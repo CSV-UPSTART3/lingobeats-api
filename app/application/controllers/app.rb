@@ -47,7 +47,7 @@ module LingoBeats
 
         # Show popular songs on home page
         result = Service::ListSongs.new.call(:popular)
-        songs, bad_message = RouteHelpers::ResultParser.parse(result) do |songs, error|
+        songs, bad_message = RouteHelpers::ResultParser.parse_multi(result) do |songs, error|
           [Views::SongsList.new(songs), error]
         end
 
@@ -84,7 +84,7 @@ module LingoBeats
           query = url_request[:query]
 
           result = Service::ListSongs.new.call(url_request)
-          songs, bad_message = RouteHelpers::ResultParser.parse(result) do |songs, error|
+          songs, bad_message = RouteHelpers::ResultParser.parse_multi(result) do |songs, error|
             [Views::SongsList.new(songs), error]
           end
 
@@ -118,7 +118,7 @@ module LingoBeats
         routing.get do
           url_request = Forms::NewLyric.new.call(routing.params)
           result = Service::AddLyric.new.call(url_request)
-          lyrics, bad_message = RouteHelpers::ResultParser.parse(result) do |lyric, error|
+          lyrics, bad_message = RouteHelpers::ResultParser.parse_single(result) do |lyric, error|
             [Views::Lyric.new(lyric).text, error]
           end
 

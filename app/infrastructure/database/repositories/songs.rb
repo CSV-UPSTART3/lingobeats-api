@@ -9,6 +9,8 @@ module LingoBeats
   module Repository
     # Repository for Song Entities
     class Songs
+      CONFIG = LingoBeats::App.config
+
       def self.find_or_create(song_info)
         orm = LingoBeats::Database::SongOrm
         orm.first(uri: song_info[:uri]) || orm.create(song_info)
@@ -74,11 +76,28 @@ module LingoBeats
       end
 
       def self.build_spotify_mapper
-        config = LingoBeats::App.config
         LingoBeats::Spotify::SongMapper.new(
-          config.SPOTIFY_CLIENT_ID,
-          config.SPOTIFY_CLIENT_SECRET
+          CONFIG.SPOTIFY_CLIENT_ID,
+          CONFIG.SPOTIFY_CLIENT_SECRET
         )
+      end
+
+      # return lyric value object if exists
+      def self.find_lyric_in_database(song_id:)
+        find_id(song_id)&.lyric
+      end
+
+      # fetch lyric from Genius API
+      def self.fetch_lyric(song_name:, singer_name:)
+        lyric_mapper = Genius::LyricMapper.new(CONFIG.GENIUS_CLIENT_ACCESS_TOKEN)
+        lyric_mapper.lyrics_for(song_name: song_name, singer_name: singer_name)
+      end
+
+      # attach lyric value object to song in database, return updated lyric vo
+      def self.attach_lyric(song_id:, lyric_vo:)
+        lyric_repo = Repository::For.klass(Value::Lyric)
+        lyric_repo.attach_to_song(song_id, lyric_vo)
+        find_lyric_in_database(song_id: song_id)
       end
 
       # Helper class to rebuild entity from DB
@@ -110,8 +129,8 @@ module LingoBeats
           lyric_record = @db_record.lyric
           {
 
-            lyric: lyric_record ? Lyrics.rebuild_entity(lyric_record) : nil,
-            singers: Singers.rebuild_many(@db_record.singers)
+            lyric: lyric_record ? Lyrics.rebuild_value(lyric_record) : nil,
+            singers: @db_record.singers ? Singers.rebuild_many(@db_record.singers) : []
           }
         end
       end

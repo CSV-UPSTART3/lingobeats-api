@@ -2,7 +2,7 @@
 - bad_message ||= "Failed to load lyrics."
 
 .lyrics-content 
-  - if lyrics && !lyrics.empty?
+  - if lyrics && !lyrics.nil?
     = lyrics
   - else
     .text-center.mt-5

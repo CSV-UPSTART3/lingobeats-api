@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'search_histories'
+require_relative 'materials'
 require_relative 'singers'
 require_relative 'songs'
 require_relative 'lyrics'

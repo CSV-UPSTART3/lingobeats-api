@@ -13,11 +13,9 @@ module LingoBeats
       step :check_song_exists
       step :store_lyric
 
-      def initialize(repo: Repository::For.klass(Value::Lyric),
-                     mapper: Genius::LyricMapper.new(App.config.GENIUS_CLIENT_ACCESS_TOKEN))
+      def initialize(songs_repo: Repository::For.klass(Entity::Song))
         super()
-        @repo = repo
-        @lyric_provider = LyricProvider.new(mapper)
+        @songs_repo = songs_repo
       end
 
       private
@@ -32,12 +30,14 @@ module LingoBeats
 
       # step 2. find if lyric already exists in db, else fetch from Genius API
       def find_lyric(input)
-        if (lyric = lyric_in_database(input))
-          input[:local_lyric] = lyric
+        if (lyric_vo = lyric_in_database(input))
+          input[:local_lyric] = lyric_vo
         else
-          input[:remote_lyric] = @lyric_provider.fetch(input)
+          input[:remote_lyric] = fetch_song_of_lyric(input)
         end
         Success(input)
+      rescue FetchError => error
+        Failure(error.message)
       rescue StandardError => error
         Failure(error.to_s)
       end
@@ -54,12 +54,10 @@ module LingoBeats
 
       # step 4. store lyric if not exists, and return lyric value object
       def store_lyric(input)
-        lyric =
-          if (new_lyric = input[:remote_lyric])
-            @repo.attach_to_song(input[:song_id], new_lyric)
-          else
-            input[:local_lyric]
-          end
+        return Success(input[:local_lyric]) if input[:local_lyric]
+
+        lyric = @songs_repo.attach_lyric(song_id: input[:song_id], lyric_vo: input[:remote_lyric])
+
         Success(lyric)
       rescue StandardError => error
         App.logger.error error.backtrace.join("\n")
@@ -68,7 +66,28 @@ module LingoBeats
 
       # support methods
       def lyric_in_database(input)
-        @repo.for_song(input[:song_id])
+        @songs_repo.find_lyric_in_database(song_id: input[:song_id])
+      rescue StandardError => error
+        raise error.message
+      end
+
+      # custom error for fetch failure
+      class FetchError < StandardError; end
+
+      def fetch_song_of_lyric(input)
+        lyric = @songs_repo.fetch_lyric(song_name: input[:song_name], singer_name: input[:singer_name])
+        validate_lyric(lyric)
+      rescue FetchError => error
+        raise error
+      rescue StandardError
+        raise FetchError, 'Failed to load lyrics.'
+      end
+
+      def validate_lyric(lyric)
+        raise FetchError, 'Went wrong in fetching lyrics.' if lyric.nil? || lyric.text.strip.empty?
+        raise FetchError, 'This song is not recommended for English learners.' unless lyric.english?
+
+        lyric
       end
 
       # parameter extractor
@@ -76,32 +95,6 @@ module LingoBeats
         def self.call(request)
           params = request.to_h
           { song_id: params[:id], song_name: params[:name], singer_name: params[:singer] }
-        end
-      end
-
-      # fetch lyric from Genius API
-      class LyricProvider
-        # custom error for fetch failure
-        class FetchError < StandardError; end
-
-        def initialize(mapper)
-          @mapper = mapper
-        end
-
-        def fetch(input)
-          lyric = @mapper.lyrics_for(song_name: input[:song_name], singer_name: input[:singer_name])
-          validate_lyric(lyric)
-        rescue StandardError
-          raise FetchError, 'Failed to load lyrics.'
-        end
-
-        private
-
-        def validate_lyric(lyric)
-          raise 'Oops! Something went wrong with the lyrics.' if lyric.text.strip.empty?
-          raise 'This song is not recommended for English learners.' unless lyric.english?
-
-          lyric
         end
       end
     end

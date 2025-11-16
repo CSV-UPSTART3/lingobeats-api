@@ -12,7 +12,7 @@ module Views
     end
 
     def text
-      @lyric.text
+      @lyric&.text
     end
   end
 end

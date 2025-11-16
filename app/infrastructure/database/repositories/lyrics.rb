@@ -4,14 +4,14 @@ module LingoBeats
   module Repository
     # Repository for Lyrics
     class Lyrics
-      def self.rebuild_entity(db_record)
+      def self.rebuild_value(db_record)
         return nil unless db_record
 
         Value::Lyric.new(text: db_record[:text] || db_record.text || nil)
       end
 
       def self.find_id(id)
-        rebuild_entity Database::LyricOrm.first(id: id)
+        rebuild_value Database::LyricOrm.first(id: id)
       end
 
       def self.find_id_by_value(object)
@@ -43,6 +43,14 @@ module LingoBeats
         object&.text && object.english?
       end
 
+      def self.song_id_present?(song_id)
+        !song_id.to_s.strip.empty?
+      end
+
+      def self.valid_input?(song_id, lyric_object)
+        song_id_present?(song_id) && valid_lyric?(lyric_object)
+      end
+
       def self.insert_lyric_if_absent(id, text)
         Database::LyricOrm.dataset
                           .insert_conflict(target: :id)
@@ -60,44 +68,9 @@ module LingoBeats
         nil
       end
 
-      def self.valid_input?(song_id, lyric_object)
-        song_id_present?(song_id) && lyric_acceptable?(lyric_object)
-      end
-
-      def self.song_id_present?(song_id) = !song_id.to_s.strip.empty?
-
-      def self.lyric_acceptable?(lyric)   = lyric&.text && lyric.english?
-
       def self.update_song_lyric(song_id, lyric_id)
         Database::SongOrm.where(id: song_id).update(lyric_id: lyric_id)
       end
-
-      # def self.rebuild_entity_by_lyrics(lyrics)
-      #   return nil unless lyrics
-
-      #   id = find_id_by_value(lyrics)
-      #   Value::Lyric.new(
-      #     text: lyrics
-      #   )
-      # end
-
-      # def self.find_by_song_id(song_id)
-      #   db_record = Database::LyricOrm.first(song_id: song_id)
-      #   rebuild_entity(db_record)
-      # end
-
-      # def self.create(entity)
-      #   ds = Database::LyricOrm.dataset # 或 DB[:lyrics]
-      #   song_id = entity.song_id
-
-      #   ds.insert_conflict(target: :song_id,
-      #                      update: { lyric: Sequel[:excluded][:lyric] })
-      #     .insert(song_id: song_id, lyric: entity.lyric)
-
-      #   find_by_song_id(song_id)
-      # rescue Sequel::ForeignKeyConstraintViolation
-      #   nil
-      # end
     end
   end
 end
