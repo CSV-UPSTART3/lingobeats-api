@@ -1,0 +1,1780 @@
+[
+  {
+    "song_id": "demo-song-1",
+    "name": "ghost",
+    "level": "A1",
+    "material": {
+      "word": "ghost",
+      "head_zh": "鬼魂、幽靈",
+      "entries": [
+        {
+          "pos": "noun",
+          "definition_en": "The spirit of a dead person that someone sees or feels.",
+          "definition_zh": "死者的靈魂，人們有時會看到或感覺到。",
+          "examples": [
+            "I saw a ghost in my dream. (我在夢裡看到一個鬼。)",
+            "Some people believe in ghosts. (有些人相信鬼的存在。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "ghostly",
+          "pos": "adjective"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "alone",
+    "level": "A2",
+    "material": {
+      "word": "alone",
+      "head_zh": "獨自、單獨",
+      "entries": [
+        {
+          "pos": "adjective",
+          "definition_en": "To be by yourself.",
+          "definition_zh": "獨自一人。",
+          "examples": [
+            "I am alone at home. (我獨自在家。)",
+            "She likes to be alone. (她喜歡獨處。)"
+          ]
+        },
+        {
+          "pos": "adverb",
+          "definition_en": "Without anyone else.",
+          "definition_zh": "沒有其他人。",
+          "examples": [
+            "He went to the store alone. (他獨自去商店。)",
+            "She lives alone. (她獨自生活。)"
+          ]
+        }
+      ],
+      "related_forms": []
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "given",
+    "level": "A2",
+    "material": {
+      "word": "given",
+      "head_zh": "給予、贈送",
+      "entries": [
+        {
+          "pos": "verb",
+          "definition_en": "Past participle of 'give'. To hand something to someone.",
+          "definition_zh": "「give」的過去分詞。 把某物交給某人。",
+          "examples": [
+            "I have given him the book. (我已經把書給了他。)",
+            "The present was given to her. (這份禮物是送給她的。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "give",
+          "pos": "verb"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "throne",
+    "level": "C1",
+    "material": {
+      "word": "throne",
+      "head_zh": "王位、寶座",
+      "entries": [
+        {
+          "pos": "noun",
+          "definition_en": "The special chair used by a king or queen.",
+          "definition_zh": "國王或女王使用的特殊椅子。",
+          "examples": [
+            "The king sat on his throne. (國王坐在他的王位上。)",
+            "The throne is made of gold. (這王位是用黃金製成的。)"
+          ]
+        }
+      ],
+      "related_forms": []
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "know",
+    "level": "A1",
+    "material": {
+      "word": "know",
+      "head_zh": "知道、了解",
+      "entries": [
+        {
+          "pos": "verb",
+          "definition_en": "To have information in your mind.",
+          "definition_zh": "腦海中有資訊。",
+          "examples": [
+            "I know the answer. (我知道答案。)",
+            "Do you know her name? (你知道她的名字嗎？)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "knew",
+          "pos": "verb"
+        },
+        {
+          "form": "known",
+          "pos": "verb"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "believe",
+    "level": "A1",
+    "material": {
+      "word": "believe",
+      "head_zh": "相信、認為",
+      "entries": [
+        {
+          "pos": "verb",
+          "definition_en": "To think that something is true.",
+          "definition_zh": "認為某件事是真的。",
+          "examples": [
+            "I believe in you. (我相信你。)",
+            "Do you believe in ghosts? (你相信鬼嗎？)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "believed",
+          "pos": "verb"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "queen",
+    "level": "A2",
+    "material": {
+      "word": "queen",
+      "head_zh": "女王、皇后",
+      "entries": [
+        {
+          "pos": "noun",
+          "definition_en": "A female ruler of a country.",
+          "definition_zh": "一個國家的女性統治者。",
+          "examples": [
+            "The queen lives in a castle. (女王住在城堡裡。)",
+            "She is the queen of England. (她是英國女王。)"
+          ]
+        }
+      ],
+      "related_forms": []
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "meant",
+    "level": "A2",
+    "material": {
+      "word": "meant",
+      "head_zh": "意思是、意味著",
+      "entries": [
+        {
+          "pos": "verb",
+          "definition_en": "Past tense of 'mean'. To express something.",
+          "definition_zh": "「mean」的過去式。 表示某件事。",
+          "examples": [
+            "I meant to call you. (我本來想打電話給你。)",
+            "What do you mean? (你這是什麼意思？)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "mean",
+          "pos": "verb"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "lived",
+    "level": "A2",
+    "material": {
+      "word": "lived",
+      "head_zh": "居住、生活",
+      "entries": [
+        {
+          "pos": "verb",
+          "definition_en": "Past tense of 'live'. To stay in a place.",
+          "definition_zh": "「live」的過去式。 待在某個地方。",
+          "examples": [
+            "I lived in Taipei last year. (我去年住在台北。)",
+            "They lived in a big house. (他們住在一間大房子裡。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "live",
+          "pos": "verb"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "two",
+    "level": "A1",
+    "material": {
+      "word": "two",
+      "head_zh": "二、兩個",
+      "entries": [
+        {
+          "pos": "number",
+          "definition_en": "The number after one.",
+          "definition_zh": "一之後的數字。",
+          "examples": [
+            "I have two cats. (我有兩隻貓。)",
+            "One plus one is two. (一加一等於二。)"
+          ]
+        }
+      ],
+      "related_forms": []
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "lives",
+    "level": "A2",
+    "material": {
+      "word": "lives",
+      "head_zh": "生活、居住、生命",
+      "entries": [
+        {
+          "pos": "noun",
+          "definition_en": "The plural of 'life'. It means the time when someone is alive.",
+          "definition_zh": "「life」的複數形式。指的是某人活著的時間。",
+          "examples": [
+            "He lives in Taipei. (他住在台北。)",
+            "My grandma lives a happy life. (我的奶奶過著幸福的生活。)"
+          ]
+        },
+        {
+          "pos": "verb",
+          "definition_en": "To live in a place means to have your home there.",
+          "definition_zh": "居住在某地意味著你的家在那裡。",
+          "examples": [
+            "She lives near the park. (她住在公園附近。)",
+            "Do you live in this city? (你住在这个城市吗？)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "life",
+          "pos": "noun"
+        },
+        {
+          "form": "living",
+          "pos": "verb"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "tried",
+    "level": "A2",
+    "material": {
+      "word": "tried",
+      "head_zh": "嘗試、努力",
+      "entries": [
+        {
+          "pos": "verb",
+          "definition_en": "Past tense of 'try'. To make an effort to do something.",
+          "definition_zh": "「try」的過去式。表示努力做某事。",
+          "examples": [
+            "I tried to call you. (我試著給你打電話。)",
+            "She tried her best on the test. (她在考試中盡了最大的努力。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "try",
+          "pos": "verb"
+        },
+        {
+          "form": "trying",
+          "pos": "adjective"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "play",
+    "level": "A1",
+    "material": {
+      "word": "play",
+      "head_zh": "玩、演奏、戲劇",
+      "entries": [
+        {
+          "pos": "verb",
+          "definition_en": "To do something for fun, or to use an instrument.",
+          "definition_zh": "為了樂趣而做某事，或使用樂器。",
+          "examples": [
+            "The children play in the park. (孩子們在公園裡玩耍。)",
+            "She plays the piano very well. (她鋼琴彈得很好。)"
+          ]
+        },
+        {
+          "pos": "noun",
+          "definition_en": "An activity done for enjoyment.",
+          "definition_zh": "為了享受而做的活動。",
+          "examples": [
+            "We went to see a play at the theater. (我們去劇院看了一場戲。)",
+            "Let's go to the park for play. (我們去公園玩吧。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "playing",
+          "pos": "verb"
+        },
+        {
+          "form": "player",
+          "pos": "noun"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "sides",
+    "level": "A1",
+    "material": {
+      "word": "sides",
+      "head_zh": "邊、面",
+      "entries": [
+        {
+          "pos": "noun",
+          "definition_en": "The plural of 'side'. The left or right of something or someone.",
+          "definition_zh": "「side」的複數形式。某物或某人的左邊或右邊。",
+          "examples": [
+            "There are trees on both sides of the road. (路的两边都有树。)",
+            "He looked on all sides. (他看向四面八方。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "side",
+          "pos": "noun"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "could",
+    "level": "A1",
+    "material": {
+      "word": "could",
+      "head_zh": "能夠（can的過去式）",
+      "entries": [
+        {
+          "pos": "verb",
+          "definition_en": "The past tense of 'can'. To be able to do something.",
+          "definition_zh": "「can」的過去式。能够做某事。",
+          "examples": [
+            "I could swim when I was five. (我五歲的時候就能游泳了。)",
+            "She could speak English well. (她能說一口流利的英語。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "can",
+          "pos": "verb"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "find",
+    "level": "A1",
+    "material": {
+      "word": "find",
+      "head_zh": "尋找、發現",
+      "entries": [
+        {
+          "pos": "verb",
+          "definition_en": "To discover something that you are looking for.",
+          "definition_zh": "發現你正在尋找的東西。",
+          "examples": [
+            "I can't find my keys. (我找不到我的鑰匙。)",
+            "Did you find the book you wanted? (你找到你想找的書了嗎？)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "finding",
+          "pos": "verb"
+        },
+        {
+          "form": "found",
+          "pos": "verb"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "place",
+    "level": "A2",
+    "material": {
+      "word": "place",
+      "head_zh": "地方、位置",
+      "entries": [
+        {
+          "pos": "noun",
+          "definition_en": "A location or area.",
+          "definition_zh": "一個地點或區域。",
+          "examples": [
+            "This is a nice place to live. (這是個宜居的好地方。)",
+            "What is your favorite place? (你最喜歡的地方是哪裡？)"
+          ]
+        },
+        {
+          "pos": "verb",
+          "definition_en": "To put something in a specific location.",
+          "definition_zh": "將某物放置在特定位置。",
+          "examples": [
+            "Please place the book on the table. (請把書放在桌子上。)",
+            "I placed my bag on the floor. (我把包放在地板上。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "places",
+          "pos": "noun"
+        },
+        {
+          "form": "placing",
+          "pos": "verb"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "called",
+    "level": "A2",
+    "material": {
+      "word": "called",
+      "head_zh": "叫做、呼叫",
+      "entries": [
+        {
+          "pos": "verb",
+          "definition_en": "Past tense of 'call'. To give someone or something a name.",
+          "definition_zh": "「call」的過去式。給某人或某物一個名字。",
+          "examples": [
+            "My dog is called Lucky. (我的狗叫做Lucky。)",
+            "She called her friend on the phone. (她給她的朋友打了電話。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "call",
+          "pos": "verb"
+        },
+        {
+          "form": "calling",
+          "pos": "verb"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "problem",
+    "level": "A1",
+    "material": {
+      "word": "problem",
+      "head_zh": "問題",
+      "entries": [
+        {
+          "pos": "noun",
+          "definition_en": "A situation that causes difficulties.",
+          "definition_zh": "引起困難的情況。",
+          "examples": [
+            "We have a problem with the car. (我們的車有問題。)",
+            "I need help with this problem. (我需要幫助解決這個問題。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "problems",
+          "pos": "noun"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "child",
+    "level": "A1",
+    "material": {
+      "word": "child",
+      "head_zh": "孩子",
+      "entries": [
+        {
+          "pos": "noun",
+          "definition_en": "A young person who is not yet an adult.",
+          "definition_zh": "一個還不是成年的年輕人。",
+          "examples": [
+            "The child is playing with a toy. (這個孩子在玩玩具。)",
+            "She is a happy child. (她是個快樂的孩子。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "children",
+          "pos": "noun"
+        },
+        {
+          "form": "childhood",
+          "pos": "noun"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "got",
+    "level": "A1",
+    "material": {
+      "word": "got",
+      "head_zh": "得到、獲得",
+      "entries": [
+        {
+          "pos": "verb",
+          "definition_en": "To receive or obtain something.",
+          "definition_zh": "收到或獲得某物。",
+          "examples": [
+            "I got a new toy. (我得到了一個新玩具。)",
+            "She got a letter from her friend. (她收到了朋友的信。)",
+            "He got a good grade on the test. (他考試考得很好。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "get",
+          "pos": "verb"
+        },
+        {
+          "form": "getting",
+          "pos": "verb"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "wild",
+    "level": "A2",
+    "material": {
+      "word": "wild",
+      "head_zh": "野生的、狂野的",
+      "entries": [
+        {
+          "pos": "adjective",
+          "definition_en": "Living in nature, not controlled by people.",
+          "definition_zh": "生活在自然中，不受人控制的。",
+          "examples": [
+            "A wild animal lives in the forest. (野生動物住在森林裡。)",
+            "The flowers are wild and beautiful. (這些花是野生的，而且很漂亮。)",
+            "He has a wild imagination. (他有著狂野的想像力。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "wildly",
+          "pos": "adverb"
+        },
+        {
+          "form": "wildness",
+          "pos": "noun"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "getting",
+    "level": "A1",
+    "material": {
+      "word": "getting",
+      "head_zh": "正在得到、變得",
+      "entries": [
+        {
+          "pos": "verb",
+          "definition_en": "Becoming or receiving something.",
+          "definition_zh": "正在變成或得到某物。",
+          "examples": [
+            "It is getting cold outside. (外面正在變冷。)",
+            "I am getting a new book. (我正在得到一本新書。)",
+            "She is getting ready for school. (她正在為上學做準備。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "get",
+          "pos": "verb"
+        },
+        {
+          "form": "got",
+          "pos": "verb"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "paid",
+    "level": "B1",
+    "material": {
+      "word": "paid",
+      "head_zh": "支付、有報酬的",
+      "entries": [
+        {
+          "pos": "verb",
+          "definition_en": "To give someone money for work or something.",
+          "definition_zh": "為了工作或某物而給予某人金錢。",
+          "examples": [
+            "I paid for the food. (我付了食物的錢。)",
+            "She got paid for her job. (她因工作而獲得報酬。)",
+            "He paid the bill yesterday. (他昨天支付了帳單。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "pay",
+          "pos": "verb"
+        },
+        {
+          "form": "paying",
+          "pos": "verb"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "stage",
+    "level": "A1",
+    "material": {
+      "word": "stage",
+      "head_zh": "舞台、階段",
+      "entries": [
+        {
+          "pos": "noun",
+          "definition_en": "A place where actors perform.",
+          "definition_zh": "演員表演的地方。",
+          "examples": [
+            "The actors are on the stage. (演員們在舞台上。)",
+            "The band played on a big stage. (樂隊在一個大舞台上演奏。)",
+            "She walked onto the stage. (她走上了舞台。)"
+          ]
+        },
+        {
+          "pos": "noun",
+          "definition_en": "A period or step in a process.",
+          "definition_zh": "過程中一個時期或步驟。",
+          "examples": [
+            "The project is in the first stage. (這個專案處於第一階段。)",
+            "He is at a difficult stage in his life. (他正處於人生的困難階段。)",
+            "Each stage of the game is harder. (遊戲的每個階段都更難。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "staged",
+          "pos": "adjective"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "done",
+    "level": "A2",
+    "material": {
+      "word": "done",
+      "head_zh": "完成的、結束的",
+      "entries": [
+        {
+          "pos": "adjective",
+          "definition_en": "Finished or completed.",
+          "definition_zh": "完成或結束的。",
+          "examples": [
+            "I am done with my homework. (我完成了我的作業。)",
+            "The food is done cooking. (食物煮好了。)",
+            "Are you done eating? (你吃完了嗎？)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "do",
+          "pos": "verb"
+        },
+        {
+          "form": "doing",
+          "pos": "verb"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "hiding",
+    "level": "A1",
+    "material": {
+      "word": "hiding",
+      "head_zh": "躲藏、隱藏",
+      "entries": [
+        {
+          "pos": "verb",
+          "definition_en": "Putting something where it cannot be easily seen.",
+          "definition_zh": "把某物放在不容易看到的地方。",
+          "examples": [
+            "The cat is hiding under the bed. (貓躲在床底下。)",
+            "He is hiding his face. (他正在遮掩他的臉。)",
+            "I am hiding from my friend. (我正在躲避我的朋友。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "hide",
+          "pos": "verb"
+        },
+        {
+          "form": "hidden",
+          "pos": "adjective"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "shining",
+    "level": "A2",
+    "material": {
+      "word": "shining",
+      "head_zh": "閃耀、發光",
+      "entries": [
+        {
+          "pos": "verb",
+          "definition_en": "Giving out light.",
+          "definition_zh": "發出光芒。",
+          "examples": [
+            "The sun is shining brightly. (太陽正在明亮地照耀。)",
+            "Her eyes are shining. (她的眼睛在發光。)",
+            "The stars are shining in the sky. (星星在天空中閃耀。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "shine",
+          "pos": "verb"
+        },
+        {
+          "form": "shone",
+          "pos": "verb"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "like",
+    "level": "A2",
+    "material": {
+      "word": "like",
+      "head_zh": "喜歡、像",
+      "entries": [
+        {
+          "pos": "verb",
+          "definition_en": "To enjoy or be fond of something.",
+          "definition_zh": "喜歡或喜愛某物。",
+          "examples": [
+            "I like ice cream. (我喜歡冰淇淋。)",
+            "She likes to read books. (她喜歡閱讀書籍。)",
+            "He likes playing games. (他喜歡玩遊戲。)"
+          ]
+        },
+        {
+          "pos": "preposition",
+          "definition_en": "Similar to something.",
+          "definition_zh": "與某物相似。",
+          "examples": [
+            "She is like her mother. (她像她的母親。)",
+            "It looks like rain. (看起來像要下雨。)",
+            "He sings like a bird. (他唱歌像鳥一樣。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "liked",
+          "pos": "verb"
+        },
+        {
+          "form": "liking",
+          "pos": "verb"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "born",
+    "level": "A2",
+    "material": {
+      "word": "born",
+      "head_zh": "出生的",
+      "entries": [
+        {
+          "pos": "verb",
+          "definition_en": "To come into the world.",
+          "definition_zh": "來到這個世界。",
+          "examples": [
+            "I was born in Taiwan. (我出生在台灣。)",
+            "She was born in 2000. (她出生於2000年。)",
+            "He was born on a rainy day. (他出生在一個下雨天。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "bear",
+          "pos": "verb"
+        },
+        {
+          "form": "birth",
+          "pos": "noun"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "dreaming",
+    "level": "A2",
+    "material": {
+      "word": "dreaming",
+      "head_zh": "夢想、做夢",
+      "entries": [
+        {
+          "pos": "verb",
+          "definition_en": "Thinking about something you want to happen.",
+          "definition_zh": "想像你想要發生的事情。",
+          "examples": [
+            "I am dreaming of a vacation. (我夢想著去度假。)",
+            "She is always dreaming big. (她總是懷抱著遠大的夢想。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "dream",
+          "pos": "noun"
+        },
+        {
+          "form": "dream",
+          "pos": "verb"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "hard",
+    "level": "A1",
+    "material": {
+      "word": "hard",
+      "head_zh": "困難的、努力地",
+      "entries": [
+        {
+          "pos": "adjective",
+          "definition_en": "Difficult to do.",
+          "definition_zh": "不容易做到的。",
+          "examples": [
+            "This test is very hard. (這個考試非常困難。)",
+            "It's a hard job, but I like it. (這是一個艱難的工作，但我喜歡它。)"
+          ]
+        },
+        {
+          "pos": "adverb",
+          "definition_en": "With a lot of effort.",
+          "definition_zh": "非常努力地。",
+          "examples": [
+            "I worked hard on my homework. (我努力做我的作業。)",
+            "He tried hard to win the game. (他努力想贏得比賽。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "hardly",
+          "pos": "adverb"
+        },
+        {
+          "form": "hardness",
+          "pos": "noun"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "came",
+    "level": "A1",
+    "material": {
+      "word": "came",
+      "head_zh": "來",
+      "entries": [
+        {
+          "pos": "verb",
+          "definition_en": "The past tense of 'come', meaning to move or travel towards a person or place.",
+          "definition_zh": "「come」的過去式，意思是移動或旅行到某人或某個地方。",
+          "examples": [
+            "She came to my house yesterday. (她昨天來我家了。)",
+            "He came from Taiwan. (他來自台灣。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "come",
+          "pos": "verb"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "far",
+    "level": "B1",
+    "material": {
+      "word": "far",
+      "head_zh": "遠的",
+      "entries": [
+        {
+          "pos": "adjective",
+          "definition_en": "A long distance away.",
+          "definition_zh": "距離很長的。",
+          "examples": [
+            "My school is far from my home. (我的學校離我家很遠。)",
+            "That mountain looks far away. (那座山看起來很遠。)"
+          ]
+        },
+        {
+          "pos": "adverb",
+          "definition_en": "To a great distance.",
+          "definition_zh": "到很遠的距離。",
+          "examples": [
+            "He walked far into the forest. (他走進森林很遠的地方。)",
+            "How far is the airport? (機場有多遠？)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "farther",
+          "pos": "adjective"
+        },
+        {
+          "form": "farthest",
+          "pos": "adjective"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "going",
+    "level": "A2",
+    "material": {
+      "word": "going",
+      "head_zh": "去",
+      "entries": [
+        {
+          "pos": "verb",
+          "definition_en": "Moving or travelling to a place.",
+          "definition_zh": "移動或旅行到一個地方。",
+          "examples": [
+            "I am going to the store. (我要去商店。)",
+            "She is going to travel to Japan. (她將要去日本旅行。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "go",
+          "pos": "verb"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "moment",
+    "level": "A1",
+    "material": {
+      "word": "moment",
+      "head_zh": "片刻、瞬間",
+      "entries": [
+        {
+          "pos": "noun",
+          "definition_en": "A very short period of time.",
+          "definition_zh": "非常短的時間。",
+          "examples": [
+            "Wait a moment, please. (請稍等一下。)",
+            "I'll be back in a moment. (我馬上回來。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "moments",
+          "pos": "noun"
+        },
+        {
+          "form": "momentary",
+          "pos": "adjective"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "together",
+    "level": "A1",
+    "material": {
+      "word": "together",
+      "head_zh": "一起",
+      "entries": [
+        {
+          "pos": "adverb",
+          "definition_en": "With another person or people.",
+          "definition_zh": "與另一個人或人們一起。",
+          "examples": [
+            "Let's go to the park together. (我們一起去公園吧。)",
+            "We can study together. (我們可以一起讀書。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "togetherness",
+          "pos": "noun"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "glowing",
+    "level": "B2",
+    "material": {
+      "word": "glowing",
+      "head_zh": "發光的",
+      "entries": [
+        {
+          "pos": "verb",
+          "definition_en": "Giving out a soft light.",
+          "definition_zh": "發出柔和的光芒。",
+          "examples": [
+            "The stars are glowing in the sky. (星星在天空中閃耀著光芒。)",
+            "The fire was glowing warmly. (火溫暖地燃燒著。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "glow",
+          "pos": "verb"
+        },
+        {
+          "form": "glow",
+          "pos": "noun"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "golden",
+    "level": "A2",
+    "material": {
+      "word": "golden",
+      "head_zh": "金色的",
+      "entries": [
+        {
+          "pos": "adjective",
+          "definition_en": "Having the color of gold.",
+          "definition_zh": "具有金子的顏色。",
+          "examples": [
+            "She has golden hair. (她有金色的頭髮。)",
+            "The sun sets with a golden light. (太陽落下時帶著金色的光芒。)"
+          ]
+        }
+      ],
+      "related_forms": []
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "voices",
+    "level": "A2",
+    "material": {
+      "word": "voices",
+      "head_zh": "聲音",
+      "entries": [
+        {
+          "pos": "noun",
+          "definition_en": "The sound that you make when you speak or sing.",
+          "definition_zh": "當你說話或唱歌時發出的聲音。",
+          "examples": [
+            "I heard their voices in the hall. (我聽到他們在大廳裡的聲音。)",
+            "She has a beautiful singing voice. (她有美妙的歌聲。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "voice",
+          "pos": "noun"
+        },
+        {
+          "form": "voice",
+          "pos": "verb"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "time",
+    "level": "A2",
+    "material": {
+      "word": "time",
+      "head_zh": "時間",
+      "entries": [
+        {
+          "pos": "noun",
+          "definition_en": "What we use to measure how long things take.",
+          "definition_zh": "我們用來測量事物經過多久的單位。",
+          "examples": [
+            "What time is it? (現在幾點？)",
+            "I don't have much time. (我沒有太多時間。)"
+          ]
+        },
+        {
+          "pos": "verb",
+          "definition_en": "To arrange when something will happen.",
+          "definition_zh": "安排某事發生的時間。",
+          "examples": [
+            "We need to time our trip carefully. (我們需要仔細安排我們的旅行時間。)",
+            "The race was timed using a stopwatch. (比賽是用碼錶計時的。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "times",
+          "pos": "noun"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "fears",
+    "level": "B1",
+    "material": {
+      "word": "fears",
+      "head_zh": "害怕、恐懼",
+      "entries": [
+        {
+          "pos": "noun",
+          "definition_en": "Unpleasant feeling caused by being aware of danger.",
+          "definition_zh": "因為意識到危險而產生的不愉快感覺。",
+          "examples": [
+            "I have many fears. (我有很多害怕的事情。)",
+            "My biggest fear is spiders. (我最大的恐懼是蜘蛛。)"
+          ]
+        },
+        {
+          "pos": "verb",
+          "definition_en": "To be afraid of something or someone.",
+          "definition_zh": "害怕某事物或某人。",
+          "examples": [
+            "I fear that I will fail the exam. (我害怕我會考試不及格。)",
+            "She fears being alone at night. (她害怕晚上獨自一人。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "fear",
+          "pos": "noun"
+        },
+        {
+          "form": "fearful",
+          "pos": "adjective"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "lies",
+    "level": "A2",
+    "material": {
+      "word": "lies",
+      "head_zh": "謊言、躺",
+      "entries": [
+        {
+          "pos": "noun",
+          "definition_en": "A statement that is not true.",
+          "definition_zh": "不真實的陳述。",
+          "examples": [
+            "He told me a lie. (他對我說謊。)",
+            "Don't tell lies. (不要說謊。)"
+          ]
+        },
+        {
+          "pos": "verb",
+          "definition_en": "To be in or move into a horizontal position on a surface.",
+          "definition_zh": "處於或移動到表面上的水平位置。",
+          "examples": [
+            "I like to lie on the beach. (我喜歡躺在沙灘上。)",
+            "The cat lies on the sofa. (貓躺在沙發上。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "lie",
+          "pos": "noun"
+        },
+        {
+          "form": "lying",
+          "pos": "verb"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "waited",
+    "level": "A2",
+    "material": {
+      "word": "waited",
+      "head_zh": "等待",
+      "entries": [
+        {
+          "pos": "verb",
+          "definition_en": "To stay in a place until someone comes or something happens.",
+          "definition_zh": "留在某個地方直到有人來或發生某事。",
+          "examples": [
+            "I waited for you at the bus stop. (我在公車站等你。)",
+            "She waited for the rain to stop. (她等雨停。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "wait",
+          "pos": "verb"
+        },
+        {
+          "form": "waiting",
+          "pos": "verb"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "long",
+    "level": "A2",
+    "material": {
+      "word": "long",
+      "head_zh": "長的、很久",
+      "entries": [
+        {
+          "pos": "adjective",
+          "definition_en": "Measuring a great distance from end to end.",
+          "definition_zh": "從一端到另一端測量很長的距離。",
+          "examples": [
+            "The road is very long. (這條路很長。)",
+            "She has long hair. (她有長頭髮。)"
+          ]
+        },
+        {
+          "pos": "adverb",
+          "definition_en": "For a great amount of time.",
+          "definition_zh": "經過很長的時間。",
+          "examples": [
+            "I have known her for a long time. (我認識她很久了。)",
+            "He waited long for the bus. (他等了很久的公車。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "longer",
+          "pos": "adjective"
+        },
+        {
+          "form": "longest",
+          "pos": "adjective"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "break",
+    "level": "A2",
+    "material": {
+      "word": "break",
+      "head_zh": "打破、休息",
+      "entries": [
+        {
+          "pos": "verb",
+          "definition_en": "To damage or destroy something.",
+          "definition_zh": "損壞或摧毀某物。",
+          "examples": [
+            "Don't break the glass. (不要打破玻璃。)",
+            "He broke his leg. (他摔斷了腿。)"
+          ]
+        },
+        {
+          "pos": "noun",
+          "definition_en": "A time when you stop working or doing something.",
+          "definition_zh": "停止工作或做某事的時間。",
+          "examples": [
+            "Let's take a break. (我們休息一下吧。)",
+            "I need a coffee break. (我需要一個咖啡休息時間。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "broken",
+          "pos": "adjective"
+        },
+        {
+          "form": "breaking",
+          "pos": "verb"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "walls",
+    "level": "A1",
+    "material": {
+      "word": "walls",
+      "head_zh": "牆壁",
+      "entries": [
+        {
+          "pos": "noun",
+          "definition_en": "The sides of a room or building.",
+          "definition_zh": "房間或建築物的側面。",
+          "examples": [
+            "The walls are painted white. (牆壁漆成白色。)",
+            "There are pictures on the walls. (牆上有圖片。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "wall",
+          "pos": "noun"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "wake",
+    "level": "A2",
+    "material": {
+      "word": "wake",
+      "head_zh": "醒來",
+      "entries": [
+        {
+          "pos": "verb",
+          "definition_en": "To stop sleeping.",
+          "definition_zh": "停止睡覺。",
+          "examples": [
+            "I wake up at 7am every day. (我每天早上7點醒來。)",
+            "She woke up early this morning. (她今天早上醒得很早。)"
+          ]
+        },
+        {
+          "pos": "noun",
+          "definition_en": "The state of being awake.",
+          "definition_zh": "醒著的狀態。",
+          "examples": [
+            "I had a rude wake up call this morning when the alarm went off. (今天早上鬧鐘響起時，我有一個粗魯的起床電話。)",
+            "He is still in a wake."
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "woke",
+          "pos": "verb"
+        },
+        {
+          "form": "waking",
+          "pos": "verb"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "feel",
+    "level": "A2",
+    "material": {
+      "word": "feel",
+      "head_zh": "感覺",
+      "entries": [
+        {
+          "pos": "verb",
+          "definition_en": "To experience an emotion or physical sensation.",
+          "definition_zh": "體驗一種情緒或身體感覺。",
+          "examples": [
+            "I feel happy today. (我今天感到快樂。)",
+            "Do you feel cold? (你覺得冷嗎？)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "feeling",
+          "pos": "noun"
+        },
+        {
+          "form": "felt",
+          "pos": "verb"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "put",
+    "level": "A1",
+    "material": {
+      "word": "put",
+      "head_zh": "放置、擺放",
+      "entries": [
+        {
+          "pos": "verb",
+          "definition_en": "To move something to a specific place.",
+          "definition_zh": "將某物移動到特定位置。",
+          "examples": [
+            "Please put the book on the table. (請把書放在桌子上。)",
+            "Where did you put my keys? (你把我的鑰匙放在哪裡了？)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "putting",
+          "pos": "verb"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "patterns",
+    "level": "B1",
+    "material": {
+      "word": "patterns",
+      "head_zh": "模式、圖案",
+      "entries": [
+        {
+          "pos": "noun",
+          "definition_en": "Repeated designs or ways of doing something.",
+          "definition_zh": "重複出現的設計或做事方式。",
+          "examples": [
+            "The artist uses interesting color patterns in her paintings. (這位藝術家在她的畫作中使用有趣的顏色模式。)",
+            "We need to identify the patterns in customer behavior. (我們需要找出顧客行為的模式。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "pattern",
+          "pos": "noun"
+        },
+        {
+          "form": "patterned",
+          "pos": "adjective"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "past",
+    "level": "A2",
+    "material": {
+      "word": "past",
+      "head_zh": "過去、以前",
+      "entries": [
+        {
+          "pos": "noun",
+          "definition_en": "The time before now.",
+          "definition_zh": "現在之前的時間。",
+          "examples": [
+            "In the past, people traveled by horse. (在過去，人們騎馬旅行。)",
+            "I don't want to talk about the past. (我不想談論過去。)"
+          ]
+        },
+        {
+          "pos": "adjective",
+          "definition_en": "Happened or existed before now.",
+          "definition_zh": "以前發生或存在的。",
+          "examples": [
+            "She is a past student of this school. (她是這所學校的過去的學生。)",
+            "We should learn from past mistakes. (我們應該從過去的錯誤中學習。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "pass",
+          "pos": "verb"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "finally",
+    "level": "A2",
+    "material": {
+      "word": "finally",
+      "head_zh": "終於、最後",
+      "entries": [
+        {
+          "pos": "adverb",
+          "definition_en": "After a long time, or at the end.",
+          "definition_zh": "經過很長時間之後，或在最後。",
+          "examples": [
+            "We finally arrived at the hotel. (我們終於到達了飯店。)",
+            "Finally, the rain stopped. (最後，雨停了。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "final",
+          "pos": "adjective"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "live",
+    "level": "A2",
+    "material": {
+      "word": "live",
+      "head_zh": "居住、生活；現場的",
+      "entries": [
+        {
+          "pos": "verb",
+          "definition_en": "To have your home somewhere.",
+          "definition_zh": "住在某個地方。",
+          "examples": [
+            "I live in Taipei. (我住在台北。)",
+            "Where do you live? (你住在哪裡？)"
+          ]
+        },
+        {
+          "pos": "adjective",
+          "definition_en": "Happening now, not recorded.",
+          "definition_zh": "現在正在發生的，不是錄製的。",
+          "examples": [
+            "We watched a live concert. (我們觀看了一場現場演唱會。)",
+            "The news was broadcast live. (這則新聞是現場直播的。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "living",
+          "pos": "noun"
+        },
+        {
+          "form": "life",
+          "pos": "noun"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "girl",
+    "level": "A1",
+    "material": {
+      "word": "girl",
+      "head_zh": "女孩",
+      "entries": [
+        {
+          "pos": "noun",
+          "definition_en": "A young female person.",
+          "definition_zh": "年輕的女性。",
+          "examples": [
+            "The girl is playing with her doll. (這個女孩正在玩她的洋娃娃。)",
+            "She is a very smart girl. (她是個非常聰明的女孩。)"
+          ]
+        }
+      ],
+      "related_forms": []
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "see",
+    "level": "A1",
+    "material": {
+      "word": "see",
+      "head_zh": "看見、明白",
+      "entries": [
+        {
+          "pos": "verb",
+          "definition_en": "To notice something with your eyes.",
+          "definition_zh": "用眼睛注意到某事。",
+          "examples": [
+            "I can see the mountains from my window. (我能從我的窗戶看到山。) ",
+            "Do you see what I mean? (你明白我的意思嗎？)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "saw",
+          "pos": "verb"
+        },
+        {
+          "form": "seen",
+          "pos": "verb"
+        },
+        {
+          "form": "seeing",
+          "pos": "verb"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "hunters",
+    "level": "A2",
+    "material": {
+      "word": "hunters",
+      "head_zh": "獵人",
+      "entries": [
+        {
+          "pos": "noun",
+          "definition_en": "People who hunt animals.",
+          "definition_zh": "獵捕動物的人。",
+          "examples": [
+            "The hunters went into the forest. (獵人進入了森林。)",
+            "Some hunters use dogs to help them. (一些獵人使用狗來幫助他們。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "hunter",
+          "pos": "noun"
+        },
+        {
+          "form": "hunt",
+          "pos": "verb"
+        }
+      ]
+    }
+  },
+  {
+    "song_id": "demo-song-1",
+    "name": "strong",
+    "level": "A1",
+    "material": {
+      "word": "strong",
+      "head_zh": "強壯的、堅固的",
+      "entries": [
+        {
+          "pos": "adjective",
+          "definition_en": "Having a lot of physical power; not easily broken.",
+          "definition_zh": "擁有很大的體力；不容易被打破。",
+          "examples": [
+            "He is a very strong man. (他是個非常強壯的男人。)",
+            "This is a strong table. (這是一張堅固的桌子。)"
+          ]
+        }
+      ],
+      "related_forms": [
+        {
+          "form": "strength",
+          "pos": "noun"
+        },
+        {
+          "form": "strongly",
+          "pos": "adverb"
+        }
+      ]
+    }
+  }
+]

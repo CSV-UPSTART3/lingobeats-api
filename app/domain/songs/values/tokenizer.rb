@@ -9,11 +9,11 @@ module LingoBeats
       end
 
       def call
-        return [] if blank?(@cleaned_text)
+        return [] if TokenizerHelpers.blank?(@cleaned_text)
 
-        extract_words(@cleaned_text)
-          .reject { |word| stopwords.include?(word) }
-          .uniq
+        TokenizerHelpers.extract_words(@cleaned_text)
+                        .reject { |word| TokenizerHelpers.stopwords.include?(word) }
+                        .uniq
       end
 
       # Helper methods for tokenization

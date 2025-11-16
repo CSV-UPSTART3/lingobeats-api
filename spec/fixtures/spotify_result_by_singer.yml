@@ -26,6 +26,30 @@
   - :id: 11kt6ggsdxvI8MhyeSMKom
     :name: CYRIL
     :external_url: https://open.spotify.com/artist/11kt6ggsdxvI8MhyeSMKom
+- :id: 1HNkqx9Ahdgi1Ixy2xkKkL
+  :name: Photograph
+  :uri: spotify:track:1HNkqx9Ahdgi1Ixy2xkKkL
+  :external_url: https://open.spotify.com/track/1HNkqx9Ahdgi1Ixy2xkKkL
+  :album_id: 1xn54DMo2qIqBuMqHtUsFd
+  :album_name: x (Deluxe Edition)
+  :album_url: https://open.spotify.com/album/1xn54DMo2qIqBuMqHtUsFd
+  :album_image_url: https://i.scdn.co/image/ab67616d0000b27313b3e37318a0c247b550bccd
+  :singers:
+  - :id: 6eUKZXaKkcviH0Ku9w2n3V
+    :name: Ed Sheeran
+    :external_url: https://open.spotify.com/artist/6eUKZXaKkcviH0Ku9w2n3V
+- :id: 34gCuhDGsG4bRPIf9bb02f
+  :name: Thinking out Loud
+  :uri: spotify:track:34gCuhDGsG4bRPIf9bb02f
+  :external_url: https://open.spotify.com/track/34gCuhDGsG4bRPIf9bb02f
+  :album_id: 1xn54DMo2qIqBuMqHtUsFd
+  :album_name: x (Deluxe Edition)
+  :album_url: https://open.spotify.com/album/1xn54DMo2qIqBuMqHtUsFd
+  :album_image_url: https://i.scdn.co/image/ab67616d0000b27313b3e37318a0c247b550bccd
+  :singers:
+  - :id: 6eUKZXaKkcviH0Ku9w2n3V
+    :name: Ed Sheeran
+    :external_url: https://open.spotify.com/artist/6eUKZXaKkcviH0Ku9w2n3V
 - :id: 7qiZfU4dY1lWllzX7mPBI3
   :name: Shape of You
   :uri: spotify:track:7qiZfU4dY1lWllzX7mPBI3
@@ -50,38 +74,14 @@
   - :id: 6eUKZXaKkcviH0Ku9w2n3V
     :name: Ed Sheeran
     :external_url: https://open.spotify.com/artist/6eUKZXaKkcviH0Ku9w2n3V
-- :id: 1HNkqx9Ahdgi1Ixy2xkKkL
-  :name: Photograph
-  :uri: spotify:track:1HNkqx9Ahdgi1Ixy2xkKkL
-  :external_url: https://open.spotify.com/track/1HNkqx9Ahdgi1Ixy2xkKkL
-  :album_id: 1xn54DMo2qIqBuMqHtUsFd
-  :album_name: x (Deluxe Edition)
-  :album_url: https://open.spotify.com/album/1xn54DMo2qIqBuMqHtUsFd
-  :album_image_url: https://i.scdn.co/image/ab67616d0000b27313b3e37318a0c247b550bccd
-  :singers:
-  - :id: 6eUKZXaKkcviH0Ku9w2n3V
-    :name: Ed Sheeran
-    :external_url: https://open.spotify.com/artist/6eUKZXaKkcviH0Ku9w2n3V
-- :id: 3rmo8F54jFF8OgYsqTxm5d
-  :name: Bad Habits
-  :uri: spotify:track:3rmo8F54jFF8OgYsqTxm5d
-  :external_url: https://open.spotify.com/track/3rmo8F54jFF8OgYsqTxm5d
-  :album_id: 32iAEBstCjauDhyKpGjTuq
-  :album_name: "="
-  :album_url: https://open.spotify.com/album/32iAEBstCjauDhyKpGjTuq
-  :album_image_url: https://i.scdn.co/image/ab67616d0000b273ef24c3fdbf856340d55cfeb2
-  :singers:
-  - :id: 6eUKZXaKkcviH0Ku9w2n3V
-    :name: Ed Sheeran
-    :external_url: https://open.spotify.com/artist/6eUKZXaKkcviH0Ku9w2n3V
-- :id: 34gCuhDGsG4bRPIf9bb02f
-  :name: Thinking out Loud
-  :uri: spotify:track:34gCuhDGsG4bRPIf9bb02f
-  :external_url: https://open.spotify.com/track/34gCuhDGsG4bRPIf9bb02f
-  :album_id: 1xn54DMo2qIqBuMqHtUsFd
-  :album_name: x (Deluxe Edition)
-  :album_url: https://open.spotify.com/album/1xn54DMo2qIqBuMqHtUsFd
-  :album_image_url: https://i.scdn.co/image/ab67616d0000b27313b3e37318a0c247b550bccd
+- :id: 6vqyk3mbDBv3npTpctYoka
+  :name: Camera
+  :uri: spotify:track:6vqyk3mbDBv3npTpctYoka
+  :external_url: https://open.spotify.com/track/6vqyk3mbDBv3npTpctYoka
+  :album_id: 20dY0uZi9SzfrcWYfiWGqH
+  :album_name: Play
+  :album_url: https://open.spotify.com/album/20dY0uZi9SzfrcWYfiWGqH
+  :album_image_url: https://i.scdn.co/image/ab67616d0000b273d42be8d4bebc9cf111ce98a1
   :singers:
   - :id: 6eUKZXaKkcviH0Ku9w2n3V
     :name: Ed Sheeran
@@ -116,38 +116,14 @@
   - :id: 6eUKZXaKkcviH0Ku9w2n3V
     :name: Ed Sheeran
     :external_url: https://open.spotify.com/artist/6eUKZXaKkcviH0Ku9w2n3V
-- :id: 6vqyk3mbDBv3npTpctYoka
-  :name: Camera
-  :uri: spotify:track:6vqyk3mbDBv3npTpctYoka
-  :external_url: https://open.spotify.com/track/6vqyk3mbDBv3npTpctYoka
-  :album_id: 20dY0uZi9SzfrcWYfiWGqH
-  :album_name: Play
-  :album_url: https://open.spotify.com/album/20dY0uZi9SzfrcWYfiWGqH
-  :album_image_url: https://i.scdn.co/image/ab67616d0000b273d42be8d4bebc9cf111ce98a1
-  :singers:
-  - :id: 6eUKZXaKkcviH0Ku9w2n3V
-    :name: Ed Sheeran
-    :external_url: https://open.spotify.com/artist/6eUKZXaKkcviH0Ku9w2n3V
-- :id: 0afhq8XCExXpqazXczTSve
-  :name: Galway Girl
-  :uri: spotify:track:0afhq8XCExXpqazXczTSve
-  :external_url: https://open.spotify.com/track/0afhq8XCExXpqazXczTSve
-  :album_id: 3T4tUhGYeRNVUGevb0wThu
-  :album_name: "÷ (Deluxe)"
-  :album_url: https://open.spotify.com/album/3T4tUhGYeRNVUGevb0wThu
-  :album_image_url: https://i.scdn.co/image/ab67616d0000b273ba5db46f4b838ef6027e6f96
-  :singers:
-  - :id: 6eUKZXaKkcviH0Ku9w2n3V
-    :name: Ed Sheeran
-    :external_url: https://open.spotify.com/artist/6eUKZXaKkcviH0Ku9w2n3V
-- :id: 0tgVpDi06FyKpA1z0VMD4v
-  :name: Perfect
-  :uri: spotify:track:0tgVpDi06FyKpA1z0VMD4v
-  :external_url: https://open.spotify.com/track/0tgVpDi06FyKpA1z0VMD4v
-  :album_id: 3T4tUhGYeRNVUGevb0wThu
-  :album_name: "÷ (Deluxe)"
-  :album_url: https://open.spotify.com/album/3T4tUhGYeRNVUGevb0wThu
-  :album_image_url: https://i.scdn.co/image/ab67616d0000b273ba5db46f4b838ef6027e6f96
+- :id: 3rmo8F54jFF8OgYsqTxm5d
+  :name: Bad Habits
+  :uri: spotify:track:3rmo8F54jFF8OgYsqTxm5d
+  :external_url: https://open.spotify.com/track/3rmo8F54jFF8OgYsqTxm5d
+  :album_id: 32iAEBstCjauDhyKpGjTuq
+  :album_name: "="
+  :album_url: https://open.spotify.com/album/32iAEBstCjauDhyKpGjTuq
+  :album_image_url: https://i.scdn.co/image/ab67616d0000b273ef24c3fdbf856340d55cfeb2
   :singers:
   - :id: 6eUKZXaKkcviH0Ku9w2n3V
     :name: Ed Sheeran
@@ -172,6 +148,30 @@
   :album_name: "="
   :album_url: https://open.spotify.com/album/32iAEBstCjauDhyKpGjTuq
   :album_image_url: https://i.scdn.co/image/ab67616d0000b273ef24c3fdbf856340d55cfeb2
+  :singers:
+  - :id: 6eUKZXaKkcviH0Ku9w2n3V
+    :name: Ed Sheeran
+    :external_url: https://open.spotify.com/artist/6eUKZXaKkcviH0Ku9w2n3V
+- :id: 0tgVpDi06FyKpA1z0VMD4v
+  :name: Perfect
+  :uri: spotify:track:0tgVpDi06FyKpA1z0VMD4v
+  :external_url: https://open.spotify.com/track/0tgVpDi06FyKpA1z0VMD4v
+  :album_id: 3T4tUhGYeRNVUGevb0wThu
+  :album_name: "÷ (Deluxe)"
+  :album_url: https://open.spotify.com/album/3T4tUhGYeRNVUGevb0wThu
+  :album_image_url: https://i.scdn.co/image/ab67616d0000b273ba5db46f4b838ef6027e6f96
+  :singers:
+  - :id: 6eUKZXaKkcviH0Ku9w2n3V
+    :name: Ed Sheeran
+    :external_url: https://open.spotify.com/artist/6eUKZXaKkcviH0Ku9w2n3V
+- :id: 0afhq8XCExXpqazXczTSve
+  :name: Galway Girl
+  :uri: spotify:track:0afhq8XCExXpqazXczTSve
+  :external_url: https://open.spotify.com/track/0afhq8XCExXpqazXczTSve
+  :album_id: 3T4tUhGYeRNVUGevb0wThu
+  :album_name: "÷ (Deluxe)"
+  :album_url: https://open.spotify.com/album/3T4tUhGYeRNVUGevb0wThu
+  :album_image_url: https://i.scdn.co/image/ab67616d0000b273ba5db46f4b838ef6027e6f96
   :singers:
   - :id: 6eUKZXaKkcviH0Ku9w2n3V
     :name: Ed Sheeran

@@ -89,6 +89,11 @@ module LingoBeats
         LEVEL_SCORES.key(weighted_average(dist, total).round)
       end
 
+      # 要在 controller require service
+      def generate_vocab_materials(vocabulary_service:)
+        vocabulary_service.call(self)
+      end
+
       private
 
       def base_distribution

@@ -82,4 +82,108 @@ http_interactions:
           "responseId": "XosQafvsG6K7vr0Ph4KJgAQ"
         }
   recorded_at: Sun, 09 Nov 2025 12:38:56 GMT
+- request:
+    method: post
+    uri: https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=<GEMINI_API_KEY>
+    body:
+      encoding: UTF-8
+      string: '{"contents":[{"role":"user","parts":[{"text":"You are an English learning
+        assistant for Taiwanese learners.\n\nTASK:\nFor EACH word in the given list,
+        return a detailed vocabulary entry with:\n1. Multiple part-of-speech entries
+        (noun, verb, adjective… as applicable).\n2. A short Traditional Chinese gloss
+        for the word (head_zh).\n    - Example: for \"ghost\", head_zh should be like
+        \"鬼魂、幽靈\".\n3. For each part-of-speech entry:\n    - definition_en: short,
+        simple English explanation (CEFR A2 level).\n    - definition_zh: clear Traditional
+        Chinese explanation, natural and easy to understand.\n    - examples: 2–3
+        everyday example sentences (CEFR A2), natural spoken/written English and it''s
+        explain in Chinese.\n4. related_forms: common derivatives or different grammatical
+        forms of the word\n    (e.g. ghostly, ghosting, staged, wildness), with part-of-speech.\n\nOUTPUT
+        FORMAT (IMPORTANT):\nReturn ONLY valid JSON.\nNO markdown, NO comments, NO
+        explanations outside JSON.\n\nJSON SCHEMA:\n[\n    {\n    \"word\": \"string\",\n    \"head_zh\":
+        \"string\",\n    \"entries\": [\n        {\n        \"pos\": \"string\",\n        \"definition_en\":
+        \"string\",\n        \"definition_zh\": \"string\",\n        \"examples\":
+        [\"string\", \"string\"]\n        }\n    ],\n    \"related_forms\": [\n        {\n        \"form\":
+        \"string\",\n        \"pos\": \"string\"\n        }\n    ]\n    }\n]\n\nLEVEL:
+        A2\nSONG_TITLE: Test Song\nWORD LIST:\n[\"ghost\",\"alone\",\"queen\"]\n\nOUTPUT
+        FORMAT (IMPORTANT):\nReturn ONLY valid JSON. No markdown, no comments, no
+        code fences, no ``` blocks.\n"}]}]}'
+    headers:
+      Connection:
+      - close
+      Content-Type:
+      - application/json; charset=utf-8
+      Host:
+      - generativelanguage.googleapis.com
+      User-Agent:
+      - http.rb/5.3.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Vary:
+      - Origin,Accept-Encoding
+      - Referer
+      - X-Origin
+      Date:
+      - Sat, 15 Nov 2025 11:04:20 GMT
+      Server:
+      - scaffolding on HTTPServer2
+      X-Xss-Protection:
+      - '0'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Server-Timing:
+      - gfet4t7; dur=3684
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Accept-Ranges:
+      - none
+      Connection:
+      - close
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "candidates": [
+            {
+              "content": {
+                "parts": [
+                  {
+                    "text": "```json\n[\n  {\n    \"word\": \"ghost\",\n    \"head_zh\": \"鬼魂、幽靈\",\n    \"entries\": [\n      {\n        \"pos\": \"noun\",\n        \"definition_en\": \"The spirit of a dead person that some people believe can be seen.\",\n        \"definition_zh\": \"死者的靈魂，有些人相信可以看到。\",\n        \"examples\": [\n          \"Some people say they've seen a ghost in this house. (有些人說他們在這間房子裡看到鬼。)\",\n          \"Do you believe in ghosts? (你相信有鬼嗎？)\"\n        ]\n      }\n    ],\n    \"related_forms\": [\n      {\n        \"form\": \"ghostly\",\n        \"pos\": \"adjective\"\n      }\n    ]\n  },\n  {\n    \"word\": \"alone\",\n    \"head_zh\": \"單獨的、獨自的\",\n    \"entries\": [\n      {\n        \"pos\": \"adjective\",\n        \"definition_en\": \"Being by yourself; not with anyone else.\",\n        \"definition_zh\": \"自己一個人；沒有和任何人在一起。\",\n        \"examples\": [\n          \"She likes to be alone sometimes. (她有時候喜歡獨處。)\",\n          \"I felt alone in the big city. (我在大城市裡感到孤單。)\"\n        ]\n      },\n      {\n        \"pos\": \"adverb\",\n        \"definition_en\": \"Without any other people.\",\n        \"definition_zh\": \"沒有其他人在身邊。\",\n        \"examples\": [\n          \"He went to the store alone. (他獨自去商店。)\",\n          \"She lives alone. (她獨自生活。)\"\n        ]\n      }\n    ],\n    \"related_forms\": []\n  },\n  {\n    \"word\": \"queen\",\n    \"head_zh\": \"女王、王后\",\n    \"entries\": [\n      {\n        \"pos\": \"noun\",\n        \"definition_en\": \"The female ruler of a country.\",\n        \"definition_zh\": \"一個國家的女性統治者。\",\n        \"examples\": [\n          \"The queen lives in a palace. (女王住在宮殿裡。)\",\n          \"She wants to be a queen. (她想成為女王。)\"\n        ]\n      }\n    ],\n    \"related_forms\": []\n  }\n]\n```"
+                  }
+                ],
+                "role": "model"
+              },
+              "finishReason": "STOP",
+              "avgLogprobs": -0.065766835734792
+            }
+          ],
+          "usageMetadata": {
+            "promptTokenCount": 402,
+            "candidatesTokenCount": 548,
+            "totalTokenCount": 950,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 402
+              }
+            ],
+            "candidatesTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 548
+              }
+            ]
+          },
+          "modelVersion": "gemini-2.0-flash",
+          "responseId": "MV4YabPJBc6j1e8P9ciZsAg"
+        }
+  recorded_at: Sat, 15 Nov 2025 11:04:21 GMT
 recorded_with: VCR 6.3.1

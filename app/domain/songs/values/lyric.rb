@@ -4,6 +4,9 @@ require 'dry-types'
 require 'dry-struct'
 require 'digest'
 require 'cld3'
+
+require_relative 'cleaner'
+require_relative 'tokenizer'
 # require 'pycall/import'
 
 module LingoBeats

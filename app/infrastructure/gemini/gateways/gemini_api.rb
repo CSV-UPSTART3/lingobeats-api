@@ -7,8 +7,8 @@ module LingoBeats
   module Gemini
     # 組 URL → 發 HTTP POST → 回 Ruby Hash
     class Api
-      BASE  = 'https://generativelanguage.googleapis.com/v1/models'
-      MODEL = 'gemini-2.5-flash'
+      BASE  = 'https://generativelanguage.googleapis.com/v1beta/models'
+      MODEL = 'gemini-2.0-flash'
 
       def initialize(token_provider:, model: MODEL, http_client: HTTP)
         @token_provider = token_provider
@@ -18,8 +18,14 @@ module LingoBeats
 
       # prompt: String or Array<String>
       def generate_content(prompt)
-        validate_prompt!(prompt)
+        Functionality.validate_prompt!(prompt)
         resp = @http.post(request_url, json: request_body(prompt))
+        # http gem 取碼：resp.status.to_i 或 resp.code
+        status = resp.respond_to?(:code) ? resp.code : resp.status.to_i
+        body   = resp.to_s
+
+        raise "Gemini HTTP #{status}: #{body}" if status != 200
+
         JSON.parse(resp.to_s)
       end
 
@@ -30,7 +36,7 @@ module LingoBeats
       end
 
       def request_body(prompt)
-        { contents: [{ role: 'user', parts: build_parts(prompt) }] }
+        { contents: [{ role: 'user', parts: Functionality.build_parts(prompt) }] }
       end
 
       # Functionality module for Gemini API
