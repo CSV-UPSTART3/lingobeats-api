@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'search_histories'
-require_relative 'materials'
+require_relative 'vocabularies'
 require_relative 'singers'
 require_relative 'songs'
 require_relative 'lyrics'
@@ -13,7 +13,7 @@ module LingoBeats
       ENTITY_REPOSITORY = {
         Entity::Singer        => Singers,
         Entity::Song          => Songs,
-        Entity::Material      => Materials,
+        Entity::Vocabulary    => Vocabularies,
         Entity::SearchHistory => SearchHistories,
         Value::Lyric          => Lyrics
       }.freeze
