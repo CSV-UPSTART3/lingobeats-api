@@ -2,6 +2,8 @@
   detectors:
     IrresponsibleModule:
       enabled: false
+    DuplicateMethodCall:
+      enabled: false
   exclude_paths:
     - _snippets
     - lib/lingo_beats.rb # one-time test fixture creator

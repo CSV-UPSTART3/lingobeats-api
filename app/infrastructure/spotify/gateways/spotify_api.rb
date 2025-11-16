@@ -138,21 +138,6 @@ module LingoBeats
           @category = category.to_s.downcase
           @query = query
           @limit = limit
-
-          check_category
-          check_query
-        end
-
-        def check_category
-          return true if QUERY_BY_CATEGORY.key?(@category)
-
-          raise ArgumentError, "Unsupported search type: #{@category.inspect}"
-        end
-
-        def check_query
-          return true unless @query.to_s.strip.empty?
-
-          raise ArgumentError, 'Query cannot be blank'
         end
 
         def params

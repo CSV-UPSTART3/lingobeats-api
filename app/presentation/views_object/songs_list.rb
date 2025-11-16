@@ -7,7 +7,7 @@ module Views
   class SongsList
     def initialize(songs)
       @songs = songs.map do |song|
-        Song.new(song)
+        song.is_a?(Song) ? song : Song.new(song)
       end
     end
 

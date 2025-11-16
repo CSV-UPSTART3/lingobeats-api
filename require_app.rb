@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-CODE_DIRS = %w[config app/domain app/infrastructure app/presentation app/controllers].freeze
+CODE_DIRS = %w[config app/domain app/infrastructure app/presentation app/application].freeze
 
 # Requires all ruby files in specified app folders
 def require_app

@@ -10,28 +10,60 @@ gem 'pry'
 gem 'pycall'
 gem 'rake'
 
-# Web Application
+# PRESENTATION LAYER
+gem 'slim', '~> 4.0'
+
+# APPLICATION LAYER
+# Web Application related
 gem 'base64'
 gem 'logger', '~> 1.0'
 gem 'puma', '~> 7.0'
+gem 'rack', '~> 3.2'
 gem 'rack-cors'
 gem 'rack-session', '~> 0'
 gem 'roda', '~> 3.0'
-gem 'slim', '~> 4.0'
 
+# Controllers and services
+gem 'dry-monads', '~> 1.0'
+gem 'dry-transaction', '~> 0'
+gem 'dry-validation', '~> 1.0'
+
+# HTML Parsing
+gem 'nokogiri'
+
+# DOMAIN LAYER
+# Validation
+gem 'dry-struct', '~> 1.0'
+gem 'dry-types', '~> 1.0'
+
+# INFRASTRUCTURE LAYER
 # Networking
 gem 'http', '~> 5.0'
-gem 'rack', '~> 3.2'
 
-# Testing
+# Database
+gem 'hirb'
+gem 'sequel', '~> 5.0'
+
+group :development, :test do
+  gem 'sqlite3', '~> 1.0'
+end
+
+group :production do
+  gem 'pg'
+end
+
+# TESTING
 group :test do
+  # Unit/Integration/Acceptance Tests
   gem 'minitest', '~> 5.20'
   gem 'minitest-rg', '~> 5.2'
   gem 'simplecov', '~> 0'
   gem 'vcr', '~> 6'
   gem 'webmock', '~> 3'
 
+  # Acceptance Tests
   gem 'headless', '~> 2.3'
+  gem 'page-object', '~> 2.0'
   gem 'selenium-webdriver', '~> 4.11'
   gem 'watir', '~> 7.0'
 end
@@ -45,23 +77,4 @@ group :development do
   gem 'rubocop-minitest'
   gem 'rubocop-rake'
   gem 'rubocop-sequel'
-end
-
-# HTML Parsing
-gem 'nokogiri'
-
-# Data Validation
-gem 'dry-struct', '~> 1.8'
-gem 'dry-types', '~> 1.8'
-
-# Database
-gem 'hirb'
-gem 'sequel', '~> 5.0'
-
-group :development, :test do
-  gem 'sqlite3', '~> 1.0'
-end
-
-group :production do
-  gem 'pg'
 end

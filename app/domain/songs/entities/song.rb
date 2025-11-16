@@ -28,10 +28,7 @@ module LingoBeats
       end
 
       def lyrics
-        text = lyric&.text&.strip
-        return nil if text.nil? || text.empty?
-
-        text
+        lyric&.text&.strip
       end
 
       # Remove duplicates by name + first singer id
