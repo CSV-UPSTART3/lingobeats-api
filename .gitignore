@@ -6,6 +6,8 @@ coverage/*
 # spec/fixtures/cassettes/
 spec/fixtures/*.html
 spec/fixtures/*.txt
+# spec/fixtures/*.yml
+# spec/fixtures/*.json
 lib/gemini_*
 lib/genius_*
 lib/lingo_beats.rb

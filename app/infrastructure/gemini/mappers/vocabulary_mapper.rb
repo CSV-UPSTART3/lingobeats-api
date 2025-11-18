@@ -85,19 +85,18 @@ module LingoBeats
 
       # material_hash + 其他欄位 → Vocabulary entity
       class DataMapper
-        def initialize(material_hash, song_id:, name:, level:)
+        def initialize(material_hash, name:, level:)
           @material = material_hash
-          @song_id  = song_id
           @name     = name
           @level    = level
         end
 
         def build_entity
           LingoBeats::Entity::Vocabulary.new(
-            song_id: @song_id,
+            id: nil,
             name: @name,
             level: @level,
-            material: @material
+            material: @material # Hash, NOT JSON string (Repo 會負責轉 JSON)
           )
         end
       end
@@ -108,9 +107,9 @@ module LingoBeats
       end
 
       # 直接拿 Vocabulary：payload → Vocabulary entity
-      def self.build_from_payload(payload, song_id:, name:, level:)
+      def self.build_from_payload(payload, name:, level:)
         material_hash = MaterialParser.parse_payload(payload)
-        DataMapper.new(material_hash, song_id:, name:, level:).build_entity
+        DataMapper.new(material_hash, name:, level:).build_entity
       end
     end
   end

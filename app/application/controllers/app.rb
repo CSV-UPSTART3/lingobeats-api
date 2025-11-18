@@ -95,6 +95,30 @@ module LingoBeats
           view 'song', locals: { songs:, category:, query:, bad_message:, search_history: }
         end
       end
+
+      # GET /songs/:id/materials
+      # routing.on String do |song_id|
+      #   routing.on 'materials' do
+      #     routing.get do
+      #       song = Repository::For.klass(Entity::Song).find_id(song_id)
+
+      #       unless song
+      #         routing.halt(404, "Song #{song_id} not found")
+      #       end
+
+      #       cfg = App.config
+
+      #       materials = LingoBeats::Vocabularies::Services::GenerateMaterialsForSong.new(
+      #         vocabulary_repo: Repository::For.klass(Entity::Vocabulary),
+      #         mapper: LingoBeats::Gemini::VocabularyMapper.new(
+      #           access_token: cfg.GEMINI_API_KEY
+      #         )
+      #       ).call(song)
+
+      #       view 'materials', locals: { materials:, song: }
+      #     end
+      #   end
+      # end
     end
 
     # manage search history
@@ -116,8 +140,13 @@ module LingoBeats
       # GET /lyrics/song?id=...&name=...&singer=...
       routing.on 'song' do
         routing.get do
+          # 1. Validate parameters
           url_request = Forms::NewLyric.new.call(routing.params)
+
+          # 2. Call new AddLyric pipelin
           result = Service::AddLyric.new.call(url_request)
+
+          # 3. Parse result (success or failure)
           lyrics, bad_message = RouteHelpers::ResultParser.parse_single(result) do |lyric, error|
             [Views::Lyric.new(lyric).text, error]
           end

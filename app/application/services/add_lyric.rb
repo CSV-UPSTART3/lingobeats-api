@@ -7,6 +7,7 @@ module LingoBeats
     # Transaction to store lyric when user selects a song
     class AddLyric
       include Dry::Transaction
+      include Dry::Monads[:result]
 
       step :parse_url
       step :find_lyric
@@ -54,11 +55,37 @@ module LingoBeats
 
       # step 4. store lyric if not exists, and return lyric value object
       def store_lyric(input)
-        return Success(input[:local_lyric]) if input[:local_lyric]
+        song_id      = input[:song_id]
+        local_lyric  = input[:local_lyric]
+        remote_lyric = input[:remote_lyric]
 
-        lyric = @songs_repo.attach_lyric(song_id: input[:song_id], lyric_vo: input[:remote_lyric])
+        # 1. 如果 DB 中已經有 lyrics，就直接使用，不要覆蓋
+        lyric =
+          if local_lyric
+            local_lyric
+          else
+            # 2. 沒有 DB lyrics → 用 remote 寫入資料庫
+            @songs_repo.attach_lyric(song_id: song_id, lyric_vo: remote_lyric)
+          end
+        
+        # 3. vocabulary pipeline（使用實際用的 lyric，不是 remote_lyric）
+        # --- ADDED: integrate your vocabulary storage pipeline (from old_app.rb) ---
+        if lyric&.text&.length&.positive?
+          vocab_service = LingoBeats::Service::VocabularyStorageService.new(
+            vocab_repo: Repository::For.klass(Entity::Vocabulary)
+          )
+          vocab_service.store_from_song(
+            @songs_repo.find_id(input[:song_id])
+          )
+        end
+        # ---------------------------------------------------------------------------
 
         Success(lyric)
+        # return Success(input[:local_lyric]) if input[:local_lyric]
+
+        # lyric = @songs_repo.attach_lyric(song_id: input[:song_id], lyric_vo: input[:remote_lyric])
+
+        # Success(lyric)
       rescue StandardError => error
         App.logger.error error.backtrace.join("\n")
         Failure('Failed to store lyric to database')

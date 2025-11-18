@@ -73,7 +73,8 @@ module LingoBeats
       end
 
       def difficulty_distribution
-        fill_levels(base_distribution)
+        puts base_distribution
+        # SongDifficultyHelper.fill_levels(base_distribution)
       end
 
       def average_difficulty
@@ -83,7 +84,10 @@ module LingoBeats
         total = dist.values.sum
         return if total.zero?
 
-        LEVEL_SCORES.key(weighted_average(dist, total).round)
+        # 用 helper 的分數表來還原平均難度所對應的等級
+        SongDifficultyHelper.level_scores.key(
+          SongDifficultyHelper.weighted_average(dist, total).round
+        )
       end
 
       # 要在 controller require service
@@ -94,38 +98,34 @@ module LingoBeats
       private
 
       def base_distribution
-        evaluate_words.each_value.with_object(Hash.new(0)) do |level, hash|
-          hash[level] += 1 if level
+        evaluate_words.values.each_with_object(Hash.new(0)) do |level, hash|
+          next unless %w[A B C].include?(level)
+          hash[level] += 1
+        end
+      end
+    end
+
+    # Helpers for calculating song difficulty
+    module SongDifficultyHelper
+      module_function
+
+      def weighted_average(dist, total)
+        weighted = dist.sum { |level, count| level_scores[level] * count }.to_f
+        weighted / total
+      end
+
+      def fill_levels(distribution)
+        %w[A B C].each_with_object({}) do |level, hash|
+          hash[level] = distribution.fetch(level, 0)
         end
       end
 
-      # Helpers for calculating song difficulty
-      module SongDifficultyHelper
-        module_function
-
-        def weighted_average(dist, total)
-          weighted = dist.sum { |level, count| LEVEL_SCORES[level] * count }.to_f
-          weighted / total
-        end
-
-        def fill_levels(distribution)
-          %w[A1 A2 B1 B2 C1 C2].each_with_object({}) do |level, hash|
-            hash[level] = distribution.fetch(level, 0)
-          end
-        end
-
-        def level_scores
-          {
-            'A1' => 1, 'A2' => 2,
-            'B1' => 3, 'B2' => 4,
-            'C1' => 5, 'C2' => 6
-          }.freeze
-        end
-
-        def weighted_average_score(dist, total)
-          weighted = dist.sum { |level, count| level_scores[level] * count }.to_f
-          weighted / total
-        end
+      def level_scores
+        {
+          'A' => 1,
+          'B' => 2,
+          'C' => 3
+        }.freeze
       end
     end
   end

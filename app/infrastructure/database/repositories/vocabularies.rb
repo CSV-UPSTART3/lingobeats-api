@@ -8,37 +8,58 @@ module LingoBeats
   module Repository
     # Repository for Vocabulary Entities
     class Vocabularies
+      # ORM mapping
+      VocabularyOrm = LingoBeats::Database::VocabularyOrm
+
       # 取多筆
       def self.all
-        rows = LingoBeats::Database::VocabularyOrm.all
-        rebuild_many(rows)
+        rebuild_many(VocabularyOrm.all)
       end
 
       def self.latest(limit = 20)
-        LingoBeats::Database::VocabularyOrm.reverse_order(:id)
-                                           .limit(limit).all
-                                           .map { |rec| rebuild_entity(rec) }
+        rows = VocabularyOrm.reverse_order(:id).limit(limit).all
+        rebuild_many(rows)
       end
 
       # 查一筆
       def self.find_id(id)
-        rec = LingoBeats::Database::VocabularyOrm.first(id: id)
+        rec = VocabularyOrm.first(id: id)
         rebuild_entity(rec)
       end
 
-      def self.find_by_song_id(song_id)
-        rec = LingoBeats::Database::VocabularyOrm.where(song_id: song_id)
-                                                 .order(Sequel.desc(:id)).first
+      def self.for_song(song_id)
+        song = LingoBeats::Database::SongOrm.first(id: song_id)
+        return [] unless song
+
+        rebuild_many(song.vocabularies)
+      end
+
+      def self.find_by_name(name)
+        rec = VocabularyOrm.first(name: name)
         rebuild_entity(rec)
       end
 
-      # 新增（由 Domain Entity 建立）
       def self.create(entity)
-        rec = LingoBeats::Database::VocabularyOrm.create(
-          song_id: entity.song_id,
+        rec = VocabularyOrm.create(
+          name: entity.name,
           level: entity.level,
-          content: entity.content # JSON 字串
+          material: entity.material
         )
+        rebuild_entity(rec)
+      end
+
+      def self.link_song(song_id, vocab_id)
+        song = LingoBeats::Database::SongOrm.first(id: song_id)
+        vocab = VocabularyOrm.first(id: vocab_id)
+        return if song.vocabularies_dataset.where(id: vocab_id).any?
+
+        song.add_vocabulary(vocab)
+      end
+
+      def self.update_material(id, material_hash)
+        # puts material_hash.class
+        rec = VocabularyOrm.first(id: id)
+        rec.update(material: material_hash)
         rebuild_entity(rec)
       end
 
@@ -52,9 +73,10 @@ module LingoBeats
         return nil unless rec
 
         LingoBeats::Entity::Vocabulary.new(
-          song_id: rec.song_id,
+          id: rec.id,
+          name: rec.name,
           level: rec.level,
-          content: rec.content
+          material: rec.material   # String 或 nil
         )
       end
       private_class_method :rebuild_entity

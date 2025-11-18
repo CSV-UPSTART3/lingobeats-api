@@ -4,13 +4,14 @@ require 'sequel'
 
 module LingoBeats
   module Database
-    # Object-Relational Mapper for Materials
-    class VocabularyOrm < Sequel::Model(:materials)
+    # Object-Relational Mapper for Vocabularys
+    class VocabularyOrm < Sequel::Model(:vocabularies)
       unrestrict_primary_key
 
-      # many_to_one :song,
-      #             class: :'LingoBeats::Database::SongOrm',
-      #             key: :song_id
+      many_to_many :songs,
+                   class: :'LingoBeats::Database::SongOrm',
+                   join_table: :songs_vocabularies,
+                   left_key: :vocabulary_id, right_key: :song_id
 
       plugin :timestamps, update_on_create: true
     end

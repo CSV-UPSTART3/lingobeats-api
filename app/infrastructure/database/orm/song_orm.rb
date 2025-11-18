@@ -13,6 +13,11 @@ module LingoBeats
                    join_table: :songs_singers,
                    left_key: :song_id, right_key: :singer_id
 
+      many_to_many :vocabularies,
+                   class: :'LingoBeats::Database::VocabularyOrm',
+                   join_table: :songs_vocabularies,
+                   left_key: :song_id, right_key: :vocabulary_id
+
       # one_to_one :lyric,
       #            class: :'LingoBeats::Database::LyricOrm',
       #            key: :song_id

@@ -35,7 +35,8 @@ module LingoBeats
               next if material_hash.nil?
 
               updated_vocab = build_updated_vocab(vocab, material_hash)
-              @vocabulary_repo.update(updated_vocab)
+              @vocabulary_repo.update_material(updated_vocab.id, updated_vocab.material)
+              # @vocabulary_repo.update_material(updated_vocab)
               updated << updated_vocab
             end
           end
@@ -58,7 +59,7 @@ module LingoBeats
 
         # Dry::Struct 是 immutable，所以要 new 一個新的回去
         def build_updated_vocab(vocab, material_hash)
-          attrs = vocab.to_attr_hash.merge(material: material_hash)
+          attrs = vocab.to_attr_hash.merge(material: material_hash.nil? ? nil : JSON.generate(material_hash))
           LingoBeats::Entity::Vocabulary.new(attrs)
         end
 
@@ -110,7 +111,7 @@ module LingoBeats
             ]
 
             LEVEL: #{level}
-            SONG_TITLE: #{song.title}
+            SONG_TITLE: #{song.name}
             WORD LIST:
             #{words.to_json}
 
