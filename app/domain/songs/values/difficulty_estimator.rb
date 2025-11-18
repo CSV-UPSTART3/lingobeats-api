@@ -14,7 +14,7 @@ module LingoBeats
       def call
         return {} if @words.empty?
 
-        stdout, stderr, status = run_python(@words)
+        stdout, stderr, status = PythonRunner.run_python(@words)
         return JSON.parse(stdout) if status.success?
 
         warn "Python failed (#{status.exitstatus}): #{stderr}"

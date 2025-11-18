@@ -8,7 +8,9 @@ module DatabaseHelper
     LingoBeats::Database::SingerOrm.map(&:destroy)
     LingoBeats::Database::SongOrm.map(&:destroy)
     LingoBeats::Database::LyricOrm.map(&:destroy)
+    LingoBeats::Database::VocabularyOrm.map(&:destroy)
     LingoBeats::App.db[:songs_singers].delete if LingoBeats::App.db.table_exists?(:songs_singers)
+    LingoBeats::App.db[:songs_vocabularies].delete if LingoBeats::App.db.table_exists?(:songs_vocabularies)
     LingoBeats::App.db.run('PRAGMA foreign_keys = ON')
   end
 end

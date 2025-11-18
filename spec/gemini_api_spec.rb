@@ -19,55 +19,74 @@ describe 'Tests Gemini API → Vocabulary pipeline' do
   # 簡單的 in-memory Vocabulary repo(for spec)
   # 接上 db 以後可以改掉
   class InMemoryVocabularyRepo
-    def initialize(vocabs)
+    def initialize(song, vocabs)
       @store = {}
       vocabs.each do |v|
-        (@store[v.song_id] ||= []) << v
+        (@store[song.id] ||= []) << v
       end
+      # puts @store
     end
 
+    # 給 GenerateMaterialsForSong 用的介面
     def for_song(song_id)
       Array(@store[song_id])
     end
 
-    def update(vocab)
-      list = (@store[vocab.song_id] ||= [])
-      idx  = list.index { |v| v.name == vocab.name }
-      idx ? list[idx] = vocab : list << vocab
+    # 更新：用 word 當 key 找到舊的，換成新的
+    def update_material(id, material_str)
+      @store.each_value do |list|
+        idx = list.index { |v| v.id == id }
+        next unless idx
+
+        old = list[idx]
+        updated = LingoBeats::Entity::Vocabulary.new(
+          old.to_attr_hash.merge(material: material_str)
+        )
+        list[idx] = updated
+        return updated
     end
 
-    def all
-      @store.values.flatten
-    end
+    nil
   end
 
+  # 方便最後輸出全部看看
+  def all
+    @store.values.flatten
+  end
+end
+
   it 'HAPPY: generates vocabulary materials for a song via service' do
+    dir = 'spec/fixtures'
     gemini_key = defined?(GEMINI_API_KEY) ? GEMINI_API_KEY : ENV.fetch('GEMINI_API_KEY', nil)
     skip 'GEMINI_API_KEY not set; skipping integration spec' unless gemini_key
 
     # --- 準備一首假的歌 + CEFR 結果 ---
-    level   = 'A2'
-    song_id = 'spotify:track:test-123'
-    song    = OpenStruct.new(id: song_id, title: 'Test Song')
+    SongStub = Struct.new(:id, :name)
+    song = SongStub.new('0bHs3ly4Bv5BlzE3KrePfX', 'Golden')
+    # level   = 'A2'
+    # song_id = 'spotify:track:test-123'
+    # song    = OpenStruct.new(id: song_id, title: 'Test Song')
 
     # 簡化版 CEFR 結果（避免一次丟太多 token）
-    cefr_result = {
-      'ghost' => level,
-      'alone' => level,
-      'queen' => level
-    }
+    result = JSON.parse(File.read(File.join(dir, 'cefr_result.txt')))
+    cefr_result = result.first(1).to_h
+    # cefr_result = {
+    #   'ghost' => level,
+    #   'alone' => level,
+    #   'queen' => level
+    # }
 
     # 把 vocabs（material 為空）建成 domain entity
-    initial_vocabs = cefr_result.map do |word, lvl|
+    initial_vocabs = cefr_result.map.with_index do |(word, level), idx|
       LingoBeats::Entity::Vocabulary.new(
-        song_id: song_id,
+        id: idx + 1,            # ⭐ 加上假的自增 ID
         name: word,
-        level: lvl,
-        material: {} # 先留空，等等由 service 填入
+        level: level,
+        material: nil # 一開始先是空的，等等由 service 幫你塞進去
       )
     end
 
-    vocab_repo = InMemoryVocabularyRepo.new(initial_vocabs)
+    vocab_repo = InMemoryVocabularyRepo.new(song, initial_vocabs)
 
     # 建立 Gemini mapper
     mapper = LingoBeats::Gemini::VocabularyMapper.new(access_token: gemini_key)
@@ -84,16 +103,17 @@ describe 'Tests Gemini API → Vocabulary pipeline' do
     _(updated_vocabs).wont_be_empty
     updated_vocabs.each do |vocab|
       _(vocab).must_be_kind_of LingoBeats::Entity::Vocabulary
-      _(vocab.song_id).must_equal song_id
-      _(vocab.level).must_equal level
+      # _(vocab.song_id).must_equal song_id
+      # _(vocab.level).must_equal level
 
-      _(vocab.material).wont_be_nil
-      _(vocab.material).must_be_kind_of Hash
+      material_hash = JSON.parse(vocab.material, symbolize_names: true)
+      _(vocab.material_hash).wont_be_nil
+      _(vocab.material_hash).must_be_kind_of Hash
 
       # material hash must = schema
-      _(vocab.material).must_include :word
-      _(vocab.material).must_include :entries
-      _(vocab.material[:entries]).must_be_kind_of Array
+      _(vocab.material_hash).must_include :word
+      _(vocab.material_hash).must_include :entries
+      _(vocab.material_hash[:entries]).must_be_kind_of Array
     end
   end
 

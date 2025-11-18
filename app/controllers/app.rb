@@ -154,6 +154,7 @@ module LingoBeats
       module_function
 
       def song_repo = @song_repo ||= Repository::For.klass(Entity::Song)
+      def vocabulary_repo = @vocabulary_repo ||= Repository::For.klass(Entity::Vocabulary)
 
       def get_params(req)
         req.params.values_at('id', 'name', 'singer').map(&:to_s)
@@ -167,30 +168,59 @@ module LingoBeats
 
         # 2. call api if not found in DB
         song = fetch_from_api(song_id, song_name, singer_name)
-
-        # 3. 若沒有英文歌詞則直接 return
         return { lyrics: nil, cached: false } unless song
 
-        # 4. return lyrics immediately
-        { lyrics: song.lyrics, cached: false }
+        process_song(song, cached: false)
       end
 
       # --- internals ---
+
       def find_in_db(song_id)
-        text = song_repo.find_id(song_id)&.lyrics
+        song = song_repo.find_id(song_id)
+        return nil unless song
 
-        return unless text&.length&.positive?
+        process_song(song, cached: true)
+      end
 
-        # puts song_repo.find_id(song_id).difficulty_distribution
-        # puts song_repo.find_id(song_id).average_difficulty
+      # DB 或 API 拿到 song，都走這條 pipeline
+      def process_song(song, cached:)
+        # 若沒有英文歌詞則直接 return
+        return { lyrics: nil, cached: cached } unless song&.lyrics&.length&.positive?
 
-        { lyrics: text, cached: true }
+        service = LingoBeats::Service::VocabularyStorageService.new(
+          vocab_repo: vocabulary_repo
+        )
+        service.store_from_song(song)
+
+        # 這裡以後要印 distribution 或 avg 也可以統一放這裡
+        # vocabs = @vocabulary_repo.for_song(song.id)
+        # distribution = vocabs.group_by(&:level).transform_values(&:count)
+        # puts distribution
+        # 以下兩個壞掉中...
+        # puts song.difficulty_distribution
+        # puts song.average_difficulty
+
+        # 這是生歌詞的地方，但不知道前端具體要在哪裡呼叫
+        # cfg = App.config
+        # materials = LingoBeats::Vocabularies::Services::GenerateMaterialsForSong.new(
+        #   vocabulary_repo: vocabulary_repo,
+        #   mapper: LingoBeats::Gemini::VocabularyMapper.new(
+        #     access_token: cfg.GEMINI_API_KEY
+        #   )
+        # ).call(song)
+
+
+        { lyrics: song.lyrics, cached: cached }
       end
 
       def fetch_from_api(song_id, song_name, artist_name)
-        song_repo.find_with_lyrics(song_id: song_id, song_name: song_name, artist_name: artist_name)
+        song_repo.find_with_lyrics(
+          song_id: song_id,
+          song_name: song_name,
+          artist_name: artist_name
+        )
       end
-      
+
       # 4. save in background
 
       # def save_in_background(song_id, lyric_value_object)

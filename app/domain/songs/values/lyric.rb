@@ -53,7 +53,17 @@ module LingoBeats
         words = clean_words
         results = DifficultyEstimator.new(words).call
 
-        results.reject { |_word, lvl| [nil, 'None'].include?(lvl) }
+        # let A1/A2 → A, B1/B2 → B, C1/C2 → C
+        mapped_results = results.transform_values do |lvl|
+          case lvl
+          when /^A/ then 'A'
+          when /^B/ then 'B'
+          when /^C/ then 'C'
+          else nil
+          end
+        end
+
+        mapped_results.reject { |_word, lvl| [nil, 'None'].include?(lvl) }
       end
     end
   end
