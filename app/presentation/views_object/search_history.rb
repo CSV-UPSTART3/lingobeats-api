@@ -3,15 +3,12 @@
 module Views
   # View for a single search history entity
   class SearchHistory
-    attr_reader :song_search_history, :singer_search_history
-
-    def initialize(song_search_history: [], singer_search_history: [])
-      @song_search_history = song_search_history
-      @singer_search_history = singer_search_history
+    def initialize(history)
+      @history = history
     end
 
     def for(category)
-      category.to_s == 'singer' ? @singer_search_history : @song_search_history
+      category.to_s == 'singer' ? @history.singers : @history.song_names
     end
   end
 end

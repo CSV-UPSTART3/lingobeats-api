@@ -26,7 +26,7 @@ module LingoBeats
         self.class.build_entities(tracks)
       end
 
-      def display_popular_songs
+      def search_popular_songs
         data = @gateway.billboard_data(limit: 10)
         tracks = FieldExtractor.extract_playlist_track(data)
         self.class.build_entities(tracks)

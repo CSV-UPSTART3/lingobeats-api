@@ -1,25 +1,26 @@
-/ locals: songs, title (optional), icon (optional), no_result_id (optional)
+/ locals: songs, title (optional), icon (optional), bad_message (optional)
 
 - has_title = (defined?(title) && !!title && !(title.respond_to?(:empty?) && title.empty?))
 - has_icon  = (defined?(icon)  && !!icon)
-- has_noid  = (defined?(no_result_id) && !!no_result_id)
+- bad_message ||= "Failed to load songs.\nPlease try again later."
 
-.results-container
+.flex-grow-1.d-flex.flex-column.min-h-0
   - if songs && songs.any?
-    .row.justify-content-center.g-0
-      - if has_title
-        .col-12.col-md-10.col-lg-9
-          h5.text-warning.d-flex.align-items-center.fs-6.mb-2
-            - if has_icon
-              i class="fas fa-#{icon} text-warning me-2" aria-hidden="true"
-            = title
+    .flex-grow-1.overflow-auto
+      .row.justify-content-center.g-0
+        - if has_title
+          .col-12.col-md-10.col-lg-9
+            h5.text-warning.d-flex.align-items-center.fs-6.mb-2
+              - if has_icon
+                i class="fas fa-#{icon} text-warning me-2" aria-hidden="true"
+              = title
 
-      - songs.each do |song|
-        .col-12.col-md-10.col-lg-9.mb-2
-          == render('partials/_song_card', locals: { song: song })
+        - songs.each do |song|
+          .col-12.col-md-10.col-lg-9.mb-2
+            == render('partials/_song_card', locals: { song: song })
+
   - else
-    .text-center.mt-5
-      - if has_noid
-        h4.text-muted id=no_result_id
-      - else
-        h4.text-muted No songs found.
+    .flex-grow-1.d-flex.flex-column.justify-content-center.align-items-center.px-3
+      i.fas.fa-exclamation-triangle.fa-3x.text-muted.mb-3 aria-hidden="true"
+      h4.text-muted id="error"
+        = bad_message

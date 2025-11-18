@@ -4,12 +4,13 @@ require_relative 'singers'
 require_relative 'lyrics'
 require_relative '../../spotify/mappers/song_mapper' # for SongMapper
 # require_relative '../genius/mappers/lyric_mapper'       # (可能之後用)
-require_relative '../../../controllers/app' # so App.config is loaded
 
 module LingoBeats
   module Repository
     # Repository for Song Entities
     class Songs
+      CONFIG = LingoBeats::App.config
+
       def self.find_or_create(song_info)
         orm = LingoBeats::Database::SongOrm
         orm.first(uri: song_info[:uri]) || orm.create(song_info)
@@ -75,26 +76,28 @@ module LingoBeats
       end
 
       def self.build_spotify_mapper
-        config = LingoBeats::App.config
         LingoBeats::Spotify::SongMapper.new(
-          config.SPOTIFY_CLIENT_ID,
-          config.SPOTIFY_CLIENT_SECRET
+          CONFIG.SPOTIFY_CLIENT_ID,
+          CONFIG.SPOTIFY_CLIENT_SECRET
         )
       end
 
-      def self.find_with_lyrics(song_id:, song_name:, artist_name:)
-        config = LingoBeats::App.config
-        lyric_mapper = LingoBeats::Genius::LyricMapper.new(App.config.GENIUS_CLIENT_ACCESS_TOKEN)
+      # return lyric value object if exists
+      def self.find_lyric_in_database(song_id:)
+        find_id(song_id)&.lyric
+      end
+
+      # fetch lyric from Genius API
+      def self.fetch_lyric(song_name:, singer_name:)
+        lyric_mapper = Genius::LyricMapper.new(CONFIG.GENIUS_CLIENT_ACCESS_TOKEN)
+        lyric_mapper.lyrics_for(song_name: song_name, singer_name: singer_name)
+      end
+
+      # attach lyric value object to song in database, return updated lyric vo
+      def self.attach_lyric(song_id:, lyric_vo:)
         lyric_repo = Repository::For.klass(Value::Lyric)
-        lyric_value_object = lyric_mapper.lyrics_for(song_name: song_name, artist_name: artist_name)
-        return nil unless lyric_value_object&.english?
-        return nil if lyric_value_object.text.strip.empty?
-        return unless lyric_value_object.is_a?(Value::Lyric)
-
-        ensure_song_exists(song_id)
-        lyric_repo.attach_to_song(song_id, lyric_value_object)
-
-        find_id(song_id)
+        lyric_repo.attach_to_song(song_id, lyric_vo)
+        find_lyric_in_database(song_id: song_id)
       end
 
       # Helper class to rebuild entity from DB

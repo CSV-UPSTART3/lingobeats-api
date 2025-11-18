@@ -1,9 +1,4 @@
 / 頂部 Hero + Search
-== render('partials/_search_section', locals: { search_history: search_history })
-
-- if !defined?(popular) || popular.empty?
-  .text-center.mt-5
-    i.fas.fa-music.fa-3x.text-success.mb-3
-    h4.text-muted Start exploring songs!
-- else
-  == render('partials/_songs_list', locals: { songs: popular, title: 'Hot Trends', icon: 'arrow-trend-up' })
+.d-flex.flex-column.vh-100 style="padding-bottom: 100px;"
+    == render('partials/_search_section', locals: { search_history: search_history })
+    == render('partials/_songs_list', locals: { songs: songs, title: 'Hot Trends', icon: 'arrow-trend-up', bad_message: (defined?(bad_message) ? bad_message : nil) })

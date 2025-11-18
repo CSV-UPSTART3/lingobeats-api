@@ -6,7 +6,7 @@
 
     // --- Elements used across sections ---
     const searchInput      = document.getElementById('spotify_query_input');
-    const msg              = document.getElementById('noResultMsg');
+    const errorMsg         = document.getElementById('error');
     const switcher         = document.querySelector('.pill-switch');
     const slider           = switcher?.querySelector('.slider');
     const links            = switcher ? switcher.querySelectorAll('.nav-link') : [];
@@ -237,11 +237,11 @@
         sessionStorage.removeItem('lastCategory');
         sessionStorage.removeItem('lastSearchQuery');
         searchInput.value = '';
-        if (msg) msg.textContent = '';
+        if (errorMsg) errorMsg.textContent = '';
       } else {
         const rememberedQuery = sessionStorage.getItem('lastSearchQuery');
         if (rememberedQuery) searchInput.value = rememberedQuery;
-        if (msg && !rememberedQuery) msg.textContent = '';
+        if (errorMsg && !rememberedQuery) errorMsg.textContent = '';
       }
     }
 
@@ -432,7 +432,6 @@
       }
 
       const lyricsEl = document.getElementById('modalLyrics');
-      lyricsEl.style.whiteSpace = 'pre-wrap';
       lyricsEl.scrollTop = 0;
       lyricsEl.innerHTML = lyricsLoadingHTML;
 
@@ -443,7 +442,6 @@
     async function loadLyrics(songId, songName, singerName) {
       const lyricsEl = document.getElementById('modalLyrics');
       lyricsEl.classList.add('loading');
-      lyricsEl.innerHTML = lyricsLoadingHTML;
 
       try {
         const params = new URLSearchParams();

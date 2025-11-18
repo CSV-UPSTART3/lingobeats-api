@@ -11,7 +11,7 @@ module LingoBeats
       def initialize(token_provider:)
         @http = HTTP.headers(
           'Authorization' => "Bearer #{token_provider.access_token}",
-          'User-Agent' => 'Mozilla/5.0 (compatible; LingoBeats/1.0; +https://github.com/CSV-UPSTART3)'
+          'User-Agent'    => 'Mozilla/5.0 (compatible; LingoBeats/1.0; +https://github.com/CSV-UPSTART3)'
         )
       end
 
@@ -22,11 +22,11 @@ module LingoBeats
         proxy_url = "https://lingobeats-proxy.vick-fan.workers.dev/?url=#{URI.encode_www_form_component(url)}"
 
         plain_http = HTTP.headers(
-          'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0 Safari/537.36'
+          'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0 Safari/537.36' # rubocop:disable Layout/LineLength
         )
 
         response = plain_http.follow(max_hops: 3).get(proxy_url)
-        # App.logger.info "[Genius] fetch_lyrics_html via proxy status=#{response.status} size=#{response.body.to_s.bytesize}"
+        # App.logger.info "[Genius] fetch_lyrics_html via proxy status=#{response.status} size=#{response.body.to_s.bytesize}" # rubocop:disable Layout/LineLength
 
         return unless response.status.success?
 

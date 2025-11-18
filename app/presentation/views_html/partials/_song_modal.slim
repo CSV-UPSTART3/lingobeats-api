@@ -1,28 +1,28 @@
 #songModal.modal.fade(tabindex="-1" aria-labelledby="songModalLabel" aria-hidden="true" data-bs-backdrop="static")
-  .modal-dialog.modal-dialog-centered.modal-dialog-scrollable.modal-custom-width
-    .modal-content
-      .modal-header.border-bottom.p-4
+  .modal-dialog.modal-dialog-centered.modal-dialog-scrollable.modal-custom-width.min-h-100vh
+    .modal-content.d-flex.flex-column
+      .modal-header.border-bottom.p-4.flex-shrink-0
         h5#songModalLabel.modal-title.text-main.fw-bold Lyrics
         button.btn-close(type="button" data-bs-dismiss="modal" aria-label="Close")
 
       / ===== Modal body =====
-      .modal-body.p-4.d-flex.flex-column.min-h-0
+      .modal-body.p-4.d-flex.flex-column.min-h-0.flex-grow-1.overflow-hidden
         .row.g-4.flex-grow-1.min-h-0
           / Info
-          .col-12.col-lg-3
+          .col-12.col-lg-3.d-flex.flex-column
             .song-info-wrap.d-lg-block.d-flex.gap-3
-              .cover-box.position-relative.rounded.overflow-hidden
-                img#modalCover.w-100.h-100(alt="Cover")
+              .cover-box.position-relative.rounded.overflow-hidden.flex-shrink-0
+                img#modalCover.w-100.h-100(alt="Cover" style="object-fit: cover;")
                 a#modalPlayOverlay.position-absolute.top-0.start-0.bottom-0.end-0.d-flex.align-items-center.justify-content-center.rounded(target="_blank" rel="noopener")
                   span.play-btn.rounded-circle.d-inline-flex.align-items-center.justify-content-center
                     i.fas.fa-play.text-white
-              .song-meta.d-flex.flex-column.min-w-0
-                h6#modalSongTitle.fw-semibold.mb-1.text-black.truncate-1line
-                .text-secondary.small.mb-2#modalAlbum.truncate-1line
-                .d-flex.align-items-start.small.mt-auto
+              .song-meta.d-flex.flex-column.min-w-0.justify-content-between.overflow-hidden
+                .song-title-info
+                  h6#modalSongTitle.fw-semibold.mb-1.text-black.text-truncate
+                  .text-secondary.small.text-truncate#modalAlbum
+                .d-flex.align-items-start.small.mt-2
                   i.fas.fa-user.text-black-50.me-2.mt-1.flex-shrink-0
-                  #modalSingers.flex-grow-1.truncate-1line
-
+                  #modalSingers.flex-grow-1.text-truncate.min-w-0
           / Lyrics
           .col-12.col-lg-9.d-flex.flex-column.min-h-0
             #modalLyrics.flex-grow-1.overflow-auto.lyrics-content
