@@ -46,7 +46,7 @@ module LingoBeats
         return [] if text.to_s.strip.empty?
 
         cleaned_text = Cleaner.new(text).call
-        Tokenizer.new(cleaned_text).call # array of words
+        # Tokenizer.new(cleaned_text).call # array of words
       end
 
       def evaluate_difficulty

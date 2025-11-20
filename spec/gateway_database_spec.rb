@@ -40,7 +40,7 @@ describe 'Integration Tests of Spotify API and Database' do
       first_singer_name = song_entity.singers.first&.name
       lyric_value_object = lyric_mapper.lyrics_for(
         song_name: song_entity.name,
-        artist_name: first_singer_name
+        singer_name: first_singer_name
       )
 
       # lyric_entity = LingoBeats::Value::Lyric.new(
