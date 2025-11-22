@@ -69,7 +69,7 @@ module LingoBeats
       def evaluate_words
         return [] unless lyric
 
-        lyric&.evaluate_difficulty || {} # 呼叫 Lyric 的斷詞邏輯，並且進行評級
+        lyric&.evaluate_difficulty # 呼叫 Lyric 的斷詞邏輯，並且進行評級
       end
 
       def difficulty_distribution
@@ -100,6 +100,7 @@ module LingoBeats
       def base_distribution
         evaluate_words.values.each_with_object(Hash.new(0)) do |level, hash|
           next unless %w[A B C].include?(level)
+
           hash[level] += 1
         end
       end

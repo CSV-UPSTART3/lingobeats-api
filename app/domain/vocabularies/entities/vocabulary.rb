@@ -18,7 +18,8 @@ module LingoBeats
       # Helper: parse JSON → Hash
       def material_hash
         return nil if material.nil?
-        ::JSON.parse(material, symbolize_names: true)
+
+        ::JSON.generate(value)
       end
 
       # Helper: check if Gemini already enriched this vocab

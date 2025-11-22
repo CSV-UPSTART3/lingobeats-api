@@ -59,7 +59,6 @@ module LingoBeats
           when /^A/ then 'A'
           when /^B/ then 'B'
           when /^C/ then 'C'
-          else nil
           end
         end
 

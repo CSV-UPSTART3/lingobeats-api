@@ -74,10 +74,10 @@ module LingoBeats
       end
     end
 
-    # search songs
+    # song-related routes
     route('songs') do |routing|
-      # GET /songs/search?category=...&query=...
-      routing.on 'search' do
+      # GET /songs?category=...&query=...
+      routing.is do
         routing.get do
           url_request = Forms::NewSong.new.call(routing.params)
           category = url_request[:category]
@@ -93,6 +93,27 @@ module LingoBeats
           search_history = Views::SearchHistory.new(result.value!)
 
           view 'song', locals: { songs:, category:, query:, bad_message:, search_history: }
+        end
+      end
+
+      # GET /songs/:id/lyrics
+      routing.on String do |song_id|
+        routing.on 'lyrics' do
+          routing.get do
+            # 1. Validate parameters
+            raw_params = { 'id' => song_id }
+            url_request = Forms::NewLyric.new.call(raw_params)
+
+            # 2. Call new AddLyric pipeline
+            result = Service::AddLyric.new.call(url_request)
+
+            # 3. Parse result (success or failure)
+            lyrics, bad_message = RouteHelpers::ResultParser.parse_single(result) do |lyric, error|
+              [Views::Lyric.new(lyric).text, error]
+            end
+
+            view 'lyrics_block', locals: { lyrics:, bad_message: }, layout: false
+          end
         end
       end
 
@@ -131,27 +152,6 @@ module LingoBeats
 
           response.status = 204
           routing.halt
-        end
-      end
-    end
-
-    # search lyrics
-    route('lyrics') do |routing|
-      # GET /lyrics/song?id=...&name=...&singer=...
-      routing.on 'song' do
-        routing.get do
-          # 1. Validate parameters
-          url_request = Forms::NewLyric.new.call(routing.params)
-
-          # 2. Call new AddLyric pipelin
-          result = Service::AddLyric.new.call(url_request)
-
-          # 3. Parse result (success or failure)
-          lyrics, bad_message = RouteHelpers::ResultParser.parse_single(result) do |lyric, error|
-            [Views::Lyric.new(lyric).text, error]
-          end
-
-          view 'lyrics_block', locals: { lyrics:, bad_message: }, layout: false
         end
       end
     end

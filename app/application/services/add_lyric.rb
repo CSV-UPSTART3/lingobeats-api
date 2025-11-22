@@ -7,12 +7,13 @@ module LingoBeats
     # Transaction to store lyric when user selects a song
     class AddLyric
       include Dry::Transaction
-      include Dry::Monads[:result]
 
       step :parse_url
-      step :find_lyric
       step :check_song_exists
+      step :find_local_lyric
+      step :fetch_remote_lyric
       step :store_lyric
+      step :store_vocabularies
 
       def initialize(songs_repo: Repository::For.klass(Entity::Song))
         super()
@@ -29,80 +30,73 @@ module LingoBeats
         Success(params)
       end
 
-      # step 2. find if lyric already exists in db, else fetch from Genius API
-      def find_lyric(input)
-        if (lyric_vo = lyric_in_database(input))
-          input[:local_lyric] = lyric_vo
-        else
-          input[:remote_lyric] = fetch_song_of_lyric(input)
-        end
-        Success(input)
-      rescue FetchError => error
-        Failure(error.message)
-      rescue StandardError => error
-        Failure(error.to_s)
-      end
-
-      # step 3. check if song exists
+      # step 2. check if song exists
       def check_song_exists(input)
         add_song_result = Service::AddSong.new.call(input[:song_id])
         return Failure(add_song_result.failure) if add_song_result.failure?
 
         Success(input)
       rescue StandardError => error
-        Failure(error.to_s)
+        Failure("Failed to verify song: #{error.message}")
+      end
+
+      # step 3-1. find local lyric in DB if exists
+      def find_local_lyric(input)
+        existing_lyric = find_existing_lyric(input[:song_id])
+        return Success(input.merge(local_lyric: existing_lyric)) if existing_lyric
+
+        Success(input) # proceed to fetch remote lyric
+      end
+
+      # step 3-2. if no local lyric, fetch from Genius API
+      def fetch_remote_lyric(input)
+        return Success(input) if input[:local_lyric]
+
+        remote_lyric = fetch_song_of_lyric(fetch_song(input))
+        Success(input.merge(remote_lyric: remote_lyric))
+      rescue StandardError => error
+        Failure(error.message)
       end
 
       # step 4. store lyric if not exists, and return lyric value object
       def store_lyric(input)
-        song_id      = input[:song_id]
-        local_lyric  = input[:local_lyric]
-        remote_lyric = input[:remote_lyric]
-
-        # 1. 如果 DB 中已經有 lyrics，就直接使用，不要覆蓋
-        lyric =
-          if local_lyric
-            local_lyric
-          else
-            # 2. 沒有 DB lyrics → 用 remote 寫入資料庫
-            @songs_repo.attach_lyric(song_id: song_id, lyric_vo: remote_lyric)
-          end
-        
-        # 3. vocabulary pipeline（使用實際用的 lyric，不是 remote_lyric）
-        # --- ADDED: integrate your vocabulary storage pipeline (from old_app.rb) ---
-        if lyric&.text&.length&.positive?
-          vocab_service = LingoBeats::Service::VocabularyStorageService.new(
-            vocab_repo: Repository::For.klass(Entity::Vocabulary)
-          )
-          vocab_service.store_from_song(
-            @songs_repo.find_id(input[:song_id])
-          )
-        end
-        # ---------------------------------------------------------------------------
-
-        Success(lyric)
-        # return Success(input[:local_lyric]) if input[:local_lyric]
-
-        # lyric = @songs_repo.attach_lyric(song_id: input[:song_id], lyric_vo: input[:remote_lyric])
-
-        # Success(lyric)
+        song_id = input[:song_id]
+        lyric = input[:local_lyric] || store_remote_lyric(song_id, input[:remote_lyric])
+        Success({ song_id: song_id, lyric: lyric })
       rescue StandardError => error
-        App.logger.error error.backtrace.join("\n")
-        Failure('Failed to store lyric to database')
+        handle_store_error(error, 'lyric')
+      end
+
+      # step 5. store vocabularies for the song lyrics
+      def store_vocabularies(input)
+        result = Service::AddVocabularies.new.call(fetch_song(input))
+        raise StandardError, result.failure if result.failure?
+
+        Success(input[:lyric])
+      rescue StandardError => error
+        handle_store_error(error, 'vocabularies')
       end
 
       # support methods
-      def lyric_in_database(input)
-        @songs_repo.find_lyric_in_database(song_id: input[:song_id])
+      def find_existing_lyric(song_id)
+        @songs_repo.find_lyric_in_database(song_id: song_id)
       rescue StandardError => error
-        raise error.message
+        App.logger.warn("Error checking existing lyric: #{error.message}")
+        nil # return nil, let flow continue to fetch remote
       end
 
       # custom error for fetch failure
       class FetchError < StandardError; end
 
-      def fetch_song_of_lyric(input)
-        lyric = @songs_repo.fetch_lyric(song_name: input[:song_name], singer_name: input[:singer_name])
+      def fetch_song(input)
+        @songs_repo.find_id(input[:song_id])
+      rescue StandardError => error
+        App.logger.error("Error fetching song: #{error.message}")
+        raise 'Error fetching song.'
+      end
+
+      def fetch_song_of_lyric(song)
+        lyric = @songs_repo.fetch_lyric(song_name: song.name, singer_name: song.singers.first.name)
         validate_lyric(lyric)
       rescue FetchError => error
         raise error
@@ -111,17 +105,26 @@ module LingoBeats
       end
 
       def validate_lyric(lyric)
-        raise FetchError, 'Went wrong in fetching lyrics.' if lyric.nil? || lyric.text.strip.empty?
+        raise FetchError, 'Went wrong in fetching lyrics.' if lyric.text.strip.empty?
         raise FetchError, 'This song is not recommended for English learners.' unless lyric.english?
 
         lyric
+      end
+
+      def store_remote_lyric(song_id, remote_lyric)
+        @songs_repo.attach_lyric(song_id: song_id, lyric_vo: remote_lyric)
+      end
+
+      def handle_store_error(error, object_name)
+        App.logger.error("Failed to store #{object_name}: #{error.message}")
+        Failure('Error in connecting to database.')
       end
 
       # parameter extractor
       class ParamExtractor
         def self.call(request)
           params = request.to_h
-          { song_id: params[:id], song_name: params[:name], singer_name: params[:singer] }
+          { song_id: params[:id] }
         end
       end
     end

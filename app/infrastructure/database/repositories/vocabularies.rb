@@ -9,7 +9,7 @@ module LingoBeats
     # Repository for Vocabulary Entities
     class Vocabularies
       # ORM mapping
-      VocabularyOrm = LingoBeats::Database::VocabularyOrm
+      VocabularyOrm = Database::VocabularyOrm
 
       # 取多筆
       def self.all
@@ -28,7 +28,7 @@ module LingoBeats
       end
 
       def self.for_song(song_id)
-        song = LingoBeats::Database::SongOrm.first(id: song_id)
+        song = Database::SongOrm.first(id: song_id)
         return [] unless song
 
         rebuild_many(song.vocabularies)
@@ -37,6 +37,10 @@ module LingoBeats
       def self.find_by_name(name)
         rec = VocabularyOrm.first(name: name)
         rebuild_entity(rec)
+      end
+
+      def self.find_by_names(names)
+        VocabularyOrm.where(name: names).all.map { |rec| rebuild_entity(rec) }
       end
 
       def self.create(entity)
@@ -48,12 +52,38 @@ module LingoBeats
         rebuild_entity(rec)
       end
 
+      def self.create_many(entities)
+        # 用 transaction 包起來，避免一半成功一半失敗
+        VocabularyOrm.db.transaction do
+          entities.map do |ent|
+            rec = VocabularyOrm.create(
+              name: ent.name,
+              level: ent.level,
+              material: ent.material
+            )
+            rebuild_entity(rec)
+          end
+        end
+      end
+
       def self.link_song(song_id, vocab_id)
-        song = LingoBeats::Database::SongOrm.first(id: song_id)
+        song = Database::SongOrm.first(id: song_id)
         vocab = VocabularyOrm.first(id: vocab_id)
         return if song.vocabularies_dataset.where(id: vocab_id).any?
 
         song.add_vocabulary(vocab)
+      end
+
+      def self.link_songs(song_id, vocab_ids)
+        song = Database::SongOrm.first(id: song_id)
+        existing_vocab_ids = song.vocabularies_dataset.select(:id).map(:id)
+        new_vocab_ids = vocab_ids - existing_vocab_ids
+        return if new_vocab_ids.empty?
+
+        new_vocab_ids.each do |vocab_id|
+          vocab = VocabularyOrm.first(id: vocab_id)
+          song.add_vocabulary(vocab) if vocab
+        end
       end
 
       def self.update_material(id, material_hash)
@@ -76,7 +106,7 @@ module LingoBeats
           id: rec.id,
           name: rec.name,
           level: rec.level,
-          material: rec.material   # String 或 nil
+          material: rec.material # String 或 nil
         )
       end
       private_class_method :rebuild_entity

@@ -435,21 +435,15 @@
       lyricsEl.scrollTop = 0;
       lyricsEl.innerHTML = lyricsLoadingHTML;
 
-      const primaryArtist = data.singers?.[0]?.name || '';
-      loadLyrics(data.id, data.name, primaryArtist);
+      loadLyrics(data.id);
     }
 
-    async function loadLyrics(songId, songName, singerName) {
+    async function loadLyrics(songId) {
       const lyricsEl = document.getElementById('modalLyrics');
       lyricsEl.classList.add('loading');
 
       try {
-        const params = new URLSearchParams();
-        if (songId) params.set('id', songId);
-        if (songName) params.set('name', songName);
-        if (singerName) params.set('singer', singerName);
-
-        const res  = await fetch(`/lyrics/song?${params.toString()}`, { cache: 'no-store' });
+        const res  = await fetch(`/songs/${songId}/lyrics`, { cache: 'no-store' });
         const html = await res.text();
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
 

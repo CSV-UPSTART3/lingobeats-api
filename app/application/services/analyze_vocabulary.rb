@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 module LingoBeats
   module Service
-    class VocabularyAnalysis
+    # Service to analyze vocabulary data for songs
+    class AnalyzeVocabulary
       def initialize(vocab_repo: Repository::For.klass(Entity::Vocabulary))
         @vocab_repo = vocab_repo
       end

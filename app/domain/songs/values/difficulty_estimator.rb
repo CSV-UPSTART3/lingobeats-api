@@ -26,7 +26,8 @@ module LingoBeats
         module_function
 
         def run_python(words)
-          command = ['python3', 'app/domain/songs/services/cefrpy_service.py', words.join(',')]
+          command = ['/Users/lyc/miniforge3/envs/lingobeats-nlp/bin/python', 'app/domain/songs/services/cefrpy_service.py',
+                     words.join(',')]
           Open3.capture3(*command)
         end
       end

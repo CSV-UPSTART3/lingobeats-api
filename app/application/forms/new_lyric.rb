@@ -10,8 +10,6 @@ module LingoBeats
 
       params do
         required(:id).filled(:string)
-        required(:name).filled(:string)
-        required(:singer).filled(:string)
       end
 
       # check if id is not empty
