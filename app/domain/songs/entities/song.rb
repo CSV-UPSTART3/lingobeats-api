@@ -62,8 +62,6 @@ module LingoBeats
       # Check if the song name is in English
       def english_name?
         name.ascii_only?
-        # 允許英文、數字、空白、常見符號、以及少數變音字母
-        # name.match?(/\A[0-9A-Za-z\s'&.,!?\-éáíóúñÉÁÍÓÚ]+(?:\s*\(.*\))?\z/)
       end
 
       def evaluate_words

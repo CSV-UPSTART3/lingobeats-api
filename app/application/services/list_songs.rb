@@ -8,7 +8,7 @@ module LingoBeats
     class ListSongs
       include Dry::Transaction
 
-      step :parse_url
+      step :validate_list
       step :fetch_songs
 
       def initialize(mapper: nil)
@@ -17,32 +17,28 @@ module LingoBeats
         @song_provider = SongProvider.new(mapper)
       end
 
+      SPOTIFY_API_ERROR = "Failed to load songs.\nPlease try again later."
+      EMPTY_SONG_RESULT = 'No results for' # concatenated with query later
+
       private
 
       # step 1. parse category and query from request URL
-      def parse_url(input)
+      def validate_list(input)
         return Success(popular: true) if input == :popular
-        return Failure("URL #{input.errors.messages.first}") unless input.success?
 
-        params = ParamExtractor.call(input)
-        Success(params)
+        list_request = input[:list_request].call
+        return Failure(list_request.failure) if list_request.failure?
+
+        Success(list_request.value!)
       end
 
       # step 2. fetch songs from Spotify API
       def fetch_songs(input)
-        songs = @song_provider.fetch(input)
-        Success(songs)
+        @song_provider.fetch(input)
+                      .then { |songs| Response::SongsList.new(songs) }
+                      .then { |songs_list| Success(Response::ApiResult.new(status: :created, message: songs_list)) }
       rescue StandardError => error
-        App.logger.error error.backtrace.join("\n")
-        Failure(error.to_s)
-      end
-
-      # parameter extractor
-      class ParamExtractor
-        def self.call(request)
-          params = request.to_h
-          { category: params[:category], query: params[:query] }
-        end
+        Failure(Response::ApiResult.new(status: :internal_error, message: error.to_s))
       end
 
       # fetch songs from Spotify API
@@ -63,7 +59,7 @@ module LingoBeats
             end
           validate_songs(songs, input)
         rescue FetchError
-          raise "Failed to load songs.\nPlease try again later."
+          raise SPOTIFY_API_ERROR
         end
 
         def fetch_trends
@@ -72,16 +68,16 @@ module LingoBeats
           raise FetchError
         end
 
-        private
-
         def fetch_search_results(input)
           @mapper.public_send("search_songs_by_#{input[:category]}", input[:query])
         rescue StandardError
           raise FetchError
         end
 
+        private
+
         def validate_songs(songs, input)
-          raise "No results for \"#{input[:query]}\"" if songs.empty?
+          raise "#{EMPTY_SONG_RESULT} \"#{input[:query]}\"" if songs.empty?
 
           songs
         end

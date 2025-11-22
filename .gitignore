@@ -17,4 +17,4 @@ vendor/*
 # Ignore application configuration
 /config/application.yml
 .bundle/
-app/domain/songs/services/__pycache__
+app/domain/songs/lib/__pycache__

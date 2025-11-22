@@ -6,7 +6,3 @@ require_relative 'require_app'
 require_app
 
 def app = LingoBeats::App
-
-include LingoBeats::Database
-include LingoBeats::Repository
-include LingoBeats::Entity

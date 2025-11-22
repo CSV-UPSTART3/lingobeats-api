@@ -4,7 +4,7 @@ require 'dry/transaction'
 
 module LingoBeats
   module Service
-    # Transaction to store vocabulary for a song
+    # Transaction to store vocabularies for a song
     class AddVocabularies
       include Dry::Transaction
 
@@ -16,38 +16,45 @@ module LingoBeats
         @vocab_repo = vocab_repo
       end
 
+      VOCABULARY_EVAL_ERROR = 'Failed to evaluate words'
+      VOCABULARY_PROCESS_ERROR = 'Failed to process vocabularies'
+      DB_ERROR = 'Having trouble accessing the database'
+
       private
 
-      # step 1. split song into words and evaluate their difficulty levels
-      def split_and_evaluate(input)
-        return Success(song: input, skip: true) if @vocab_repo.for_song(input.id).any?
+      def split_and_evaluate(song)
+        return Success(song:, skip: true) if @vocab_repo.for_song(song.id).any?
 
-        difficulties = input.evaluate_words
-        Success(song: input, difficulties:)
+        difficulties = song.evaluate_words
+
+        Success(song:, difficulties:, skip: false)
       rescue StandardError => error
-        Failure("Failed to evaluate words: #{error.message}")
+        App.logger.error("[AddVocabularies] #{VOCABULARY_EVAL_ERROR}: #{error.message}")
+        Failure(Response::ApiResult.new(status: :internal_error, message: DB_ERROR))
       end
 
-      # step 2. process vocabularies (check existing, create new, link to song)
       def process_vocabularies(input)
-        return Success(input) if input[:skip]
+        song = input[:song]
+        return Success(Response::ApiResult.new(status: :ok, message: song)) if input[:skip]
 
-        VocabularyProcessor.new(@vocab_repo, input).execute
-        Success(input)
+        VocabularyProcessor.new(vocab_repo: @vocab_repo, song:, difficulties: input[:difficulties]).call
+
+        Success(Response::ApiResult.new(status: :created, message: song))
       rescue StandardError => error
-        Failure("Failed to process vocabularies: #{error.message}")
+        App.logger.error("[AddVocabularies] #{VOCABULARY_PROCESS_ERROR}: #{error.message}")
+        Failure(Response::ApiResult.new(status: :internal_error, message: DB_ERROR))
       end
     end
 
-    # Handles vocabulary creation and linking logic
+    # Helper class to process vocabularies
     class VocabularyProcessor
-      def initialize(vocab_repo, input)
+      def initialize(vocab_repo:, song:, difficulties:)
         @vocab_repo = vocab_repo
-        @song = input[:song]
-        @difficulties = input[:difficulties]
+        @song = song
+        @difficulties = difficulties
       end
 
-      def execute
+      def call
         existing_map = fetch_existing_vocabularies
         new_entities = build_new_entities(existing_map)
         link_vocabularies_to_song(new_entities, existing_map)
@@ -62,6 +69,7 @@ module LingoBeats
 
       def build_new_entities(existing_map)
         words_to_create = @difficulties.reject { |word, level| existing_map.key?(word) || level.nil? }
+
         words_to_create.map do |word, level|
           Entity::Vocabulary.new(
             id: nil,
@@ -73,18 +81,14 @@ module LingoBeats
       end
 
       def link_vocabularies_to_song(new_entities, existing_map)
-        return if new_entities.empty? && existing_map.empty?
-
-        newly_created_ids = create_vocabularies(new_entities)
-        all_vocab_ids = existing_map.values + newly_created_ids
-        @vocab_repo.link_songs(@song.id, all_vocab_ids)
+        vocab_ids = existing_map.values + create_vocabularies(new_entities)
+        @vocab_repo.link_songs(@song.id, vocab_ids) unless vocab_ids.empty?
       end
 
       def create_vocabularies(entities)
         return [] if entities.empty?
 
-        created = @vocab_repo.create_many(entities)
-        created.map(&:id)
+        @vocab_repo.create_many(entities).map(&:id)
       end
     end
   end
