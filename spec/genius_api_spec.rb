@@ -17,7 +17,7 @@ describe 'Tests Genius API library' do
   describe 'Lyrics content check' do
     it 'HAPPY: should fetch correct lyrics text' do
       genius_mapper = LingoBeats::Genius::LyricMapper.new(GENIUS_CLIENT_ACCESS_TOKEN)
-      lyrics = genius_mapper.lyrics_for(song_name: 'Golden', artist_name: 'HUNTR/X')
+      lyrics = genius_mapper.lyrics_for(song_name: 'Golden', singer_name: 'HUNTR/X')
 
       _(lyrics).wont_be_nil
       _(lyrics.text).must_be_kind_of(String)
@@ -26,7 +26,7 @@ describe 'Tests Genius API library' do
 
     it 'SAD: should return nil when song does not exist' do
       genius_mapper = LingoBeats::Genius::LyricMapper.new(GENIUS_CLIENT_ACCESS_TOKEN)
-      result = genius_mapper.lyrics_for(song_name: 'totally-not-exist-zzz', artist_name: 'totally-not-exist-zzz')
+      result = genius_mapper.lyrics_for(song_name: 'totally-not-exist-zzz', singer_name: 'totally-not-exist-zzz')
       _(result).must_be_nil
     end
 
@@ -40,7 +40,7 @@ describe 'Tests Genius API library' do
     it 'SAD: raises ApiError when unauthorized token used' do
       _(proc do
         LingoBeats::Genius::LyricMapper.new('BAD_TOKEN')
-                                      .lyrics_for(song_name: 'Photograph', artist_name: 'Ed Sheeran')
+                                      .lyrics_for(song_name: 'Photograph', singer_name: 'Ed Sheeran')
       end).must_raise LingoBeats::HttpHelper::Response::ApiError
     end
   end

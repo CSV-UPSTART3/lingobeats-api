@@ -79,10 +79,10 @@ end
     # 把 vocabs（material 為空）建成 domain entity
     initial_vocabs = cefr_result.map.with_index do |(word, level), idx|
       LingoBeats::Entity::Vocabulary.new(
-        id: idx + 1,            # ⭐ 加上假的自增 ID
+        id: idx + 1,            # 加上假的自增 ID
         name: word,
         level: level,
-        material: nil # 一開始先是空的，等等由 service 幫你塞進去
+        material: nil # 一開始先是空的，等等 service 塞進去
       )
     end
 

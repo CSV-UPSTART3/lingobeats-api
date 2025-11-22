@@ -55,7 +55,51 @@ def clean_lyrics_text(text: str) -> str:
     text = re.sub(r"\s+", " ", text).strip()
     return text
 
+def looks_like_word(token: str) -> bool:
+    # 長度至少 3
+    if len(token) < 3:
+        return False
+    # 至少要有一個母音 (a e i o u)，避免 th, nth, oop 這種奇怪片段
+    if not re.search(r"[aeiou]", token):
+        return False
+    return True
+
+def filter_name_like_tokens(words, nlp):
+    """
+    用 spaCy 把看起來是人名或專有名詞的 token 找出來並過濾掉。
+    """
+    if not words:
+        return words
+
+    # 把目前的詞串成一句話給 spaCy 分析
+    doc = nlp(" ".join(words))
+
+    name_like = set()
+    for token in doc:
+        # PERSON：人名實體
+        if token.ent_type_ == "PERSON":
+            name_like.add(token.text.lower())
+            continue
+
+        # PROPN：專有名詞（名字、地名、作品名等）
+        if token.pos_ == "PROPN":
+            name_like.add(token.text.lower())
+            continue
+
+    # 把標記成人名 / 專有名詞的詞排除掉
+    return [w for w in words if w.lower() not in name_like]
+
 def preprocess(words):
+    # 確保 spaCy 模型已安裝
+    try:
+        NLP = spacy.load("en_core_web_sm")
+    except OSError:
+        print("Model en_core_web_sm not found. Downloading...")
+        subprocess.run(["python3", "-m", "spacy", "download", "en_core_web_sm"], check=True)
+        NLP = spacy.load("en_core_web_sm")
+    
+    nlp = spacy.load("en_core_web_sm")
+    
     """Expand contractions and remove stopwords"""
     cleaned = []
     for word in words:
@@ -71,13 +115,19 @@ def preprocess(words):
             sub = normalize_leading_apostrophe(sub)
             # Handle words like hidin'
             sub = normalize_apostrophe_endings(sub)
-            if sub.lower() not in STOP_WORDS:
-                cleaned.append(sub.lower())
 
+            sub_lower = sub.lower()
+            if sub_lower in STOP_WORDS:
+                continue
+            if not looks_like_word(sub_lower):
+                continue
+            
+            cleaned.append(sub_lower)
             # Lemmatize
             # lemma = nlp(sub)[0].lemma_
             # if lemma.lower() not in STOP_WORDS:
             #     cleaned.append(lemma.lower())
+    cleaned = filter_name_like_tokens(cleaned, nlp)
     return cleaned
 
 if __name__ == "__main__":

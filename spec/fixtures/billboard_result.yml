@@ -95,30 +95,6 @@
   - :id: 0cGUm45nv7Z6M6qdXYQGTX
     :name: Kehlani
     :external_url: https://open.spotify.com/artist/0cGUm45nv7Z6M6qdXYQGTX
-- :id: 1jgTiNob5cVyXeJ3WgX5bL
-  :name: Elizabeth Taylor
-  :uri: spotify:track:1jgTiNob5cVyXeJ3WgX5bL
-  :external_url: https://open.spotify.com/track/1jgTiNob5cVyXeJ3WgX5bL
-  :album_id: 4a6NzYL1YHRUgx9e3YZI6I
-  :album_name: The Life of a Showgirl
-  :album_url: https://open.spotify.com/album/4a6NzYL1YHRUgx9e3YZI6I
-  :album_image_url: https://i.scdn.co/image/ab67616d0000b273d7812467811a7da6e6a44902
-  :singers:
-  - :id: 06HL4z0CvFAxyc27GXpf02
-    :name: Taylor Swift
-    :external_url: https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02
-- :id: 4GBNnoGf1FgsPtsgghZ381
-  :name: I Got Better
-  :uri: spotify:track:4GBNnoGf1FgsPtsgghZ381
-  :external_url: https://open.spotify.com/track/4GBNnoGf1FgsPtsgghZ381
-  :album_id: 1o844O5I0qVpZKiePtIGcF
-  :album_name: I’m The Problem
-  :album_url: https://open.spotify.com/album/1o844O5I0qVpZKiePtIGcF
-  :album_image_url: https://i.scdn.co/image/ab67616d0000b273a70a80359930eea5bfdf11f5
-  :singers:
-  - :id: 4oUHIQIBe0LHzYfvXNW4QM
-    :name: Morgan Wallen
-    :external_url: https://open.spotify.com/artist/4oUHIQIBe0LHzYfvXNW4QM
 - :id: 1mh9eHVRdNhzryG43PXdW1
   :name: MUTT
   :uri: spotify:track:1mh9eHVRdNhzryG43PXdW1
@@ -131,3 +107,27 @@
   - :id: 0nnBZ8FXWjG9wZgM2cpfeb
     :name: Leon Thomas
     :external_url: https://open.spotify.com/artist/0nnBZ8FXWjG9wZgM2cpfeb
+- :id: 4GBNnoGf1FgsPtsgghZ381
+  :name: I Got Better
+  :uri: spotify:track:4GBNnoGf1FgsPtsgghZ381
+  :external_url: https://open.spotify.com/track/4GBNnoGf1FgsPtsgghZ381
+  :album_id: 1o844O5I0qVpZKiePtIGcF
+  :album_name: I’m The Problem
+  :album_url: https://open.spotify.com/album/1o844O5I0qVpZKiePtIGcF
+  :album_image_url: https://i.scdn.co/image/ab67616d0000b273a70a80359930eea5bfdf11f5
+  :singers:
+  - :id: 4oUHIQIBe0LHzYfvXNW4QM
+    :name: Morgan Wallen
+    :external_url: https://open.spotify.com/artist/4oUHIQIBe0LHzYfvXNW4QM
+- :id: 2LlQb7Uoj1kKyGhlkBf9aC
+  :name: Thriller
+  :uri: spotify:track:2LlQb7Uoj1kKyGhlkBf9aC
+  :external_url: https://open.spotify.com/track/2LlQb7Uoj1kKyGhlkBf9aC
+  :album_id: 2ANVost0y2y52ema1E9xAZ
+  :album_name: Thriller
+  :album_url: https://open.spotify.com/album/2ANVost0y2y52ema1E9xAZ
+  :album_image_url: https://i.scdn.co/image/ab67616d0000b27332a7d87248d1b75463483df5
+  :singers:
+  - :id: 3fMbdgg4jU18AjLCKBhRSm
+    :name: Michael Jackson
+    :external_url: https://open.spotify.com/artist/3fMbdgg4jU18AjLCKBhRSm

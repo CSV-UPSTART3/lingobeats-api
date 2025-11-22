@@ -90,7 +90,7 @@ describe 'Tests Spotify API library' do
     it 'HAPPY: should provide correct attributes of multiple songs for a singer' do
       # check size and attributes
       results = LingoBeats::Spotify::SongMapper.new(SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET)
-                                               .display_popular_songs
+                                               .search_popular_songs
       results = YamlHelper.to_hash_array(results)
 
       _(results.size).must_equal CORRECT_RESULT_BY_BILLBOARD.size
@@ -104,12 +104,12 @@ describe 'Tests Spotify API library' do
     end
     it 'SAD: raises ArgumentError when number of arguments is wrong' do
       _(proc do
-        LingoBeats::Spotify::SongMapper.new('BAD_TOKEN').display_popular_songs
+        LingoBeats::Spotify::SongMapper.new('BAD_TOKEN').search_popular_songs
       end).must_raise ArgumentError
     end
     it 'SAD: raises ApiError when unauthorized' do
       _(proc do
-        LingoBeats::Spotify::SongMapper.new('BAD_ID', 'BAD_SECRET').display_popular_songs
+        LingoBeats::Spotify::SongMapper.new('BAD_ID', 'BAD_SECRET').search_popular_songs
       end).must_raise LingoBeats::HttpHelper::Response::ApiError
     end
   end
