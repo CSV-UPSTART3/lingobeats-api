@@ -5,8 +5,6 @@ require 'dry-struct'
 require 'digest'
 require 'cld3'
 
-require_relative 'cleaner'
-require_relative 'tokenizer'
 # require 'pycall/import'
 
 module LingoBeats
@@ -45,13 +43,13 @@ module LingoBeats
       def clean_words
         return [] if text.to_s.strip.empty?
 
-        cleaned_text = Cleaner.new(text).call
-        # Tokenizer.new(cleaned_text).call # array of words
+        cleaned_text = Mixins::Cleaner.new(text).call
+        Mixins::Tokenizer.new(cleaned_text).call # array of words
       end
 
       def evaluate_difficulty
         words = clean_words
-        results = DifficultyEstimator.new(words).call
+        results = Mixins::DifficultyEstimator.new(words).call
 
         # let A1/A2 → A, B1/B2 → B, C1/C2 → C
         mapped_results = results.transform_values do |lvl|

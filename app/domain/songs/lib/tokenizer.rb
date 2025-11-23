@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module LingoBeats
-  module Value
+  module Mixins
     # Tokenizer for song lyrics
     class Tokenizer
       def initialize(cleaned_text)

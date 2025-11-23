@@ -65,7 +65,7 @@ module LingoBeats
       end
 
       def evaluate_words
-        return [] unless lyric
+        return {} unless lyric
 
         lyric&.evaluate_difficulty # 呼叫 Lyric 的斷詞邏輯，並且進行評級
       end

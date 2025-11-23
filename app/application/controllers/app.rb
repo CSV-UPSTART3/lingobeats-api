@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
-require 'uri'
 require 'roda'
-require 'rack'
+require 'rack' # for Rack::MethodOverride
 
 require_relative 'helpers'
 
@@ -16,14 +15,14 @@ module LingoBeats
     plugin :halt
     plugin :multi_route
 
-    use Rack::MethodOverride # allows HTTP verbs beyond GET/POST (e.g., DELETE)
-
     route do |routing|
       routing.public # serve /public files
       response['Content-Type'] = 'application/json'
 
       # GET /
       routing.root do
+        @current_page = :home
+
         # Show popular songs on home page
         result = Service::ListSongs.new.call(:popular)
         RouteHelpers::Response.call(routing, result, Representer::SongsList)
@@ -31,6 +30,22 @@ module LingoBeats
 
       # 子路由
       routing.multi_route
+    end
+
+    # /tutorial
+    route('tutorial') do |routing|
+      routing.get do
+        @current_page = :tutorial
+        view 'tutorial'
+      end
+    end
+
+    # /history
+    route('history') do |routing|
+      routing.get do
+        @current_page = :history
+        view 'history'
+      end
     end
 
     route('api/v1') do |routing|
@@ -75,12 +90,14 @@ module LingoBeats
             end
           end
 
-          # POST /songs/:id/materials
-          routing.on 'materials' do
-            routing.post do
-              # ...
-            end
-          end
+          # # POST /songs/:id/materials
+          # routing.on 'materials' do
+          #   routing.post do
+          #     result = Service::AddMaterial.new.call(song_id:)
+
+          #     RouteHelpers::Response.call(routing, result, Representer::Material)
+          #   end
+          # end
         end
       end
     end

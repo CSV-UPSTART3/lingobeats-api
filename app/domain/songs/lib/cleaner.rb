@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module LingoBeats
-  module Value
+  module Mixins
     # Text cleaner for song lyrics
     class Cleaner
       def initialize(raw_text)

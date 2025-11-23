@@ -4,7 +4,7 @@ require 'open3'
 require 'json'
 
 module LingoBeats
-  module Value
+  module Mixins
     # Difficulty estimator using external Python script
     class DifficultyEstimator
       def initialize(words)
@@ -26,7 +26,7 @@ module LingoBeats
         module_function
 
         def run_python(words)
-          command = ['python3',
+          command = ['/Users/lyc/miniforge3/envs/lingobeats-nlp/bin/python',
                      'app/domain/songs/lib/cefrpy_service.py',
                      words.join(',')]
           Open3.capture3(*command)
