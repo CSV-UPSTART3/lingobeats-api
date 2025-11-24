@@ -72,7 +72,7 @@ module LingoBeats
 
       def difficulty_distribution
         puts base_distribution
-        # SongDifficultyHelper.fill_levels(base_distribution)
+        SongDifficultyHelper.fill_levels(base_distribution)
       end
 
       def average_difficulty

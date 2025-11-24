@@ -9,7 +9,8 @@ module LingoBeats
     class SongLevel < Roar::Decorator
       include Roar::JSON
 
-      property :tag
+      property :distribution
+      property :level
     end
   end
 end

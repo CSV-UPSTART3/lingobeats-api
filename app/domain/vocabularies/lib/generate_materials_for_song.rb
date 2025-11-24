@@ -19,16 +19,15 @@ module LingoBeats
         def call(song)
           vocabs = load_vocabs_for(song)
           pending = vocabs.select { |v| material_blank?(v) }
-          return [] if pending.empty?
+          return vocabs if pending.empty?
 
           updated = []
 
           pending.each_slice(BATCH_SIZE) do |batch|
-            prompt = build_prompt(batch, song)
+            prompt = build_prompt_for_batch(batch, song)
             # payload = @mapper.gateway.generate_content(prompt)
 
-            # 假設 mapper.parse_batch(payload) 會回傳：
-            # [ {..material_hash_for_word1..}, {..for_word2..}, ... ]
+            # Gemini 會回傳 JSON array: [ {material1}, {material2}, ... ]
             materials = @mapper.generate_and_parse(prompt)
 
             batch.zip(materials).each do |vocab, material_hash|
@@ -36,7 +35,6 @@ module LingoBeats
 
               updated_vocab = build_updated_vocab(vocab, material_hash)
               @vocabulary_repo.update_material(updated_vocab.id, updated_vocab.material)
-              # @vocabulary_repo.update_material(updated_vocab)
               updated << updated_vocab
             end
           end
@@ -65,52 +63,54 @@ module LingoBeats
 
         # 這裡組你的「給 Gemini 的 prompt」
         # 先假設：同一 batch 裡的 vocab level 一樣
-        def build_prompt(batch, song)
+        def build_prompt_for_batch(batch, song)
           words = batch.map(&:name)
-          level = batch.first.level
+          levels = batch.map(&:level)
 
           <<~PROMPT
-            You are an English learning assistant for Taiwanese learners.
+            You are an English learning assistant for Taiwanese ESL learners.
 
             TASK:
-            For EACH word in the given list, return a detailed vocabulary entry with:
-            1. Multiple part-of-speech entries (noun, verb, adjective… as applicable).
-            2. A short Traditional Chinese gloss for the word (head_zh).
+            For EACH word in the word list, return a *separate* detailed vocabulary entry with:
+            1. CEFR LEVEL: Use the CEFR level provided for that exact word (see LEVEL_LIST below).
+            2. Multiple part-of-speech entries (noun, verb, adjective… as applicable).
+            3. A short Traditional Chinese gloss for the word (head_zh).
                 - Example: for "ghost", head_zh should be like "鬼魂、幽靈".
-            3. For each part-of-speech entry:
-                - definition_en: short, simple English explanation (CEFR #{level} level).
+            4. For each part-of-speech entry:
+                - definition_en: short, simple CEFR-level English explanation.
                 - definition_zh: clear Traditional Chinese explanation, natural and easy to understand.
-                - examples: 2–3 everyday example sentences (CEFR #{level}), natural spoken/written English and it's explain in Chinese.
-            4. related_forms: common derivatives or different grammatical forms of the word
+                - examples: 2–3 everyday CEFR-level English example sentences, natural spoken/written English and explain in Chinese.
+            5. related_forms: common derivatives or different grammatical forms of the word
                 (e.g. ghostly, ghosting, staged, wildness), with part-of-speech.
 
             OUTPUT FORMAT (IMPORTANT):
-            Return ONLY valid JSON.
-            NO markdown, NO comments, NO explanations outside JSON.
+            - Use the CEFR LEVEL corresponding to each word individually.
+            - Return ONLY valid JSON.
+            - NO markdown, NO comments, NO explanations outside JSON.
 
             JSON SCHEMA:
             [
-                {
+              {
                 "word": "string",
                 "head_zh": "string",
                 "entries": [
-                    {
+                  {
                     "pos": "string",
                     "definition_en": "string",
                     "definition_zh": "string",
                     "examples": ["string", "string"]
-                    }
+                  }
                 ],
                 "related_forms": [
-                    {
+                  {
                     "form": "string",
                     "pos": "string"
-                    }
+                  }
                 ]
-                }
+              }
             ]
 
-            LEVEL: #{level}
+            LEVEL LIST: #{levels.to_json}
             SONG_TITLE: #{song.name}
             WORD LIST:
             #{words.to_json}

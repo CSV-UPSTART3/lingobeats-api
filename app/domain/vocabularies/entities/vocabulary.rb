@@ -19,7 +19,7 @@ module LingoBeats
       def material_hash
         return nil if material.nil?
 
-        ::JSON.generate(value)
+        ::JSON.generate(material)
       end
 
       # Helper: check if Gemini already enriched this vocab

@@ -9,7 +9,8 @@ module LingoBeats
     class Material < Roar::Decorator
       include Roar::JSON
 
-      property :text
+      property :song
+      property :materials
     end
   end
 end

@@ -4,6 +4,7 @@ import spacy
 import contractions
 import unicodedata
 from nltk.corpus import stopwords
+from pathlib import Path
 
 nltk.download('stopwords', quiet = True)
 STOP_WORDS = set(stopwords.words('english'))
@@ -60,8 +61,8 @@ def looks_like_word(token: str) -> bool:
     if len(token) < 3:
         return False
     # 至少要有一個母音 (a e i o u)，避免 th, nth, oop 這種奇怪片段
-    if not re.search(r"[aeiou]", token):
-        return False
+    # if not re.search(r"[aeiou]", token):
+    #     return False
     return True
 
 def filter_name_like_tokens(words, nlp):
@@ -91,14 +92,11 @@ def filter_name_like_tokens(words, nlp):
 
 def preprocess(words):
     # 確保 spaCy 模型已安裝
+    local_model_path = Path(__file__).parent / "en_core_web_sm" / "en_core_web_sm-3.8.0"
     try:
-        NLP = spacy.load("en_core_web_sm")
-    except OSError:
-        print("Model en_core_web_sm not found. Downloading...")
-        subprocess.run(["python3", "-m", "spacy", "download", "en_core_web_sm"], check=True)
-        NLP = spacy.load("en_core_web_sm")
-    
-    nlp = spacy.load("en_core_web_sm")
+        nlp = spacy.load(local_model_path)
+    except Exception as e:
+        raise RuntimeError(f"Failed to load local spaCy model: {e}")
     
     """Expand contractions and remove stopwords"""
     cleaned = []

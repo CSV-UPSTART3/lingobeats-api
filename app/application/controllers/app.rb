@@ -20,7 +20,7 @@ module LingoBeats
       response['Content-Type'] = 'application/json'
 
       # GET /
-      routing.root do
+      routing.root do # Roda routing.root is for GET /
         @current_page = :home
 
         # Show popular songs on home page
@@ -90,14 +90,20 @@ module LingoBeats
             end
           end
 
-          # # POST /songs/:id/materials
-          # routing.on 'materials' do
-          #   routing.post do
-          #     result = Service::AddMaterial.new.call(song_id:)
+          # POST /songs/:id/materials
+          routing.on 'materials' do
+            routing.post do
+              result = Service::AddMaterial.new.call(song_id:)
 
-          #     RouteHelpers::Response.call(routing, result, Representer::Material)
-          #   end
-          # end
+              RouteHelpers::Response.call(routing, result, Representer::Material)
+            end
+            # GET /songs/:id/materials
+            routing.get do
+              result = Service::GetMaterials.new.call(song_id:)
+
+              RouteHelpers::Response.call(routing, result, Representer::Material)
+            end
+          end
         end
       end
     end
