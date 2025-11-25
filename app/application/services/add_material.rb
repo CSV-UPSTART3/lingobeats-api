@@ -2,85 +2,130 @@
 
 require 'dry/transaction'
 require 'ostruct'
+require 'json'
+require 'erb'
 
 module LingoBeats
   module Service
+    # Transaction to add learning materials for vocabularies of a song
     class AddMaterial
       include Dry::Transaction
 
-      step :fetch_data
-      step :build_prompt
-      step :generate_material
+      BATCH_SIZE = 10
 
-      def initialize(songs_repo: Repository::For.klass(Entity::Song),
-                     vocab_repo: Repository::For.klass(Entity::Vocabulary))
+      step :fetch_data
+      step :find_pending
+      step :generate_for_pending
+      step :build_result
+
+      def initialize(
+        songs_repo: Repository::For.klass(Entity::Song),
+        vocabs_repo: Repository::For.klass(Entity::Vocabulary),
+        mapper: LingoBeats::Gemini::VocabularyMapper.new(
+          access_token: App.config.GEMINI_API_KEY
+        )
+      )
         super()
         @songs_repo = songs_repo
-        @vocab_repo = vocab_repo
+        @vocabs_repo = vocabs_repo
+        @mapper = mapper
       end
-      
-      DB_ERROR = 'Having trouble accessing the database'
-      PROMPT_BUILD_ERROR = "Failed to build prompt"
-      MATERIAL_GENERATE_ERROR = 'Failed to generate learning materials'
 
+      SONG_NOT_EXISTS = 'Cannot find the specified song'                # → 404
+      VOCAB_NOT_EXISTS = 'Cannot find the vocabularies in the song'     # → 404
+      DB_ERROR = 'Having trouble accessing the database'                # → 500
+      MATERIAL_GENERATE_ERROR = 'Failed to generate learning materials' # → 500
+
+      private
+
+      # step 1. fetch song + vocabs
       def fetch_data(input)
-        song = @songs_repo.find_id(input[:song_id])
-        vocabs = @vocab_repo.for_song(song.id)
-        Success(input.merge(song: song, vocabs: vocabs))
-      rescue => error
-        App.logger.error("[AddMaterial] #{DB_ERROR}: #{error.message}")
+        song = find_song(input[:song_id])
+        Success({ song:, vocabs: find_vocabs(song.id) })
+      rescue StandardError => error
+        App.logger.error("[AddMaterial] fetch data error: #{error.full_message}")
+        Failure(Response::ApiResult.new(status: :internal_error, message: error.message || DB_ERROR))
+      end
+
+      # step 2. find which vocabs need material
+      def find_pending(input)
+        pending_vocabs = input[:vocabs].select(&:material_blank?)
+
+        Success(input.merge(pending_vocabs:))
+      rescue StandardError => error
+        App.logger.error("[AddMaterial] find pending error: #{error.full_message}")
         Failure(Response::ApiResult.new(status: :internal_error, message: DB_ERROR))
       end
 
-      def build_prompt(input)
-        song = input[:song]
-        vocabs = input[:vocabs]
+      # step 3. only generate materials for pending vocabs
+      def generate_for_pending(input)
+        pending_vocabs = input[:pending_vocabs]
+        return Success({ song: input[:song] }) if pending_vocabs.empty?
 
-        prompts = vocabs.map do |vocab|
-        PromptLoader.render(
-          'material_prompt.erb',
-          {
-            word: vocab.name,
-            level: vocab.level,
-            song_name: song.name
-          }
-        )
-        end
-        Success(input.merge(prompts: prompts))
+        pending_vocabs.each_slice(BATCH_SIZE).flat_map { |batch| generate_batch_materials(batch, input[:song]) }
+
+        Success({ song: input[:song] })
       rescue StandardError => error
-        App.logger.error("[AddMaterial] #{PROMPT_BUILD_ERROR}: #{error.message}")
-        Failure(Response::ApiResult.new(status: :internal_error, message: PROMPT_BUILD_ERROR))
-      end
-
-      def generate_material(input)
-        song   = input[:song]
-        # vocabs = input[:vocabs]
-
-        generator = LingoBeats::Vocabularies::Services::GenerateMaterialsForSong.new(
-          vocabulary_repo: @vocab_repo,
-          mapper: LingoBeats::Gemini::VocabularyMapper.new(
-            access_token: App.config.GEMINI_API_KEY
-          )
-        )
-
-        vocabs = generator.call(song)
-
-        Success(Response::ApiResult.new(status: :created,
-          message: OpenStruct.new(
-            song: input[:song].name,
-            materials: vocabs.map { |vocab| JSON.parse(vocab.material) }
-          )
-        ))
-      rescue StandardError => error
-        App.logger.error("[AddMaterial] #{MATERIAL_GENERATE_ERROR}: #{error.message}")
+        App.logger.error("[AddMaterial] generate materials error: #{error.full_message}")
         Failure(Response::ApiResult.new(status: :internal_error, message: MATERIAL_GENERATE_ERROR))
       end
 
-      class PromptLoader
-        def self.render(template_name, locals = {})
-          path = File.join('app/application/services/prompts', template_name)
-          template = File.read(path)
-          ERB.new(template).result_with_hash(locals)
+      # step 4. build API result (all vocabs)
+      def build_result(input)
+        result = Response::Material.new(
+          song: input[:song].name,
+          contents: @vocabs_repo.vocabs_content(input[:song].id)
+        )
+
+        Success(Response::ApiResult.new(status: :created, message: result))
+      rescue StandardError => error
+        App.logger.error("[AddMaterial] build result error: #{error.full_message}")
+        Failure(Response::ApiResult.new(status: :internal_error, message: DB_ERROR))
+      end
+
+      # helper methods
+      # for each batch of vocabs, generate materials and update them in the repo
+      def generate_batch_materials(batch, song)
+        prompt = PromptRenderer.call(batch: batch, song: song)
+        materials = @mapper.generate_and_parse(prompt)
+
+        batch.zip(materials).filter_map do |vocab, material_hash|
+          next unless material_hash
+
+          attrs = vocab.to_attr_hash.merge(material: JSON.generate(material_hash))
+          updated_vocab = Entity::Vocabulary.new(attrs)
+          @vocabs_repo.update_material(updated_vocab.id, updated_vocab.material)
+          updated_vocab
+        end
+      end
+
+      def find_song(song_id)
+        song = @songs_repo.find_by_id(song_id)
+        raise SONG_NOT_EXISTS unless song
+
+        song
+      end
+
+      def find_vocabs(vocab_id)
+        vocab = @vocabs_repo.for_song(vocab_id)
+        raise VOCAB_NOT_EXISTS unless vocab
+
+        vocab
+      end
+
+      # helper class to render Gemini prompt
+      class PromptRenderer
+        TEMPLATE_PATH = 'app/application/services/prompts/material_prompt.erb'
+
+        def self.call(batch:, song:)
+          pairs = batch.map { |vocab| { word: vocab.name, level: vocab.level } }
+
+          template = File.read(TEMPLATE_PATH)
+
+          ERB.new(template).result_with_hash(
+            vocab_pairs: pairs,
+            song_name: song.name
+          )
         end
       end
     end

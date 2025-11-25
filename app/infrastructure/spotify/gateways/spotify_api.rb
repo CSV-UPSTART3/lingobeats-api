@@ -5,8 +5,6 @@ require 'fileutils'
 require 'http'
 require 'yaml'
 
-require_relative '../../http_helper'
-
 module LingoBeats
   module Spotify
     # Library for Spotify Web API
@@ -21,26 +19,24 @@ module LingoBeats
       def initialize(client_id, client_secret)
         credential = Credentials.new(client_id, client_secret)
         @token_manager = SpotifyTokenManager.instance_for(credential)
+        @http_request = HttpHelper::Request.new('Authorization' => "Bearer #{@token_manager.access_token}")
       end
 
       # search songs with specified condition
       def songs_data(category:, query:, limit:)
         spec = SearchSpec.new(category: category, query: query, limit: limit)
-        HttpHelper::Request.new('Authorization' => "Bearer #{@token_manager.access_token}")
-                           .get(spotify_search_url, params: spec.params)
+        @http_request.get(spotify_search_url, params: spec.params)
       end
 
       # get billboard 100 playlist songs
       def billboard_data(limit:)
         params = { limit: limit }
-        HttpHelper::Request.new('Authorization' => "Bearer #{@token_manager.access_token}")
-                           .get(spotify_playlist_url(BILLBORAD_PLAYLIST_ID), params: params)
+        @http_request.get(spotify_playlist_url(BILLBORAD_PLAYLIST_ID), params: params)
       end
 
       # get song details by id
       def song_info(song_id:)
-        HttpHelper::Request.new('Authorization' => "Bearer #{@token_manager.access_token}")
-                           .get(spotify_track_url(song_id))
+        @http_request.get(spotify_track_url(song_id))
       end
 
       private

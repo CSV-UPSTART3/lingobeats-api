@@ -10,7 +10,7 @@ module LingoBeats
         Value::Lyric.new(text: db_record[:text] || db_record.text || nil)
       end
 
-      def self.find_id(id)
+      def self.find_by_id(id)
         rebuild_value Database::LyricOrm.first(id: id)
       end
 
@@ -27,7 +27,7 @@ module LingoBeats
         lyric_id = song[:lyric_id]
         return nil unless lyric_id
 
-        find_id(lyric_id)
+        find_by_id(lyric_id)
       end
 
       # create lyric and link to song

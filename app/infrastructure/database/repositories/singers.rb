@@ -9,7 +9,7 @@ module LingoBeats
         orm.first(id: singer_info[:id]) || orm.create(singer_info) # 都是內建方法
       end
 
-      def self.find_id(id)
+      def self.find_by_id(id)
         rebuild_entity Database::SingerOrm.first(id: id)
       end
 
