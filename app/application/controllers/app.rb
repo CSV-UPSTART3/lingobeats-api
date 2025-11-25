@@ -10,13 +10,14 @@ module LingoBeats
   # Web App
   class App < Roda
     plugin :all_verbs # allows HTTP verbs beyond GET/POST (e.g., DELETE)
-    # plugin :public, root: 'app/presentation/public'
+    plugin :public, root: 'app/presentation/public'
     plugin :halt
     plugin :multi_route
 
     route do |routing|
-      # routing.public # serve /public files
+      routing.public # serve /public files
       response['Content-Type'] = 'application/json'
+      
 
       # GET /
       routing.root do # Roda routing.root is for GET /
@@ -106,7 +107,6 @@ module LingoBeats
           end
         end
       end
-      # 子路由
       routing.multi_route
     end
   end
