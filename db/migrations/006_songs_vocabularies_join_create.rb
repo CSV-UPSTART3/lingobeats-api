@@ -11,7 +11,7 @@ Sequel.migration do
                   key: :id, type: String, on_delete: :cascade
 
       foreign_key :vocabulary_id, :vocabularies,
-                  key: :id,  on_delete: :cascade
+                  key: :id, on_delete: :cascade
 
       index [:song_id, :vocabulary_id] # rubocop:disable Style/SymbolArray
     end

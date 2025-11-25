@@ -18,9 +18,6 @@ module LingoBeats
                    join_table: :songs_vocabularies,
                    left_key: :song_id, right_key: :vocabulary_id
 
-      # one_to_one :lyric,
-      #            class: :'LingoBeats::Database::LyricOrm',
-      #            key: :song_id
       many_to_one :lyric,
                   class: :'LingoBeats::Database::LyricOrm',
                   key: :lyric_id

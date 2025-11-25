@@ -11,6 +11,8 @@ gem 'pycall'
 gem 'rake'
 
 # PRESENTATION LAYER
+gem 'multi_json', '~> 1.15'
+gem 'roar', '~> 1.1'
 gem 'slim', '~> 4.0'
 
 # APPLICATION LAYER

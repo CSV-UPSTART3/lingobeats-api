@@ -1,4 +1,5 @@
-# app/infrastructure/gemini/mappers/vocabulary_mapper.rb
+# frozen_string_literal: false
+
 module LingoBeats
   module Gemini
     # 建立 Vocabulary 的 mapper
@@ -11,6 +12,7 @@ module LingoBeats
         )
       end
 
+      # provide static token for Gemini API
       class StaticTokenProvider
         attr_reader :api_key
 
@@ -74,7 +76,6 @@ module LingoBeats
         rescue JSON::ParserError
           [{ raw_text: text }]
         end
-        module_function :parse_batch
       end
 
       # For Service

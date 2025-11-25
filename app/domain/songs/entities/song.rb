@@ -62,19 +62,17 @@ module LingoBeats
       # Check if the song name is in English
       def english_name?
         name.ascii_only?
-        # 允許英文、數字、空白、常見符號、以及少數變音字母
-        # name.match?(/\A[0-9A-Za-z\s'&.,!?\-éáíóúñÉÁÍÓÚ]+(?:\s*\(.*\))?\z/)
       end
 
       def evaluate_words
-        return [] unless lyric
+        return {} unless lyric
 
-        lyric&.evaluate_difficulty || {} # 呼叫 Lyric 的斷詞邏輯，並且進行評級
+        lyric&.evaluate_difficulty # 呼叫 Lyric 的斷詞邏輯，並且進行評級
       end
 
       def difficulty_distribution
         puts base_distribution
-        # SongDifficultyHelper.fill_levels(base_distribution)
+        SongDifficultyHelper.fill_levels(base_distribution)
       end
 
       def average_difficulty
@@ -100,6 +98,7 @@ module LingoBeats
       def base_distribution
         evaluate_words.values.each_with_object(Hash.new(0)) do |level, hash|
           next unless %w[A B C].include?(level)
+
           hash[level] += 1
         end
       end

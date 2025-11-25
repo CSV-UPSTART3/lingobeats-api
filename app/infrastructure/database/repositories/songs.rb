@@ -98,6 +98,9 @@ module LingoBeats
         lyric_repo = Repository::For.klass(Value::Lyric)
         lyric_repo.attach_to_song(song_id, lyric_vo)
         find_lyric_in_database(song_id: song_id)
+      rescue StandardError => error
+        App.logger.error("Failed to store lyric to database: #{error.message}")
+        raise 'Error in connecting to database.'
       end
 
       # Helper class to rebuild entity from DB

@@ -1,4 +1,19 @@
 ---
+- :id: 3bH2Eu9A9ymI4UnGHRmoXg
+  :name: Merry Christmas
+  :uri: spotify:track:3bH2Eu9A9ymI4UnGHRmoXg
+  :external_url: https://open.spotify.com/track/3bH2Eu9A9ymI4UnGHRmoXg
+  :album_id: 3pqY0b5nEKoWwSrrwMwqMK
+  :album_name: Merry Christmas
+  :album_url: https://open.spotify.com/album/3pqY0b5nEKoWwSrrwMwqMK
+  :album_image_url: https://i.scdn.co/image/ab67616d0000b273b629026e4cf6254a90dfc414
+  :singers:
+  - :id: 6eUKZXaKkcviH0Ku9w2n3V
+    :name: Ed Sheeran
+    :external_url: https://open.spotify.com/artist/6eUKZXaKkcviH0Ku9w2n3V
+  - :id: 3PhoLpVuITZKcymswpck5b
+    :name: Elton John
+    :external_url: https://open.spotify.com/artist/3PhoLpVuITZKcymswpck5b
 - :id: 4Q0qVhFQa7j6jRKzo3HDmP
   :name: Sapphire
   :uri: spotify:track:4Q0qVhFQa7j6jRKzo3HDmP
@@ -11,21 +26,18 @@
   - :id: 6eUKZXaKkcviH0Ku9w2n3V
     :name: Ed Sheeran
     :external_url: https://open.spotify.com/artist/6eUKZXaKkcviH0Ku9w2n3V
-- :id: 6J1L5q4tDfn2mfP9mFDZAF
-  :name: Camera (CYRIL Remix)
-  :uri: spotify:track:6J1L5q4tDfn2mfP9mFDZAF
-  :external_url: https://open.spotify.com/track/6J1L5q4tDfn2mfP9mFDZAF
-  :album_id: 17w0kQfQhwj2ptpp0eFt3n
-  :album_name: Camera (CYRIL Remix)
-  :album_url: https://open.spotify.com/album/17w0kQfQhwj2ptpp0eFt3n
-  :album_image_url: https://i.scdn.co/image/ab67616d0000b273701bf34e3af09d64799e6dd2
+- :id: 0tgVpDi06FyKpA1z0VMD4v
+  :name: Perfect
+  :uri: spotify:track:0tgVpDi06FyKpA1z0VMD4v
+  :external_url: https://open.spotify.com/track/0tgVpDi06FyKpA1z0VMD4v
+  :album_id: 3T4tUhGYeRNVUGevb0wThu
+  :album_name: "÷ (Deluxe)"
+  :album_url: https://open.spotify.com/album/3T4tUhGYeRNVUGevb0wThu
+  :album_image_url: https://i.scdn.co/image/ab67616d0000b273ba5db46f4b838ef6027e6f96
   :singers:
   - :id: 6eUKZXaKkcviH0Ku9w2n3V
     :name: Ed Sheeran
     :external_url: https://open.spotify.com/artist/6eUKZXaKkcviH0Ku9w2n3V
-  - :id: 11kt6ggsdxvI8MhyeSMKom
-    :name: CYRIL
-    :external_url: https://open.spotify.com/artist/11kt6ggsdxvI8MhyeSMKom
 - :id: 1HNkqx9Ahdgi1Ixy2xkKkL
   :name: Photograph
   :uri: spotify:track:1HNkqx9Ahdgi1Ixy2xkKkL
@@ -34,6 +46,54 @@
   :album_name: x (Deluxe Edition)
   :album_url: https://open.spotify.com/album/1xn54DMo2qIqBuMqHtUsFd
   :album_image_url: https://i.scdn.co/image/ab67616d0000b27313b3e37318a0c247b550bccd
+  :singers:
+  - :id: 6eUKZXaKkcviH0Ku9w2n3V
+    :name: Ed Sheeran
+    :external_url: https://open.spotify.com/artist/6eUKZXaKkcviH0Ku9w2n3V
+- :id: 51ChrwmUPDJvedPQnIU8Ls
+  :name: Dive
+  :uri: spotify:track:51ChrwmUPDJvedPQnIU8Ls
+  :external_url: https://open.spotify.com/track/51ChrwmUPDJvedPQnIU8Ls
+  :album_id: 3T4tUhGYeRNVUGevb0wThu
+  :album_name: "÷ (Deluxe)"
+  :album_url: https://open.spotify.com/album/3T4tUhGYeRNVUGevb0wThu
+  :album_image_url: https://i.scdn.co/image/ab67616d0000b273ba5db46f4b838ef6027e6f96
+  :singers:
+  - :id: 6eUKZXaKkcviH0Ku9w2n3V
+    :name: Ed Sheeran
+    :external_url: https://open.spotify.com/artist/6eUKZXaKkcviH0Ku9w2n3V
+- :id: 3rmo8F54jFF8OgYsqTxm5d
+  :name: Bad Habits
+  :uri: spotify:track:3rmo8F54jFF8OgYsqTxm5d
+  :external_url: https://open.spotify.com/track/3rmo8F54jFF8OgYsqTxm5d
+  :album_id: 32iAEBstCjauDhyKpGjTuq
+  :album_name: "="
+  :album_url: https://open.spotify.com/album/32iAEBstCjauDhyKpGjTuq
+  :album_image_url: https://i.scdn.co/image/ab67616d0000b273ef24c3fdbf856340d55cfeb2
+  :singers:
+  - :id: 6eUKZXaKkcviH0Ku9w2n3V
+    :name: Ed Sheeran
+    :external_url: https://open.spotify.com/artist/6eUKZXaKkcviH0Ku9w2n3V
+- :id: 6vqyk3mbDBv3npTpctYoka
+  :name: Camera
+  :uri: spotify:track:6vqyk3mbDBv3npTpctYoka
+  :external_url: https://open.spotify.com/track/6vqyk3mbDBv3npTpctYoka
+  :album_id: 20dY0uZi9SzfrcWYfiWGqH
+  :album_name: Play
+  :album_url: https://open.spotify.com/album/20dY0uZi9SzfrcWYfiWGqH
+  :album_image_url: https://i.scdn.co/image/ab67616d0000b273d42be8d4bebc9cf111ce98a1
+  :singers:
+  - :id: 6eUKZXaKkcviH0Ku9w2n3V
+    :name: Ed Sheeran
+    :external_url: https://open.spotify.com/artist/6eUKZXaKkcviH0Ku9w2n3V
+- :id: 6PCUP3dWmTjcTtXY02oFdT
+  :name: Castle on the Hill
+  :uri: spotify:track:6PCUP3dWmTjcTtXY02oFdT
+  :external_url: https://open.spotify.com/track/6PCUP3dWmTjcTtXY02oFdT
+  :album_id: 3T4tUhGYeRNVUGevb0wThu
+  :album_name: "÷ (Deluxe)"
+  :album_url: https://open.spotify.com/album/3T4tUhGYeRNVUGevb0wThu
+  :album_image_url: https://i.scdn.co/image/ab67616d0000b273ba5db46f4b838ef6027e6f96
   :singers:
   - :id: 6eUKZXaKkcviH0Ku9w2n3V
     :name: Ed Sheeran
@@ -62,30 +122,6 @@
   - :id: 6eUKZXaKkcviH0Ku9w2n3V
     :name: Ed Sheeran
     :external_url: https://open.spotify.com/artist/6eUKZXaKkcviH0Ku9w2n3V
-- :id: 51ChrwmUPDJvedPQnIU8Ls
-  :name: Dive
-  :uri: spotify:track:51ChrwmUPDJvedPQnIU8Ls
-  :external_url: https://open.spotify.com/track/51ChrwmUPDJvedPQnIU8Ls
-  :album_id: 3T4tUhGYeRNVUGevb0wThu
-  :album_name: "÷ (Deluxe)"
-  :album_url: https://open.spotify.com/album/3T4tUhGYeRNVUGevb0wThu
-  :album_image_url: https://i.scdn.co/image/ab67616d0000b273ba5db46f4b838ef6027e6f96
-  :singers:
-  - :id: 6eUKZXaKkcviH0Ku9w2n3V
-    :name: Ed Sheeran
-    :external_url: https://open.spotify.com/artist/6eUKZXaKkcviH0Ku9w2n3V
-- :id: 6vqyk3mbDBv3npTpctYoka
-  :name: Camera
-  :uri: spotify:track:6vqyk3mbDBv3npTpctYoka
-  :external_url: https://open.spotify.com/track/6vqyk3mbDBv3npTpctYoka
-  :album_id: 20dY0uZi9SzfrcWYfiWGqH
-  :album_name: Play
-  :album_url: https://open.spotify.com/album/20dY0uZi9SzfrcWYfiWGqH
-  :album_image_url: https://i.scdn.co/image/ab67616d0000b273d42be8d4bebc9cf111ce98a1
-  :singers:
-  - :id: 6eUKZXaKkcviH0Ku9w2n3V
-    :name: Ed Sheeran
-    :external_url: https://open.spotify.com/artist/6eUKZXaKkcviH0Ku9w2n3V
 - :id: 2x0WlnmfG39ZuDmstl9xfX
   :name: End Game
   :uri: spotify:track:2x0WlnmfG39ZuDmstl9xfX
@@ -104,42 +140,6 @@
   - :id: 1RyvyyTE3xzB2ZywiAwp0i
     :name: Future
     :external_url: https://open.spotify.com/artist/1RyvyyTE3xzB2ZywiAwp0i
-- :id: 1VdZ0vKfR5jneCmWIUAMxK
-  :name: The A Team
-  :uri: spotify:track:1VdZ0vKfR5jneCmWIUAMxK
-  :external_url: https://open.spotify.com/track/1VdZ0vKfR5jneCmWIUAMxK
-  :album_id: 0W5GGnapMz0VwemQvJDqa7
-  :album_name: "+"
-  :album_url: https://open.spotify.com/album/0W5GGnapMz0VwemQvJDqa7
-  :album_image_url: https://i.scdn.co/image/ab67616d0000b273e6d489d359c546fea254f440
-  :singers:
-  - :id: 6eUKZXaKkcviH0Ku9w2n3V
-    :name: Ed Sheeran
-    :external_url: https://open.spotify.com/artist/6eUKZXaKkcviH0Ku9w2n3V
-- :id: 3rmo8F54jFF8OgYsqTxm5d
-  :name: Bad Habits
-  :uri: spotify:track:3rmo8F54jFF8OgYsqTxm5d
-  :external_url: https://open.spotify.com/track/3rmo8F54jFF8OgYsqTxm5d
-  :album_id: 32iAEBstCjauDhyKpGjTuq
-  :album_name: "="
-  :album_url: https://open.spotify.com/album/32iAEBstCjauDhyKpGjTuq
-  :album_image_url: https://i.scdn.co/image/ab67616d0000b273ef24c3fdbf856340d55cfeb2
-  :singers:
-  - :id: 6eUKZXaKkcviH0Ku9w2n3V
-    :name: Ed Sheeran
-    :external_url: https://open.spotify.com/artist/6eUKZXaKkcviH0Ku9w2n3V
-- :id: 6PCUP3dWmTjcTtXY02oFdT
-  :name: Castle on the Hill
-  :uri: spotify:track:6PCUP3dWmTjcTtXY02oFdT
-  :external_url: https://open.spotify.com/track/6PCUP3dWmTjcTtXY02oFdT
-  :album_id: 3T4tUhGYeRNVUGevb0wThu
-  :album_name: "÷ (Deluxe)"
-  :album_url: https://open.spotify.com/album/3T4tUhGYeRNVUGevb0wThu
-  :album_image_url: https://i.scdn.co/image/ab67616d0000b273ba5db46f4b838ef6027e6f96
-  :singers:
-  - :id: 6eUKZXaKkcviH0Ku9w2n3V
-    :name: Ed Sheeran
-    :external_url: https://open.spotify.com/artist/6eUKZXaKkcviH0Ku9w2n3V
 - :id: 50nfwKoDiSYg8zOCREWAm5
   :name: Shivers
   :uri: spotify:track:50nfwKoDiSYg8zOCREWAm5
@@ -152,14 +152,14 @@
   - :id: 6eUKZXaKkcviH0Ku9w2n3V
     :name: Ed Sheeran
     :external_url: https://open.spotify.com/artist/6eUKZXaKkcviH0Ku9w2n3V
-- :id: 0tgVpDi06FyKpA1z0VMD4v
-  :name: Perfect
-  :uri: spotify:track:0tgVpDi06FyKpA1z0VMD4v
-  :external_url: https://open.spotify.com/track/0tgVpDi06FyKpA1z0VMD4v
-  :album_id: 3T4tUhGYeRNVUGevb0wThu
-  :album_name: "÷ (Deluxe)"
-  :album_url: https://open.spotify.com/album/3T4tUhGYeRNVUGevb0wThu
-  :album_image_url: https://i.scdn.co/image/ab67616d0000b273ba5db46f4b838ef6027e6f96
+- :id: 1VdZ0vKfR5jneCmWIUAMxK
+  :name: The A Team
+  :uri: spotify:track:1VdZ0vKfR5jneCmWIUAMxK
+  :external_url: https://open.spotify.com/track/1VdZ0vKfR5jneCmWIUAMxK
+  :album_id: 0W5GGnapMz0VwemQvJDqa7
+  :album_name: "+"
+  :album_url: https://open.spotify.com/album/0W5GGnapMz0VwemQvJDqa7
+  :album_image_url: https://i.scdn.co/image/ab67616d0000b273e6d489d359c546fea254f440
   :singers:
   - :id: 6eUKZXaKkcviH0Ku9w2n3V
     :name: Ed Sheeran

@@ -6,9 +6,10 @@ Sequel.migration do
   change do
     create_table(:vocabularies) do
       primary_key :id
-      String   :name,   null: false
-      String   :level,     null: false
-      Text     :material,   null: false # 存 JSON 字串
+      String   :name,       null: false
+      String   :level,      null: false
+      # Text     :material,   null: false # 存 JSON 字串
+      Text     :material
       DateTime :created_at, null: false, default: Sequel::CURRENT_TIMESTAMP
       DateTime :updated_at, null: false, default: Sequel::CURRENT_TIMESTAMP
 

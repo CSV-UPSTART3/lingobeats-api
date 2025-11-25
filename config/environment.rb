@@ -2,29 +2,31 @@
 
 require 'figaro'
 require 'logger'
-require 'rack/session/cookie'
+require 'rack/session'
 require 'roda'
 require 'sequel'
-require 'yaml'
 
 module LingoBeats
-  # Configuration for the App
+  # Environment-specific configuration
   class App < Roda
     plugin :environments
 
     # Environment variables setup
     Figaro.application = Figaro::Application.new(
-      environment: ENV.fetch('RACK_ENV', 'development'),
+      environment:,
       path: File.expand_path('config/secrets.yml')
     )
     Figaro.load
     def self.config = Figaro.env
 
-    raise 'Missing SESSION_SECRET!' unless config.SESSION_SECRET
+    configure :app_test do
+      require_relative '../spec/helpers/vcr_helper'
+      VcrHelper.setup_vcr
+      VcrHelper.configure_vcr_for_github(recording: :none)
+    end
 
-    use Rack::Session::Cookie, secret: config.SESSION_SECRET
-
-    configure :development, :test do
+    # Database Setup
+    configure :development, :test, :app_test do
       require 'pry'; # for breakpoints
       ENV['DATABASE_URL'] = "sqlite://#{config.DB_FILENAME}"
     end
@@ -34,7 +36,23 @@ module LingoBeats
     def self.db = @db # rubocop:disable Style/TrivialAccessors
 
     # Logger Setup
-    @logger = Logger.new($stderr)
+    configure :development, :production do
+      plugin :common_logger, $stderr
+      @logger = Logger.new($stderr)
+    end
+
+    # Logger that outputs nowhere; used to suppress logging in test environment
+    class NullLogger < Logger
+      def initialize(*)
+        super(IO::NULL)
+      end
+    end
+
+    configure :test do
+      plugin :common_logger, NullLogger.new
+      @logger = NullLogger.new
+    end
+
     class << self
       attr_reader :logger
     end
