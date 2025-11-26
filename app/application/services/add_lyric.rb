@@ -56,8 +56,9 @@ module LingoBeats
 
       # step 4. store lyric if not exists, and return lyric value object
       def store_lyric(input)
-        song = input[:song]
-        lyric = input[:local_lyric] || store_remote_lyric(song.id, input[:remote_lyric])
+        song_id = input[:song_id]
+        lyric = input[:local_lyric] || store_remote_lyric(song_id, input[:remote_lyric])
+        song = @songs_repo.find_by_id(song_id)
 
         Success({ song:, lyric: })
       rescue StandardError => error

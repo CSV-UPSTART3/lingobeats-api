@@ -95,7 +95,9 @@ module LingoBeats
 
       def self.incomplete_material?(song_id)
         vocabs = for_song(song_id)
-        vocabs.any? { |vocab| vocab.material.to_s.strip.empty? } || vocabs.empty?
+        return true if vocabs.empty?
+
+        vocabs.any? { |vocab| vocab.material.to_s.strip.empty? }
       end
 
       def self.vocabs_content(id)

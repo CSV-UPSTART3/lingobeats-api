@@ -106,11 +106,11 @@ module LingoBeats
         song
       end
 
-      def find_vocabs(vocab_id)
-        vocab = @vocabs_repo.for_song(vocab_id)
-        raise VOCAB_NOT_EXISTS unless vocab
+      def find_vocabs(song_id)
+        vocabs = @vocabs_repo.for_song(song_id)
+        raise VOCAB_NOT_EXISTS if vocabs.empty?
 
-        vocab
+        vocabs
       end
 
       # helper class to render Gemini prompt
