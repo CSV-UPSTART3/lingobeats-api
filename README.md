@@ -59,7 +59,7 @@ Status:
 * 500: problems finding data (bad)
 <br>
 
-`POST /songs/{song_id}/level`
+`POST /songs/{song_id}/material`
 <br>
 Status:
 * 200: Material returned (happy)

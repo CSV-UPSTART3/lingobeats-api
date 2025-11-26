@@ -22,6 +22,7 @@ module LingoBeats
       # GET /
       routing.root do
         @current_page = :home
+        routing.halt(200, { status: 'ok', message: 'API is working' }.to_json)
       end
 
       # 子路由
