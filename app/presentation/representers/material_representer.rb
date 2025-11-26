@@ -10,7 +10,7 @@ module LingoBeats
       include Roar::JSON
 
       property :song
-      property :materials
+      property :contents
     end
   end
 end

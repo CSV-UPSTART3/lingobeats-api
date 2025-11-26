@@ -8,7 +8,7 @@ Sequel.migration do
       String :id, primary_key: true
       String :text, null: true
 
-      DateTime :created_at
+      DateTime :created_at, null: false, default: Sequel::CURRENT_TIMESTAMP
     end
 
     alter_table(:songs) do

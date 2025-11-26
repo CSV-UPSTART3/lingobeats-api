@@ -17,14 +17,14 @@ module LingoBeats
 
       # Helper: parse JSON → Hash
       def material_hash
-        return nil if material.nil?
+        return nil if material.empty?
 
         ::JSON.generate(material)
       end
 
       # Helper: check if Gemini already enriched this vocab
-      def enriched?
-        !material.nil?
+      def material_blank?
+        material.nil? || material.strip.empty?
       end
 
       def to_attr_hash

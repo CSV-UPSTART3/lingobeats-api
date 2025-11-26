@@ -22,7 +22,7 @@ module LingoBeats
       end
 
       # 查一筆
-      def self.find_id(id)
+      def self.find_by_id(id)
         rec = VocabularyOrm.first(id: id)
         rebuild_entity(rec)
       end
@@ -93,23 +93,34 @@ module LingoBeats
         rebuild_entity(rec)
       end
 
+      def self.incomplete_material?(song_id)
+        vocabs = for_song(song_id)
+        return true if vocabs.empty?
+
+        vocabs.any? { |vocab| vocab.material.to_s.strip.empty? }
+      end
+
+      def self.vocabs_content(id)
+        vocabs = for_song(id)
+        vocabs.map { |vocab| JSON.parse(vocab.material) }.compact
+      end
+
       # --- helpers ---
       def self.rebuild_many(db_records)
         Array(db_records).map { |rec| rebuild_entity(rec) }
       end
-      private_class_method :rebuild_many
 
       def self.rebuild_entity(rec)
         return nil unless rec
 
-        LingoBeats::Entity::Vocabulary.new(
+        Entity::Vocabulary.new(
           id: rec.id,
           name: rec.name,
           level: rec.level,
           material: rec.material # String 或 nil
         )
       end
-      private_class_method :rebuild_entity
+      private_class_method :rebuild_many, :rebuild_entity
     end
   end
 end

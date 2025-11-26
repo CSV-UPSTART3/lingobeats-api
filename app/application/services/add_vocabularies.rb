@@ -11,45 +11,59 @@ module LingoBeats
       step :split_and_evaluate
       step :process_vocabularies
 
-      def initialize(vocab_repo: Repository::For.klass(Entity::Vocabulary))
-        super()
-        @vocab_repo = vocab_repo
-      end
-
       VOCABULARY_EVAL_ERROR = 'Failed to evaluate words'
       VOCABULARY_PROCESS_ERROR = 'Failed to process vocabularies'
       DB_ERROR = 'Having trouble accessing the database'
 
+      def initialize(vocabs_repo: Repository::For.klass(Entity::Vocabulary))
+        super()
+        @vocabs_repo = vocabs_repo
+      end
+
       private
 
       def split_and_evaluate(song)
-        return Success(song:, skip: true) if @vocab_repo.for_song(song.id).any?
+        return Success(song:, skip: true) if @vocabs_repo.for_song(song.id).any?
 
         difficulties = song.evaluate_words
 
         Success(song:, difficulties:, skip: false)
       rescue StandardError => error
-        App.logger.error("[AddVocabularies] #{VOCABULARY_EVAL_ERROR}: #{error.message}")
-        Failure(Response::ApiResult.new(status: :internal_error, message: DB_ERROR))
+        handle_error(VOCABULARY_EVAL_ERROR, error)
       end
 
       def process_vocabularies(input)
-        song = input[:song]
-        return Success(Response::ApiResult.new(status: :ok, message: song)) if input[:skip]
+        return Success(Response::ApiResult.new(status: :ok, message: input[:song])) if input[:skip]
 
-        VocabularyProcessor.new(vocab_repo: @vocab_repo, song:, difficulties: input[:difficulties]).call
+        process_new_vocabularies(input)
+      rescue StandardError => error
+        handle_error(VOCABULARY_PROCESS_ERROR, error)
+      end
+
+      # helper method to process new vocabularies
+      def process_new_vocabularies(input)
+        song = input[:song]
+
+        VocabularyProcessor.new(
+          vocabs_repo: @vocabs_repo,
+          song:,
+          difficulties: input[:difficulties]
+        ).call
 
         Success(Response::ApiResult.new(status: :created, message: song))
-      rescue StandardError => error
-        App.logger.error("[AddVocabularies] #{VOCABULARY_PROCESS_ERROR}: #{error.message}")
+      end
+
+      # helper method to handle errors
+      def handle_error(message, error)
+        App.logger.error("[AddVocabularies] #{message}: #{error.full_message}")
         Failure(Response::ApiResult.new(status: :internal_error, message: DB_ERROR))
       end
     end
 
     # Helper class to process vocabularies
     class VocabularyProcessor
-      def initialize(vocab_repo:, song:, difficulties:)
-        @vocab_repo = vocab_repo
+      def initialize(vocabs_repo:, song:, difficulties:)
+        @vocabs_repo = vocabs_repo
         @song = song
         @difficulties = difficulties
       end
@@ -63,32 +77,26 @@ module LingoBeats
       private
 
       def fetch_existing_vocabularies
-        existing = @vocab_repo.find_by_names(@difficulties.keys)
+        existing = @vocabs_repo.find_by_names(@difficulties.keys)
         existing.to_h { |vocab| [vocab.name, vocab.id] }
       end
 
       def build_new_entities(existing_map)
-        words_to_create = @difficulties.reject { |word, level| existing_map.key?(word) || level.nil? }
-
-        words_to_create.map do |word, level|
-          Entity::Vocabulary.new(
-            id: nil,
-            name: word,
-            level: level,
-            material: nil
-          )
-        end
+        Vocabularies::VocabularyBuilder.build_from_difficulties(
+          @difficulties,
+          existing_names: existing_map.keys
+        )
       end
 
       def link_vocabularies_to_song(new_entities, existing_map)
         vocab_ids = existing_map.values + create_vocabularies(new_entities)
-        @vocab_repo.link_songs(@song.id, vocab_ids) unless vocab_ids.empty?
+        @vocabs_repo.link_songs(@song.id, vocab_ids) unless vocab_ids.empty?
       end
 
       def create_vocabularies(entities)
         return [] if entities.empty?
 
-        @vocab_repo.create_many(entities).map(&:id)
+        @vocabs_repo.create_many(entities).map(&:id)
       end
     end
   end

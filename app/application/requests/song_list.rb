@@ -20,7 +20,7 @@ module LingoBeats
       def call
         Success(category: category.value!, query: query.value!)
       rescue StandardError => error
-        App.logger.error("Parameter validation error: #{error.message}")
+        App.logger.error("Parameter validation error: #{error.full_message}")
         Failure(Response::ApiResult.new(status: :bad_request, message: PARAMS_ERROR))
       end
 

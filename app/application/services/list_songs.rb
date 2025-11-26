@@ -17,9 +17,6 @@ module LingoBeats
         @song_provider = SongProvider.new(mapper)
       end
 
-      SPOTIFY_API_ERROR = "Failed to load songs.\nPlease try again later."
-      EMPTY_SONG_RESULT = 'No results for' # concatenated with query later
-
       private
 
       # step 1. parse category and query from request URL
@@ -36,15 +33,28 @@ module LingoBeats
       def fetch_songs(input)
         @song_provider.fetch(input)
                       .then { |songs| Response::SongsList.new(songs) }
-                      .then { |songs_list| Success(Response::ApiResult.new(status: :created, message: songs_list)) }
+                      .then { |songs_list| Success(Response::ApiResult.new(status: :ok, message: songs_list)) }
       rescue StandardError => error
-        Failure(Response::ApiResult.new(status: :internal_error, message: error.to_s))
+        Failure(Response::ApiResult.new(status: error.http_status, message: error.message))
       end
 
       # fetch songs from Spotify API
       class SongProvider
-        # custom error for fetch failure
-        class FetchError < StandardError; end
+        # custom error base class
+        class BaseError < StandardError
+          attr_reader :http_status
+
+          def initialize(message:, http_status: :internal_error)
+            @http_status = http_status
+            super(message)
+          end
+        end
+
+        class FetchError < BaseError; end
+        class EmptyError < BaseError; end
+
+        SPOTIFY_API_ERROR = 'Failed to load songs.'
+        EMPTY_SONG_RESULT = 'No results for' # concatenated with query later
 
         def initialize(mapper)
           @mapper = mapper
@@ -57,27 +67,33 @@ module LingoBeats
             else
               fetch_search_results(input)
             end
+
           validate_songs(songs, input)
         rescue FetchError
-          raise SPOTIFY_API_ERROR
+          raise FetchError.new(message: SPOTIFY_API_ERROR)
         end
 
         def fetch_trends
           @mapper.search_popular_songs
-        rescue StandardError
-          raise FetchError
+        rescue StandardError => error
+          raise FetchError.new(message: error.message)
         end
 
         def fetch_search_results(input)
           @mapper.public_send("search_songs_by_#{input[:category]}", input[:query])
-        rescue StandardError
-          raise FetchError
+        rescue StandardError => error
+          raise FetchError.new(message: error.message)
         end
 
         private
 
         def validate_songs(songs, input)
-          raise "#{EMPTY_SONG_RESULT} \"#{input[:query]}\"" if songs.empty?
+          if songs.empty?
+            raise EmptyError.new(
+              message: "#{EMPTY_SONG_RESULT} \"#{input[:query]}\"",
+              http_status: :not_found
+            )
+          end
 
           songs
         end

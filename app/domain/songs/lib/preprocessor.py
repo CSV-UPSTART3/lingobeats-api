@@ -34,8 +34,22 @@ def normalize_leading_apostrophe(word):
     # 否則處理像 ’neath → beneath 這類通用情形
     return re.sub(r"^[’']([a-z]+)$", r"\1", word)
 
-def normalize_apostrophe_endings(word):
-    return re.sub(r"([a-zA-Z]+)in'$", r"\1ing", word)
+# 正規化結尾撇號
+def normalize_apostrophe_endings(word: str) -> str:
+    # ...in' → ...ing
+    new_word = re.sub(r"([a-zA-Z]+)in'$", r"\1ing", word)
+    if new_word != word:
+        return new_word
+
+    # ...n' → ...ing (special case for words like gon')
+    m = re.match(r"([a-zA-Z]{2,})n'$", word)
+    if m:
+        root = m.group(1)[:-1]   # remove the 'n'
+        if len(root) >= 2:       # avoid weird words like on' → oing
+            return root + "ing"
+
+    # others remain the same
+    return word
 
 # 避免非英文字母之特殊字
 def normalize_basic_ascii(token: str) -> str:
@@ -90,6 +104,21 @@ def filter_name_like_tokens(words, nlp):
     # 把標記成人名 / 專有名詞的詞排除掉
     return [w for w in words if w.lower() not in name_like]
 
+def lemmatize_with_spacy(words, nlp):
+    if not words:
+        return []
+
+    doc = nlp(" ".join(words))
+    lemmas = []
+    for token in doc:
+        lemma = token.lemma_.lower()
+        if lemma in STOP_WORDS:
+            continue
+        if not looks_like_word(lemma):
+            continue
+        lemmas.append(lemma)
+    return lemmas
+
 def preprocess(words):
     # 確保 spaCy 模型已安裝
     local_model_path = Path(__file__).parent / "en_core_web_sm" / "en_core_web_sm-3.8.0"
@@ -121,11 +150,9 @@ def preprocess(words):
                 continue
             
             cleaned.append(sub_lower)
-            # Lemmatize
-            # lemma = nlp(sub)[0].lemma_
-            # if lemma.lower() not in STOP_WORDS:
-            #     cleaned.append(lemma.lower())
+            
     cleaned = filter_name_like_tokens(cleaned, nlp)
+    cleaned = lemmatize_with_spacy(cleaned, nlp) # Lemmatize
     return cleaned
 
 if __name__ == "__main__":

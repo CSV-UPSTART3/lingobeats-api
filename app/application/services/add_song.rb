@@ -19,7 +19,8 @@ module LingoBeats
         status, song = SongFinder.new(@repo).call(input[:song_id])
 
         Success(Response::ApiResult.new(status:, message: song))
-      rescue StandardError
+      rescue StandardError => error
+        App.logger.error("[AddSong] #{error.full_message}")
         Failure(Response::ApiResult.new(status: :internal_error, message: DB_ERROR))
       end
 
@@ -41,10 +42,9 @@ module LingoBeats
         end
 
         def find_song(id)
-          @repo.find_id(id)
+          @repo.find_by_id(id)
         rescue StandardError
-          App.logger.error("[SongFinder] #{DB_FIND_SONG_ERROR}")
-          raise
+          raise "[AddSong] #{DB_FIND_SONG_ERROR}"
         end
 
         private
@@ -52,8 +52,7 @@ module LingoBeats
         def create_song(id)
           @repo.ensure_song_exists(id)
         rescue StandardError
-          App.logger.error("[SongFinder] #{DB_STORE_SONG_ERROR}")
-          raise
+          raise "[AddSong] #{DB_STORE_SONG_ERROR}"
         end
       end
     end

@@ -3,7 +3,6 @@
 require_relative 'singers'
 require_relative 'lyrics'
 require_relative '../../spotify/mappers/song_mapper' # for SongMapper
-# require_relative '../genius/mappers/lyric_mapper'       # (可能之後用)
 
 module LingoBeats
   module Repository
@@ -28,13 +27,8 @@ module LingoBeats
         db_records.map { |record| rebuild_entity(record) }
       end
 
-      def self.find_id(id)
+      def self.find_by_id(id)
         db_record = Database::SongOrm.first(id: id)
-        rebuild_entity(db_record)
-      end
-
-      def self.find_name(name)
-        db_record = Database::SongOrm.first(name: name)
         rebuild_entity(db_record)
       end
 
@@ -45,15 +39,15 @@ module LingoBeats
       end
 
       def self.create(entity)
-        raise 'Song already exists' if find_id(entity.id)
+        raise 'Song already exists' if find_by_id(entity.id)
 
-        # return find_id(entity.id) if find_id(entity.id)
+        # return find_by_id(entity.id) if find_by_id(entity.id)
         db_song = PersistSong.new(entity).call
         rebuild_entity(db_song)
       end
 
       def self.ensure_song_exists(song_id)
-        find_id(song_id) || begin
+        find_by_id(song_id) || begin
           mapper = build_spotify_mapper
           song_info = mapper.fetch_song_info_by_id(song_id)
           create(song_info) if song_info
@@ -84,7 +78,7 @@ module LingoBeats
 
       # return lyric value object if exists
       def self.find_lyric_in_database(song_id:)
-        find_id(song_id)&.lyric
+        find_by_id(song_id)&.lyric
       end
 
       # fetch lyric from Genius API
@@ -99,7 +93,7 @@ module LingoBeats
         lyric_repo.attach_to_song(song_id, lyric_vo)
         find_lyric_in_database(song_id: song_id)
       rescue StandardError => error
-        App.logger.error("Failed to store lyric to database: #{error.message}")
+        App.logger.error("Failed to store lyric to database: #{error.full_message}")
         raise 'Error in connecting to database.'
       end
 
