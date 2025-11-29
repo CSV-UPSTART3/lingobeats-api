@@ -1,22 +1,8 @@
-name: API continuous integration
-
-on:
-  push:
-    branches:
-      - main
-      - test-ci
-      - 'feature/**'
-  pull_request:
-    branches:
-      - '*'
-  workflow_dispatch:
-
 jobs:
   api_test:
     runs-on: ubuntu-latest
-  
     env:
-        BUNDLE_WITHOUT: production
+      BUNDLE_WITHOUT: production
 
     steps:
       - name: Checkout code
@@ -26,6 +12,26 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+
+      - name: Create config/secrets.yml for test
+        run: |
+          mkdir -p config
+          cat > config/secrets.yml << EOF
+          test:
+            DB_FILENAME: ${DB_FILENAME}
+            SPOTIFY_CLIENT_ID: ${SPOTIFY_CLIENT_ID}
+            SPOTIFY_CLIENT_SECRET: ${SPOTIFY_CLIENT_SECRET}
+            GENIUS_CLIENT_ACCESS_TOKEN: ${GENIUS_CLIENT_ACCESS_TOKEN}
+            GEMINI_API_KEY: ${GEMINI_API_KEY}
+            SESSION_SECRET: ${SESSION_SECRET}
+          EOF
+        env:
+          DB_FILENAME: ${{ secrets.DB_FILENAME }}
+          SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
+          SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
+          GENIUS_CLIENT_ACCESS_TOKEN: ${{ secrets.GENIUS_CLIENT_ACCESS_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
 
       - name: Setup test database
         env:
