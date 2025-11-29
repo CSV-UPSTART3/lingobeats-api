@@ -7169,4 +7169,117 @@ http_interactions:
         It","title_with_featured":"Survive It (Ft. Fabiana Palladino)","url":"https://genius.com/Ghostpoet-survive-it-lyrics","featured_artists":[{"api_path":"/artists/15667","header_image_url":"https://images.genius.com/4411540ab1414b8a57746550019d48d1.1000x656x1.jpg","id":15667,"image_url":"https://images.genius.com/52ca6eae5cf28d622c9577c215ebdfde.696x696x1.jpg","is_meme_verified":false,"is_verified":false,"name":"Fabiana
         Palladino","url":"https://genius.com/artists/Fabiana-palladino"}],"primary_artist":{"api_path":"/artists/2320","header_image_url":"https://images.genius.com/8761b0e258de1b29fb5050c217598460.1000x705x1.jpg","id":2320,"image_url":"https://images.genius.com/733275cf2f781124703f79c01b64dc6e.1000x1000x1.jpg","is_meme_verified":false,"is_verified":false,"name":"Ghostpoet","url":"https://genius.com/artists/Ghostpoet"},"primary_artists":[{"api_path":"/artists/2320","header_image_url":"https://images.genius.com/8761b0e258de1b29fb5050c217598460.1000x705x1.jpg","id":2320,"image_url":"https://images.genius.com/733275cf2f781124703f79c01b64dc6e.1000x1000x1.jpg","is_meme_verified":false,"is_verified":false,"name":"Ghostpoet","url":"https://genius.com/artists/Ghostpoet"}]}}]}}'
   recorded_at: Sat, 29 Nov 2025 11:35:49 GMT
+- request:
+    method: get
+    uri: https://api.genius.com/search?q=Golden%20Jill%20Scott
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <SPOTIFY_ACCESS_TOKEN>
+      User-Agent:
+      - Mozilla/5.0 (compatible; LingoBeats/1.0; +https://github.com/CSV-UPSTART3)
+      Connection:
+      - close
+      Host:
+      - api.genius.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 29 Nov 2025 11:59:12 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - close
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 9a61effead393303-TPE
+      Cf-Cache-Status:
+      - DYNAMIC
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - public, s-maxage=300
+      Etag:
+      - W/"64995288a7f92e1b0b8afd08c8100079"
+      Via:
+      - 1.1 heroku-router
+      Access-Control-Allow-Headers:
+      - Origin, Access-Control-Request-Method, Access-Control-Request-Headers, Content-Type,
+        Accept, X-Auth-Token, Authorization
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, OPTIONS, DELETE
+      Nel:
+      - '{"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}'
+      Report-To:
+      - '{"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=ktk6VVjwmYjK28jJFeK%2FPbN9EAnSLkTn2xzbKw4zV5g%3D\u0026sid=929419e7-33ea-4e2f-85f0-7d8b7cd5cbd6\u0026ts=1764417551"}],"max_age":3600}'
+      Reporting-Endpoints:
+      - heroku-nel="https://nel.heroku.com/reports?s=ktk6VVjwmYjK28jJFeK%2FPbN9EAnSLkTn2xzbKw4zV5g%3D&sid=929419e7-33ea-4e2f-85f0-7d8b7cd5cbd6&ts=1764417551"
+      X-Request-Id:
+      - 4e75397f-d06e-bc7f-9723-284507e9d185
+      X-Runtime:
+      - '0.298745'
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - _cfuvid=H9EeSzWvZq6IVer0lnWK8qINZEA8WLMLQmmCY.EvUhY-1764417552373-0.0.1.1-604800000;
+        path=/; domain=.genius.com; HttpOnly; Secure; SameSite=None
+    body:
+      encoding: UTF-8
+      string: '{"meta":{"status":200},"response":{"hits":[{"highlights":[],"index":"song","type":"song","result":{"annotation_count":2,"api_path":"/songs/604509","artist_names":"Jill
+        Scott","full_title":"Golden by Jill Scott","header_image_thumbnail_url":"https://images.genius.com/a6a0bf87417f34555a11f3588c915a99.300x300x1.jpg","header_image_url":"https://images.genius.com/a6a0bf87417f34555a11f3588c915a99.1000x1000x1.jpg","id":604509,"lyrics_owner_id":1168310,"lyrics_state":"complete","path":"/Jill-scott-golden-lyrics","primary_artist_names":"Jill
+        Scott","pyongs_count":4,"relationships_index_url":"https://genius.com/Jill-scott-golden-sample","release_date_components":{"year":2004,"month":6,"day":15},"release_date_for_display":"June
+        15, 2004","release_date_with_abbreviated_month_for_display":"Jun. 15, 2004","song_art_image_thumbnail_url":"https://images.genius.com/a6a0bf87417f34555a11f3588c915a99.300x300x1.jpg","song_art_image_url":"https://images.genius.com/a6a0bf87417f34555a11f3588c915a99.1000x1000x1.jpg","stats":{"unreviewed_annotations":2,"concurrents":2,"hot":false,"pageviews":64188},"title":"Golden","title_with_featured":"Golden","url":"https://genius.com/Jill-scott-golden-lyrics","featured_artists":[],"primary_artist":{"api_path":"/artists/1731","header_image_url":"https://images.genius.com/a35cee11d0c57ca4318101531a2e1b81.300x199x1.jpg","id":1731,"image_url":"https://s3.amazonaws.com/rapgenius/JILL-SCOTT.jpg","is_meme_verified":false,"is_verified":false,"name":"Jill
+        Scott","url":"https://genius.com/artists/Jill-scott"},"primary_artists":[{"api_path":"/artists/1731","header_image_url":"https://images.genius.com/a35cee11d0c57ca4318101531a2e1b81.300x199x1.jpg","id":1731,"image_url":"https://s3.amazonaws.com/rapgenius/JILL-SCOTT.jpg","is_meme_verified":false,"is_verified":false,"name":"Jill
+        Scott","url":"https://genius.com/artists/Jill-scott"}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":1,"api_path":"/songs/54649","artist_names":"Domo
+        Genesis (Ft. Tyler, The Creator)","full_title":"Heart of Gold by Domo Genesis
+        (Ft. Tyler, The Creator)","header_image_thumbnail_url":"https://images.genius.com/0d17861e296ecb5ed2192d91a0520e5c.300x300x1.jpg","header_image_url":"https://images.genius.com/0d17861e296ecb5ed2192d91a0520e5c.1000x1000x1.jpg","id":54649,"lyrics_owner_id":47097,"lyrics_state":"complete","path":"/Domo-genesis-heart-of-gold-lyrics","primary_artist_names":"Domo
+        Genesis","pyongs_count":1,"relationships_index_url":"https://genius.com/Domo-genesis-heart-of-gold-sample","release_date_components":{"year":2011,"month":9,"day":20},"release_date_for_display":"September
+        20, 2011","release_date_with_abbreviated_month_for_display":"Sep. 20, 2011","song_art_image_thumbnail_url":"https://images.genius.com/0d17861e296ecb5ed2192d91a0520e5c.300x300x1.jpg","song_art_image_url":"https://images.genius.com/0d17861e296ecb5ed2192d91a0520e5c.1000x1000x1.jpg","stats":{"unreviewed_annotations":0,"hot":false,"pageviews":11220},"title":"Heart
+        of Gold","title_with_featured":"Heart of Gold (Ft. Tyler, The Creator)","url":"https://genius.com/Domo-genesis-heart-of-gold-lyrics","featured_artists":[{"api_path":"/artists/685","header_image_url":"https://images.genius.com/7f695420a69e62cb875156810936f4fc.686x386x1.jpg","id":685,"image_url":"https://images.genius.com/24d14175e453cfc5d917d5516e60609a.1000x1000x1.png","is_meme_verified":false,"is_verified":true,"name":"Tyler,
+        The Creator","url":"https://genius.com/artists/Tyler-the-creator","iq":452}],"primary_artist":{"api_path":"/artists/1190","header_image_url":"https://images.genius.com/abbcdb96d9e110441b52433fc685e43a.420x420x1.jpg","id":1190,"image_url":"https://images.genius.com/abbcdb96d9e110441b52433fc685e43a.420x420x1.jpg","is_meme_verified":false,"is_verified":true,"name":"Domo
+        Genesis","url":"https://genius.com/artists/Domo-genesis","iq":832},"primary_artists":[{"api_path":"/artists/1190","header_image_url":"https://images.genius.com/abbcdb96d9e110441b52433fc685e43a.420x420x1.jpg","id":1190,"image_url":"https://images.genius.com/abbcdb96d9e110441b52433fc685e43a.420x420x1.jpg","is_meme_verified":false,"is_verified":true,"name":"Domo
+        Genesis","url":"https://genius.com/artists/Domo-genesis","iq":832}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":25,"api_path":"/songs/131727","artist_names":"Sterling
+        Duns (Ft. Rick Banks, SDeez & Young Leo DaVinci)","full_title":"Flex On ''Em
+        by Sterling Duns (Ft. Rick Banks, SDeez & Young Leo DaVinci)","header_image_thumbnail_url":"https://assets.genius.com/images/default_cover_image.png?1764012224","header_image_url":"https://assets.genius.com/images/default_cover_image.png?1764012224","id":131727,"lyrics_owner_id":200066,"lyrics_state":"complete","path":"/Sterling-duns-flex-on-em-lyrics","primary_artist_names":"Sterling
+        Duns","pyongs_count":null,"relationships_index_url":"https://genius.com/Sterling-duns-flex-on-em-sample","release_date_components":null,"release_date_for_display":null,"release_date_with_abbreviated_month_for_display":null,"song_art_image_thumbnail_url":"https://assets.genius.com/images/default_cover_image.png?1764012224","song_art_image_url":"https://assets.genius.com/images/default_cover_image.png?1764012224","stats":{"unreviewed_annotations":25,"hot":false},"title":"Flex
+        On ’Em","title_with_featured":"Flex On ''Em (Ft. Rick Banks, SDeez & Young Leo
+        DaVinci)","url":"https://genius.com/Sterling-duns-flex-on-em-lyrics","featured_artists":[{"api_path":"/artists/42632","header_image_url":"https://assets.genius.com/images/default_avatar_300.png?1764012224","id":42632,"image_url":"https://assets.genius.com/images/default_avatar_300.png?1764012224","is_meme_verified":false,"is_verified":false,"name":"Young
+        Leo DaVinci","url":"https://genius.com/artists/Young-leo-davinci"},{"api_path":"/artists/42633","header_image_url":"https://assets.genius.com/images/default_avatar_300.png?1764012224","id":42633,"image_url":"https://assets.genius.com/images/default_avatar_300.png?1764012224","is_meme_verified":false,"is_verified":false,"name":"SDeez","url":"https://genius.com/artists/Sdeez"},{"api_path":"/artists/42631","header_image_url":"https://assets.genius.com/images/default_avatar_300.png?1764012224","id":42631,"image_url":"https://assets.genius.com/images/default_avatar_300.png?1764012224","is_meme_verified":false,"is_verified":false,"name":"Rick
+        Banks","url":"https://genius.com/artists/Rick-banks"}],"primary_artist":{"api_path":"/artists/42634","header_image_url":"https://assets.genius.com/images/default_avatar_300.png?1764012224","id":42634,"image_url":"https://assets.genius.com/images/default_avatar_300.png?1764012224","is_meme_verified":false,"is_verified":false,"name":"Sterling
+        Duns","url":"https://genius.com/artists/Sterling-duns"},"primary_artists":[{"api_path":"/artists/42634","header_image_url":"https://assets.genius.com/images/default_avatar_300.png?1764012224","id":42634,"image_url":"https://assets.genius.com/images/default_avatar_300.png?1764012224","is_meme_verified":false,"is_verified":false,"name":"Sterling
+        Duns","url":"https://genius.com/artists/Sterling-duns"}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":0,"api_path":"/songs/5742037","artist_names":"Chaseon","full_title":"Ego
+        Talking by Chaseon","header_image_thumbnail_url":"https://images.genius.com/5f29354c57b76c24fc234d600e2bb87f.300x300x1.jpg","header_image_url":"https://images.genius.com/5f29354c57b76c24fc234d600e2bb87f.1000x1000x1.jpg","id":5742037,"lyrics_owner_id":1731081,"lyrics_state":"complete","path":"/Chaseon-ego-talking-lyrics","primary_artist_names":"Chaseon","pyongs_count":null,"relationships_index_url":"https://genius.com/Chaseon-ego-talking-sample","release_date_components":{"year":2020,"month":6,"day":28},"release_date_for_display":"June
+        28, 2020","release_date_with_abbreviated_month_for_display":"Jun. 28, 2020","song_art_image_thumbnail_url":"https://images.genius.com/5f29354c57b76c24fc234d600e2bb87f.300x300x1.jpg","song_art_image_url":"https://images.genius.com/5f29354c57b76c24fc234d600e2bb87f.1000x1000x1.jpg","stats":{"unreviewed_annotations":0,"hot":false},"title":"Ego
+        Talking","title_with_featured":"Ego Talking","url":"https://genius.com/Chaseon-ego-talking-lyrics","featured_artists":[],"primary_artist":{"api_path":"/artists/400759","header_image_url":"https://assets.genius.com/images/default_avatar_300.png?1764012224","id":400759,"image_url":"https://assets.genius.com/images/default_avatar_300.png?1764012224","is_meme_verified":false,"is_verified":false,"name":"Chaseon","url":"https://genius.com/artists/Chaseon"},"primary_artists":[{"api_path":"/artists/400759","header_image_url":"https://assets.genius.com/images/default_avatar_300.png?1764012224","id":400759,"image_url":"https://assets.genius.com/images/default_avatar_300.png?1764012224","is_meme_verified":false,"is_verified":false,"name":"Chaseon","url":"https://genius.com/artists/Chaseon"}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":0,"api_path":"/songs/3038458","artist_names":"Elgus
+        (Ft. RaneRaps)","full_title":"Stumbled On You (ft.RaneRaps) by Elgus (Ft. RaneRaps)","header_image_thumbnail_url":"https://assets.genius.com/images/default_cover_image.png?1764012224","header_image_url":"https://assets.genius.com/images/default_cover_image.png?1764012224","id":3038458,"lyrics_owner_id":281774,"lyrics_state":"complete","path":"/Elgus-stumbled-on-you-ftraneraps-lyrics","primary_artist_names":"Elgus","pyongs_count":null,"relationships_index_url":"https://genius.com/Elgus-stumbled-on-you-ftraneraps-sample","release_date_components":null,"release_date_for_display":null,"release_date_with_abbreviated_month_for_display":null,"song_art_image_thumbnail_url":"https://assets.genius.com/images/default_cover_image.png?1764012224","song_art_image_url":"https://assets.genius.com/images/default_cover_image.png?1764012224","stats":{"unreviewed_annotations":0,"hot":false},"title":"Stumbled
+        On You (ft.RaneRaps)","title_with_featured":"Stumbled On You (ft.RaneRaps)
+        (Ft. RaneRaps)","url":"https://genius.com/Elgus-stumbled-on-you-ftraneraps-lyrics","featured_artists":[{"api_path":"/artists/154896","header_image_url":"https://images.genius.com/2fb7dd1828229080e498947bf9c0ba6e.1000x1000x1.jpg","id":154896,"image_url":"https://images.genius.com/dc0dfcf132e2c95390f7fc5b34bcc3b7.1000x1000x1.jpg","is_meme_verified":false,"is_verified":false,"name":"RaneRaps","url":"https://genius.com/artists/Raneraps","iq":1332}],"primary_artist":{"api_path":"/artists/1109989","header_image_url":"https://assets.genius.com/images/default_avatar_300.png?1764012224","id":1109989,"image_url":"https://assets.genius.com/images/default_avatar_300.png?1764012224","is_meme_verified":false,"is_verified":false,"name":"Elgus","url":"https://genius.com/artists/Elgus"},"primary_artists":[{"api_path":"/artists/1109989","header_image_url":"https://assets.genius.com/images/default_avatar_300.png?1764012224","id":1109989,"image_url":"https://assets.genius.com/images/default_avatar_300.png?1764012224","is_meme_verified":false,"is_verified":false,"name":"Elgus","url":"https://genius.com/artists/Elgus"}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":0,"api_path":"/songs/12622834","artist_names":"Teko
+        Lewis","full_title":"Come Back (Drip) by Teko Lewis","header_image_thumbnail_url":"https://images.genius.com/21efd961f10badb3c5815561b27c0a43.300x300x1.webp","header_image_url":"https://images.genius.com/21efd961f10badb3c5815561b27c0a43.632x632x1.webp","id":12622834,"lyrics_owner_id":132464,"lyrics_state":"complete","path":"/Teko-lewis-come-back-drip-lyrics","primary_artist_names":"Teko
+        Lewis","pyongs_count":null,"relationships_index_url":"https://genius.com/Teko-lewis-come-back-drip-sample","release_date_components":{"year":2025,"month":10,"day":15},"release_date_for_display":"October
+        15, 2025","release_date_with_abbreviated_month_for_display":"Oct. 15, 2025","song_art_image_thumbnail_url":"https://images.genius.com/21efd961f10badb3c5815561b27c0a43.300x300x1.webp","song_art_image_url":"https://images.genius.com/21efd961f10badb3c5815561b27c0a43.632x632x1.webp","stats":{"unreviewed_annotations":0,"hot":false},"title":"Come
+        Back (Drip)","title_with_featured":"Come Back (Drip)","url":"https://genius.com/Teko-lewis-come-back-drip-lyrics","featured_artists":[],"primary_artist":{"api_path":"/artists/4648081","header_image_url":"https://assets.genius.com/images/default_avatar_300.png?1764012224","id":4648081,"image_url":"https://assets.genius.com/images/default_avatar_300.png?1764012224","is_meme_verified":false,"is_verified":false,"name":"Teko
+        Lewis","url":"https://genius.com/artists/Teko-lewis"},"primary_artists":[{"api_path":"/artists/4648081","header_image_url":"https://assets.genius.com/images/default_avatar_300.png?1764012224","id":4648081,"image_url":"https://assets.genius.com/images/default_avatar_300.png?1764012224","is_meme_verified":false,"is_verified":false,"name":"Teko
+        Lewis","url":"https://genius.com/artists/Teko-lewis"}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":7,"api_path":"/songs/1929764","artist_names":"Jill
+        Scott","full_title":"Fool''s Gold by Jill Scott","header_image_thumbnail_url":"https://images.rapgenius.com/2378ef6f56f5ec370235cf2c8179ce65.280x280x1.jpg","header_image_url":"https://images.rapgenius.com/2378ef6f56f5ec370235cf2c8179ce65.280x280x1.jpg","id":1929764,"lyrics_owner_id":66559,"lyrics_state":"complete","path":"/Jill-scott-fools-gold-lyrics","primary_artist_names":"Jill
+        Scott","pyongs_count":11,"relationships_index_url":"https://genius.com/Jill-scott-fools-gold-sample","release_date_components":{"year":2015,"month":5,"day":4},"release_date_for_display":"May
+        4, 2015","release_date_with_abbreviated_month_for_display":"May 4, 2015","song_art_image_thumbnail_url":"https://images.rapgenius.com/2378ef6f56f5ec370235cf2c8179ce65.280x280x1.jpg","song_art_image_url":"https://images.rapgenius.com/2378ef6f56f5ec370235cf2c8179ce65.280x280x1.jpg","stats":{"unreviewed_annotations":2,"hot":false,"pageviews":22726},"title":"Fool’s
+        Gold","title_with_featured":"Fool''s Gold","url":"https://genius.com/Jill-scott-fools-gold-lyrics","featured_artists":[],"primary_artist":{"api_path":"/artists/1731","header_image_url":"https://images.genius.com/a35cee11d0c57ca4318101531a2e1b81.300x199x1.jpg","id":1731,"image_url":"https://s3.amazonaws.com/rapgenius/JILL-SCOTT.jpg","is_meme_verified":false,"is_verified":false,"name":"Jill
+        Scott","url":"https://genius.com/artists/Jill-scott"},"primary_artists":[{"api_path":"/artists/1731","header_image_url":"https://images.genius.com/a35cee11d0c57ca4318101531a2e1b81.300x199x1.jpg","id":1731,"image_url":"https://s3.amazonaws.com/rapgenius/JILL-SCOTT.jpg","is_meme_verified":false,"is_verified":false,"name":"Jill
+        Scott","url":"https://genius.com/artists/Jill-scott"}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":1,"api_path":"/songs/862835","artist_names":"Kem
+        (Ft. Jill Scott)","full_title":"Golden Days by Kem (Ft. Jill Scott)","header_image_thumbnail_url":"https://images.genius.com/18c0d50580023d864a1833a042fd1932.300x300x1.png","header_image_url":"https://images.genius.com/18c0d50580023d864a1833a042fd1932.1000x1000x1.png","id":862835,"lyrics_owner_id":7547709,"lyrics_state":"complete","path":"/Kem-golden-days-lyrics","primary_artist_names":"Kem","pyongs_count":null,"relationships_index_url":"https://genius.com/Kem-golden-days-sample","release_date_components":{"year":2010,"month":8,"day":17},"release_date_for_display":"August
+        17, 2010","release_date_with_abbreviated_month_for_display":"Aug. 17, 2010","song_art_image_thumbnail_url":"https://images.genius.com/18c0d50580023d864a1833a042fd1932.300x300x1.png","song_art_image_url":"https://images.genius.com/18c0d50580023d864a1833a042fd1932.1000x1000x1.png","stats":{"unreviewed_annotations":0,"hot":false},"title":"Golden
+        Days","title_with_featured":"Golden Days (Ft. Jill Scott)","url":"https://genius.com/Kem-golden-days-lyrics","featured_artists":[{"api_path":"/artists/1731","header_image_url":"https://images.genius.com/a35cee11d0c57ca4318101531a2e1b81.300x199x1.jpg","id":1731,"image_url":"https://s3.amazonaws.com/rapgenius/JILL-SCOTT.jpg","is_meme_verified":false,"is_verified":false,"name":"Jill
+        Scott","url":"https://genius.com/artists/Jill-scott"}],"primary_artist":{"api_path":"/artists/14629","header_image_url":"https://images.genius.com/35243bea2c8392512092ca586d0add7d.305x225x1.jpg","id":14629,"image_url":"https://images.genius.com/c71b098c5cc1e5b0f805ae2d815e6900.874x874x1.jpg","is_meme_verified":false,"is_verified":false,"name":"Kem","url":"https://genius.com/artists/Kem"},"primary_artists":[{"api_path":"/artists/14629","header_image_url":"https://images.genius.com/35243bea2c8392512092ca586d0add7d.305x225x1.jpg","id":14629,"image_url":"https://images.genius.com/c71b098c5cc1e5b0f805ae2d815e6900.874x874x1.jpg","is_meme_verified":false,"is_verified":false,"name":"Kem","url":"https://genius.com/artists/Kem"}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":25,"api_path":"/songs/61274","artist_names":"Ghostpoet
+        (Ft. Fabiana Palladino)","full_title":"Survive It by Ghostpoet (Ft. Fabiana Palladino)","header_image_thumbnail_url":"https://images.genius.com/6162b40218e5ff64c477ace90e294198.300x300x1.jpg","header_image_url":"https://images.genius.com/6162b40218e5ff64c477ace90e294198.1000x1000x1.jpg","id":61274,"lyrics_owner_id":28903,"lyrics_state":"complete","path":"/Ghostpoet-survive-it-lyrics","primary_artist_names":"Ghostpoet","pyongs_count":3,"relationships_index_url":"https://genius.com/Ghostpoet-survive-it-sample","release_date_components":null,"release_date_for_display":null,"release_date_with_abbreviated_month_for_display":null,"song_art_image_thumbnail_url":"https://images.genius.com/6162b40218e5ff64c477ace90e294198.300x300x1.jpg","song_art_image_url":"https://images.genius.com/6162b40218e5ff64c477ace90e294198.1000x1000x1.jpg","stats":{"unreviewed_annotations":0,"hot":false,"pageviews":16636},"title":"Survive
+        It","title_with_featured":"Survive It (Ft. Fabiana Palladino)","url":"https://genius.com/Ghostpoet-survive-it-lyrics","featured_artists":[{"api_path":"/artists/15667","header_image_url":"https://images.genius.com/4411540ab1414b8a57746550019d48d1.1000x656x1.jpg","id":15667,"image_url":"https://images.genius.com/52ca6eae5cf28d622c9577c215ebdfde.696x696x1.jpg","is_meme_verified":false,"is_verified":false,"name":"Fabiana
+        Palladino","url":"https://genius.com/artists/Fabiana-palladino"}],"primary_artist":{"api_path":"/artists/2320","header_image_url":"https://images.genius.com/8761b0e258de1b29fb5050c217598460.1000x705x1.jpg","id":2320,"image_url":"https://images.genius.com/733275cf2f781124703f79c01b64dc6e.1000x1000x1.jpg","is_meme_verified":false,"is_verified":false,"name":"Ghostpoet","url":"https://genius.com/artists/Ghostpoet"},"primary_artists":[{"api_path":"/artists/2320","header_image_url":"https://images.genius.com/8761b0e258de1b29fb5050c217598460.1000x705x1.jpg","id":2320,"image_url":"https://images.genius.com/733275cf2f781124703f79c01b64dc6e.1000x1000x1.jpg","is_meme_verified":false,"is_verified":false,"name":"Ghostpoet","url":"https://genius.com/artists/Ghostpoet"}]}}]}}'
+  recorded_at: Sat, 29 Nov 2025 11:59:12 GMT
 recorded_with: VCR 6.3.1
