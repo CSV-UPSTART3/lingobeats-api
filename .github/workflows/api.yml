@@ -1,3 +1,16 @@
+name: API continuous integration
+
+on:
+  push:
+    branches:
+      - main
+      - test-ci
+      - 'feature/**'
+  pull_request:
+    branches:
+      - '**'
+  workflow_dispatch:
+
 jobs:
   # 這個 workflow 裡唯一一個 job，叫 api_test
   api_test:
@@ -72,3 +85,4 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
         run: bundle exec rake spec
+
