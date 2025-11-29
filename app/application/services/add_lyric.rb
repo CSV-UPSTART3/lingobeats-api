@@ -23,6 +23,7 @@ module LingoBeats
       LYRIC_EMPTY = 'Went wrong in fetching lyrics'
       LYRIC_NOT_RECOMMENDED = 'This song is not recommended for English learners.'
       DB_ERROR = 'Having trouble accessing the database'
+      #DB_ERROR = 'ADD_LYRIC_DB_ERROR'
 
       private
 
@@ -70,7 +71,8 @@ module LingoBeats
         result = Service::AddVocabularies.new.call(input[:song])
         return Failure(result.failure) if result.failure?
 
-        Success(Response::ApiResult.new(status: :created, message: input[:lyric]))
+        # if success, return 200 with lyric text
+        Success(Response::ApiResult.new(status: :ok, message: input[:lyric]))
       end
 
       # support methods
@@ -96,8 +98,9 @@ module LingoBeats
         validate_lyric(lyric)
       rescue FetchError => error
         raise error
-      rescue StandardError
-        raise FetchError.new(message: GENIUS_API_ERROR, http_status: :internal_error)
+      rescue StandardError => e
+        App.logger.error("[AddLyric] Unexpected error when fetching lyric: #{e.full_message}")
+        Failure(Response::ApiResult.new(status: :internal_error, message: GENIUS_API_ERROR))
       end
 
       def validate_lyric(lyric)

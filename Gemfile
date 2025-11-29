@@ -68,6 +68,7 @@ group :test do
   gem 'page-object', '~> 2.0'
   gem 'selenium-webdriver', '~> 4.11'
   gem 'watir', '~> 7.0'
+  gem 'rack-test'
 end
 
 # Development

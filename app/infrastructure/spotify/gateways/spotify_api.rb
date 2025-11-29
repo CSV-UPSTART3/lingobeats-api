@@ -17,6 +17,7 @@ module LingoBeats
       end
 
       def initialize(client_id, client_secret)
+        #puts "[Spotify::Api] initialize from #{__FILE__} object_id=#{object_id}"
         credential = Credentials.new(client_id, client_secret)
         @token_manager = SpotifyTokenManager.instance_for(credential)
         @http_request = HttpHelper::Request.new('Authorization' => "Bearer #{@token_manager.access_token}")
@@ -36,6 +37,7 @@ module LingoBeats
 
       # get song details by id
       def song_info(song_id:)
+        #puts "[Spotify::Api] song_info(#{song_id}) auth=#{@http_request.headers['Authorization'].inspect}"
         @http_request.get(spotify_track_url(song_id))
       end
 
