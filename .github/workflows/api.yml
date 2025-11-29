@@ -1,19 +1,13 @@
-name: API continuous integration
-
-on:
-  push:
-    branches:
-      - main
-      - test-ci
-      - 'feature/**'
-  pull_request:
-    branches:
-      - '**'
-  workflow_dispatch:
-
 jobs:
+  # 這個 workflow 裡唯一一個 job，叫 api_test
   api_test:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu, macos]
+
+    runs-on: ${{ matrix.os }}-latest   # 會跑 ubuntu-latest 跟 macos-latest 各一次
+
     env:
       BUNDLE_WITHOUT: production
 
@@ -47,22 +41,22 @@ jobs:
           SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
         run: |
           mkdir -p config
-          cat <<EOF > config/secrets.yml
-          development:
-            SPOTIFY_CLIENT_ID: "${SPOTIFY_CLIENT_ID}"
-            SPOTIFY_CLIENT_SECRET: "${SPOTIFY_CLIENT_SECRET}"
-            GENIUS_CLIENT_ACCESS_TOKEN: "${GENIUS_CLIENT_ACCESS_TOKEN}"
-            GEMINI_API_KEY: "${GEMINI_API_KEY}"
-            SESSION_SECRET: "${SESSION_SECRET}"
-
-          test:
-            DB_FILENAME: "${DB_FILENAME}"
-            SPOTIFY_CLIENT_ID: "${SPOTIFY_CLIENT_ID}"
-            SPOTIFY_CLIENT_SECRET: "${SPOTIFY_CLIENT_SECRET}"
-            GENIUS_CLIENT_ACCESS_TOKEN: "${GENIUS_CLIENT_ACCESS_TOKEN}"
-            GEMINI_API_KEY: "${GEMINI_API_KEY}"
-            SESSION_SECRET: "${SESSION_SECRET}"
-          EOF
+          printf '%s\n' \
+            "development:" \
+            "  SPOTIFY_CLIENT_ID: \"${SPOTIFY_CLIENT_ID}\"" \
+            "  SPOTIFY_CLIENT_SECRET: \"${SPOTIFY_CLIENT_SECRET}\"" \
+            "  GENIUS_CLIENT_ACCESS_TOKEN: \"${GENIUS_CLIENT_ACCESS_TOKEN}\"" \
+            "  GEMINI_API_KEY: \"${GEMINI_API_KEY}\"" \
+            "  SESSION_SECRET: \"${SESSION_SECRET}\"" \
+            "" \
+            "test:" \
+            "  DB_FILENAME: \"${DB_FILENAME}\"" \
+            "  SPOTIFY_CLIENT_ID: \"${SPOTIFY_CLIENT_ID}\"" \
+            "  SPOTIFY_CLIENT_SECRET: \"${SPOTIFY_CLIENT_SECRET}\"" \
+            "  GENIUS_CLIENT_ACCESS_TOKEN: \"${GENIUS_CLIENT_ACCESS_TOKEN}\"" \
+            "  GEMINI_API_KEY: \"${GEMINI_API_KEY}\"" \
+            "  SESSION_SECRET: \"${SESSION_SECRET}\"" \
+            > config/secrets.yml
 
       - name: Setup test database
         env:
