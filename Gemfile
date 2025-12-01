@@ -21,8 +21,11 @@ gem 'base64'
 gem 'logger', '~> 1.0'
 gem 'puma', '~> 7.0'
 gem 'rack', '~> 3.2'
+gem 'rack-cache', '~> 1.13'
 gem 'rack-cors'
 gem 'rack-session', '~> 0'
+gem 'redis'
+gem 'redis-rack-cache'
 gem 'roda', '~> 3.0'
 
 # Controllers and services

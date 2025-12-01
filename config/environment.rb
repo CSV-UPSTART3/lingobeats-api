@@ -2,7 +2,9 @@
 
 require 'figaro'
 require 'logger'
+require 'rack/cache'
 require 'rack/session'
+require 'redis-rack-cache'
 require 'roda'
 require 'sequel'
 
@@ -19,6 +21,23 @@ module LingoBeats
     Figaro.load
     def self.config = Figaro.env
 
+    # Setup Caching mechanism
+    configure :development do
+      use Rack::Cache,
+          verbose: true,
+          metastore: 'file:_cache/rack/meta',
+          entitystore: 'file:_cache/rack/body'
+    end
+
+    # setup Redis for Production Caching
+    configure :production do
+      use Rack::Cache,
+          verbose: true,
+          metastore: config.REDISCLOUD_URL + '/0/metastore',
+          entitystore: config.REDISCLOUD_URL + '/0/entitystore'
+    end
+
+    # Automated HTTP stubbing for testing only
     configure :app_test do
       require_relative '../spec/helpers/vcr_helper'
       VcrHelper.setup_vcr
