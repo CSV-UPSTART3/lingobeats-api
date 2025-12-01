@@ -133,3 +133,51 @@ namespace :db do
     puts "Deleted #{LingoBeats::App.config.DB_FILENAME}"
   end
 end
+
+# cache manipulation
+namespace :cache do
+  task :config do # rubocop:disable Rake/Desc
+    require_relative 'app/infrastructure/cache/local_cache'
+    require_relative 'app/infrastructure/cache/redis_cache'
+    require_relative 'config/environment' # load config info
+    @api = LingoBeats::App
+  end
+
+  desc 'Directory listing of local dev cache'
+  namespace :list do
+    desc 'Lists development cache'
+    task :dev => :config do
+      puts 'Lists development cache'
+      keys = LingoBeats::Cache::Local.new(@api.config).keys
+      puts 'No local cache found' if keys.none?
+      keys.each { |key| puts "Key: #{key}" }
+    end
+
+    desc 'Lists production cache'
+    task :production => :config do
+      puts 'Finding production cache'
+      keys = LingoBeats::Cache::Remote.new(@api.config).keys
+      puts 'No keys found' if keys.none?
+      keys.each { |key| puts "Key: #{key}" }
+    end
+  end
+
+  namespace :wipe do
+    desc 'Delete development cache'
+    task :dev => :config do
+      puts 'Deleting development cache'
+      LingoBeats::Cache::Local.new(@api.config).wipe
+      puts 'Development cache wiped'
+    end
+
+    desc 'Delete production cache'
+    task :production => :config do
+      print 'Are you sure you wish to wipe the production cache? (y/n) '
+      if $stdin.gets.chomp.downcase == 'y'
+        puts 'Deleting production cache'
+        wiped = LingoBeats::Cache::Remote.new(@api.config).wipe
+        wiped.each { |key| puts "Wiped: #{key}" }
+      end
+    end
+  end
+end
