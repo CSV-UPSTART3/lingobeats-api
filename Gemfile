@@ -9,6 +9,7 @@ gem 'figaro', '~> 1.0'
 gem 'pry'
 gem 'pycall'
 gem 'rake'
+gem 'openssl', '~> 3.3.1'
 
 # PRESENTATION LAYER
 gem 'multi_json', '~> 1.15'

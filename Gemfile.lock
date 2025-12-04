@@ -144,6 +144,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.18.10-x86_64-linux-musl)
       racc (~> 1.4)
+    openssl (3.3.2)
     page-object (2.3.1)
       page_navigation (>= 0.10)
       watir (>= 6.10.3)
@@ -304,6 +305,7 @@ DEPENDENCIES
   minitest-rg (~> 5.2)
   multi_json (~> 1.15)
   nokogiri
+  openssl (~> 3.3.1)
   page-object (~> 2.0)
   pg
   pry
