@@ -16,3 +16,4 @@ vendor/*
 .bundle/
 app/domain/songs/lib/__pycache__
 .vscode/
+_cache/

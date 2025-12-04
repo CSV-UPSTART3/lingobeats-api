@@ -14,6 +14,7 @@ module LingoBeats
     plugin :public, root: 'app/presentation/public'
     plugin :halt
     plugin :multi_route
+    plugin :caching
 
     route do |routing|
       routing.public # serve /public files
@@ -22,6 +23,7 @@ module LingoBeats
       # GET /
       routing.root do
         @current_page = :home
+        response.cache_control public: true, max_age: 30
         routing.halt(200, { status: 'ok', message: 'API is working' }.to_json)
       end
 
@@ -37,6 +39,7 @@ module LingoBeats
           # GET /songs?category=...&query=...
           # return popular songs if no params
           routing.get do
+            response.cache_control public: true, max_age: 300
             params = routing.params
             service = Service::ListSongs.new
 
@@ -57,6 +60,7 @@ module LingoBeats
           routing.is do
             # GET /songs/:id
             routing.get do
+              response.cache_control public: true, max_age: 300
               result = Service::AddSong.new.call(song_id:)
 
               RouteHelpers::Response.call(routing, result, Representer::Song)
@@ -67,6 +71,7 @@ module LingoBeats
           routing.on 'lyrics' do
             # GET /songs/:id/lyrics
             routing.get do
+              response.cache_control public: true, max_age: 300
               result = Service::AddLyric.new.call(song_id:)
 
               RouteHelpers::Response.call(routing, result, Representer::Lyric)
@@ -77,6 +82,7 @@ module LingoBeats
           routing.on 'level' do
             # GET /songs/:id/level
             routing.get do
+              response.cache_control public: true, max_age: 300
               result = Service::AnalyzeSongLevel.new.call(song_id:)
 
               RouteHelpers::Response.call(routing, result, Representer::SongLevel)
@@ -87,6 +93,7 @@ module LingoBeats
           routing.on 'material' do
             # GET /songs/:id/material
             routing.get do
+              response.cache_control public: true, max_age: 300
               result = Service::GetMaterial.new.call(song_id:)
 
               RouteHelpers::Response.call(routing, result, Representer::Material)
