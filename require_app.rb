@@ -8,5 +8,3 @@ def require_app
     Dir.glob("./#{dir}/**/*.rb").each { |file| require file }
   end
 end
-
-require_app

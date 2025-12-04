@@ -9,6 +9,7 @@ gem 'figaro', '~> 1.0'
 gem 'pry'
 gem 'pycall'
 gem 'rake'
+gem 'openssl', '~> 3.3.1'
 
 # PRESENTATION LAYER
 gem 'multi_json', '~> 1.15'
@@ -71,6 +72,7 @@ group :test do
   gem 'page-object', '~> 2.0'
   gem 'selenium-webdriver', '~> 4.11'
   gem 'watir', '~> 7.0'
+  gem 'rack-test'
 end
 
 # Development

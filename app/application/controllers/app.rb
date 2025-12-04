@@ -31,22 +31,6 @@ module LingoBeats
       routing.multi_route
     end
 
-    # /tutorial
-    route('tutorial') do |routing|
-      routing.get do
-        @current_page = :tutorial
-        view 'tutorial'
-      end
-    end
-
-    # /history
-    route('history') do |routing|
-      routing.get do
-        @current_page = :history
-        view 'history'
-      end
-    end
-
     # /api/v1
     route('api/v1') do |routing|
       # /songs

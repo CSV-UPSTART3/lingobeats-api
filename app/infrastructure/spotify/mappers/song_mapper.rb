@@ -33,6 +33,7 @@ module LingoBeats
       end
 
       def fetch_song_info_by_id(song_id)
+        #puts "[SongMapper] fetch_song_info_by_id #{song_id} (gateway=#{@gateway.class})"
         data = @gateway.song_info(song_id: song_id)
         self.class.build_entity(data)
       end

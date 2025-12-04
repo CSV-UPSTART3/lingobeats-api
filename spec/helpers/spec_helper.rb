@@ -25,11 +25,12 @@ VcrHelper.setup_vcr
 
 SINGER = 'Ed Sheeran'
 SONG_NAME = 'Golden'
+SONG_ID = '0bHs3ly4Bv5BlzE3KrePfX'
 CONFIG = YAML.safe_load_file('config/secrets.yml')
-SPOTIFY_CLIENT_ID = CONFIG['development']['SPOTIFY_CLIENT_ID']
-SPOTIFY_CLIENT_SECRET = CONFIG['development']['SPOTIFY_CLIENT_SECRET']
-GENIUS_CLIENT_ACCESS_TOKEN = CONFIG['development']['GENIUS_CLIENT_ACCESS_TOKEN']
-GEMINI_API_KEY = CONFIG['development']['GEMINI_API_KEY']
+SPOTIFY_CLIENT_ID = CONFIG['test']['SPOTIFY_CLIENT_ID']
+SPOTIFY_CLIENT_SECRET = CONFIG['test']['SPOTIFY_CLIENT_SECRET']
+GENIUS_CLIENT_ACCESS_TOKEN = CONFIG['test']['GENIUS_CLIENT_ACCESS_TOKEN']
+GEMINI_API_KEY = CONFIG['test']['GEMINI_API_KEY']
 CORRECT_RESULT_BY_SINGER = YAML.safe_load_file('spec/fixtures/spotify_result_by_singer.yml',
                                                permitted_classes: [Symbol])
 CORRECT_RESULT_BY_SONG = YAML.safe_load_file('spec/fixtures/spotify_result_by_song_name.yml',

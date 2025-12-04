@@ -6,6 +6,7 @@ coverage/*
 # spec/fixtures/cassettes/
 spec/fixtures/*.html
 spec/fixtures/*.txt
+!spec/fixtures/lyrics_output.txt
 # spec/fixtures/*.yml
 # spec/fixtures/*.json
 vendor/*
