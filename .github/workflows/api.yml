@@ -71,6 +71,18 @@ jobs:
             "  SESSION_SECRET: \"${SESSION_SECRET}\"" \
             > config/secrets.yml
 
+      - name: Prepare SQLite test DB
+        run: |
+          mkdir -p db/local
+          if [ -f db/local/dev.db ]; then
+            cp db/local/dev.db db/local/test.db
+            echo "Copied db/local/dev.db to db/local/test.db"
+          else
+            echo "ERROR: db/local/dev.db not found"
+            ls -R db || true
+            exit 1
+          fi
+
       - name: Setup test database
         env:
           DB_FILENAME: ${{ secrets.DB_FILENAME }}
