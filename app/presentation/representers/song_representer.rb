@@ -23,11 +23,35 @@ module LingoBeats
       property :album_url
       property :album_image_url
       collection :singers, extend: Representer::Singer, class: OpenStruct
-      # property :lyric, extend: Representer::Lyric, class: OpenStruct
 
-      # link :self do
-      #   "#{App.config.API_HOST}/api/v1/songs/#{song_id}"
-      # end
+      # --- HATEOAS links ---
+      link :self do
+        {
+          href: "#{App.config.API_HOST}/api/v1/songs/#{song_id}",
+          method: 'GET'
+        }
+      end
+
+      link :lyrics do
+        {
+          href: "#{App.config.API_HOST}/api/v1/songs/#{song_id}/lyrics",
+          method: 'GET'
+        }
+      end
+
+      link :level do
+        {
+          href: "#{App.config.API_HOST}/api/v1/songs/#{song_id}/level",
+          method: 'GET'
+        }
+      end
+
+      link :material do
+        {
+          href: "#{App.config.API_HOST}/api/v1/songs/#{song_id}/material",
+          methods: %w[GET POST]
+        }
+      end
 
       private
 
