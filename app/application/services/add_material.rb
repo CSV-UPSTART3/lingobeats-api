@@ -89,14 +89,32 @@ module LingoBeats
         prompt = PromptRenderer.call(batch: batch, song: song)
         materials = @mapper.generate_and_parse(prompt)
 
-        batch.zip(materials).filter_map do |vocab, material_hash|
-          next unless material_hash
+        batch.zip(materials).filter_map do |vocab, raw_material|
+          # puts "[DEBUG] vocab=#{vocab.name}, level=#{vocab.level}"
+          material_for_db = validate_vocab_format(vocab, raw_material)
+          next unless material_for_db
 
-          attrs = vocab.to_attr_hash.merge(material: JSON.generate(material_hash))
-          updated_vocab = Entity::Vocabulary.new(attrs)
-          @vocabs_repo.update_material(updated_vocab.id, updated_vocab.material)
-          updated_vocab
+          save_vocab_material(vocab, material_for_db)
         end
+      end
+
+      def validate_vocab_format(vocab, raw_material)
+        return unless raw_material
+
+        Validator::VocabularyInput.call(
+          raw_hash: raw_material,
+          word: vocab.name
+        )
+      end
+
+      def save_vocab_material(vocab, material_for_db)
+        attrs = vocab.to_attr_hash.merge(
+          material: JSON.generate(material_for_db)
+        )
+
+        updated = Entity::Vocabulary.new(attrs)
+        @vocabs_repo.update_material(updated.id, updated.material)
+        updated
       end
 
       def find_song(song_id)

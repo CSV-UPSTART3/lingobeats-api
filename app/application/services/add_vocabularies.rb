@@ -14,7 +14,6 @@ module LingoBeats
       VOCABULARY_EVAL_ERROR = 'Failed to evaluate words'
       VOCABULARY_PROCESS_ERROR = 'Failed to process vocabularies'
       DB_ERROR = 'Having trouble accessing the database'
-      #DB_ERROR = 'ADD_VOCABS_DB_ERROR'
 
       def initialize(vocabs_repo: Repository::For.klass(Entity::Vocabulary))
         super()

@@ -11,13 +11,11 @@ module LingoBeats
   class App < Roda
     plugin :flash
     plugin :all_verbs # allows HTTP verbs beyond GET/POST (e.g., DELETE)
-    plugin :public, root: 'app/presentation/public'
     plugin :halt
     plugin :multi_route
     plugin :caching
 
     route do |routing|
-      routing.public # serve /public files
       response['Content-Type'] = 'application/json'
 
       # GET /

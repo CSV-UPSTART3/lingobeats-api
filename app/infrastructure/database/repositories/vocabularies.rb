@@ -100,9 +100,17 @@ module LingoBeats
         vocabs.any? { |vocab| vocab.material.to_s.strip.empty? }
       end
 
-      def self.vocabs_content(id)
-        vocabs = for_song(id)
-        vocabs.map { |vocab| JSON.parse(vocab.material) }.compact
+      def self.vocabs_content(song_id)
+        for_song(song_id).filter_map do |vocab|
+          next unless vocab.material && !vocab.material.empty?
+
+          material = JSON.parse(vocab.material)
+
+          material.merge(
+            'word'  => vocab.name,
+            'level' => vocab.level
+          )
+        end
       end
 
       # --- helpers ---

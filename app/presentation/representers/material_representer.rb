@@ -3,6 +3,9 @@
 require 'roar/decorator'
 require 'roar/json'
 
+require_relative 'openstruct_with_links'
+require_relative 'vocabulary_representer'
+
 module LingoBeats
   module Representer
     # Represents essential Material information for API output
@@ -10,7 +13,9 @@ module LingoBeats
       include Roar::JSON
 
       property :song
-      property :contents
+      collection :contents,
+                 extend: Representer::Vocabulary,
+                 class: Representer::OpenStructWithLinks
     end
   end
 end

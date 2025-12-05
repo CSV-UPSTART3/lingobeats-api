@@ -1,8 +1,10 @@
 # frozen_string_literal: false
 
+require 'json'
+
 module LingoBeats
   module Gemini
-    # 建立 Vocabulary 的 mapper
+    # Data Mapper: Gemini API <-> Vocabulary entity
     class VocabularyMapper
       attr_reader :gateway
 
@@ -23,26 +25,26 @@ module LingoBeats
       module MaterialParser
         module_function
 
-        def parse_payload(payload)
-          text = extract_text(payload)
-          return nil if text.to_s.strip.empty?
-
-          raw =
-            begin
-              JSON.parse(text)
-            rescue JSON::ParserError
-              { 'raw_text' => text }
-            end
-
-          symbolize_keys(raw)
-        end
-
-        # 從 candidates.parts 抽文字
         def extract_text(payload)
           parts = payload.dig('candidates', 0, 'content', 'parts')
           return nil unless parts.is_a?(Array) && !parts.empty?
 
           parts.map { |part| part['text'] }.compact.join("\n")
+        end
+
+        def strip_code_fences(text)
+          return '' if text.nil?
+
+          text
+            .sub(/\A```json\s*/i, '') # starts with ```json
+            .sub(/\A```/, '')         # or only ```
+            .sub(/```$/, '')          # end ```
+            .strip
+        end
+
+        # remove extra: `, ]` / `, }`
+        def relax_trailing_commas(text)
+          text.gsub(/,\s*([\]}])/, '\1')
         end
 
         def symbolize_keys(obj)
@@ -58,27 +60,39 @@ module LingoBeats
           end
         end
 
-        def strip_code_fences(text)
-          text
-            .sub(/\A```json\s*/i, '')  # 開頭的 ```json
-            .sub(/```$/, '')           # 結尾的 ```
-            .strip
+        # ----- single mode: original parse_material / build_from_payload -----
+
+        def parse_payload(payload)
+          text = extract_text(payload)
+          return nil if text.to_s.strip.empty?
+
+          cleaned = relax_trailing_commas(strip_code_fences(text))
+          raw = JSON.parse(cleaned)
+
+          symbolize_keys(raw)
+        rescue JSON::ParserError
+          { raw_text: text }
         end
 
+        # ----- batch mode: for AddMaterial -----
+
         def parse_batch(payload)
-          text = extract_text(payload)
-          return [] if text.to_s.strip.empty?
+          text = strip_code_fences(extract_text(payload).to_s).strip
+          return [] if text.empty?
 
-          cleaned = strip_code_fences(text)
+          cleaned = relax_trailing_commas(text)
+          raw     = begin
+            JSON.parse(cleaned)
+          rescue StandardError
+            { raw_text: text }
+          end
+          array = raw.is_a?(Array) ? raw : [raw]
 
-          raw_array = JSON.parse(cleaned)
-          symbolize_keys(raw_array)
-        rescue JSON::ParserError
-          [{ raw_text: text }]
+          symbolize_keys(array)
         end
       end
 
-      # For Service
+      # For Service：batch processing vocabulary materials
       def generate_and_parse(prompt)
         payload = @gateway.generate_content(prompt)
         MaterialParser.parse_batch(payload)
