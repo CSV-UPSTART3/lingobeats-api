@@ -101,16 +101,13 @@ module LingoBeats
             routing.post do
               incomplete = Repository::For.klass(Entity::Vocabulary).incomplete_material?(song_id)
 
-              result =
-                if incomplete
-                  # there are vocabularies without materials, generate them
-                  Service::AddMaterial.new.call(song_id:)
-                else
-                  # all vocabularies have materials, just return them
-                  Service::GetMaterial.new.call(song_id:)
-                end
-
-              RouteHelpers::Response.call(routing, result, Representer::Material)
+              if incomplete
+                result = Service::AddMaterial.new.call(song_id:)
+                RouteHelpers::Response.call(routing, result, Representer::Material)
+              else
+                # convert to GET /songs/:id/material
+                routing.redirect "#{App.config.API_HOST}/api/v1/songs/#{song_id}/material"
+              end
             end
           end
         end
