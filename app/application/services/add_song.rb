@@ -19,12 +19,6 @@ module LingoBeats
         status, song = SongFinder.new(@repo).call(input[:song_id])
 
         Success(Response::ApiResult.new(status:, message: song))
-      # rescue StandardError => error
-      #   # 先讓錯直接冒出來
-      #   puts "[AddSong ERROR] #{error.class}: #{error.message}"
-      #   puts error.backtrace.join("\n")
-      #   raise error
-      # end
       rescue StandardError => error
         App.logger.error("[AddSong] #{error.full_message}")
         Failure(Response::ApiResult.new(status: :internal_error, message: DB_ERROR))
@@ -51,22 +45,18 @@ module LingoBeats
           @repo.find_by_id(id)
         rescue StandardError
           raise "[AddSong] #{DB_FIND_SONG_ERROR}"
-          puts "[AddSong ERROR find] #{error.class}: #{error.message}"
+          # puts "[AddSong ERROR find] #{error.class}: #{error.message}"
         end
 
         private
 
         def create_song(id)
           @repo.ensure_song_exists(id)
-        rescue StandardError => e
+        rescue StandardError
           # 先把真實錯誤串進去，方便看
-          raise "[AddSong] #{DB_STORE_SONG_ERROR}: #{e.class} - #{e.message}"
-          puts "[AddSong ERROR create] #{e.class}: #{e.message}"
+          raise "[AddSong] #{DB_STORE_SONG_ERROR}"
+          # puts "[AddSong ERROR create] #{e.class}: #{e.message}"
         end
-        # rescue StandardError
-        #   raise "[AddSong] #{DB_STORE_SONG_ERROR}"
-        #   #raise "[AddSong] #{DB_FIND_SONG_ERROR}: #{e.class} - #{e.message}"
-        # end
       end
     end
   end

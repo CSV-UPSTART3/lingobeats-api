@@ -6,10 +6,10 @@ ruby File.read('.ruby-version').strip
 # Configuration and Utilities
 gem 'cld3'
 gem 'figaro', '~> 1.0'
+gem 'openssl', '~> 3.3.1'
 gem 'pry'
 gem 'pycall'
 gem 'rake'
-gem 'openssl', '~> 3.3.1'
 
 # PRESENTATION LAYER
 gem 'multi_json', '~> 1.15'
@@ -70,9 +70,9 @@ group :test do
   # Acceptance Tests
   gem 'headless', '~> 2.3'
   gem 'page-object', '~> 2.0'
+  gem 'rack-test'
   gem 'selenium-webdriver', '~> 4.11'
   gem 'watir', '~> 7.0'
-  gem 'rack-test'
 end
 
 # Development

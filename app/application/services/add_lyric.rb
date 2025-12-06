@@ -23,7 +23,6 @@ module LingoBeats
       LYRIC_EMPTY = 'Went wrong in fetching lyrics'
       LYRIC_NOT_RECOMMENDED = 'This song is not recommended for English learners.'
       DB_ERROR = 'Having trouble accessing the database'
-      #DB_ERROR = 'ADD_LYRIC_DB_ERROR'
 
       private
 
