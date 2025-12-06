@@ -25,7 +25,7 @@ VcrHelper.setup_vcr
 
 SINGER = 'Ed Sheeran'
 SONG_NAME = 'Golden'
-SONG_ID = '0bHs3ly4Bv5BlzE3KrePfX'
+SONG_ID = '53iuhJlwXhSER5J2IYYv1W'
 CONFIG = YAML.safe_load_file('config/secrets.yml')
 SPOTIFY_CLIENT_ID = CONFIG['test']['SPOTIFY_CLIENT_ID']
 SPOTIFY_CLIENT_SECRET = CONFIG['test']['SPOTIFY_CLIENT_SECRET']

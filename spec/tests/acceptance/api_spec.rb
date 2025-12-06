@@ -131,8 +131,11 @@ describe 'Test LingoBeats API routes' do
     describe 'GET /api/v1/songs/:id/level' do
       it 'returns song level info for an existing song' do
         # 先確定 DB 有這首歌 + 它的 vocab（AnalyzeSongLevel 才有東西算）
-        LingoBeats::Service::AddSong.new.call(song_id: SONG_ID)
-        LingoBeats::Service::AddLyric.new.call(song_id: SONG_ID)
+        add_song_result = LingoBeats::Service::AddSong.new.call(song_id: SONG_ID)
+        add_lyric_result = LingoBeats::Service::AddLyric.new.call(song_id: SONG_ID)
+
+        puts "[TEST DEBUG] add_song_result: #{add_song_result.inspect}"
+        puts "[TEST DEBUG] add_lyric_result: #{add_lyric_result.inspect}"
 
         get "/api/v1/songs/#{SONG_ID}/level"
 
