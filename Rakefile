@@ -134,6 +134,75 @@ namespace :db do
   end
 end
 
+# queue manipulation
+namespace :queues do
+  task :config do
+    require 'aws-sdk-sqs'
+    require_relative 'config/environment' # load config info
+    @api = LingoBeats::App
+    @sqs = Aws::SQS::Client.new(
+      access_key_id: @api.config.AWS_ACCESS_KEY_ID,
+      secret_access_key: @api.config.AWS_SECRET_ACCESS_KEY,
+      region: @api.config.AWS_REGION
+    )
+    @q_name = @api.config.MATERIAL_QUEUE
+    @q_url = @sqs.get_queue_url(queue_name: @q_name).queue_url
+
+    puts "Environment: #{@api.environment}"
+    puts "Queue URL: #{@q_url}"
+  end
+
+  # NOTE: Queue already created on AWS console. Do not run unless recreating queue.
+  desc 'Create SQS queue for worker'
+  task :create => :config do
+    @sqs.create_queue(queue_name: @q_name)
+
+    puts 'Queue created:'
+    puts "  Name: #{@q_name}"
+    puts "  Region: #{@api.config.AWS_REGION}"
+    puts "  URL: #{@q_url}"
+  rescue StandardError => e
+    puts "Error creating queue: #{e}"
+  end
+
+  desc 'Report status of queue for worker'
+  task :status => :config do
+    puts 'Queue info:'
+    puts "  Name: #{@q_name}"
+    puts "  Region: #{@api.config.AWS_REGION}"
+    puts "  URL: #{@q_url}"
+  rescue StandardError => e
+    puts "Error finding queue: #{e}"
+  end
+
+  desc 'Purge messages in SQS queue for worker'
+  task :purge => :config do
+    @sqs.purge_queue(queue_url: @q_url)
+    puts "Queue #{@q_name} purged"
+  rescue StandardError => e
+    puts "Error purging queue: #{e}"
+  end
+end
+
+namespace :worker do
+  namespace :run do
+    desc 'Run the background material generation worker in development mode'
+    task :dev => 'queues:config' do
+      sh 'RACK_ENV=development bundle exec shoryuken -r ./workers/material_generation_worker.rb -C ./workers/shoryuken_dev.yml'
+    end
+
+    desc 'Run the background material generation worker in testing mode'
+    task :test => 'queues:config' do
+      sh 'RACK_ENV=test bundle exec shoryuken -r ./workers/material_generation_worker.rb -C ./workers/shoryuken_test.yml'
+    end
+
+    desc 'Run the background material generation worker in production mode'
+    task :production => 'queues:config' do
+      sh 'RACK_ENV=production bundle exec shoryuken -r ./workers/material_generation_worker.rb -C ./workers/shoryuken.yml'
+    end
+  end
+end
+
 # cache manipulation
 namespace :cache do
   task :config do # rubocop:disable Rake/Desc

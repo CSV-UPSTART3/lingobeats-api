@@ -3,7 +3,6 @@
 require 'dry/transaction'
 require 'ostruct'
 require 'json'
-require 'erb'
 
 module LingoBeats
   module Service
@@ -11,11 +10,9 @@ module LingoBeats
     class AddMaterial
       include Dry::Transaction
 
-      BATCH_SIZE = 10
-
       step :fetch_data
       step :find_pending
-      step :generate_for_pending
+      step :queue_pending_materials
       step :build_result
 
       def initialize(
@@ -35,6 +32,7 @@ module LingoBeats
       VOCAB_NOT_EXISTS = 'Cannot find the vocabularies in the song'     # → 404
       DB_ERROR = 'Having trouble accessing the database'                # → 500
       MATERIAL_GENERATE_ERROR = 'Failed to generate learning materials' # → 500
+      MATERIAL_GENERATE_QUEUED = 'Material generation job queued'       # → 202
 
       private
 
@@ -58,65 +56,29 @@ module LingoBeats
       end
 
       # step 3. only generate materials for pending vocabs
-      def generate_for_pending(input)
+      def queue_pending_materials(input)
         pending_vocabs = input[:pending_vocabs]
         return Success({ song: input[:song] }) if pending_vocabs.empty?
 
-        pending_vocabs.each_slice(BATCH_SIZE).flat_map { |batch| generate_batch_materials(batch, input[:song]) }
+        message = LingoBeats::Representer::MaterialJob
+              .new(song_id: input[:song].id)
+              .to_json
 
-        Success({ song: input[:song] })
+        Messaging::Queue.new(App.config.MATERIAL_QUEUE_URL, App.config)
+          .send(message)
+
+        Success(input.merge(status: :processing))
+
       rescue StandardError => error
         App.logger.error("[AddMaterial] generate materials error: #{error.full_message}")
         Failure(Response::ApiResult.new(status: :internal_error, message: MATERIAL_GENERATE_ERROR))
       end
 
-      # step 4. build API result (all vocabs)
       def build_result(input)
-        result = Response::Material.new(
-          song: input[:song].name,
-          contents: @vocabs_repo.vocabs_content(input[:song].id)
-        )
-
-        Success(Response::ApiResult.new(status: :created, message: result))
-      rescue StandardError => error
-        App.logger.error("[AddMaterial] build result error: #{error.full_message}")
-        Failure(Response::ApiResult.new(status: :internal_error, message: DB_ERROR))
+        Success(Response::ApiResult.new(status: input[:status], message: MATERIAL_GENERATE_QUEUED))
       end
 
       # helper methods
-      # for each batch of vocabs, generate materials and update them in the repo
-      def generate_batch_materials(batch, song)
-        prompt = PromptRenderer.call(batch: batch, song: song)
-        materials = @mapper.generate_and_parse(prompt)
-
-        batch.zip(materials).filter_map do |vocab, raw_material|
-          # puts "[DEBUG] vocab=#{vocab.name}, level=#{vocab.level}"
-          material_for_db = validate_vocab_format(vocab, raw_material)
-          next unless material_for_db
-
-          save_vocab_material(vocab, material_for_db)
-        end
-      end
-
-      def validate_vocab_format(vocab, raw_material)
-        return unless raw_material
-
-        Validator::VocabularyInput.call(
-          raw_hash: raw_material,
-          word: vocab.name
-        )
-      end
-
-      def save_vocab_material(vocab, material_for_db)
-        attrs = vocab.to_attr_hash.merge(
-          material: JSON.generate(material_for_db)
-        )
-
-        updated = Entity::Vocabulary.new(attrs)
-        @vocabs_repo.update_material(updated.id, updated.material)
-        updated
-      end
-
       def find_song(song_id)
         song = @songs_repo.find_by_id(song_id)
         raise SONG_NOT_EXISTS unless song
@@ -129,22 +91,6 @@ module LingoBeats
         raise VOCAB_NOT_EXISTS if vocabs.empty?
 
         vocabs
-      end
-
-      # helper class to render Gemini prompt
-      class PromptRenderer
-        TEMPLATE_PATH = 'app/application/services/prompts/material_prompt.erb'
-
-        def self.call(batch:, song:)
-          pairs = batch.map { |vocab| { word: vocab.name, level: vocab.level } }
-
-          template = File.read(TEMPLATE_PATH)
-
-          ERB.new(template).result_with_hash(
-            vocab_pairs: pairs,
-            song_name: song.name
-          )
-        end
       end
     end
   end

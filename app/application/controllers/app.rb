@@ -103,7 +103,7 @@ module LingoBeats
 
               if incomplete
                 result = Service::AddMaterial.new.call(song_id:)
-                RouteHelpers::Response.call(routing, result, Representer::Material)
+                RouteHelpers::Response.call(routing, result, nil)
               else
                 # convert to GET /songs/:id/material
                 routing.redirect "#{App.config.API_HOST}/api/v1/songs/#{song_id}/material"
