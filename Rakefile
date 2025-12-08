@@ -7,19 +7,16 @@ task :default do
   puts `rake -T`
 end
 
-desc 'Run the unit and integration tests'
-task spec: ['spec:default']
+desc 'Run unit and integration tests'
+Rake::TestTask.new(:spec) do |t|
+  puts 'Make sure worker is running in separate process'
+  t.pattern = 'spec/tests/**/*_spec.rb'
+  t.warning = false
+end
 
 desc 'Keep rerunning unit/integration tests upon changes'
 task :respec do
-  sh "rerun -c 'rake spec' --ignore 'coverage/*'"
-end
-
-# NOTE: run `rake run:test` in another process
-desc 'Run acceptance tests only'
-Rake::TestTask.new(:spec_accept) do |t|
-  t.pattern = 'spec/tests/acceptance/*_spec.rb'
-  t.warning = false
+  sh "rerun -c 'rake spec' --ignore 'coverage/*' --ignore 'repostore/*'"
 end
 
 # session
@@ -31,25 +28,25 @@ task :new_session_secret do
   puts "SESSION_SECRET: #{secret}"
 end
 
-# run application
-desc 'Run the application (default: development mode)'
+# run api
+desc 'Run API (default: development mode)'
 task run: ['run:dev']
 
 namespace :run do
-  desc 'Run the application in development mode'
+  desc 'Run API in dev mode'
   task :dev do
     sh 'bundle exec puma'
   end
 
-  desc 'Run the application in test mode'
+  desc 'Run API in test mode'
   task :test do
     sh 'RACK_ENV=test bundle exec puma'
   end
 end
 
-desc 'Run the application with auto-reloading (development mode)'
+desc 'Run API with auto-reloading (development mode)'
 task :rerun do
-  sh "rerun -c --ignore 'coverage/*' -- bundle exec puma"
+  sh "rerun -c --ignore 'coverage/*' --ignore '_cache/*' -- bundle exec puma"
 end
 
 namespace :db do
@@ -156,6 +153,37 @@ namespace :worker do
     desc 'Run the background material generation worker in production mode'
     task :production => 'queues:config' do
       sh 'RACK_ENV=production bundle exec shoryuken -r ./workers/material_generation_worker.rb -C ./workers/shoryuken.yml'
+    end
+  end
+end
+
+namespace :repos do
+  task :config do # rubocop:disable Rake/Desc
+    require_relative 'config/environment' # load config info
+    def app = CodePraise::App # rubocop:disable Rake/MethodDefinitionInTask
+    @repo_dirs = Dir.glob("#{app.config.REPOSTORE_PATH}/*/")
+  end
+
+  desc 'Create directory for repo store'
+  task :create => :config do
+    puts `mkdir #{app.config.REPOSTORE_PATH}`
+  end
+
+  desc 'Delete cloned repos in repo store'
+  task :wipe => :config do
+    puts 'No git repositories found in repostore' if @repo_dirs.empty?
+
+    sh "rm -rf #{app.config.REPOSTORE_PATH}/*/" do |ok, _|
+      puts(ok ? "#{@repo_dirs.count} repos deleted" : 'Could not delete repos')
+    end
+  end
+
+  desc 'List cloned repos in repo store'
+  task :list => :config do
+    if @repo_dirs.empty?
+      puts 'No git repositories found in repostore'
+    else
+      puts @repo_dirs.join("\n")
     end
   end
 end
