@@ -4,8 +4,10 @@ require 'roar/json'
 
 module LingoBeats
   module Representer
+    # Represents a material generation job message
     class MaterialJob
       include Roar::JSON
+
       def initialize(song_id:)
         @song_id = song_id
       end
