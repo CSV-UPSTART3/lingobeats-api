@@ -58,22 +58,17 @@ module LingoBeats
       # step 3. only generate materials for pending vocabs
       def queue_pending_materials(input)
         pending_vocabs = input[:pending_vocabs]
-        return Success({ song: input[:song] }) if pending_vocabs.empty?
 
-        message = LingoBeats::Representer::MaterialJob
-              .new(song_id: input[:song].id)
-              .to_json
+        return Success(build_created_material_result(input)) if pending_vocabs.empty?
 
-        Messaging::Queue.new(App.config.MATERIAL_QUEUE_URL, App.config)
-          .send(message)
-
+        enqueue_material_job(input[:song])
         Success(input.merge(status: :processing))
-
       rescue StandardError => error
         App.logger.error("[AddMaterial] generate materials error: #{error.full_message}")
         Failure(Response::ApiResult.new(status: :internal_error, message: MATERIAL_GENERATE_ERROR))
       end
 
+      # step 4. build result to return
       def build_result(input)
         Success(Response::ApiResult.new(status: input[:status], message: MATERIAL_GENERATE_QUEUED))
       end
@@ -91,6 +86,28 @@ module LingoBeats
         raise VOCAB_NOT_EXISTS if vocabs.empty?
 
         vocabs
+      end
+
+      # if no pending vocabs, build the material result directly
+      def build_created_material_result(input)
+        song = input.fetch(:song)
+        contents = @vocabs_repo.vocabs_content(song.id)
+
+        material = Response::Material.new(song: song.name, contents: contents)
+
+        Response::ApiResult.new(status: :ok, message: material)
+      end
+
+      # enqueue material generation job
+      def enqueue_material_job(song)
+        message = LingoBeats::Representer::MaterialJob
+                  .new(song_id: song.id)
+                  .to_json
+
+        Messaging::Queue.new(App.config.MATERIAL_QUEUE_URL, App.config)
+                        .send(message)
+
+        App.logger.info("[AddMaterial] queued material job for song=#{song.name}, song_id=#{song.id}")
       end
     end
   end

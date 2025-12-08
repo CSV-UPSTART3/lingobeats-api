@@ -13,6 +13,7 @@ Figaro.application = Figaro::Application.new(
 )
 Figaro.load
 
+# Worker for generating learning materials
 class MaterialGenerationWorker
   include Shoryuken::Worker
 
@@ -23,7 +24,7 @@ class MaterialGenerationWorker
   shoryuken_options queue: config.MATERIAL_QUEUE_URL,
                     auto_delete: true
 
-  def perform(sqs_msg, body)
+  def perform(_sqs_msg, body)
     # body is JSON queue.enqueue(message)
     data = LingoBeats::Representer::MaterialJob.from_json(body)
 
