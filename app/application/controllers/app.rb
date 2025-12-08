@@ -91,7 +91,7 @@ module LingoBeats
           routing.on 'material' do
             # GET /songs/:id/material
             routing.get do
-              response.cache_control public: true, max_age: 300
+              # response.cache_control public: true, max_age: 300
               result = Service::GetMaterial.new.call(song_id:)
 
               RouteHelpers::Response.call(routing, result, Representer::Material)
