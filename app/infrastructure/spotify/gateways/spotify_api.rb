@@ -17,28 +17,28 @@ module LingoBeats
       end
 
       def initialize(client_id, client_secret)
-        #puts "[Spotify::Api] initialize from #{__FILE__} object_id=#{object_id}"
+        # puts "[Spotify::Api] initialize from #{__FILE__} object_id=#{object_id}"
         credential = Credentials.new(client_id, client_secret)
         @token_manager = SpotifyTokenManager.instance_for(credential)
-        @http_request = HttpHelper::Request.new('Authorization' => "Bearer #{@token_manager.access_token}")
+        @headers = { 'Authorization' => "Bearer #{@token_manager.access_token}" }
       end
 
       # search songs with specified condition
       def songs_data(category:, query:, limit:)
         spec = SearchSpec.new(category: category, query: query, limit: limit)
-        @http_request.get(spotify_search_url, params: spec.params)
+        HttpHelper::Request.new(@headers).get(spotify_search_url, params: spec.params)
       end
 
       # get billboard 100 playlist songs
       def billboard_data(limit:)
         params = { limit: limit }
-        @http_request.get(spotify_playlist_url(BILLBORAD_PLAYLIST_ID), params: params)
+        HttpHelper::Request.new(@headers).get(spotify_playlist_url(BILLBORAD_PLAYLIST_ID), params: params)
       end
 
       # get song details by id
       def song_info(song_id:)
-        #puts "[Spotify::Api] song_info(#{song_id}) auth=#{@http_request.headers['Authorization'].inspect}"
-        @http_request.get(spotify_track_url(song_id))
+        # puts "[Spotify::Api] song_info(#{song_id}) auth=#{@http_request.headers['Authorization'].inspect}"
+        HttpHelper::Request.new(@headers).get(spotify_track_url(song_id))
       end
 
       private

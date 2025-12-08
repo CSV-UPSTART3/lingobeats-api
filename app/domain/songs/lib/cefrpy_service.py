@@ -1,5 +1,5 @@
 import sys, json
-import spacy
+# import spacy
 from cefrpy import CEFRAnalyzer
 from preprocessor import preprocess
 

@@ -1,136 +1,93 @@
 # frozen_string_literal: true
 
 require 'rake/testtask'
-require 'fileutils'
 require_relative 'require_app'
-require 'bundler/setup'
-# Bundler.require(:default)
 
 task :default do
   puts `rake -T`
 end
 
-# run all test
-desc 'Run tests once'
-Rake::TestTask.new(:spec) do |t|
-  t.libs << 'lib' << 'spec'
-  t.pattern = 'spec/**/*_spec.rb'
-  # t.pattern = 'spec/spotify_api_spec.rb'
-  # t.pattern = 'spec/gateway_database_spec.rb'
-  t.warning = false
-end
+desc 'Run the unit and integration tests'
+task spec: ['spec:default']
 
-desc 'Keep rerunning tests upon changes'
+desc 'Keep rerunning unit/integration tests upon changes'
 task :respec do
   sh "rerun -c 'rake spec' --ignore 'coverage/*'"
 end
 
-desc 'Run application console (irb)'
-task :console do
-  sh 'pry -r ./load_all'
-end
-
-# manage vcr record file
-namespace :vcr do
-  desc 'delete cassette fixtures (*.yml)'
-  task :wipe do
-    files = Dir['spec/fixtures/cassettes/*.yml']
-    if files.empty?
-      puts 'No cassettes found'
-    else
-      FileUtils.rm_f(files)
-      puts "Cassettes deleted: #{files.size}"
-    end
-  end
-end
-
-# check code quality
-namespace :quality do
-  desc 'run all quality checks'
-  task all: %i[rubocop reek flog]
-
-  desc 'Run RuboCop'
-  task :rubocop do
-    puts '[RuboCop]'
-    sh 'bundle', 'exec', 'rubocop', *CODE_DIRS do
-      puts # avoid aborting
-    end
-  end
-
-  desc 'Run Reek'
-  task :reek do
-    puts '[Reek]'
-    sh 'bundle', 'exec', 'reek', *CODE_DIRS do
-      puts # avoid aborting
-    end
-  end
-
-  desc 'Run Flog'
-  task :flog do
-    puts '[Flog]'
-    sh 'bundle', 'exec', 'flog', *CODE_DIRS
-  end
-end
-
-# run application
-namespace :app do
-  desc 'Run web app'
-  task :run do
-    sh 'bundle exec puma'
-  end
-
-  desc 'Keep rerunning web app upon changes'
-  task :rerun do
-    sh "rerun -c --ignore 'coverage/*' -- bundle exec puma"
-  end
+# NOTE: run `rake run:test` in another process
+desc 'Run acceptance tests only'
+Rake::TestTask.new(:spec_accept) do |t|
+  t.pattern = 'spec/tests/acceptance/*_spec.rb'
+  t.warning = false
 end
 
 # session
 desc 'Generates a 64 by secret for Rack::Session'
 task :new_session_secret do
   require 'base64'
-  require 'securerandom'
+  require 'SecureRandom'
   secret = SecureRandom.random_bytes(64).then { Base64.urlsafe_encode64(it) }
   puts "SESSION_SECRET: #{secret}"
 end
 
-# db manipulation
+# run application
+desc 'Run the application (default: development mode)'
+task run: ['run:dev']
+
+namespace :run do
+  desc 'Run the application in development mode'
+  task :dev do
+    sh 'bundle exec puma'
+  end
+
+  desc 'Run the application in test mode'
+  task :test do
+    sh 'RACK_ENV=test bundle exec puma'
+  end
+end
+
+desc 'Run the application with auto-reloading (development mode)'
+task :rerun do
+  sh "rerun -c --ignore 'coverage/*' -- bundle exec puma"
+end
+
 namespace :db do
-  task :config do
+  task :config do # rubocop:disable Rake/Desc
     require 'sequel'
     require_relative 'config/environment' # load config info
     require_relative 'spec/helpers/database_helper'
 
-    def app = LingoBeats::App
+    def app = LingoBeats::App # rubocop:disable Rake/MethodDefinitionInTask
   end
 
   desc 'Run migrations'
-  task migrate: :config do
+  task :migrate => :config do
     Sequel.extension :migration
     puts "Migrating #{app.environment} database to latest"
     Sequel::Migrator.run(app.db, 'db/migrations')
   end
 
   desc 'Wipe records from all tables'
-  task wipe: :config do
+  task :wipe => :config do
     if app.environment == :production
       puts 'Do not damage production database!'
       return
     end
 
-    require_app
+    require_app(%w[domain infrastructure])
     DatabaseHelper.wipe_database
   end
 
   desc 'Delete dev or test database file (set correct RACK_ENV)'
-  task drop: :config do
+  task :drop => :config do
     if app.environment == :production
       puts 'Do not damage production database!'
       return
     end
 
-    FileUtils.rm(LingoBeats::App.config.DB_FILENAME)
-    puts "Deleted #{LingoBeats::App.config.DB_FILENAME}"
+    FileUtils.rm(app.config.DB_FILENAME)
+    puts "Deleted #{app.config.DB_FILENAME}"
   end
 end
 
@@ -248,5 +205,43 @@ namespace :cache do
         wiped.each { |key| puts "Wiped: #{key}" }
       end
     end
+  end
+end
+
+desc 'Run application console'
+task :console do
+  sh 'pry -r ./load_all'
+end
+
+# manage vcr record file
+namespace :vcr do
+  desc 'delete cassette fixtures'
+  task :wipe do
+    sh 'rm spec/fixtures/cassettes/*.yml' do |ok, _|
+      puts(ok ? 'Cassettes deleted' : 'No cassettes found')
+    end
+  end
+end
+
+# check code quality
+namespace :quality do
+  only_app = 'config/ app/'
+
+  desc 'run all static-analysis quality checks'
+  task all: %i[rubocop reek flog]
+
+  desc 'code style linter'
+  task :rubocop do
+    sh 'rubocop'
+  end
+
+  desc 'code smell detector'
+  task :reek do
+    sh "reek #{only_app}"
+  end
+
+  desc 'complexiy analysis'
+  task :flog do
+    sh "flog -m #{only_app}"
   end
 end
