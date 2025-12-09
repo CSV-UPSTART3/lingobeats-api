@@ -18,21 +18,25 @@ module LingoBeats
       def initialize(
         songs_repo: Repository::For.klass(Entity::Song),
         vocabs_repo: Repository::For.klass(Entity::Vocabulary),
-        mapper: LingoBeats::Gemini::VocabularyMapper.new(
-          access_token: App.config.GEMINI_API_KEY
-        )
+        mapper: Gemini::VocabularyMapper.new(access_token: App.config.GEMINI_API_KEY),
+        material_job_queue: Messaging::MaterialJobQueue.new
       )
         super()
         @songs_repo = songs_repo
         @vocabs_repo = vocabs_repo
         @mapper = mapper
+        @material_job_queue = material_job_queue
       end
 
-      SONG_NOT_EXISTS = 'Cannot find the specified song'                # → 404
-      VOCAB_NOT_EXISTS = 'Cannot find the vocabularies in the song'     # → 404
-      DB_ERROR = 'Having trouble accessing the database'                # → 500
-      MATERIAL_GENERATE_ERROR = 'Failed to generate learning materials' # → 500
-      MATERIAL_GENERATE_QUEUED = 'Material generation job queued'       # → 202
+      SONG_NOT_EXISTS = 'Cannot find the specified song'                   # → 404
+      VOCAB_NOT_EXISTS = 'Cannot find the vocabularies in the song'        # → 404
+      DB_ERROR = 'Having trouble accessing the database'                   # → 500
+      MATERIAL_GENERATE_ERROR = 'Failed to generate learning materials'    # → 500
+
+      MATERIAL_QUEUE_MESSAGES = {
+        insert_to_queue: 'Material generation job queued',                 # → 202
+        already_queued: 'Material generation job already in queue'         # → 202
+      }.freeze
 
       private
 
@@ -57,20 +61,18 @@ module LingoBeats
 
       # step 3. only generate materials for pending vocabs
       def queue_pending_materials(input)
-        pending_vocabs = input[:pending_vocabs]
+        return handle_no_pending_materials(input) if input[:pending_vocabs].empty?
 
-        return Success(build_created_material_result(input)) if pending_vocabs.empty?
-
-        enqueue_material_job(input[:song])
-        Success(input.merge(status: :processing))
+        handle_pending_materials(input)
       rescue StandardError => error
         App.logger.error("[AddMaterial] generate materials error: #{error.full_message}")
         Failure(Response::ApiResult.new(status: :internal_error, message: MATERIAL_GENERATE_ERROR))
       end
 
       # step 4. build result to return
+      # :reek:FeatureEnvy
       def build_result(input)
-        Success(Response::ApiResult.new(status: input[:status], message: MATERIAL_GENERATE_QUEUED))
+        Success(Response::ApiResult.new(status: input[:status], message: input[:message]))
       end
 
       # helper methods
@@ -88,26 +90,29 @@ module LingoBeats
         vocabs
       end
 
-      # if no pending vocabs, build the material result directly
-      def build_created_material_result(input)
-        song = input.fetch(:song)
+      # if no pending vocabs, build the material entity to return
+      # :reek:FeatureEnvy
+      def build_material_entity(song)
         contents = @vocabs_repo.vocabs_content(song.id)
-
-        material = Response::Material.new(song: song.name, contents: contents)
-
-        Response::ApiResult.new(status: :ok, message: material)
+        Response::Material.new(song: song.name, contents: contents)
       end
 
-      # enqueue material generation job
-      def enqueue_material_job(song)
-        message = LingoBeats::Representer::MaterialJob
-                  .new(song_id: song.id)
-                  .to_json
+      def handle_no_pending_materials(input)
+        material = build_material_entity(input[:song])
+        Success(input.merge(status: :ok, message: material))
+      end
 
-        Messaging::Queue.new(App.config.MATERIAL_QUEUE_URL, App.config)
-                        .send(message)
+      def handle_pending_materials(input)
+        song = input[:song]
 
-        App.logger.info("[AddMaterial] queued material job for song=#{song.name}, song_id=#{song.id}")
+        if Material::ProcessingLock.acquire?(song.id)
+          # first time enqueue
+          @material_job_queue.enqueue(song)
+          Success(input.merge(status: :processing, message: MATERIAL_QUEUE_MESSAGES[:insert_to_queue]))
+        else
+          App.logger.info("[AddMaterial] material job already queued for song=#{song.name}, song_id=#{song.id}")
+          Success(input.merge(status: :processing, message: MATERIAL_QUEUE_MESSAGES[:already_queued]))
+        end
       end
     end
   end
