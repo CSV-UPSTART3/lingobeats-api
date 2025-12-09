@@ -55,6 +55,7 @@ Status:
 <br>
 Status:
 * 200: Material returned (happy)
+* 202: Material generating (happy)
 * 404: Song/Material not exists (sad)
 * 500: problems finding data (bad)
 <br>
@@ -63,4 +64,5 @@ Status:
 <br>
 Status:
 * 200: Material returned (happy)
+* 202: Material generating (happy)
 * 500: problems finding or storing data (bad)
