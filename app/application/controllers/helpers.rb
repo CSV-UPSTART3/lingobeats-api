@@ -22,8 +22,12 @@ module LingoBeats
           http = Representer::HttpResponse.new(result)
           routing.response.status = http.http_status_code
 
-          # Case 1: do not need representer → direct ApiResult (#message is string or Hash)
-          return {status: result.status, message: result.message}.to_json if representer_class.nil?
+          # Case 1: do not need representer / have representer but message is string
+          # → direct ApiResult (#message is string or Hash)
+          if representer_class.nil? || result.message.is_a?(String)
+            return { status: result.status,
+                     message: result.message }.to_json
+          end
 
           # Case 2: have representer → use representer to wrap JSON
           representer_class.new(result.message).to_json
