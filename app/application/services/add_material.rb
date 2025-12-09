@@ -3,7 +3,6 @@
 require 'dry/transaction'
 require 'ostruct'
 require 'json'
-require 'erb'
 
 module LingoBeats
   module Service
@@ -11,30 +10,33 @@ module LingoBeats
     class AddMaterial
       include Dry::Transaction
 
-      BATCH_SIZE = 10
-
       step :fetch_data
       step :find_pending
-      step :generate_for_pending
+      step :queue_pending_materials
       step :build_result
 
       def initialize(
         songs_repo: Repository::For.klass(Entity::Song),
         vocabs_repo: Repository::For.klass(Entity::Vocabulary),
-        mapper: LingoBeats::Gemini::VocabularyMapper.new(
-          access_token: App.config.GEMINI_API_KEY
-        )
+        mapper: Gemini::VocabularyMapper.new(access_token: App.config.GEMINI_API_KEY),
+        material_job_queue: Messaging::MaterialJobQueue.new
       )
         super()
         @songs_repo = songs_repo
         @vocabs_repo = vocabs_repo
         @mapper = mapper
+        @material_job_queue = material_job_queue
       end
 
-      SONG_NOT_EXISTS = 'Cannot find the specified song'                # → 404
-      VOCAB_NOT_EXISTS = 'Cannot find the vocabularies in the song'     # → 404
-      DB_ERROR = 'Having trouble accessing the database'                # → 500
-      MATERIAL_GENERATE_ERROR = 'Failed to generate learning materials' # → 500
+      SONG_NOT_EXISTS = 'Cannot find the specified song'                   # → 404
+      VOCAB_NOT_EXISTS = 'Cannot find the vocabularies in the song'        # → 404
+      DB_ERROR = 'Having trouble accessing the database'                   # → 500
+      MATERIAL_GENERATE_ERROR = 'Failed to generate learning materials'    # → 500
+
+      MATERIAL_QUEUE_MESSAGES = {
+        insert_to_queue: 'Material generation job queued',                 # → 202
+        already_queued: 'Material generation job already in queue'         # → 202
+      }.freeze
 
       private
 
@@ -58,65 +60,22 @@ module LingoBeats
       end
 
       # step 3. only generate materials for pending vocabs
-      def generate_for_pending(input)
-        pending_vocabs = input[:pending_vocabs]
-        return Success({ song: input[:song] }) if pending_vocabs.empty?
+      def queue_pending_materials(input)
+        return handle_no_pending_materials(input) if input[:pending_vocabs].empty?
 
-        pending_vocabs.each_slice(BATCH_SIZE).flat_map { |batch| generate_batch_materials(batch, input[:song]) }
-
-        Success({ song: input[:song] })
+        handle_pending_materials(input)
       rescue StandardError => error
         App.logger.error("[AddMaterial] generate materials error: #{error.full_message}")
         Failure(Response::ApiResult.new(status: :internal_error, message: MATERIAL_GENERATE_ERROR))
       end
 
-      # step 4. build API result (all vocabs)
+      # step 4. build result to return
+      # :reek:FeatureEnvy
       def build_result(input)
-        result = Response::Material.new(
-          song: input[:song].name,
-          contents: @vocabs_repo.vocabs_content(input[:song].id)
-        )
-
-        Success(Response::ApiResult.new(status: :created, message: result))
-      rescue StandardError => error
-        App.logger.error("[AddMaterial] build result error: #{error.full_message}")
-        Failure(Response::ApiResult.new(status: :internal_error, message: DB_ERROR))
+        Success(Response::ApiResult.new(status: input[:status], message: input[:message]))
       end
 
       # helper methods
-      # for each batch of vocabs, generate materials and update them in the repo
-      def generate_batch_materials(batch, song)
-        prompt = PromptRenderer.call(batch: batch, song: song)
-        materials = @mapper.generate_and_parse(prompt)
-
-        batch.zip(materials).filter_map do |vocab, raw_material|
-          # puts "[DEBUG] vocab=#{vocab.name}, level=#{vocab.level}"
-          material_for_db = validate_vocab_format(vocab, raw_material)
-          next unless material_for_db
-
-          save_vocab_material(vocab, material_for_db)
-        end
-      end
-
-      def validate_vocab_format(vocab, raw_material)
-        return unless raw_material
-
-        Validator::VocabularyInput.call(
-          raw_hash: raw_material,
-          word: vocab.name
-        )
-      end
-
-      def save_vocab_material(vocab, material_for_db)
-        attrs = vocab.to_attr_hash.merge(
-          material: JSON.generate(material_for_db)
-        )
-
-        updated = Entity::Vocabulary.new(attrs)
-        @vocabs_repo.update_material(updated.id, updated.material)
-        updated
-      end
-
       def find_song(song_id)
         song = @songs_repo.find_by_id(song_id)
         raise SONG_NOT_EXISTS unless song
@@ -131,19 +90,28 @@ module LingoBeats
         vocabs
       end
 
-      # helper class to render Gemini prompt
-      class PromptRenderer
-        TEMPLATE_PATH = 'app/application/services/prompts/material_prompt.erb'
+      # if no pending vocabs, build the material entity to return
+      # :reek:FeatureEnvy
+      def build_material_entity(song)
+        contents = @vocabs_repo.vocabs_content(song.id)
+        Response::Material.new(song: song.name, contents: contents)
+      end
 
-        def self.call(batch:, song:)
-          pairs = batch.map { |vocab| { word: vocab.name, level: vocab.level } }
+      def handle_no_pending_materials(input)
+        material = build_material_entity(input[:song])
+        Success(input.merge(status: :ok, message: material))
+      end
 
-          template = File.read(TEMPLATE_PATH)
+      def handle_pending_materials(input)
+        song = input[:song]
 
-          ERB.new(template).result_with_hash(
-            vocab_pairs: pairs,
-            song_name: song.name
-          )
+        if Material::ProcessingLock.acquire?(song.id)
+          # first time enqueue
+          @material_job_queue.enqueue(song)
+          Success(input.merge(status: :processing, message: MATERIAL_QUEUE_MESSAGES[:insert_to_queue]))
+        else
+          App.logger.info("[AddMaterial] material job already queued for song=#{song.name}, song_id=#{song.id}")
+          Success(input.merge(status: :processing, message: MATERIAL_QUEUE_MESSAGES[:already_queued]))
         end
       end
     end
