@@ -51,16 +51,29 @@ module LingoBeats
         words = clean_words
         results = Mixins::DifficultyEstimator.new(words).call
 
-        # let A1/A2 → A, B1/B2 → B, C1/C2 → C
-        mapped_results = results.transform_values do |lvl|
-          case lvl
-          when /^A/ then 'A'
-          when /^B/ then 'B'
-          when /^C/ then 'C'
-          end
-        end
+        puts "[DEBUG] evaluate_difficulty results sample: #{results.first.inspect}"
 
-        mapped_results.reject { |_word, lvl| [nil, 'None'].include?(lvl) }
+        # let A1/A2 → A, B1/B2 → B, C1/C2 → C
+        mapped_results =
+        results.map do |result|
+          raw_level = result["level"]
+          
+          collapsed =
+            case raw_level
+            when /^A/ then 'A'
+            when /^B/ then 'B'
+            when /^C/ then 'C'
+            end
+          
+          next nil if collapsed.nil?
+
+          result.merge("level" => collapsed)
+        end.compact
+
+        puts "[DEBUG] Mapped results sample: #{mapped_results.first.inspect}"
+
+        # mapped_results.reject { |_word, lvl| [nil, 'None'].include?(lvl) }
+        mapped_results
       end
     end
   end

@@ -10,10 +10,11 @@ module LingoBeats
     class Vocabulary < Dry::Struct
       include Dry.Types
 
-      attribute :id,           Integer.optional
-      attribute :name,         Strict::String
-      attribute :level,        Strict::String
-      attribute :material,     Strict::String.optional # JSON string (nullable)
+      attribute :id,            Integer.optional
+      attribute :name,          Strict::String
+      attribute :original_word, Strict::String
+      attribute :level,         Strict::String
+      attribute :material,      Strict::String.optional # JSON string (nullable)
 
       # Helper: parse JSON → Hash
       def material_hash

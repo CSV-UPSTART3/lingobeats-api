@@ -12,6 +12,9 @@ module LingoBeats
       property :word,
                getter: ->(represented:, **) { represented[:word] || represented['word'] }
 
+      property :origin_word,
+               getter: ->(represented:, **) { represented[:origin_word] || represented['origin_word'] }
+
       property :level,
                getter: ->(represented:, **) { represented[:level] || represented['level'] }
 

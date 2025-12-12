@@ -45,7 +45,8 @@ module LingoBeats
 
       def self.create(entity)
         rec = VocabularyOrm.create(
-          name: entity.name,
+          name: entity.lemma,
+          original_word: entity.original_word,
           level: entity.level,
           material: entity.material
         )
@@ -58,6 +59,7 @@ module LingoBeats
           entities.map do |ent|
             rec = VocabularyOrm.create(
               name: ent.name,
+              original_word: ent.original_word,
               level: ent.level,
               material: ent.material
             )
@@ -108,6 +110,7 @@ module LingoBeats
 
           material.merge(
             'word'  => vocab.name,
+            'origin_word' => vocab.original_word,
             'level' => vocab.level
           )
         end
@@ -125,6 +128,7 @@ module LingoBeats
           id: rec.id,
           name: rec.name,
           level: rec.level,
+          original_word: rec.original_word,
           material: rec.material # String 或 nil
         )
       end
