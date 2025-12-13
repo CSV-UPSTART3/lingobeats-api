@@ -109,15 +109,19 @@ def lemmatize_with_spacy(words, nlp):
         return []
 
     doc = nlp(" ".join(words))
-    lemmas = []
+    # lemmas = []
+    pairs = []
     for token in doc:
+        # lemma = token.lemma_.lower()
+        surface = token.text.lower()
         lemma = token.lemma_.lower()
         if lemma in STOP_WORDS:
             continue
         if not looks_like_word(lemma):
             continue
-        lemmas.append(lemma)
-    return lemmas
+        # lemmas.append(lemma)
+        pairs.append((surface, lemma))
+    return pairs
 
 def preprocess(words):
     # 確保 spaCy 模型已安裝
@@ -152,8 +156,15 @@ def preprocess(words):
             cleaned.append(sub_lower)
             
     cleaned = filter_name_like_tokens(cleaned, nlp)
-    cleaned = lemmatize_with_spacy(cleaned, nlp) # Lemmatize
-    return cleaned
+    cleaned = lemmatize_with_spacy(cleaned, nlp) # Lemmatize + remove stopwords
+
+    # 防止同一個 (surface, lemma) pair 出現多次
+    unique_pairs = {}
+    for surface, lemma in cleaned:
+        key = (surface, lemma)
+        unique_pairs[key] = (surface, lemma)
+
+    return list(unique_pairs.values())
 
 if __name__ == "__main__":
     # print(preprocess(["you're"]))

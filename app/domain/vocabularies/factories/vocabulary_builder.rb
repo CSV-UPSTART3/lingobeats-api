@@ -9,9 +9,17 @@ module LingoBeats
       # difficulties: { "ghost" => "B1", "stage" => "A2", ... }
       # existing_names: ["ghost", ...]
       def self.build_from_difficulties(difficulties, existing_names:)
-        candidates = difficulties.reject do |word, level|
-          existing_names.include?(word) || !level
+        # difficulties: [[original_word, lemma, level], ...]
+        # candidates = difficulties.reject do |original_word, lemma, level|
+        #   existing_names.include?(lemma) || !level
+        # end
+        candidates = difficulties.reject do |item|
+          lemma = item["lemma"]
+          level = item["level"]
+          existing_names.include?(lemma) || !level
         end
+
+        puts "[DEBUG] candidates sample: #{candidates.first.inspect}"
 
         create_entities(candidates)
       end
@@ -20,10 +28,26 @@ module LingoBeats
         private
 
         def create_entities(candidates)
-          candidates.map do |word, level|
+          # candidates.map do |original_word, lemma, level|
+          #   Entity::Vocabulary.new(
+          #     id: nil,
+          #     name: lemma,
+          #     original_word: original_word,
+          #     level: level,
+          #     material: nil
+          #   )
+          # end
+          candidates.map do |item|
+            lemma = item["lemma"]
+            original_word = item["origin_word"]
+            level = item["level"]
+
+            puts "[DEBUG] Creating entity for lemma=#{lemma}, original_word=#{original_word}, level=#{level}"
+
             Entity::Vocabulary.new(
               id: nil,
-              name: word,
+              name: lemma,
+              original_word: original_word,
               level: level,
               material: nil
             )
