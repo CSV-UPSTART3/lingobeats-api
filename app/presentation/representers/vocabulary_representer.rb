@@ -9,6 +9,9 @@ module LingoBeats
     class Vocabulary < Roar::Decorator
       include Roar::JSON
 
+      property :id,
+               getter: ->(represented:, **) { represented[:id] || represented['id'] }
+
       property :word,
                getter: ->(represented:, **) { represented[:word] || represented['word'] }
 

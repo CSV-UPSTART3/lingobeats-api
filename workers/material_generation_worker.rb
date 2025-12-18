@@ -32,10 +32,10 @@ module MaterialGeneration
       data = LingoBeats::Representer::MaterialJob.from_json(body)
       job = JobReporter.new(MaterialGenerationWorker.config, data)
       service = LingoBeats::Service::MaterialGenerationService.new
-      
+
       puts "[Worker] Start generating materials for song #{data['song_id']}"
       job.report(GenerationMonitor.starting)
-      
+
       service.call(data['song_id']) do |event|
         job.report(
           GenerationMonitor.progress(event[:current], event[:total])

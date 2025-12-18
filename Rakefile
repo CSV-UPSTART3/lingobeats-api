@@ -3,8 +3,6 @@
 require 'rake/testtask'
 require_relative 'require_app'
 
-require_app
-
 task :default do
   puts `rake -T`
 end
@@ -57,7 +55,9 @@ namespace :db do
     require_relative 'config/environment' # load config info
     require_relative 'spec/helpers/database_helper'
 
-    def app = LingoBeats::App # rubocop:disable Rake/MethodDefinitionInTask
+    def app # rubocop:disable Rake/MethodDefinitionInTask
+      LingoBeats::App
+    end
   end
 
   desc 'Run migrations'
