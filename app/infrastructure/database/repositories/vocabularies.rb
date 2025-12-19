@@ -45,7 +45,7 @@ module LingoBeats
 
       def self.create(entity)
         rec = VocabularyOrm.create(
-          name: entity.lemma,
+          name: entity.name,
           original_word: entity.original_word,
           level: entity.level,
           material: entity.material

@@ -42,7 +42,12 @@ describe 'Test LingoBeats API routes' do
   describe 'Songs routes' do
     describe 'GET /api/v1/songs' do
       it 'returns popular songs when no params given' do
-        get '/api/v1/songs'
+        VCR.use_cassette('spotify_popular_songs') do
+          get '/api/v1/songs'
+        end
+
+        puts "STATUS: #{last_response.status}"
+        puts "BODY: #{last_response.body}"
 
         _(last_response.status).must_equal 200
 

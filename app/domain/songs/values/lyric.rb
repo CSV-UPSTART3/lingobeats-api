@@ -51,7 +51,7 @@ module LingoBeats
         words = clean_words
         results = Mixins::DifficultyEstimator.new(words).call
 
-        puts "[DEBUG] evaluate_difficulty results sample: #{results.first.inspect}"
+        # puts "[DEBUG] evaluate_difficulty results sample: #{results.first.inspect}"
 
         # let A1/A2 → A, B1/B2 → B, C1/C2 → C
         mapped_results =
@@ -70,7 +70,7 @@ module LingoBeats
           result.merge("level" => collapsed)
         end.compact
 
-        puts "[DEBUG] Mapped results sample: #{mapped_results.first.inspect}"
+        # puts "[DEBUG] Mapped results sample: #{mapped_results.first.inspect}"
 
         # mapped_results.reject { |_word, lvl| [nil, 'None'].include?(lvl) }
         mapped_results
