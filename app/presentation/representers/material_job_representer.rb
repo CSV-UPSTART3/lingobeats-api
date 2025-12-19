@@ -8,13 +8,15 @@ module LingoBeats
     class MaterialJob
       include Roar::JSON
 
-      def initialize(song_id:)
+      def initialize(song_id:, request_id:)
         @song_id = song_id
+        @request_id = request_id
       end
 
       def to_json(*_args)
         {
-          song_id: @song_id
+          song_id: @song_id,
+          request_id: @request_id
         }.to_json
       end
 

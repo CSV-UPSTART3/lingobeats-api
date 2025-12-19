@@ -43,7 +43,7 @@ module LingoBeats
       # step 1. fetch song + vocabs
       def fetch_data(input)
         song = find_song(input[:song_id])
-        Success({ song:, vocabs: find_vocabs(song.id) })
+        Success(input.merge(song: song, vocabs: find_vocabs(song.id)))
       rescue StandardError => error
         App.logger.error("[AddMaterial] fetch data error: #{error.full_message}")
         Failure(Response::ApiResult.new(status: :internal_error, message: error.message || DB_ERROR))
@@ -107,7 +107,7 @@ module LingoBeats
 
         if Material::ProcessingLock.acquire?(song.id)
           # first time enqueue
-          @material_job_queue.enqueue(song)
+          @material_job_queue.enqueue(song, input[:request_id])
           Success(input.merge(status: :processing, message: MATERIAL_QUEUE_MESSAGES[:insert_to_queue]))
         else
           App.logger.info("[AddMaterial] material job already queued for song=#{song.name}, song_id=#{song.id}")

@@ -30,9 +30,11 @@ module LingoBeats
 
       # step 1. fetch song + validate materials exist
       def fetch_data(input)
-        song = find_song(input[:song_id])
+        song     = find_song(input[:song_id])
+        contents = @vocabs_repo.vocabs_content(song.id)
+        status   = contents.empty? ? material_status(song.id) : :ok
 
-        Success(input.merge(song_name: song.name, status: material_status(song.id)))
+        Success(input.merge(song_name: song.name, status:, contents:))
       rescue StandardError => error
         App.logger.error("[GetMaterial] fetch data error: #{error.full_message}")
         Failure(Response::ApiResult.new(status: :not_found, message: error.message || DB_ERROR))
@@ -55,9 +57,6 @@ module LingoBeats
       end
 
       def material_status(song_id)
-        incomplete = @vocabs_repo.incomplete_material?(song_id)
-        return :ok unless incomplete
-
         Material::ProcessingLock.processing?(song_id) ? :processing : :not_found
       end
 
@@ -74,8 +73,7 @@ module LingoBeats
 
       # :reek:FeatureEnvy
       def build_material_entity(input)
-        contents = @vocabs_repo.vocabs_content(input[:song_id])
-        Response::Material.new(song: input[:song_name], contents: contents)
+        Response::Material.new(song: input[:song_name], contents: input[:contents])
       end
     end
   end

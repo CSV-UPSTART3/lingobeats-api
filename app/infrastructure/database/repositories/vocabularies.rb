@@ -109,9 +109,10 @@ module LingoBeats
           material = JSON.parse(vocab.material)
 
           material.merge(
-            'word'  => vocab.name,
+            'id'          => vocab.id,
+            'word'        => vocab.name,
             'origin_word' => vocab.original_word,
-            'level' => vocab.level
+            'level'       => vocab.level
           )
         end
       end

@@ -13,6 +13,8 @@ module LingoBeats
   class App < Roda
     plugin :environments
 
+    ROOT_PATH = File.expand_path('..', __dir__)
+
     # Environment variables setup
     Figaro.application = Figaro::Application.new(
       environment:,
@@ -33,8 +35,8 @@ module LingoBeats
     configure :production do
       use Rack::Cache,
           verbose: true,
-          metastore: config.REDISCLOUD_URL + '/0/metastore',
-          entitystore: config.REDISCLOUD_URL + '/0/entitystore'
+          metastore: "#{config.REDISCLOUD_URL}/0/metastore",
+          entitystore: "#{config.REDISCLOUD_URL}/0/entitystore"
     end
 
     # Automated HTTP stubbing for testing only
@@ -47,11 +49,13 @@ module LingoBeats
     # Database Setup
     configure :development, :test, :app_test do
       require 'pry'; # for breakpoints
-      ENV['DATABASE_URL'] = "sqlite://#{config.DB_FILENAME}"
+      db_path = File.expand_path(config.DB_FILENAME, ROOT_PATH)
+      ENV['DATABASE_URL'] = "sqlite://#{db_path}"
     end
 
     # Database Setup
     @db = Sequel.connect(ENV.fetch('DATABASE_URL'))
+    Sequel::Model.db = @db
     def self.db = @db # rubocop:disable Style/TrivialAccessors
 
     # Logger Setup

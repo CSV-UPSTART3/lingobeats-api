@@ -102,7 +102,8 @@ module LingoBeats
               incomplete = Repository::For.klass(Entity::Vocabulary).incomplete_material?(song_id)
 
               if incomplete
-                result = Service::AddMaterial.new.call(song_id:)
+                request_id = [request.env, request.path, Time.now.to_f].hash
+                result = Service::AddMaterial.new.call(song_id:, request_id:)
                 RouteHelpers::Response.call(routing, result, nil)
               else
                 # convert to GET /songs/:id/material

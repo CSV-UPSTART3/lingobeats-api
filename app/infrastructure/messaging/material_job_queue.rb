@@ -12,8 +12,8 @@ module LingoBeats
         puts "[DEBUG] initialized with queue_url=#{@queue_url}"
       end
 
-      def enqueue(song)
-        payload = Representer::MaterialJob.new(song_id: song.id)
+      def enqueue(song, request_id)
+        payload = Representer::MaterialJob.new(song_id: song.id, request_id: request_id)
                                           .to_json
 
         queue_client.send(payload)

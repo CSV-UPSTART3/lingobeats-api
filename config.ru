@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'faye'
 require 'rack/cors'
 
 require_relative 'require_app'
@@ -15,4 +16,5 @@ use Rack::Cors do
   end
 end
 
+use Faye::RackAdapter, mount: '/faye', timeout: 25
 run LingoBeats::App.freeze.app
