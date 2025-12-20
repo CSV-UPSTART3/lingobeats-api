@@ -1,0 +1,1670 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <SPOTIFY_ACCESS_TOKEN>
+      Connection:
+      - close
+      Host:
+      - api.spotify.com
+      User-Agent:
+      - http.rb/5.3.1
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Www-Authenticate:
+      - Bearer realm="spotify", error="invalid_request", error_description="Only valid
+        bearer authentication supported"
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '99'
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Sat, 20 Dec 2025 07:52:35 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "error": {
+            "status": 400,
+            "message": "Only valid bearer authentication supported"
+          }
+        }
+  recorded_at: Sat, 20 Dec 2025 07:52:35 GMT
+- request:
+    method: post
+    uri: https://accounts.spotify.com/api/token
+    body:
+      encoding: ASCII-8BIT
+      string: grant_type=client_credentials
+    headers:
+      Authorization:
+      - Basic <SPOTIFY_BASIC_AUTH>
+      Connection:
+      - close
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - accounts.spotify.com
+      User-Agent:
+      - http.rb/5.3.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 20 Dec 2025 07:53:02 GMT
+      Request-Id:
+      - 9ef21188-8e95-4c5b-a1d6-09c689253b21
+      Content-Type:
+      - application/json
+      Set-Cookie:
+      - __Host-device_id=AQAxmfCfvM7pInazvnRzF2Y3IN4oS6taxqheYWHhfDgKHByt7aue7V7lDv7FqviUyEf3gOGi96K9MA66nZN6Rc4fbxIdIA9LLmU;Version=1;Path=/;Max-Age=2147483647;Secure;HttpOnly;SameSite=Lax
+      - sp_tr=false;Version=1;Domain=accounts.spotify.com;Path=/;Secure;SameSite=Lax
+      Content-Length:
+      - '198'
+      Server:
+      - envoy
+      X-Envoy-Upstream-Service-Time:
+      - '6'
+      Via:
+      - HTTP/1.1 fringe, HTTP/2 edgeproxy, 1.1 google
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Vary:
+      - Accept-Encoding
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"<SPOTIFY_ACCESS_TOKEN>","token_type":"Bearer","expires_in":3600}'
+  recorded_at: Sat, 20 Dec 2025 07:53:02 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <SPOTIFY_ACCESS_TOKEN>
+      Connection:
+      - close
+      Host:
+      - api.spotify.com
+      User-Agent:
+      - http.rb/5.3.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=0
+      Etag:
+      - '"MC-ImQ0MGRkMGJhZjBkMzFkZWFjOTFjNzlkNmE1ZGQ4MzAwIg=="'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Length:
+      - '3556'
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Sat, 20 Dec 2025 07:53:02 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"album":{"album_type":"album","artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"external_urls":{"spotify":"https://open.spotify.com/album/4a6NzYL1YHRUgx9e3YZI6I"},"href":"https://api.spotify.com/v1/albums/4a6NzYL1YHRUgx9e3YZI6I","id":"4a6NzYL1YHRUgx9e3YZI6I","images":[{"url":"https://i.scdn.co/image/ab67616d0000b273d7812467811a7da6e6a44902","width":640,"height":640},{"url":"https://i.scdn.co/image/ab67616d00001e02d7812467811a7da6e6a44902","width":300,"height":300},{"url":"https://i.scdn.co/image/ab67616d00004851d7812467811a7da6e6a44902","width":64,"height":64}],"name":"The
+        Life of a Showgirl","release_date":"2025-10-03","release_date_precision":"day","total_tracks":12,"type":"album","uri":"spotify:album:4a6NzYL1YHRUgx9e3YZI6I"},"artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"disc_number":1,"duration_ms":226073,"explicit":false,"external_ids":{"isrc":"USUG12506436"},"external_urls":{"spotify":"https://open.spotify.com/track/53iuhJlwXhSER5J2IYYv1W"},"href":"https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W","id":"53iuhJlwXhSER5J2IYYv1W","is_local":false,"name":"The
+        Fate of Ophelia","popularity":100,"preview_url":null,"track_number":1,"type":"track","uri":"spotify:track:53iuhJlwXhSER5J2IYYv1W"}'
+  recorded_at: Sat, 20 Dec 2025 07:53:02 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <SPOTIFY_ACCESS_TOKEN>
+      Connection:
+      - close
+      Host:
+      - api.spotify.com
+      User-Agent:
+      - http.rb/5.3.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=0
+      Etag:
+      - '"MC-ImQ0MGRkMGJhZjBkMzFkZWFjOTFjNzlkNmE1ZGQ4MzAwIg=="'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Length:
+      - '3556'
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Sat, 20 Dec 2025 08:44:30 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"album":{"album_type":"album","artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"external_urls":{"spotify":"https://open.spotify.com/album/4a6NzYL1YHRUgx9e3YZI6I"},"href":"https://api.spotify.com/v1/albums/4a6NzYL1YHRUgx9e3YZI6I","id":"4a6NzYL1YHRUgx9e3YZI6I","images":[{"url":"https://i.scdn.co/image/ab67616d0000b273d7812467811a7da6e6a44902","width":640,"height":640},{"url":"https://i.scdn.co/image/ab67616d00001e02d7812467811a7da6e6a44902","width":300,"height":300},{"url":"https://i.scdn.co/image/ab67616d00004851d7812467811a7da6e6a44902","width":64,"height":64}],"name":"The
+        Life of a Showgirl","release_date":"2025-10-03","release_date_precision":"day","total_tracks":12,"type":"album","uri":"spotify:album:4a6NzYL1YHRUgx9e3YZI6I"},"artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"disc_number":1,"duration_ms":226073,"explicit":false,"external_ids":{"isrc":"USUG12506436"},"external_urls":{"spotify":"https://open.spotify.com/track/53iuhJlwXhSER5J2IYYv1W"},"href":"https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W","id":"53iuhJlwXhSER5J2IYYv1W","is_local":false,"name":"The
+        Fate of Ophelia","popularity":100,"preview_url":null,"track_number":1,"type":"track","uri":"spotify:track:53iuhJlwXhSER5J2IYYv1W"}'
+  recorded_at: Sat, 20 Dec 2025 08:44:30 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <SPOTIFY_ACCESS_TOKEN>
+      Connection:
+      - close
+      Host:
+      - api.spotify.com
+      User-Agent:
+      - http.rb/5.3.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=0
+      Etag:
+      - '"MC-ImQ0MGRkMGJhZjBkMzFkZWFjOTFjNzlkNmE1ZGQ4MzAwIg=="'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Length:
+      - '3556'
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Sat, 20 Dec 2025 08:44:36 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"album":{"album_type":"album","artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"external_urls":{"spotify":"https://open.spotify.com/album/4a6NzYL1YHRUgx9e3YZI6I"},"href":"https://api.spotify.com/v1/albums/4a6NzYL1YHRUgx9e3YZI6I","id":"4a6NzYL1YHRUgx9e3YZI6I","images":[{"url":"https://i.scdn.co/image/ab67616d0000b273d7812467811a7da6e6a44902","width":640,"height":640},{"url":"https://i.scdn.co/image/ab67616d00001e02d7812467811a7da6e6a44902","width":300,"height":300},{"url":"https://i.scdn.co/image/ab67616d00004851d7812467811a7da6e6a44902","width":64,"height":64}],"name":"The
+        Life of a Showgirl","release_date":"2025-10-03","release_date_precision":"day","total_tracks":12,"type":"album","uri":"spotify:album:4a6NzYL1YHRUgx9e3YZI6I"},"artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"disc_number":1,"duration_ms":226073,"explicit":false,"external_ids":{"isrc":"USUG12506436"},"external_urls":{"spotify":"https://open.spotify.com/track/53iuhJlwXhSER5J2IYYv1W"},"href":"https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W","id":"53iuhJlwXhSER5J2IYYv1W","is_local":false,"name":"The
+        Fate of Ophelia","popularity":100,"preview_url":null,"track_number":1,"type":"track","uri":"spotify:track:53iuhJlwXhSER5J2IYYv1W"}'
+  recorded_at: Sat, 20 Dec 2025 08:44:36 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <SPOTIFY_ACCESS_TOKEN>
+      Connection:
+      - close
+      Host:
+      - api.spotify.com
+      User-Agent:
+      - http.rb/5.3.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=0
+      Etag:
+      - '"MC-ImQ0MGRkMGJhZjBkMzFkZWFjOTFjNzlkNmE1ZGQ4MzAwIg=="'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Length:
+      - '3556'
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Sat, 20 Dec 2025 08:44:36 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"album":{"album_type":"album","artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"external_urls":{"spotify":"https://open.spotify.com/album/4a6NzYL1YHRUgx9e3YZI6I"},"href":"https://api.spotify.com/v1/albums/4a6NzYL1YHRUgx9e3YZI6I","id":"4a6NzYL1YHRUgx9e3YZI6I","images":[{"url":"https://i.scdn.co/image/ab67616d0000b273d7812467811a7da6e6a44902","width":640,"height":640},{"url":"https://i.scdn.co/image/ab67616d00001e02d7812467811a7da6e6a44902","width":300,"height":300},{"url":"https://i.scdn.co/image/ab67616d00004851d7812467811a7da6e6a44902","width":64,"height":64}],"name":"The
+        Life of a Showgirl","release_date":"2025-10-03","release_date_precision":"day","total_tracks":12,"type":"album","uri":"spotify:album:4a6NzYL1YHRUgx9e3YZI6I"},"artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"disc_number":1,"duration_ms":226073,"explicit":false,"external_ids":{"isrc":"USUG12506436"},"external_urls":{"spotify":"https://open.spotify.com/track/53iuhJlwXhSER5J2IYYv1W"},"href":"https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W","id":"53iuhJlwXhSER5J2IYYv1W","is_local":false,"name":"The
+        Fate of Ophelia","popularity":100,"preview_url":null,"track_number":1,"type":"track","uri":"spotify:track:53iuhJlwXhSER5J2IYYv1W"}'
+  recorded_at: Sat, 20 Dec 2025 08:44:37 GMT
+- request:
+    method: post
+    uri: https://accounts.spotify.com/api/token
+    body:
+      encoding: ASCII-8BIT
+      string: grant_type=client_credentials
+    headers:
+      Authorization:
+      - Basic <SPOTIFY_BASIC_AUTH>
+      Connection:
+      - close
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - accounts.spotify.com
+      User-Agent:
+      - http.rb/5.3.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 20 Dec 2025 08:51:03 GMT
+      Request-Id:
+      - c80d4942-b183-4c93-bd21-02243613adca
+      Content-Type:
+      - application/json
+      Set-Cookie:
+      - __Host-device_id=AQBPBQ11G5xZCCF-Tb4VaqxfvladMrA9fvZvlPkrisz6YsVFxPGXZN9KONgsaEPKHA910wfomLru--RCxfMG5rHfHVF4uoylzlM;Version=1;Path=/;Max-Age=2147483647;Secure;HttpOnly;SameSite=Lax
+      - sp_tr=false;Version=1;Domain=accounts.spotify.com;Path=/;Secure;SameSite=Lax
+      Content-Length:
+      - '198'
+      Server:
+      - envoy
+      X-Envoy-Upstream-Service-Time:
+      - '7'
+      Via:
+      - HTTP/1.1 fringe, HTTP/2 edgeproxy, 1.1 google
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Vary:
+      - Accept-Encoding
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"<SPOTIFY_ACCESS_TOKEN>","token_type":"Bearer","expires_in":3600}'
+  recorded_at: Sat, 20 Dec 2025 08:51:03 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <SPOTIFY_ACCESS_TOKEN>
+      Connection:
+      - close
+      Host:
+      - api.spotify.com
+      User-Agent:
+      - http.rb/5.3.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=0
+      Etag:
+      - '"MC-ImQ0MGRkMGJhZjBkMzFkZWFjOTFjNzlkNmE1ZGQ4MzAwIg=="'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Length:
+      - '3556'
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Sat, 20 Dec 2025 08:51:03 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"album":{"album_type":"album","artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"external_urls":{"spotify":"https://open.spotify.com/album/4a6NzYL1YHRUgx9e3YZI6I"},"href":"https://api.spotify.com/v1/albums/4a6NzYL1YHRUgx9e3YZI6I","id":"4a6NzYL1YHRUgx9e3YZI6I","images":[{"url":"https://i.scdn.co/image/ab67616d0000b273d7812467811a7da6e6a44902","width":640,"height":640},{"url":"https://i.scdn.co/image/ab67616d00001e02d7812467811a7da6e6a44902","width":300,"height":300},{"url":"https://i.scdn.co/image/ab67616d00004851d7812467811a7da6e6a44902","width":64,"height":64}],"name":"The
+        Life of a Showgirl","release_date":"2025-10-03","release_date_precision":"day","total_tracks":12,"type":"album","uri":"spotify:album:4a6NzYL1YHRUgx9e3YZI6I"},"artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"disc_number":1,"duration_ms":226073,"explicit":false,"external_ids":{"isrc":"USUG12506436"},"external_urls":{"spotify":"https://open.spotify.com/track/53iuhJlwXhSER5J2IYYv1W"},"href":"https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W","id":"53iuhJlwXhSER5J2IYYv1W","is_local":false,"name":"The
+        Fate of Ophelia","popularity":100,"preview_url":null,"track_number":1,"type":"track","uri":"spotify:track:53iuhJlwXhSER5J2IYYv1W"}'
+  recorded_at: Sat, 20 Dec 2025 08:51:04 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <SPOTIFY_ACCESS_TOKEN>
+      Connection:
+      - close
+      Host:
+      - api.spotify.com
+      User-Agent:
+      - http.rb/5.3.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=0
+      Etag:
+      - '"MC-ImQ0MGRkMGJhZjBkMzFkZWFjOTFjNzlkNmE1ZGQ4MzAwIg=="'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Length:
+      - '3556'
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Sat, 20 Dec 2025 09:31:48 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"album":{"album_type":"album","artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"external_urls":{"spotify":"https://open.spotify.com/album/4a6NzYL1YHRUgx9e3YZI6I"},"href":"https://api.spotify.com/v1/albums/4a6NzYL1YHRUgx9e3YZI6I","id":"4a6NzYL1YHRUgx9e3YZI6I","images":[{"url":"https://i.scdn.co/image/ab67616d0000b273d7812467811a7da6e6a44902","width":640,"height":640},{"url":"https://i.scdn.co/image/ab67616d00001e02d7812467811a7da6e6a44902","width":300,"height":300},{"url":"https://i.scdn.co/image/ab67616d00004851d7812467811a7da6e6a44902","width":64,"height":64}],"name":"The
+        Life of a Showgirl","release_date":"2025-10-03","release_date_precision":"day","total_tracks":12,"type":"album","uri":"spotify:album:4a6NzYL1YHRUgx9e3YZI6I"},"artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"disc_number":1,"duration_ms":226073,"explicit":false,"external_ids":{"isrc":"USUG12506436"},"external_urls":{"spotify":"https://open.spotify.com/track/53iuhJlwXhSER5J2IYYv1W"},"href":"https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W","id":"53iuhJlwXhSER5J2IYYv1W","is_local":false,"name":"The
+        Fate of Ophelia","popularity":100,"preview_url":null,"track_number":1,"type":"track","uri":"spotify:track:53iuhJlwXhSER5J2IYYv1W"}'
+  recorded_at: Sat, 20 Dec 2025 09:31:49 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <SPOTIFY_ACCESS_TOKEN>
+      Connection:
+      - close
+      Host:
+      - api.spotify.com
+      User-Agent:
+      - http.rb/5.3.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=0
+      Etag:
+      - '"MC-ImQ0MGRkMGJhZjBkMzFkZWFjOTFjNzlkNmE1ZGQ4MzAwIg=="'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Length:
+      - '3556'
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Sat, 20 Dec 2025 09:31:52 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"album":{"album_type":"album","artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"external_urls":{"spotify":"https://open.spotify.com/album/4a6NzYL1YHRUgx9e3YZI6I"},"href":"https://api.spotify.com/v1/albums/4a6NzYL1YHRUgx9e3YZI6I","id":"4a6NzYL1YHRUgx9e3YZI6I","images":[{"url":"https://i.scdn.co/image/ab67616d0000b273d7812467811a7da6e6a44902","width":640,"height":640},{"url":"https://i.scdn.co/image/ab67616d00001e02d7812467811a7da6e6a44902","width":300,"height":300},{"url":"https://i.scdn.co/image/ab67616d00004851d7812467811a7da6e6a44902","width":64,"height":64}],"name":"The
+        Life of a Showgirl","release_date":"2025-10-03","release_date_precision":"day","total_tracks":12,"type":"album","uri":"spotify:album:4a6NzYL1YHRUgx9e3YZI6I"},"artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"disc_number":1,"duration_ms":226073,"explicit":false,"external_ids":{"isrc":"USUG12506436"},"external_urls":{"spotify":"https://open.spotify.com/track/53iuhJlwXhSER5J2IYYv1W"},"href":"https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W","id":"53iuhJlwXhSER5J2IYYv1W","is_local":false,"name":"The
+        Fate of Ophelia","popularity":100,"preview_url":null,"track_number":1,"type":"track","uri":"spotify:track:53iuhJlwXhSER5J2IYYv1W"}'
+  recorded_at: Sat, 20 Dec 2025 09:31:52 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <SPOTIFY_ACCESS_TOKEN>
+      Connection:
+      - close
+      Host:
+      - api.spotify.com
+      User-Agent:
+      - http.rb/5.3.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=0
+      Etag:
+      - '"MC-ImQ0MGRkMGJhZjBkMzFkZWFjOTFjNzlkNmE1ZGQ4MzAwIg=="'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Length:
+      - '3556'
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Sat, 20 Dec 2025 09:31:57 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"album":{"album_type":"album","artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"external_urls":{"spotify":"https://open.spotify.com/album/4a6NzYL1YHRUgx9e3YZI6I"},"href":"https://api.spotify.com/v1/albums/4a6NzYL1YHRUgx9e3YZI6I","id":"4a6NzYL1YHRUgx9e3YZI6I","images":[{"url":"https://i.scdn.co/image/ab67616d0000b273d7812467811a7da6e6a44902","width":640,"height":640},{"url":"https://i.scdn.co/image/ab67616d00001e02d7812467811a7da6e6a44902","width":300,"height":300},{"url":"https://i.scdn.co/image/ab67616d00004851d7812467811a7da6e6a44902","width":64,"height":64}],"name":"The
+        Life of a Showgirl","release_date":"2025-10-03","release_date_precision":"day","total_tracks":12,"type":"album","uri":"spotify:album:4a6NzYL1YHRUgx9e3YZI6I"},"artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"disc_number":1,"duration_ms":226073,"explicit":false,"external_ids":{"isrc":"USUG12506436"},"external_urls":{"spotify":"https://open.spotify.com/track/53iuhJlwXhSER5J2IYYv1W"},"href":"https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W","id":"53iuhJlwXhSER5J2IYYv1W","is_local":false,"name":"The
+        Fate of Ophelia","popularity":100,"preview_url":null,"track_number":1,"type":"track","uri":"spotify:track:53iuhJlwXhSER5J2IYYv1W"}'
+  recorded_at: Sat, 20 Dec 2025 09:31:58 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <SPOTIFY_ACCESS_TOKEN>
+      Connection:
+      - close
+      Host:
+      - api.spotify.com
+      User-Agent:
+      - http.rb/5.3.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=0
+      Etag:
+      - '"MC-ImQ0MGRkMGJhZjBkMzFkZWFjOTFjNzlkNmE1ZGQ4MzAwIg=="'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Length:
+      - '3556'
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Sat, 20 Dec 2025 09:31:59 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"album":{"album_type":"album","artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"external_urls":{"spotify":"https://open.spotify.com/album/4a6NzYL1YHRUgx9e3YZI6I"},"href":"https://api.spotify.com/v1/albums/4a6NzYL1YHRUgx9e3YZI6I","id":"4a6NzYL1YHRUgx9e3YZI6I","images":[{"url":"https://i.scdn.co/image/ab67616d0000b273d7812467811a7da6e6a44902","width":640,"height":640},{"url":"https://i.scdn.co/image/ab67616d00001e02d7812467811a7da6e6a44902","width":300,"height":300},{"url":"https://i.scdn.co/image/ab67616d00004851d7812467811a7da6e6a44902","width":64,"height":64}],"name":"The
+        Life of a Showgirl","release_date":"2025-10-03","release_date_precision":"day","total_tracks":12,"type":"album","uri":"spotify:album:4a6NzYL1YHRUgx9e3YZI6I"},"artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"disc_number":1,"duration_ms":226073,"explicit":false,"external_ids":{"isrc":"USUG12506436"},"external_urls":{"spotify":"https://open.spotify.com/track/53iuhJlwXhSER5J2IYYv1W"},"href":"https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W","id":"53iuhJlwXhSER5J2IYYv1W","is_local":false,"name":"The
+        Fate of Ophelia","popularity":100,"preview_url":null,"track_number":1,"type":"track","uri":"spotify:track:53iuhJlwXhSER5J2IYYv1W"}'
+  recorded_at: Sat, 20 Dec 2025 09:31:59 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <SPOTIFY_ACCESS_TOKEN>
+      Connection:
+      - close
+      Host:
+      - api.spotify.com
+      User-Agent:
+      - http.rb/5.3.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=0
+      Etag:
+      - '"MC-ImQ0MGRkMGJhZjBkMzFkZWFjOTFjNzlkNmE1ZGQ4MzAwIg=="'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Length:
+      - '3556'
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Sat, 20 Dec 2025 09:32:02 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"album":{"album_type":"album","artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"external_urls":{"spotify":"https://open.spotify.com/album/4a6NzYL1YHRUgx9e3YZI6I"},"href":"https://api.spotify.com/v1/albums/4a6NzYL1YHRUgx9e3YZI6I","id":"4a6NzYL1YHRUgx9e3YZI6I","images":[{"url":"https://i.scdn.co/image/ab67616d0000b273d7812467811a7da6e6a44902","width":640,"height":640},{"url":"https://i.scdn.co/image/ab67616d00001e02d7812467811a7da6e6a44902","width":300,"height":300},{"url":"https://i.scdn.co/image/ab67616d00004851d7812467811a7da6e6a44902","width":64,"height":64}],"name":"The
+        Life of a Showgirl","release_date":"2025-10-03","release_date_precision":"day","total_tracks":12,"type":"album","uri":"spotify:album:4a6NzYL1YHRUgx9e3YZI6I"},"artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"disc_number":1,"duration_ms":226073,"explicit":false,"external_ids":{"isrc":"USUG12506436"},"external_urls":{"spotify":"https://open.spotify.com/track/53iuhJlwXhSER5J2IYYv1W"},"href":"https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W","id":"53iuhJlwXhSER5J2IYYv1W","is_local":false,"name":"The
+        Fate of Ophelia","popularity":100,"preview_url":null,"track_number":1,"type":"track","uri":"spotify:track:53iuhJlwXhSER5J2IYYv1W"}'
+  recorded_at: Sat, 20 Dec 2025 09:32:03 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <SPOTIFY_ACCESS_TOKEN>
+      Connection:
+      - close
+      Host:
+      - api.spotify.com
+      User-Agent:
+      - http.rb/5.3.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=0
+      Etag:
+      - '"MC-ImQ0MGRkMGJhZjBkMzFkZWFjOTFjNzlkNmE1ZGQ4MzAwIg=="'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Length:
+      - '3556'
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Sat, 20 Dec 2025 09:32:05 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"album":{"album_type":"album","artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"external_urls":{"spotify":"https://open.spotify.com/album/4a6NzYL1YHRUgx9e3YZI6I"},"href":"https://api.spotify.com/v1/albums/4a6NzYL1YHRUgx9e3YZI6I","id":"4a6NzYL1YHRUgx9e3YZI6I","images":[{"url":"https://i.scdn.co/image/ab67616d0000b273d7812467811a7da6e6a44902","width":640,"height":640},{"url":"https://i.scdn.co/image/ab67616d00001e02d7812467811a7da6e6a44902","width":300,"height":300},{"url":"https://i.scdn.co/image/ab67616d00004851d7812467811a7da6e6a44902","width":64,"height":64}],"name":"The
+        Life of a Showgirl","release_date":"2025-10-03","release_date_precision":"day","total_tracks":12,"type":"album","uri":"spotify:album:4a6NzYL1YHRUgx9e3YZI6I"},"artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"disc_number":1,"duration_ms":226073,"explicit":false,"external_ids":{"isrc":"USUG12506436"},"external_urls":{"spotify":"https://open.spotify.com/track/53iuhJlwXhSER5J2IYYv1W"},"href":"https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W","id":"53iuhJlwXhSER5J2IYYv1W","is_local":false,"name":"The
+        Fate of Ophelia","popularity":100,"preview_url":null,"track_number":1,"type":"track","uri":"spotify:track:53iuhJlwXhSER5J2IYYv1W"}'
+  recorded_at: Sat, 20 Dec 2025 09:32:05 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <SPOTIFY_ACCESS_TOKEN>
+      Connection:
+      - close
+      Host:
+      - api.spotify.com
+      User-Agent:
+      - http.rb/5.3.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=0
+      Etag:
+      - '"MC-ImQ0MGRkMGJhZjBkMzFkZWFjOTFjNzlkNmE1ZGQ4MzAwIg=="'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Length:
+      - '3556'
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Sat, 20 Dec 2025 09:32:08 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"album":{"album_type":"album","artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"external_urls":{"spotify":"https://open.spotify.com/album/4a6NzYL1YHRUgx9e3YZI6I"},"href":"https://api.spotify.com/v1/albums/4a6NzYL1YHRUgx9e3YZI6I","id":"4a6NzYL1YHRUgx9e3YZI6I","images":[{"url":"https://i.scdn.co/image/ab67616d0000b273d7812467811a7da6e6a44902","width":640,"height":640},{"url":"https://i.scdn.co/image/ab67616d00001e02d7812467811a7da6e6a44902","width":300,"height":300},{"url":"https://i.scdn.co/image/ab67616d00004851d7812467811a7da6e6a44902","width":64,"height":64}],"name":"The
+        Life of a Showgirl","release_date":"2025-10-03","release_date_precision":"day","total_tracks":12,"type":"album","uri":"spotify:album:4a6NzYL1YHRUgx9e3YZI6I"},"artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"disc_number":1,"duration_ms":226073,"explicit":false,"external_ids":{"isrc":"USUG12506436"},"external_urls":{"spotify":"https://open.spotify.com/track/53iuhJlwXhSER5J2IYYv1W"},"href":"https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W","id":"53iuhJlwXhSER5J2IYYv1W","is_local":false,"name":"The
+        Fate of Ophelia","popularity":100,"preview_url":null,"track_number":1,"type":"track","uri":"spotify:track:53iuhJlwXhSER5J2IYYv1W"}'
+  recorded_at: Sat, 20 Dec 2025 09:32:09 GMT
+- request:
+    method: post
+    uri: https://accounts.spotify.com/api/token
+    body:
+      encoding: ASCII-8BIT
+      string: grant_type=client_credentials
+    headers:
+      Authorization:
+      - Basic <SPOTIFY_BASIC_AUTH>
+      Connection:
+      - close
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - accounts.spotify.com
+      User-Agent:
+      - http.rb/5.3.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 20 Dec 2025 09:46:07 GMT
+      Request-Id:
+      - c0f18c79-0e26-4595-9743-d49d8b508687
+      Content-Type:
+      - application/json
+      Set-Cookie:
+      - __Host-device_id=AQDqynkFebGjcYmSiKJdTCKqdkxwDMjM4jSS3Be4Ead2WqO1QHwlQSGeqRrDBYkt3XjSaAC0xySvEBevZD7-WJ5xbPjoZNFYoGM;Version=1;Path=/;Max-Age=2147483647;Secure;HttpOnly;SameSite=Lax
+      - sp_tr=false;Version=1;Domain=accounts.spotify.com;Path=/;Secure;SameSite=Lax
+      Content-Length:
+      - '198'
+      Server:
+      - envoy
+      X-Envoy-Upstream-Service-Time:
+      - '8'
+      Via:
+      - HTTP/1.1 fringe, HTTP/2 edgeproxy, 1.1 google
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Vary:
+      - Accept-Encoding
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"<SPOTIFY_ACCESS_TOKEN>","token_type":"Bearer","expires_in":3600}'
+  recorded_at: Sat, 20 Dec 2025 09:46:07 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <SPOTIFY_ACCESS_TOKEN>
+      Connection:
+      - close
+      Host:
+      - api.spotify.com
+      User-Agent:
+      - http.rb/5.3.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=0
+      Etag:
+      - '"MC-ImQ0MGRkMGJhZjBkMzFkZWFjOTFjNzlkNmE1ZGQ4MzAwIg=="'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Length:
+      - '3556'
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Sat, 20 Dec 2025 09:46:07 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"album":{"album_type":"album","artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"external_urls":{"spotify":"https://open.spotify.com/album/4a6NzYL1YHRUgx9e3YZI6I"},"href":"https://api.spotify.com/v1/albums/4a6NzYL1YHRUgx9e3YZI6I","id":"4a6NzYL1YHRUgx9e3YZI6I","images":[{"url":"https://i.scdn.co/image/ab67616d0000b273d7812467811a7da6e6a44902","width":640,"height":640},{"url":"https://i.scdn.co/image/ab67616d00001e02d7812467811a7da6e6a44902","width":300,"height":300},{"url":"https://i.scdn.co/image/ab67616d00004851d7812467811a7da6e6a44902","width":64,"height":64}],"name":"The
+        Life of a Showgirl","release_date":"2025-10-03","release_date_precision":"day","total_tracks":12,"type":"album","uri":"spotify:album:4a6NzYL1YHRUgx9e3YZI6I"},"artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"disc_number":1,"duration_ms":226073,"explicit":false,"external_ids":{"isrc":"USUG12506436"},"external_urls":{"spotify":"https://open.spotify.com/track/53iuhJlwXhSER5J2IYYv1W"},"href":"https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W","id":"53iuhJlwXhSER5J2IYYv1W","is_local":false,"name":"The
+        Fate of Ophelia","popularity":100,"preview_url":null,"track_number":1,"type":"track","uri":"spotify:track:53iuhJlwXhSER5J2IYYv1W"}'
+  recorded_at: Sat, 20 Dec 2025 09:46:07 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <SPOTIFY_ACCESS_TOKEN>
+      Connection:
+      - close
+      Host:
+      - api.spotify.com
+      User-Agent:
+      - http.rb/5.3.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=0
+      Etag:
+      - '"MC-ImQ0MGRkMGJhZjBkMzFkZWFjOTFjNzlkNmE1ZGQ4MzAwIg=="'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Length:
+      - '3556'
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Sat, 20 Dec 2025 09:49:50 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"album":{"album_type":"album","artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"external_urls":{"spotify":"https://open.spotify.com/album/4a6NzYL1YHRUgx9e3YZI6I"},"href":"https://api.spotify.com/v1/albums/4a6NzYL1YHRUgx9e3YZI6I","id":"4a6NzYL1YHRUgx9e3YZI6I","images":[{"url":"https://i.scdn.co/image/ab67616d0000b273d7812467811a7da6e6a44902","width":640,"height":640},{"url":"https://i.scdn.co/image/ab67616d00001e02d7812467811a7da6e6a44902","width":300,"height":300},{"url":"https://i.scdn.co/image/ab67616d00004851d7812467811a7da6e6a44902","width":64,"height":64}],"name":"The
+        Life of a Showgirl","release_date":"2025-10-03","release_date_precision":"day","total_tracks":12,"type":"album","uri":"spotify:album:4a6NzYL1YHRUgx9e3YZI6I"},"artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"disc_number":1,"duration_ms":226073,"explicit":false,"external_ids":{"isrc":"USUG12506436"},"external_urls":{"spotify":"https://open.spotify.com/track/53iuhJlwXhSER5J2IYYv1W"},"href":"https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W","id":"53iuhJlwXhSER5J2IYYv1W","is_local":false,"name":"The
+        Fate of Ophelia","popularity":100,"preview_url":null,"track_number":1,"type":"track","uri":"spotify:track:53iuhJlwXhSER5J2IYYv1W"}'
+  recorded_at: Sat, 20 Dec 2025 09:49:50 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <SPOTIFY_ACCESS_TOKEN>
+      Connection:
+      - close
+      Host:
+      - api.spotify.com
+      User-Agent:
+      - http.rb/5.3.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=0
+      Etag:
+      - '"MC-ImQ0MGRkMGJhZjBkMzFkZWFjOTFjNzlkNmE1ZGQ4MzAwIg=="'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Length:
+      - '3556'
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Sat, 20 Dec 2025 09:50:02 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"album":{"album_type":"album","artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"external_urls":{"spotify":"https://open.spotify.com/album/4a6NzYL1YHRUgx9e3YZI6I"},"href":"https://api.spotify.com/v1/albums/4a6NzYL1YHRUgx9e3YZI6I","id":"4a6NzYL1YHRUgx9e3YZI6I","images":[{"url":"https://i.scdn.co/image/ab67616d0000b273d7812467811a7da6e6a44902","width":640,"height":640},{"url":"https://i.scdn.co/image/ab67616d00001e02d7812467811a7da6e6a44902","width":300,"height":300},{"url":"https://i.scdn.co/image/ab67616d00004851d7812467811a7da6e6a44902","width":64,"height":64}],"name":"The
+        Life of a Showgirl","release_date":"2025-10-03","release_date_precision":"day","total_tracks":12,"type":"album","uri":"spotify:album:4a6NzYL1YHRUgx9e3YZI6I"},"artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"disc_number":1,"duration_ms":226073,"explicit":false,"external_ids":{"isrc":"USUG12506436"},"external_urls":{"spotify":"https://open.spotify.com/track/53iuhJlwXhSER5J2IYYv1W"},"href":"https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W","id":"53iuhJlwXhSER5J2IYYv1W","is_local":false,"name":"The
+        Fate of Ophelia","popularity":100,"preview_url":null,"track_number":1,"type":"track","uri":"spotify:track:53iuhJlwXhSER5J2IYYv1W"}'
+  recorded_at: Sat, 20 Dec 2025 09:50:03 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <SPOTIFY_ACCESS_TOKEN>
+      Connection:
+      - close
+      Host:
+      - api.spotify.com
+      User-Agent:
+      - http.rb/5.3.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=0
+      Etag:
+      - '"MC-ImQ0MGRkMGJhZjBkMzFkZWFjOTFjNzlkNmE1ZGQ4MzAwIg=="'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Length:
+      - '3556'
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Sat, 20 Dec 2025 09:50:04 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"album":{"album_type":"album","artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"external_urls":{"spotify":"https://open.spotify.com/album/4a6NzYL1YHRUgx9e3YZI6I"},"href":"https://api.spotify.com/v1/albums/4a6NzYL1YHRUgx9e3YZI6I","id":"4a6NzYL1YHRUgx9e3YZI6I","images":[{"url":"https://i.scdn.co/image/ab67616d0000b273d7812467811a7da6e6a44902","width":640,"height":640},{"url":"https://i.scdn.co/image/ab67616d00001e02d7812467811a7da6e6a44902","width":300,"height":300},{"url":"https://i.scdn.co/image/ab67616d00004851d7812467811a7da6e6a44902","width":64,"height":64}],"name":"The
+        Life of a Showgirl","release_date":"2025-10-03","release_date_precision":"day","total_tracks":12,"type":"album","uri":"spotify:album:4a6NzYL1YHRUgx9e3YZI6I"},"artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"disc_number":1,"duration_ms":226073,"explicit":false,"external_ids":{"isrc":"USUG12506436"},"external_urls":{"spotify":"https://open.spotify.com/track/53iuhJlwXhSER5J2IYYv1W"},"href":"https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W","id":"53iuhJlwXhSER5J2IYYv1W","is_local":false,"name":"The
+        Fate of Ophelia","popularity":100,"preview_url":null,"track_number":1,"type":"track","uri":"spotify:track:53iuhJlwXhSER5J2IYYv1W"}'
+  recorded_at: Sat, 20 Dec 2025 09:50:05 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <SPOTIFY_ACCESS_TOKEN>
+      Connection:
+      - close
+      Host:
+      - api.spotify.com
+      User-Agent:
+      - http.rb/5.3.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=0
+      Etag:
+      - '"MC-ImQ0MGRkMGJhZjBkMzFkZWFjOTFjNzlkNmE1ZGQ4MzAwIg=="'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Length:
+      - '3556'
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Sat, 20 Dec 2025 09:50:08 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"album":{"album_type":"album","artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"external_urls":{"spotify":"https://open.spotify.com/album/4a6NzYL1YHRUgx9e3YZI6I"},"href":"https://api.spotify.com/v1/albums/4a6NzYL1YHRUgx9e3YZI6I","id":"4a6NzYL1YHRUgx9e3YZI6I","images":[{"url":"https://i.scdn.co/image/ab67616d0000b273d7812467811a7da6e6a44902","width":640,"height":640},{"url":"https://i.scdn.co/image/ab67616d00001e02d7812467811a7da6e6a44902","width":300,"height":300},{"url":"https://i.scdn.co/image/ab67616d00004851d7812467811a7da6e6a44902","width":64,"height":64}],"name":"The
+        Life of a Showgirl","release_date":"2025-10-03","release_date_precision":"day","total_tracks":12,"type":"album","uri":"spotify:album:4a6NzYL1YHRUgx9e3YZI6I"},"artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"disc_number":1,"duration_ms":226073,"explicit":false,"external_ids":{"isrc":"USUG12506436"},"external_urls":{"spotify":"https://open.spotify.com/track/53iuhJlwXhSER5J2IYYv1W"},"href":"https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W","id":"53iuhJlwXhSER5J2IYYv1W","is_local":false,"name":"The
+        Fate of Ophelia","popularity":100,"preview_url":null,"track_number":1,"type":"track","uri":"spotify:track:53iuhJlwXhSER5J2IYYv1W"}'
+  recorded_at: Sat, 20 Dec 2025 09:50:09 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <SPOTIFY_ACCESS_TOKEN>
+      Connection:
+      - close
+      Host:
+      - api.spotify.com
+      User-Agent:
+      - http.rb/5.3.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=0
+      Etag:
+      - '"MC-ImQ0MGRkMGJhZjBkMzFkZWFjOTFjNzlkNmE1ZGQ4MzAwIg=="'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Length:
+      - '3556'
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Sat, 20 Dec 2025 09:50:11 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"album":{"album_type":"album","artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"external_urls":{"spotify":"https://open.spotify.com/album/4a6NzYL1YHRUgx9e3YZI6I"},"href":"https://api.spotify.com/v1/albums/4a6NzYL1YHRUgx9e3YZI6I","id":"4a6NzYL1YHRUgx9e3YZI6I","images":[{"url":"https://i.scdn.co/image/ab67616d0000b273d7812467811a7da6e6a44902","width":640,"height":640},{"url":"https://i.scdn.co/image/ab67616d00001e02d7812467811a7da6e6a44902","width":300,"height":300},{"url":"https://i.scdn.co/image/ab67616d00004851d7812467811a7da6e6a44902","width":64,"height":64}],"name":"The
+        Life of a Showgirl","release_date":"2025-10-03","release_date_precision":"day","total_tracks":12,"type":"album","uri":"spotify:album:4a6NzYL1YHRUgx9e3YZI6I"},"artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"disc_number":1,"duration_ms":226073,"explicit":false,"external_ids":{"isrc":"USUG12506436"},"external_urls":{"spotify":"https://open.spotify.com/track/53iuhJlwXhSER5J2IYYv1W"},"href":"https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W","id":"53iuhJlwXhSER5J2IYYv1W","is_local":false,"name":"The
+        Fate of Ophelia","popularity":100,"preview_url":null,"track_number":1,"type":"track","uri":"spotify:track:53iuhJlwXhSER5J2IYYv1W"}'
+  recorded_at: Sat, 20 Dec 2025 09:50:12 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <SPOTIFY_ACCESS_TOKEN>
+      Connection:
+      - close
+      Host:
+      - api.spotify.com
+      User-Agent:
+      - http.rb/5.3.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=0
+      Etag:
+      - '"MC-ImQ0MGRkMGJhZjBkMzFkZWFjOTFjNzlkNmE1ZGQ4MzAwIg=="'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Length:
+      - '3556'
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Sat, 20 Dec 2025 09:50:19 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"album":{"album_type":"album","artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"external_urls":{"spotify":"https://open.spotify.com/album/4a6NzYL1YHRUgx9e3YZI6I"},"href":"https://api.spotify.com/v1/albums/4a6NzYL1YHRUgx9e3YZI6I","id":"4a6NzYL1YHRUgx9e3YZI6I","images":[{"url":"https://i.scdn.co/image/ab67616d0000b273d7812467811a7da6e6a44902","width":640,"height":640},{"url":"https://i.scdn.co/image/ab67616d00001e02d7812467811a7da6e6a44902","width":300,"height":300},{"url":"https://i.scdn.co/image/ab67616d00004851d7812467811a7da6e6a44902","width":64,"height":64}],"name":"The
+        Life of a Showgirl","release_date":"2025-10-03","release_date_precision":"day","total_tracks":12,"type":"album","uri":"spotify:album:4a6NzYL1YHRUgx9e3YZI6I"},"artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"disc_number":1,"duration_ms":226073,"explicit":false,"external_ids":{"isrc":"USUG12506436"},"external_urls":{"spotify":"https://open.spotify.com/track/53iuhJlwXhSER5J2IYYv1W"},"href":"https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W","id":"53iuhJlwXhSER5J2IYYv1W","is_local":false,"name":"The
+        Fate of Ophelia","popularity":100,"preview_url":null,"track_number":1,"type":"track","uri":"spotify:track:53iuhJlwXhSER5J2IYYv1W"}'
+  recorded_at: Sat, 20 Dec 2025 09:50:20 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <SPOTIFY_ACCESS_TOKEN>
+      Connection:
+      - close
+      Host:
+      - api.spotify.com
+      User-Agent:
+      - http.rb/5.3.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=0
+      Etag:
+      - '"MC-ImQ0MGRkMGJhZjBkMzFkZWFjOTFjNzlkNmE1ZGQ4MzAwIg=="'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Length:
+      - '3556'
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Sat, 20 Dec 2025 09:50:22 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"album":{"album_type":"album","artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"external_urls":{"spotify":"https://open.spotify.com/album/4a6NzYL1YHRUgx9e3YZI6I"},"href":"https://api.spotify.com/v1/albums/4a6NzYL1YHRUgx9e3YZI6I","id":"4a6NzYL1YHRUgx9e3YZI6I","images":[{"url":"https://i.scdn.co/image/ab67616d0000b273d7812467811a7da6e6a44902","width":640,"height":640},{"url":"https://i.scdn.co/image/ab67616d00001e02d7812467811a7da6e6a44902","width":300,"height":300},{"url":"https://i.scdn.co/image/ab67616d00004851d7812467811a7da6e6a44902","width":64,"height":64}],"name":"The
+        Life of a Showgirl","release_date":"2025-10-03","release_date_precision":"day","total_tracks":12,"type":"album","uri":"spotify:album:4a6NzYL1YHRUgx9e3YZI6I"},"artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"disc_number":1,"duration_ms":226073,"explicit":false,"external_ids":{"isrc":"USUG12506436"},"external_urls":{"spotify":"https://open.spotify.com/track/53iuhJlwXhSER5J2IYYv1W"},"href":"https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W","id":"53iuhJlwXhSER5J2IYYv1W","is_local":false,"name":"The
+        Fate of Ophelia","popularity":100,"preview_url":null,"track_number":1,"type":"track","uri":"spotify:track:53iuhJlwXhSER5J2IYYv1W"}'
+  recorded_at: Sat, 20 Dec 2025 09:50:23 GMT
+- request:
+    method: post
+    uri: https://accounts.spotify.com/api/token
+    body:
+      encoding: ASCII-8BIT
+      string: grant_type=client_credentials
+    headers:
+      Authorization:
+      - Basic Y2Y2OWRhNjY2NWNiNGJhNGFmYmMyYjUyYjU5YmYyMzc6NzE1ZjI0ZTE1NmQwNGU3ZGI2Nzk0Zjk4NjhiYmM5NGQ=
+      Connection:
+      - close
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - accounts.spotify.com
+      User-Agent:
+      - http.rb/5.3.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 20 Dec 2025 09:52:00 GMT
+      Request-Id:
+      - 685ac7fa-d150-4376-8470-25586561c0c8
+      Content-Type:
+      - application/json
+      Set-Cookie:
+      - __Host-device_id=AQB9vH6y358KV9cpR6DUiiXShn6UMxdtrzEtok3saMC-A4ZibT6fhyWNyIgv8exCK4t7Fofz-yJgEmg8HSytML1dDutqk4Iaf9g;Version=1;Path=/;Max-Age=2147483647;Secure;HttpOnly;SameSite=Lax
+      - sp_tr=false;Version=1;Domain=accounts.spotify.com;Path=/;Secure;SameSite=Lax
+      Content-Length:
+      - '198'
+      Server:
+      - envoy
+      X-Envoy-Upstream-Service-Time:
+      - '6'
+      Via:
+      - HTTP/1.1 fringe, HTTP/2 edgeproxy, 1.1 google
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Vary:
+      - Accept-Encoding
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"BQCIQJ3bC8YoWxPdGlhKCqEQYC_jIQ7CNt8T1CEch3xWOgZ4DkCF7DSip0NBuZqGscyXB6cnTYtqN4UVAIyPVE0PMHNu4Y3X7LrI85pqKA4lhoNw3Pg5LhjN_bg5wRMYHuzUlGRfxfI","token_type":"Bearer","expires_in":3600}'
+  recorded_at: Sat, 20 Dec 2025 09:52:01 GMT
+- request:
+    method: get
+    uri: https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Authorization:
+      - Bearer BQCIQJ3bC8YoWxPdGlhKCqEQYC_jIQ7CNt8T1CEch3xWOgZ4DkCF7DSip0NBuZqGscyXB6cnTYtqN4UVAIyPVE0PMHNu4Y3X7LrI85pqKA4lhoNw3Pg5LhjN_bg5wRMYHuzUlGRfxfI
+      Connection:
+      - close
+      Host:
+      - api.spotify.com
+      User-Agent:
+      - http.rb/5.3.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - public, max-age=0
+      Etag:
+      - '"MC-ImQ0MGRkMGJhZjBkMzFkZWFjOTFjNzlkNmE1ZGQ4MzAwIg=="'
+      X-Robots-Tag:
+      - noindex, nofollow
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Accept, App-Platform, Authorization, Content-Type, Origin, Retry-After, Spotify-App-Version,
+        X-Cloud-Trace-Context, client-token, content-access-token
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS, PUT, DELETE, PATCH
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Max-Age:
+      - '604800'
+      Content-Length:
+      - '3556'
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Sat, 20 Dec 2025 09:52:01 GMT
+      Server:
+      - envoy
+      Via:
+      - HTTP/2 edgeproxy, 1.1 google
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"album":{"album_type":"album","artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"external_urls":{"spotify":"https://open.spotify.com/album/4a6NzYL1YHRUgx9e3YZI6I"},"href":"https://api.spotify.com/v1/albums/4a6NzYL1YHRUgx9e3YZI6I","id":"4a6NzYL1YHRUgx9e3YZI6I","images":[{"url":"https://i.scdn.co/image/ab67616d0000b273d7812467811a7da6e6a44902","width":640,"height":640},{"url":"https://i.scdn.co/image/ab67616d00001e02d7812467811a7da6e6a44902","width":300,"height":300},{"url":"https://i.scdn.co/image/ab67616d00004851d7812467811a7da6e6a44902","width":64,"height":64}],"name":"The
+        Life of a Showgirl","release_date":"2025-10-03","release_date_precision":"day","total_tracks":12,"type":"album","uri":"spotify:album:4a6NzYL1YHRUgx9e3YZI6I"},"artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
+        Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"disc_number":1,"duration_ms":226073,"explicit":false,"external_ids":{"isrc":"USUG12506436"},"external_urls":{"spotify":"https://open.spotify.com/track/53iuhJlwXhSER5J2IYYv1W"},"href":"https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W","id":"53iuhJlwXhSER5J2IYYv1W","is_local":false,"name":"The
+        Fate of Ophelia","popularity":100,"preview_url":null,"track_number":1,"type":"track","uri":"spotify:track:53iuhJlwXhSER5J2IYYv1W"}'
+  recorded_at: Sat, 20 Dec 2025 09:52:01 GMT
+recorded_with: VCR 6.3.1
