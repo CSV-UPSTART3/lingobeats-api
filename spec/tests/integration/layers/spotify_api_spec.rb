@@ -5,19 +5,22 @@ require_relative '../../../helpers/vcr_helper'
 require_relative '../../../helpers/yaml_helper'
 
 describe 'Tests Spotify API library' do
-  before do
-    VcrHelper.configure_vcr_for_spotify
+  before(:all) do
+    puts "[VCR DEBUG] SPOTIFY_CLIENT_ID present? #{!!SPOTIFY_CLIENT_ID && !SPOTIFY_CLIENT_ID.to_s.empty?}"
+    puts "[VCR DEBUG] SPOTIFY_CLIENT_SECRET present? #{!!SPOTIFY_CLIENT_SECRET && !SPOTIFY_CLIENT_SECRET.to_s.empty?}"
   end
 
-  after do
-    VcrHelper.eject_vcr
+  before do
+    VcrHelper.setup_vcr
   end
 
   describe 'Songs information searched by song name' do
-    it 'HAPPY: should provide correct attributes of songs' do
+      it 'HAPPY: should provide correct attributes of songs' do
       # check size, attribute, and important value
-      results = LingoBeats::Spotify::SongMapper.new(SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET)
-                                               .search_songs_by_song_name(SONG_NAME)
+      results = with_spotify_cassette('search_song_name_happy') do
+        LingoBeats::Spotify::SongMapper.new(SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET)
+                                       .search_songs_by_song_name(SONG_NAME)
+      end
       results = YamlHelper.to_hash_array(results)
       _(results[0].size).must_equal CORRECT_RESULT_BY_SONG[0].size
       _(results[0].keys.sort).must_equal CORRECT_RESULT_BY_SONG[0].keys.sort
@@ -29,10 +32,12 @@ describe 'Tests Spotify API library' do
       _(results[0][:singers][0].size).must_equal CORRECT_RESULT_BY_SONG[0][:singers][0].size
       _(results[0][:singers][0].keys.sort).must_equal CORRECT_RESULT_BY_SONG[0][:singers][0].keys.sort
     end
-    it 'HAPPY: returns empty list when no songs matched' do
-      results = LingoBeats::Spotify::SongMapper
-                .new(SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET)
-                .search_songs_by_song_name('totally-not-exist-zzz')
+      it 'HAPPY: returns empty list when no songs matched' do
+      results = with_spotify_cassette('search_song_name_empty') do
+        LingoBeats::Spotify::SongMapper
+          .new(SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET)
+          .search_songs_by_song_name('totally-not-exist-zzz')
+      end
       results = YamlHelper.to_hash_array(results)
 
       _(results).must_be_kind_of Array
@@ -43,9 +48,9 @@ describe 'Tests Spotify API library' do
         LingoBeats::Spotify::SongMapper.new('BAD_TOKEN').search_songs_by_song_name(SONG_NAME)
       end).must_raise ArgumentError
     end
-    it 'SAD: raises ApiError when unauthorized' do
-      _(proc do
-        LingoBeats::Spotify::SongMapper.new('BAD_ID', 'BAD_SECRET').search_songs_by_song_name(SONG_NAME)
+      it 'SAD: raises ApiError when unauthorized' do
+        _(proc do
+          LingoBeats::Spotify::SongMapper.new('BAD_ID', 'BAD_SECRET').search_songs_by_song_name(SONG_NAME)
       end).must_raise LingoBeats::HttpHelper::Response::ApiError
     end
   end

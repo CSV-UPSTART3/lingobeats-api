@@ -7,6 +7,7 @@ require 'webmock'
 module VcrHelper
   CASSETTES_FOLDER = 'spec/fixtures/cassettes'
   CASSETTE_FILE = 'spotify_api' # store title for vcr
+  RECORD_MODE = ENV.fetch('VCR_RECORD_MODE', 'none').to_sym
 
   def self.setup_vcr
     VCR.configure do |c|
@@ -45,8 +46,8 @@ module VcrHelper
 
     VCR.insert_cassette(
       CASSETTE_FILE,
-      record: :new_episodes,
-      match_requests_on: %i[method uri headers]
+      record: RECORD_MODE,
+      match_requests_on: %i[method uri]
     )
   end
 
@@ -68,8 +69,8 @@ module VcrHelper
 
     VCR.insert_cassette(
       CASSETTE_FILE_GENIUS,
-      record: :new_episodes,
-      match_requests_on: %i[method uri headers]
+      record: RECORD_MODE,
+      match_requests_on: %i[method uri]
     )
   end
 
@@ -84,8 +85,8 @@ module VcrHelper
 
     VCR.insert_cassette(
       CASSETTE_FILE_GEMINI,
-      record: :new_episodes,
-      match_requests_on: %i[method uri headers]
+      record: RECORD_MODE,
+      match_requests_on: %i[method uri]
     )
   end
 
