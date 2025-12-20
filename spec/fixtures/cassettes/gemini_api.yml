@@ -30,7 +30,7 @@ http_interactions:
       - Referer
       - X-Origin
       Date:
-      - Sat, 20 Dec 2025 09:50:31 GMT
+      - Sat, 20 Dec 2025 12:19:40 GMT
       Server:
       - scaffolding on HTTPServer2
       X-Xss-Protection:
@@ -40,7 +40,7 @@ http_interactions:
       X-Content-Type-Options:
       - nosniff
       Server-Timing:
-      - gfet4t7; dur=2427
+      - gfet4t7; dur=2304
       Alt-Svc:
       - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
       Accept-Ranges:
@@ -58,19 +58,19 @@ http_interactions:
               "content": {
                 "parts": [
                   {
-                    "text": "```json\n[\n  {\n    \"word\": \"serendipity\",\n    \"cefr\": \"C1\",\n    \"entries\": [\n      {\n        \"meaning\": \"The occurrence and development of events by chance in a happy or beneficial way.\",\n        \"example\": \"Finding this amazing little cafe was pure serendipity.\"\n      },\n      {\n        \"meaning\": \"Good luck in making unexpected and fortunate discoveries.\",\n        \"example\": \"The book's success was a matter of serendipity; it just happened to be what people were looking for at the time.\"\n      }\n    ]\n  },\n  {\n    \"word\": \"resilient\",\n    \"cefr\": \"B2\",\n    \"entries\": [\n      {\n        \"meaning\": \"Able to withstand or recover quickly from difficult conditions.\",\n        \"example\": \"The human body is remarkably resilient.\"\n      },\n      {\n        \"meaning\": \"(of a substance or object) Able to recoil or spring back into shape after bending, stretching, or being compressed.\",\n        \"example\": \"Rubber is a resilient material.\"\n      },\n      {\n        \"meaning\": \"(of a person) Able to deal with negative experiences and recover quickly.\",\n        \"example\": \"She's a resilient woman and won't let this setback affect her.\"\n      }\n    ]\n  }\n]\n```"
+                    "text": "```json\n[\n  {\n    \"word\": \"serendipity\",\n    \"cefr\": \"C1\",\n    \"entries\": [\n      {\n        \"meaning\": \"The occurrence and development of events by chance in a happy or beneficial way.\",\n        \"example\": \"They found love through pure serendipity, bumping into each other at a concert neither planned to attend.\"\n      },\n      {\n        \"meaning\": \"Good luck in making unexpected and fortunate discoveries.\",\n        \"example\": \"The bookshop was full of serendipity; I found titles I never knew I needed.\"\n      }\n    ]\n  },\n  {\n    \"word\": \"resilient\",\n    \"cefr\": \"B2\",\n    \"entries\": [\n      {\n        \"meaning\": \"Able to withstand or recover quickly from difficult conditions.\",\n        \"example\": \"She is a resilient woman who overcame many hardships in her life.\"\n      },\n      {\n        \"meaning\": \"Able to recoil or spring back into shape after bending, stretching, or being compressed.\",\n        \"example\": \"The resilient rubber band snapped back into its original form.\"\n      }\n    ]\n  }\n]\n```"
                   }
                 ],
                 "role": "model"
               },
               "finishReason": "STOP",
-              "avgLogprobs": -0.15135828653971353
+              "avgLogprobs": -0.15135687908143489
             }
           ],
           "usageMetadata": {
             "promptTokenCount": 69,
-            "candidatesTokenCount": 303,
-            "totalTokenCount": 372,
+            "candidatesTokenCount": 262,
+            "totalTokenCount": 331,
             "promptTokensDetails": [
               {
                 "modality": "TEXT",
@@ -80,12 +80,12 @@ http_interactions:
             "candidatesTokensDetails": [
               {
                 "modality": "TEXT",
-                "tokenCount": 303
+                "tokenCount": 262
               }
             ]
           },
           "modelVersion": "gemini-2.0-flash",
-          "responseId": "ZHFGafmgO7OK0-kP2p3WgAc"
+          "responseId": "WZRGaYvXNMPW1e8PzLmWqAc"
         }
-  recorded_at: Sat, 20 Dec 2025 09:50:31 GMT
+  recorded_at: Sat, 20 Dec 2025 12:19:40 GMT
 recorded_with: VCR 6.3.1
