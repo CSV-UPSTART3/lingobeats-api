@@ -76,7 +76,11 @@ jobs:
         env:
           DB_FILENAME: db/local/test.db
         run: |
+          echo "DB_FILENAME=$DB_FILENAME"
+          ls -la "$(dirname "$DB_FILENAME")" || true
           mkdir -p "$(dirname "${DB_FILENAME}")"
+          touch "$DB_FILENAME" && echo "touch ok" || echo "touch failed"
+          df -h
           RACK_ENV=test bundle exec rake db:drop db:migrate
 
       - name: Run all specs
