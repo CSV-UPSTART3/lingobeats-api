@@ -77,15 +77,15 @@ namespace :db do
     DatabaseHelper.wipe_database
   end
 
-  desc 'Delete dev or test database file (set correct RACK_ENV)'
-  task :drop => :config do
-    if app.environment == :production
-      puts 'Do not damage production database!'
-      return
-    end
+  desc 'Delete database file based on DB_FILENAME env'
+  task :drop do
+    db_file = ENV['DB_FILENAME']
+    abort 'DB_FILENAME env required for db:drop' unless db_file
 
-    FileUtils.rm(app.config.DB_FILENAME)
-    puts "Deleted #{app.config.DB_FILENAME}"
+    FileUtils.rm_f(db_file)
+    FileUtils.rm_f("#{db_file}-wal")
+    FileUtils.rm_f("#{db_file}-shm")
+    puts "Deleted #{db_file}"
   end
 end
 

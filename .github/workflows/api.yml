@@ -74,18 +74,19 @@ jobs:
 
       - name: Setup test database
         env:
-          DB_FILENAME: db/local/test.db
+          DB_FILENAME: tmp/test.db
         run: |
           echo "DB_FILENAME=$DB_FILENAME"
-          ls -la "$(dirname "$DB_FILENAME")" || true
-          mkdir -p "$(dirname "${DB_FILENAME}")"
+          mkdir -p "$(dirname "$DB_FILENAME")"
+          ls -la "$(dirname "$DB_FILENAME")"
+          rm -f "$DB_FILENAME" "$DB_FILENAME-wal" "$DB_FILENAME-shm"
           touch "$DB_FILENAME" && echo "touch ok" || echo "touch failed"
           df -h
-          RACK_ENV=test bundle exec rake db:drop db:migrate
+          DB_FILENAME="$DB_FILENAME" RACK_ENV=test bundle exec rake db:migrate
 
       - name: Run all specs
         env:
-          DB_FILENAME: db/local/test.db
+          DB_FILENAME: tmp/test.db
           SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
           SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
           GENIUS_CLIENT_ACCESS_TOKEN: ${{ secrets.GENIUS_CLIENT_ACCESS_TOKEN }}
