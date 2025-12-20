@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'fileutils'
 require 'rake/testtask'
 require_relative 'require_app'
 
@@ -10,6 +11,7 @@ end
 desc 'Run unit and integration tests'
 Rake::TestTask.new(:spec) do |t|
   puts 'Make sure worker is running in separate process'
+  require_app
   t.pattern = 'spec/tests/**/*_spec.rb'
   t.warning = false
 end
@@ -215,11 +217,24 @@ end
 namespace :vcr do
   desc 'delete cassette fixtures'
   task :wipe do
-    sh 'rm spec/fixtures/cassettes/*.yml' do |ok, _|
-      puts(ok ? 'Cassettes deleted' : 'No cassettes found')
+    files = Dir.glob('spec/fixtures/cassettes/**/*.yml')
+
+    if files.any?
+      FileUtils.rm(files)
+      puts 'Cassettes deleted'
+    else
+      puts 'No cassettes found'
     end
   end
 end
+# namespace :vcr do
+#   desc 'delete cassette fixtures'
+#   task :wipe do
+#     sh 'rm spec/fixtures/cassettes/**/*.yml' do |ok, _|
+#       puts(ok ? 'Cassettes deleted' : 'No cassettes found')
+#     end
+#   end
+# end
 
 # check code quality
 namespace :quality do

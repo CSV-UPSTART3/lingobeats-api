@@ -47,6 +47,8 @@ describe 'AddSong Service Integration Test' do
             _(song.album_name).must_equal remote_song.album_name
             _(song.album_url).must_equal remote_song.album_url
             _(song.album_image_url).must_equal remote_song.album_image_url
+            _(song.lyric).must_be_nil
+            _(song.singers.length).must_equal remote_song.singers.length
         end
 
         it 'HAPPY: returns existing song when already in DB' do
@@ -79,6 +81,7 @@ describe 'AddSong Service Integration Test' do
 
             # THEN: the result should report success..
             _(result.success?).must_equal true
+            _(result.value!.status).must_equal :ok
 
             # ..and return the same song record from database
             song = result.value!.message
@@ -90,15 +93,17 @@ describe 'AddSong Service Integration Test' do
             _(song.album_name).must_equal song_entity.album_name
             _(song.album_url).must_equal song_entity.album_url
             _(song.album_image_url).must_equal song_entity.album_image_url
+            _(song.lyric).must_be_nil
+            _(song.singers.length).must_equal song_entity.singers.length
         end
 
-        # it 'SAD: fails gracefully for non-existent song' do
-        #     # WHEN: the service is called with non-existent song details
-        #     result = LingoBeats::Service::AddSong.new.call('this-song-does-not-exist-xyz')
+        it 'SAD: fails gracefully for non-existent song' do
+            # WHEN: the service is called with non-existent song details
+            result = LingoBeats::Service::AddSong.new.call('this-song-does-not-exist-xyz')
 
-        #     # THEN: the service should report failure with an error message
-        #     _(result.success?).must_equal false
-        #     _(result.failure.message.downcase).must_include 'not find'
-        # end
+            # THEN: the service should report failure with an error message
+            _(result.success?).must_equal false
+            # _(result.failure.message.downcase).must_include 'not find'
+        end
     end
 end
