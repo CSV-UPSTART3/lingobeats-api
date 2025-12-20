@@ -75,7 +75,9 @@ jobs:
       - name: Setup test database
         env:
           DB_FILENAME: ${{ secrets.DB_FILENAME }}
-        run: RACK_ENV=test bundle exec rake db:drop db:migrate
+        run: |
+          mkdir -p "$(dirname "${DB_FILENAME}")"
+          RACK_ENV=test bundle exec rake db:drop db:migrate
 
       - name: Run all specs
         env:
