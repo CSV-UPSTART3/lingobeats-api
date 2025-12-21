@@ -8,16 +8,15 @@ require_relative '../../helpers/spec_helper'
 require_relative '../../helpers/database_helper'
 require_relative '../../helpers/vcr_helper'
 
-CASSETTE_OPTS = { record: :new_episodes, match_requests_on: %i[method uri headers] }.freeze
+CASSETTE_OPTS = { record: :new_episodes, match_requests_on: %i[method uri] }.freeze
 
 # Ensure Authorization header is normalized so replays can match
 VCR.configure do |config|
-  config.before_record(:acceptance_auth_sanitizer) do |interaction|
-    headers = interaction.request.headers
-    auth = headers['Authorization']&.first
-    next unless auth&.start_with?('Bearer ')
-
-    headers['Authorization'] = ['Bearer <SPOTIFY_ACCESS_TOKEN>']
+  config.before_record do |interaction|
+    auth = interaction.request.headers['Authorization']&.first
+    if auth&.start_with?('Bearer ')
+      interaction.request.headers['Authorization'] = ['Bearer <SPOTIFY_ACCESS_TOKEN>']
+    end
   end
 end
 
