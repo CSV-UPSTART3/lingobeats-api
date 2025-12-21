@@ -84,7 +84,7 @@ describe 'AddLyric Service Integration Test' do
       record: :new_episodes,
       match_requests_on: %i[method uri headers]
     ) do
-      # 第一次：沒有 local lyric，會走 fetch_remote_lyric
+      # 第一次：沒有 local lyric -> fetch_remote_lyric
       first_result = LingoBeats::Service::AddLyric.new.call(song_id: SONG_ID)
       _(first_result.success?).must_equal true
 
@@ -96,12 +96,12 @@ describe 'AddLyric Service Integration Test' do
       _(first_lyric.respond_to?(:text)).must_equal true
       _(first_lyric.text.to_s.strip.empty?).must_equal false
 
-      # 第一次呼叫後，DB 應該已經有 lyric 了
+      # 第一次：DB 有 lyric 
       first_lyric_in_db = songs_repo.find_lyric_in_database(song_id: SONG_ID)
       _(first_lyric_in_db).wont_be_nil
       _(first_lyric_in_db.text.to_s.strip.empty?).must_equal false
 
-      # 第二次：此時已經有 local lyric，應該直接用 DB 裡的歌詞
+      # 第二次：有 local lyric，直接用 DB 的
       second_result = LingoBeats::Service::AddLyric.new.call(song_id: SONG_ID)
       _(second_result.success?).must_equal true
 
@@ -113,12 +113,12 @@ describe 'AddLyric Service Integration Test' do
       _(second_lyric.respond_to?(:text)).must_equal true
       _(second_lyric.text.to_s.strip.empty?).must_equal false
 
-      # 兩次呼叫之後，DB 裡的 lyric 內容應該沒被改變
+      # DB lyric 沒被改變
       second_lyric_in_db = songs_repo.find_lyric_in_database(song_id: SONG_ID)
       _(second_lyric_in_db).wont_be_nil
       _(second_lyric_in_db.text).must_equal first_lyric_in_db.text
 
-      # 第二次回傳的內容，也應該跟 DB 裡的 lyric 一樣
+      # 第二次回傳 = DB lyric
       _(second_lyric.text).must_equal second_lyric_in_db.text
     end
   end

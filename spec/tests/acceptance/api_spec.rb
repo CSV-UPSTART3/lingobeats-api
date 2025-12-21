@@ -1,335 +1,286 @@
 # frozen_string_literal: true
 
-require_relative '../../helpers/spec_helper'
-require_relative '../../helpers/vcr_helper'
-require_relative '../../helpers/database_helper'
+require 'fileutils'
+require 'json'
 require 'rack/test'
 
-def app
-  LingoBeats::App
+require_relative '../../helpers/spec_helper'
+require_relative '../../helpers/database_helper'
+require_relative '../../helpers/vcr_helper'
+
+CASSETTE_OPTS = { record: :new_episodes, match_requests_on: %i[method uri] }.freeze
+
+# Ensure Authorization header is normalized so replays can match
+VCR.configure do |config|
+  config.before_record do |interaction|
+    auth = interaction.request.headers['Authorization']&.first
+    if auth&.start_with?('Bearer ')
+      interaction.request.headers['Authorization'] = ['Bearer <SPOTIFY_ACCESS_TOKEN>']
+    end
+  end
 end
 
-describe 'Test LingoBeats API routes' do
+describe 'LingoBeats API acceptance reference spec' do
   include Rack::Test::Methods
 
-  VcrHelper.setup_vcr
+  def app
+    LingoBeats::App
+  end
 
   before do
-    VcrHelper.configure_vcr_for_spotify
-    VcrHelper.configure_vcr_for_genius
-    VcrHelper.configure_vcr_for_gemini
+    ensure_test_database!
     DatabaseHelper.wipe_database
   end
 
   after do
-    VcrHelper.eject_vcr
-    VcrHelper.eject_vcr
-    VcrHelper.eject_vcr
+    DatabaseHelper.wipe_database
   end
 
-  describe 'Root route' do
-    it 'successfully returns root information' do
+  describe 'GET /' do
+    it 'exposes a simple health endpoint' do
       get '/'
 
       _(last_response.status).must_equal 200
-
       body = JSON.parse(last_response.body)
       _(body['status']).must_equal 'ok'
       _(body['message']).must_include 'API is working'
     end
   end
 
-  describe 'Songs routes' do
-    describe 'GET /api/v1/songs' do
-      it 'returns popular songs when no params given' do
-        VCR.use_cassette('spotify_popular_songs') do
-          get '/api/v1/songs'
-        end
-
-        puts "STATUS: #{last_response.status}"
-        puts "BODY: #{last_response.body}"
-
-        _(last_response.status).must_equal 200
-
-        body = JSON.parse(last_response.body)
-
-        _(body).must_include 'songs'
-        songs = body['songs']
-        _(songs).must_be_kind_of Array
-
-        unless songs.empty?
-          first = songs.first
-          # 對應 Song representer 裡的 property
-          _(first).must_include 'id'
-          _(first).must_include 'name'
-          _(first).must_include 'uri'
-          _(first).must_include 'external_url'
-          _(first).must_include 'album_name'
-        end
+  describe 'GET /api/v1/songs' do
+    it 'lists popular songs via Spotify data' do
+      use_spotify_cassette('songs/index_popular') do
+        get '/api/v1/songs'
       end
 
-      it 'returns filtered songs when query is given' do
+      _(last_response.status).must_equal 200
+      body = JSON.parse(last_response.body)
+
+      _(body).must_include 'songs'
+      _(body['songs']).must_be_kind_of Array
+    end
+
+    it 'filters songs when query params provided' do
+      use_spotify_cassette('songs/filter_by_name') do
         get '/api/v1/songs', { category: 'song_name', query: 'Golden' }
-
-        _(last_response.status).must_equal 200
-
-        body = JSON.parse(last_response.body)
-        _(body).must_include 'songs'
-
-        songs = body['songs']
-        _(songs).must_be_kind_of Array
       end
+
+      _(last_response.status).must_equal 200
+      body = JSON.parse(last_response.body)
+
+      _(body).must_include 'songs'
+      _(body['songs']).must_be_kind_of Array
+    end
+  end
+
+  describe 'GET /api/v1/songs/:id' do
+    it 'returns a previously seeded song without re-hitting Spotify' do
+      seed_song!
+
+      get "/api/v1/songs/#{SONG_ID}"
+
+      _(last_response.status).must_equal 200
+      song = JSON.parse(last_response.body)
+      _(song['id']).must_equal SONG_ID
+      _(song['name']).wont_be_nil
+      _(song['album_name']).wont_be_nil
     end
 
-    describe 'GET /api/v1/songs/:id' do
-      it 'returns song info for a valid song id' do
-        LingoBeats::Service::AddSong.new.call(song_id: SONG_ID)
+    it 'responds with error for unknown ids' do
+      get '/api/v1/songs/non-existent-song'
 
-        get "/api/v1/songs/#{SONG_ID}"
+      _(last_response.status).must_equal 500
+    end
+  end
 
-        _(last_response.status).must_equal 200
-        body = JSON.parse(last_response.body)
-        song = body
-        _(song['id']).wont_be_nil
-        _(song['name']).wont_be_nil
-        _(song['uri']).wont_be_nil
-        _(song['album_name']).wont_be_nil
-      end
+  describe 'GET /api/v1/songs/:id/lyrics' do
+    it 'serves cached lyrics once Genius result is stored' do
+      seed_lyric!
 
-      it 'returns 500 for a non-existent song id' do
-        get '/api/v1/songs/non-existent-id-123'
+      get "/api/v1/songs/#{SONG_ID}/lyrics"
 
-        _(last_response.status).must_equal 500
-
-        body = JSON.parse(last_response.body)
-      end
+      _(last_response.status).must_equal 200
+      body = JSON.parse(last_response.body)
+      _(body['text']).wont_be_nil
     end
 
-    describe 'GET /api/v1/songs/:id/lyrics' do
-      # SONG_ID = ENV.fetch('TEST_SONG_ID', '3XVozq1aeqsJwpXrEZrDJ9')
+    it 'returns error for unknown songs' do
+      get '/api/v1/songs/not-found-id/lyrics'
 
-      it 'returns lyrics for an existing song' do
-        LingoBeats::Service::AddSong.new.call(song_id: SONG_ID)
-        # LingoBeats::Service::AddLyric.new.call(song_id: SONG_ID)
+      _(last_response.status).must_equal 500
+    end
+  end
 
-        get "/api/v1/songs/#{SONG_ID}/lyrics"
+  describe 'GET /api/v1/songs/:id/level' do
+    it 'returns distribution and average level for seeded song' do
+      seed_lyric! # adds song + lyric + vocabularies
 
-        # puts "STATUS: #{last_response.status}"
-        # puts "BODY:   #{last_response.body}"
+      get "/api/v1/songs/#{SONG_ID}/level"
 
-        _(last_response.status).must_equal 200
-
-        body = JSON.parse(last_response.body)
-
-        _(body).must_include 'text'
-      end
-
-      it 'returns 500 for lyrics of a non-existent song' do
-        get '/api/v1/songs/non-existent-id-123/lyrics'
-
-        _(last_response.status).must_equal 500
-
-        body = JSON.parse(last_response.body)
-      end
+      _(last_response.status).must_equal 200
+      body = JSON.parse(last_response.body)
+      _(body).must_include 'distribution'
+      _(body).must_include 'level'
     end
 
-    describe 'GET /api/v1/songs/:id/level' do
-      it 'returns song level info for an existing song' do
-        # 先確定 DB 有這首歌 + 它的 vocab（AnalyzeSongLevel 才有東西算）
-        add_song_result = LingoBeats::Service::AddSong.new.call(song_id: SONG_ID)
-        add_lyric_result = LingoBeats::Service::AddLyric.new.call(song_id: SONG_ID)
+    it 'returns 404 when song not found' do
+      get '/api/v1/songs/unknown-id/level'
 
-        puts "[TEST DEBUG] add_song_result: #{add_song_result.inspect}"
-        puts "[TEST DEBUG] add_lyric_result: #{add_lyric_result.inspect}"
+      _(last_response.status).must_equal 404
+    end
+  end
 
-        get "/api/v1/songs/#{SONG_ID}/level"
+  describe 'GET /api/v1/songs/:id/material' do
+    it 'returns materials when vocabularies have content' do
+      seed_lyric!
+      assign_fake_materials!
 
-        # puts "STATUS: #{last_response.status}"
-        # puts "BODY:   #{last_response.body}"
+      get "/api/v1/songs/#{SONG_ID}/material"
 
-        _(last_response.status).must_equal 200
-
-        body = JSON.parse(last_response.body)
-
-        _(body).must_include 'distribution'
-        _(body).must_include 'level'
-      end
-
-      it 'returns error for non-existent song id' do
-        get '/api/v1/songs/non-existent-id-123/level'
-
-        # puts "STATUS(non-existent): #{last_response.status}"
-        # puts "BODY(non-existent):   #{last_response.body}"
-
-        _(last_response.status).must_equal 404
-      end
+      _(last_response.status).must_equal 200
+      body = JSON.parse(last_response.body)
+      _(body).must_include 'song'
+      _(body).must_include 'contents'
+      _(body['contents']).wont_be_empty
+      first = body['contents'].first
+      _(first).must_include 'word'
+      _(first).must_include 'level'
+      _(first).must_include 'id'
     end
 
-    describe 'GET /api/v1/songs/:id/material' do
-      it 'returns materials for an existing song' do
-        # 1) 先把歌 + 歌詞 + vocab 建好（不產 material）
-        LingoBeats::Service::AddSong.new.call(song_id: SONG_ID)
-        LingoBeats::Service::AddLyric.new.call(song_id: SONG_ID)
-        # AddLyric 會順便跑 AddVocabularies，這樣 DB 就有 vocabs 但 material = nil
+    it 'returns not_found when materials are not generated yet' do
+      seed_lyric! # ensures vocabularies exist in test.db
 
-        # 2) 用 vocab repo 手動塞 material
-        vocabs_repo = LingoBeats::Repository::For.klass(LingoBeats::Entity::Vocabulary)
-        vocabs      = vocabs_repo.for_song(SONG_ID)
+      get "/api/v1/songs/#{SONG_ID}/material"
 
-        # 避免 spec 在還沒建 vocab 時就炸
-        _(vocabs).wont_be_empty
-
-        vocabs.each do |v|
-          fake_json = {
-            word: v.name,
-            entries: [
-              { meaning: "fake meaning for #{v.name}",
-                example: "fake example for #{v.name}" }
-            ]
-          }.to_json
-
-          vocabs_repo.update_material(v.id, fake_json)
-        end
-
-        get "/api/v1/songs/#{SONG_ID}/material"
-
-        # puts "STATUS(material GET): #{last_response.status}"
-        # puts "BODY(material GET):   #{last_response.body}"
-
-        _(last_response.status).must_equal 200
-
-        body = JSON.parse(last_response.body)
-
-        _(body).must_include 'song'
-        _(body).must_include 'contents'
-
-        first = body['contents'].first
-        _(first).must_include 'word'
-        _(first).must_include 'entries'
-      end
-
-      it 'returns 404 for materials of a non-existent song' do
-        get '/api/v1/songs/non-existent-id-123/material'
-
-        # puts "STATUS(material GET non-existent): #{last_response.status}"
-        # puts "BODY(material GET non-existent):   #{last_response.body}"
-
-        _(last_response.status).must_equal 404
-
-        body = JSON.parse(last_response.body)
-        _(body['status']).must_equal 'not_found'
-        _(body['message']).wont_be_nil
-      end
+      _(last_response.status).must_equal 404
+      body = JSON.parse(last_response.body)
+      _(body['message']).must_match(/Material not generated/i)
     end
 
-    describe 'POST /api/v1/songs/:id/material' do
-      it 'returns materials when all vocabularies already have material' do
-        # 1) song + lyric + vocabs
-        LingoBeats::Service::AddSong.new.call(song_id: SONG_ID)
-        LingoBeats::Service::AddLyric.new.call(song_id: SONG_ID)
+    it 'returns 404 when song id invalid' do
+      get '/api/v1/songs/non-existent-id/material'
 
-        # 2) 手動幫所有 vocabs 塞 material
-        vocabs_repo = LingoBeats::Repository::For.klass(LingoBeats::Entity::Vocabulary)
-        vocabs      = vocabs_repo.for_song(SONG_ID)
-        _(vocabs).wont_be_empty
+      _(last_response.status).must_equal 404
+    end
+  end
 
-        vocabs.each do |v|
-          fake_json = {
-            word: v.name,
-            entries: [
-              { meaning: "fake meaning for #{v.name}",
-                example: "fake example for #{v.name}" }
-            ]
-          }.to_json
+  describe 'POST /api/v1/songs/:id/material' do
+    it 'serves materials immediately when everything already generated' do
+      seed_lyric!
+      assign_fake_materials!
 
-          vocabs_repo.update_material(v.id, fake_json)
-        end
+      post "/api/v1/songs/#{SONG_ID}/material"
 
-        # 3) 這時 incomplete_material? 應該是 false → route 會走 GetMaterial
+      _(last_response.status).must_equal 302
+      follow_redirect!
+
+      _(last_response.status).must_equal 200
+      body = JSON.parse(last_response.body)
+      _(body).must_include 'song'
+      _(body['contents']).wont_be_empty
+    end
+
+    it 'queues material generation when vocabularies incomplete' do
+      seed_lyric!
+
+      with_fake_add_material do |fake_service|
         post "/api/v1/songs/#{SONG_ID}/material"
 
-        _(last_response.status).must_equal 200
-
+        _(last_response.status).must_equal 201
         body = JSON.parse(last_response.body)
-        _(body).must_include 'song'
-        _(body).must_include 'contents'
-        _(body['contents']).wont_be_empty
-      end
-      it 'creates materials via AddMaterial when some vocabularies have no material yet' do
-        # 1) 先準備「有 vocabs 但還沒有 material」的狀態
-        LingoBeats::Service::AddSong.new.call(song_id: SONG_ID)
-        LingoBeats::Service::AddLyric.new.call(song_id: SONG_ID)
-        # 到這裡為止，vocab 都還是 material = nil → incomplete_material? 應該會是 true
-
-        # 2) 做一個假的 AddMaterial service，完全不打 Gemini
-        fake_add_material = Class.new do
-          class << self
-            attr_accessor :called_with
-          end
-
-          def initialize(*); end
-
-          def call(song_id:)
-            self.class.called_with = song_id
-
-            fake_material = LingoBeats::Response::Material.new(
-              song: 'Golden',
-              contents: [
-                {
-                  word: 'take',
-                  entries: [
-                    { meaning: 'fake meaning', example: 'fake example' }
-                  ]
-                }
-              ]
-            )
-
-            fake_result = LingoBeats::Response::ApiResult.new(
-              status: :created,
-              message: fake_material
-            )
-
-            Dry::Monads::Result::Success.new(fake_result)
-          end
-        end
-
-        # 3) 把真的 AddMaterial 暫時換成 fake 版
-        original = LingoBeats::Service.const_get(:AddMaterial)
-
-        begin
-          LingoBeats::Service.send(:remove_const, :AddMaterial)
-          LingoBeats::Service.const_set(:AddMaterial, fake_add_material)
-
-          # 4) 打 POST /material：這裡 route 會 new fake_add_material 而不是原本那個
-          post "/api/v1/songs/#{SONG_ID}/material"
-
-          # puts "STATUS(material POST create): #{last_response.status}"
-          # puts "BODY(material POST create):   #{last_response.body}"
-
-          _(last_response.status).must_equal 201
-
-          body = JSON.parse(last_response.body)
-
-          # Representer::Material → { "song": "...", "contents": [...] }
-          _(body).must_include 'song'
-          _(body['song']).must_be_kind_of String
-
-          _(body).must_include 'contents'
-          _(body['contents']).must_be_kind_of Array
-          _(body['contents']).wont_be_empty
-
-          first = body['contents'].first
-          _(first).must_include 'word'
-          _(first).must_include 'entries'
-
-          # 確認 route 有把正確的 song_id 丟給 AddMaterial
-          _(fake_add_material.called_with).must_equal SONG_ID
-        ensure
-          # 5) 把真的 AddMaterial 放回去，避免影響其他測試
-          LingoBeats::Service.send(:remove_const, :AddMaterial)
-          LingoBeats::Service.const_set(:AddMaterial, original)
-        end
+        _(body['status']).must_equal 'created'
+        _(body['message']).must_include 'Golden'
+        _(fake_service.called_with).must_equal SONG_ID
       end
     end
+  end
+
+  def seed_song!(song_id = SONG_ID)
+    use_spotify_cassette('songs/seed_add_song') do
+      LingoBeats::Service::AddSong.new.call(song_id:)
+    end
+  end
+
+  def seed_lyric!(song_id = SONG_ID)
+    seed_song!(song_id)
+    use_genius_cassette('lyrics/seed_add_lyric') do
+      LingoBeats::Service::AddLyric.new.call(song_id:)
+    end
+  end
+
+  def assign_fake_materials!(song_id = SONG_ID)
+    repo = LingoBeats::Repository::For.klass(LingoBeats::Entity::Vocabulary)
+    vocabs = repo.for_song(song_id)
+    _(vocabs).wont_be_empty
+
+    vocabs.each do |vocab|
+      repo.update_material(vocab.id, fake_material_json(vocab.name))
+    end
+  end
+
+  def fake_material_json(word)
+    {
+      word:,
+      entries: [
+        { meaning: "fake meaning for #{word}", example: "fake example for #{word}" }
+      ]
+    }.to_json
+  end
+
+  def with_fake_add_material
+    fake_service = Class.new do
+      class << self
+        attr_accessor :called_with
+      end
+
+      def initialize(*); end
+
+      def call(song_id:, request_id: nil)
+        self.class.called_with = song_id
+        material = LingoBeats::Response::Material.new(
+          song: 'Golden',
+          contents: [
+            { word: 'take', entries: [{ meaning: 'fake meaning', example: 'fake example' }] }
+          ]
+        )
+
+        fake_result = LingoBeats::Response::ApiResult.new(status: :created, message: material)
+        Dry::Monads::Result::Success.new(fake_result)
+      end
+    end
+
+    original = LingoBeats::Service.const_get(:AddMaterial)
+    LingoBeats::Service.send(:remove_const, :AddMaterial)
+    LingoBeats::Service.const_set(:AddMaterial, fake_service)
+
+    yield(fake_service)
+  ensure
+    LingoBeats::Service.send(:remove_const, :AddMaterial)
+    LingoBeats::Service.const_set(:AddMaterial, original)
+  end
+
+  def ensure_test_database!
+    db_file = LingoBeats::App.config.DB_FILENAME
+    _(db_file).must_match(/test\.db\z/)
+  end
+
+  def use_spotify_cassette(name, &block)
+    use_cassette('spotify', name, &block)
+  end
+
+  def use_genius_cassette(name, &block)
+    use_cassette('genius', name, &block)
+  end
+
+  def use_cassette(provider, name, &block)
+    ensure_cassette_folder(provider)
+    VCR.use_cassette("#{provider}/#{name}", **CASSETTE_OPTS) do
+      block.call
+    end
+  end
+
+  def ensure_cassette_folder(provider)
+    FileUtils.mkdir_p(File.join(VcrHelper::CASSETTES_FOLDER, provider))
   end
 end

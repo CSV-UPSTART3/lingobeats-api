@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'fileutils'
 require 'rake/testtask'
 require_relative 'require_app'
 
@@ -10,6 +11,8 @@ end
 desc 'Run unit and integration tests'
 Rake::TestTask.new(:spec) do |t|
   puts 'Make sure worker is running in separate process'
+  # require_app
+  t.ruby_opts << '-r./require_app' 
   t.pattern = 'spec/tests/**/*_spec.rb'
   t.warning = false
 end
@@ -77,15 +80,15 @@ namespace :db do
     DatabaseHelper.wipe_database
   end
 
-  desc 'Delete dev or test database file (set correct RACK_ENV)'
-  task :drop => :config do
-    if app.environment == :production
-      puts 'Do not damage production database!'
-      return
-    end
+  desc 'Delete database file based on DB_FILENAME env'
+  task :drop do
+    db_file = ENV['DB_FILENAME']
+    abort 'DB_FILENAME env required for db:drop' unless db_file
 
-    FileUtils.rm(app.config.DB_FILENAME)
-    puts "Deleted #{app.config.DB_FILENAME}"
+    FileUtils.rm_f(db_file)
+    FileUtils.rm_f("#{db_file}-wal")
+    FileUtils.rm_f("#{db_file}-shm")
+    puts "Deleted #{db_file}"
   end
 end
 
@@ -215,11 +218,24 @@ end
 namespace :vcr do
   desc 'delete cassette fixtures'
   task :wipe do
-    sh 'rm spec/fixtures/cassettes/*.yml' do |ok, _|
-      puts(ok ? 'Cassettes deleted' : 'No cassettes found')
+    files = Dir.glob('spec/fixtures/cassettes/**/*.yml')
+
+    if files.any?
+      FileUtils.rm(files)
+      puts 'Cassettes deleted'
+    else
+      puts 'No cassettes found'
     end
   end
 end
+# namespace :vcr do
+#   desc 'delete cassette fixtures'
+#   task :wipe do
+#     sh 'rm spec/fixtures/cassettes/**/*.yml' do |ok, _|
+#       puts(ok ? 'Cassettes deleted' : 'No cassettes found')
+#     end
+#   end
+# end
 
 # check code quality
 namespace :quality do
