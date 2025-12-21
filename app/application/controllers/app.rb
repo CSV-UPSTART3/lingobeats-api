@@ -31,6 +31,18 @@ module LingoBeats
 
     # /api/v1
     route('api/v1') do |routing|
+      # /vocabularies
+      routing.on 'vocabularies' do
+        routing.is do
+          # GET /vocabularies?ids=xx,yy,zz,...
+          routing.get do
+            ids_request = Request::VocabularyIds.new(routing.params)
+            result = Service::FindVocabularies.new.call(ids_request:)
+            RouteHelpers::Response.call(routing, result, Representer::VocabulariesList)
+          end
+        end
+      end
+
       # /songs
       routing.on 'songs' do
         routing.is do

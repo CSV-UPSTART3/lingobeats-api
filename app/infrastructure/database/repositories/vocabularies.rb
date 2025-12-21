@@ -39,6 +39,16 @@ module LingoBeats
         rebuild_entity(rec)
       end
 
+      def self.find_by_ids(ids)
+        return [] if ids.nil? || ids.empty?
+
+        ordered_ids = ids.map(&:to_i)
+        records = VocabularyOrm.where(id: ordered_ids).all
+        entities = rebuild_many(records)
+        entity_map = entities.each_with_object({}) { |vocab, memo| memo[vocab.id] = vocab }
+        ordered_ids.map { |id| entity_map[id] }.compact
+      end
+
       def self.find_by_names(names)
         VocabularyOrm.where(name: names).all.map { |rec| rebuild_entity(rec) }
       end
@@ -103,18 +113,11 @@ module LingoBeats
       end
 
       def self.vocabs_content(song_id)
-        for_song(song_id).filter_map do |vocab|
-          next unless vocab.material && !vocab.material.empty?
+        for_song(song_id).filter_map { |vocab| material_payload(vocab) }
+      end
 
-          material = JSON.parse(vocab.material)
-
-          material.merge(
-            'id'          => vocab.id,
-            'word'        => vocab.name,
-            'origin_word' => vocab.original_word,
-            'level'       => vocab.level
-          )
-        end
+      def self.contents_by_ids(ids)
+        find_by_ids(ids).filter_map { |vocab| material_payload(vocab) }
       end
 
       # --- helpers ---
@@ -133,7 +136,20 @@ module LingoBeats
           material: rec.material # String 或 nil
         )
       end
-      private_class_method :rebuild_many, :rebuild_entity
+
+      def self.material_payload(vocab)
+        return nil unless vocab.material && !vocab.material.empty?
+
+        material = JSON.parse(vocab.material)
+
+        material.merge(
+          'id'          => vocab.id,
+          'word'        => vocab.name,
+          'origin_word' => vocab.original_word,
+          'level'       => vocab.level
+        )
+      end
+      private_class_method :rebuild_many, :rebuild_entity, :material_payload
     end
   end
 end
