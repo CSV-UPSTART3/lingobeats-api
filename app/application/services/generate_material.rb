@@ -6,7 +6,7 @@ require 'json'
 module LingoBeats
   module Service
     class MaterialGenerationService
-      BATCH_SIZE = 10
+      BATCH_SIZE = 5
 
       def initialize(
         mapper: LingoBeats::Gemini::VocabularyMapper.new(

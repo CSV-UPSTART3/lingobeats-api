@@ -13,9 +13,10 @@ module LingoBeats
       end
 
       def enqueue(song, request_id)
-        payload = Representer::MaterialJob.new(song_id: song.id, request_id: request_id)
-                                          .to_json
-
+        payload = Representer::MaterialJob.serialize(
+          song_id: song.id,
+          request_id: request_id
+        )
         queue_client.send(payload)
 
         App.logger.info("[MaterialJobQueue] queued material job for song=#{song.name}, song_id=#{song.id}")
