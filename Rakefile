@@ -11,7 +11,7 @@ end
 desc 'Run unit and integration tests'
 Rake::TestTask.new(:spec) do |t|
   puts 'Make sure worker is running in separate process'
-  require_app
+  # require_app
   t.pattern = 'spec/tests/**/*_spec.rb'
   t.warning = false
 end
