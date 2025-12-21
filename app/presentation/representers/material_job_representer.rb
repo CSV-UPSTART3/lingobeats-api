@@ -1,27 +1,24 @@
 # frozen_string_literal: true
 
 require 'roar/json'
+require 'ostruct'
 
 module LingoBeats
   module Representer
     # Represents a material generation job message
-    class MaterialJob
+    class MaterialJob < Roar::Decorator
       include Roar::JSON
 
-      def initialize(song_id:, request_id:)
-        @song_id = song_id
-        @request_id = request_id
-      end
+      property :song_id
+      property :request_id
 
-      def to_json(*_args)
-        {
-          song_id: @song_id,
-          request_id: @request_id
-        }.to_json
+      def self.serialize(song_id:, request_id:)
+        payload = OpenStruct.new(song_id:, request_id:)
+        new(payload).to_json
       end
 
       def self.from_json(json)
-        ::JSON.parse(json)
+        new(OpenStruct.new).from_json(json)
       end
     end
   end
