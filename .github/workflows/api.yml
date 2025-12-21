@@ -74,12 +74,19 @@ jobs:
 
       - name: Setup test database
         env:
-          DB_FILENAME: ${{ secrets.DB_FILENAME }}
-        run: RACK_ENV=test bundle exec rake db:drop db:migrate
+          DB_FILENAME: tmp/test.db
+        run: |
+          echo "DB_FILENAME=$DB_FILENAME"
+          mkdir -p "$(dirname "$DB_FILENAME")"
+          ls -la "$(dirname "$DB_FILENAME")"
+          rm -f "$DB_FILENAME" "$DB_FILENAME-wal" "$DB_FILENAME-shm"
+          touch "$DB_FILENAME" && echo "touch ok" || echo "touch failed"
+          df -h
+          DB_FILENAME="$DB_FILENAME" RACK_ENV=test bundle exec rake db:migrate
 
       - name: Run all specs
         env:
-          DB_FILENAME: ${{ secrets.DB_FILENAME }}
+          DB_FILENAME: tmp/test.db
           SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
           SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
           GENIUS_CLIENT_ACCESS_TOKEN: ${{ secrets.GENIUS_CLIENT_ACCESS_TOKEN }}
@@ -90,5 +97,5 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          rake worker:run:test &
+          bundle exec rake worker:run:test &
           bundle exec rake spec

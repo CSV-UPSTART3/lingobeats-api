@@ -27,8 +27,8 @@ module LingoBeats
 
         difficulties = song.evaluate_words
 
-        puts "[DEBUG] song.evaluate_words => size=#{difficulties.size}, sample=#{difficulties.class}"
-        puts "[DEBUG] song.evaluate_words first: #{difficulties.first.inspect}"
+        # puts "[DEBUG] song.evaluate_words => size=#{difficulties.size}, sample=#{difficulties.class}"
+        # puts "[DEBUG] song.evaluate_words first: #{difficulties.first.inspect}"
 
         Success(song:, difficulties:, skip: false)
       rescue StandardError => error
@@ -72,8 +72,8 @@ module LingoBeats
       end
 
       def call
-        puts "[DEBUG] Starting vocabulary processing for song"
-        puts "[DEBUG] Difficulties sample: #{@difficulties.first.inspect}"
+        # puts "[DEBUG] Starting vocabulary processing for song"
+        # puts "[DEBUG] Difficulties sample: #{@difficulties.first.inspect}"
         existing_map = fetch_existing_vocabularies
         new_entities = build_new_entities(existing_map)
         link_vocabularies_to_song(new_entities, existing_map)
@@ -86,13 +86,13 @@ module LingoBeats
         # existing.to_h { |vocab| [vocab.name, vocab.id] }
         names = @difficulties.map { |item| item["lemma"] }
         existing = @vocabs_repo.find_by_names(names)
-        puts "Existing vocabularies fetched: #{existing.map(&:name)}"
+        # puts "Existing vocabularies fetched: #{existing.map(&:name)}"
         existing.to_h { |vocab| [vocab.name, vocab.id] }
       end
 
       def build_new_entities(existing_map)
-        puts "Existing vocabularies: #{existing_map.keys}"
-        puts "Difficulties sample: #{@difficulties.first.inspect}"
+        # puts "Existing vocabularies: #{existing_map.keys}"
+        # puts "Difficulties sample: #{@difficulties.first.inspect}"
         Vocabularies::VocabularyBuilder.build_from_difficulties(
           @difficulties,
           existing_names: existing_map.keys

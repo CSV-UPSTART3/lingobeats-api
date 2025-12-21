@@ -4,6 +4,8 @@ require_relative '../../../helpers/spec_helper'
 require_relative '../../../helpers/vcr_helper'
 require_relative '../../../helpers/yaml_helper'
 
+ENV['GEMINI_API_KEY'] ||= GEMINI_API_KEY if defined?(GEMINI_API_KEY)
+
 describe 'Tests Gemini API → Vocabulary pipeline' do
   before do
     VcrHelper.setup_vcr
@@ -74,6 +76,30 @@ describe 'Tests Gemini API → Vocabulary pipeline' do
         _(result).must_be_kind_of Array
         _(result).must_be_empty
       end
+    end
+  end
+
+  describe 'Live Gemini API call (recorded via VCR)' do
+    it 'requests vocabulary materials for actual prompt' do
+      mapper = LingoBeats::Gemini::VocabularyMapper.new(access_token: GEMINI_API_KEY)
+      prompt = <<~PROMPT
+        Generate JSON array describing vocabulary materials.
+        For each item include: "word", "cefr", and "entries" (each entry with "meaning" and "example").
+        Words:
+        - "serendipity" (level C1)
+        - "resilient" (level B2)
+        Respond with strict JSON only.
+      PROMPT
+
+      result = mapper.generate_and_parse(prompt)
+
+      _(result).must_be_kind_of Array
+      _(result).wont_be_empty
+
+      first = result.first
+      _(first).must_include :word
+      _(first).must_include :entries
+      _(first[:entries]).must_be_kind_of Array
     end
   end
 end

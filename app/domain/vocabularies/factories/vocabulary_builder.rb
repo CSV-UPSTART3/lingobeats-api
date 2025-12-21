@@ -19,7 +19,7 @@ module LingoBeats
           existing_names.include?(lemma) || !level
         end
 
-        puts "[DEBUG] candidates sample: #{candidates.first.inspect}"
+        # puts "[DEBUG] candidates sample: #{candidates.first.inspect}"
 
         create_entities(candidates)
       end
@@ -42,7 +42,7 @@ module LingoBeats
             original_word = item["origin_word"]
             level = item["level"]
 
-            puts "[DEBUG] Creating entity for lemma=#{lemma}, original_word=#{original_word}, level=#{level}"
+            # puts "[DEBUG] Creating entity for lemma=#{lemma}, original_word=#{original_word}, level=#{level}"
 
             Entity::Vocabulary.new(
               id: nil,

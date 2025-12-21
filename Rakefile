@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'fileutils'
 require 'rake/testtask'
 require_relative 'require_app'
 
@@ -10,6 +11,8 @@ end
 desc 'Run unit and integration tests'
 Rake::TestTask.new(:spec) do |t|
   puts 'Make sure worker is running in separate process'
+  # require_app
+  t.ruby_opts << '-r./require_app' 
   t.pattern = 'spec/tests/**/*_spec.rb'
   t.warning = false
 end
@@ -55,7 +58,9 @@ namespace :db do
     require_relative 'config/environment' # load config info
     require_relative 'spec/helpers/database_helper'
 
-    def app = LingoBeats::App # rubocop:disable Rake/MethodDefinitionInTask
+    def app # rubocop:disable Rake/MethodDefinitionInTask
+      LingoBeats::App
+    end
   end
 
   desc 'Run migrations'
@@ -72,19 +77,18 @@ namespace :db do
       return
     end
 
-    require_app(%w[domain infrastructure])
     DatabaseHelper.wipe_database
   end
 
-  desc 'Delete dev or test database file (set correct RACK_ENV)'
-  task :drop => :config do
-    if app.environment == :production
-      puts 'Do not damage production database!'
-      return
-    end
+  desc 'Delete database file based on DB_FILENAME env'
+  task :drop do
+    db_file = ENV['DB_FILENAME']
+    abort 'DB_FILENAME env required for db:drop' unless db_file
 
-    FileUtils.rm(app.config.DB_FILENAME)
-    puts "Deleted #{app.config.DB_FILENAME}"
+    FileUtils.rm_f(db_file)
+    FileUtils.rm_f("#{db_file}-wal")
+    FileUtils.rm_f("#{db_file}-shm")
+    puts "Deleted #{db_file}"
   end
 end
 
@@ -157,37 +161,6 @@ namespace :worker do
   end
 end
 
-namespace :repos do
-  task :config do # rubocop:disable Rake/Desc
-    require_relative 'config/environment' # load config info
-    def app = CodePraise::App # rubocop:disable Rake/MethodDefinitionInTask
-    @repo_dirs = Dir.glob("#{app.config.REPOSTORE_PATH}/*/")
-  end
-
-  desc 'Create directory for repo store'
-  task :create => :config do
-    puts `mkdir #{app.config.REPOSTORE_PATH}`
-  end
-
-  desc 'Delete cloned repos in repo store'
-  task :wipe => :config do
-    puts 'No git repositories found in repostore' if @repo_dirs.empty?
-
-    sh "rm -rf #{app.config.REPOSTORE_PATH}/*/" do |ok, _|
-      puts(ok ? "#{@repo_dirs.count} repos deleted" : 'Could not delete repos')
-    end
-  end
-
-  desc 'List cloned repos in repo store'
-  task :list => :config do
-    if @repo_dirs.empty?
-      puts 'No git repositories found in repostore'
-    else
-      puts @repo_dirs.join("\n")
-    end
-  end
-end
-
 # cache manipulation
 namespace :cache do
   task :config do # rubocop:disable Rake/Desc
@@ -245,11 +218,24 @@ end
 namespace :vcr do
   desc 'delete cassette fixtures'
   task :wipe do
-    sh 'rm spec/fixtures/cassettes/*.yml' do |ok, _|
-      puts(ok ? 'Cassettes deleted' : 'No cassettes found')
+    files = Dir.glob('spec/fixtures/cassettes/**/*.yml')
+
+    if files.any?
+      FileUtils.rm(files)
+      puts 'Cassettes deleted'
+    else
+      puts 'No cassettes found'
     end
   end
 end
+# namespace :vcr do
+#   desc 'delete cassette fixtures'
+#   task :wipe do
+#     sh 'rm spec/fixtures/cassettes/**/*.yml' do |ok, _|
+#       puts(ok ? 'Cassettes deleted' : 'No cassettes found')
+#     end
+#   end
+# end
 
 # check code quality
 namespace :quality do

@@ -23,10 +23,16 @@ module LingoBeats
         vocabs = @vocabs_repo.for_song(song_id)
 
         pending = vocabs.select(&:material_blank?)
-        return if pending.empty?
+        total = pending.size
+        return if total.zero?
+
+        processed = 0
 
         pending.each_slice(BATCH_SIZE) do |batch|
           generate_batch_materials(batch, song)
+          processed += batch.size
+          
+          yield(current: processed, total: total) if block_given?
         end
 
       rescue StandardError => error
