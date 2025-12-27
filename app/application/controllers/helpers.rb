@@ -24,7 +24,7 @@ module LingoBeats
 
           # Case 1: do not need representer / have representer but message is string
           # → direct ApiResult (#message is string or Hash)
-          if representer_class.nil? || result.message.is_a?(String)
+          if !representer_class || result.message.is_a?(String)
             return { status: result.status,
                      message: result.message }.to_json
           end

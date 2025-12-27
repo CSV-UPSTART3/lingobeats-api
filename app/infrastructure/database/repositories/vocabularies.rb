@@ -40,7 +40,7 @@ module LingoBeats
       end
 
       def self.find_by_ids(ids)
-        return [] if ids.nil? || ids.empty?
+        return [] if !ids || ids.empty?
 
         ordered_ids = ids.map(&:to_i)
         records = VocabularyOrm.where(id: ordered_ids).all

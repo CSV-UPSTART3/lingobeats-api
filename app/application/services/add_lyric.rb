@@ -97,8 +97,8 @@ module LingoBeats
         validate_lyric(lyric)
       rescue FetchError => error
         raise error
-      rescue StandardError => e
-        App.logger.error("[AddLyric] Unexpected error when fetching lyric: #{e.full_message}")
+      rescue StandardError => error
+        App.logger.error("[AddLyric] Unexpected error when fetching lyric: #{error.full_message}")
         Failure(Response::ApiResult.new(status: :internal_error, message: GENIUS_API_ERROR))
       end
 

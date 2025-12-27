@@ -12,7 +12,7 @@ module LingoBeats
       end
 
       def keys
-        Dir.glob("#{@cache_dir}/**/*").select { |f| File.file?(f) }
+        Dir.glob("#{@cache_dir}/**/*").select { |filename| File.file?(filename) }
       end
 
       def wipe

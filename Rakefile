@@ -81,8 +81,9 @@ namespace :db do
   end
 
   desc 'Delete database file based on DB_FILENAME env'
-  task :drop do
-    db_file = ENV.fetch('DB_FILENAME', nil)
+  task :drop => :config do
+    db_file = ENV['DB_FILENAME'] || app.config.DB_FILENAME
+    # db_file = ENV.fetch('DB_FILENAME', nil)
     abort 'DB_FILENAME env required for db:drop' unless db_file
 
     FileUtils.rm_f(db_file)
@@ -147,21 +148,18 @@ namespace :worker do
   namespace :run do
     desc 'Run the background material generation worker in development mode'
     task :dev => 'queues:config' do
-      # rubocop:disable Layout/LineLength
       sh 'RACK_ENV=development bundle exec shoryuken -r ./workers/material_generation_worker.rb -C ./workers/shoryuken_dev.yml'
       # rubocop:enable Layout/LineLength
     end
 
     desc 'Run the background material generation worker in testing mode'
     task :test => 'queues:config' do
-      # rubocop:disable Layout/LineLength
       sh 'RACK_ENV=test bundle exec shoryuken -r ./workers/material_generation_worker.rb -C ./workers/shoryuken_test.yml'
       # rubocop:enable Layout/LineLength
     end
 
     desc 'Run the background material generation worker in production mode'
     task :production => 'queues:config' do
-      # rubocop:disable Layout/LineLength
       sh 'RACK_ENV=production bundle exec shoryuken -r ./workers/material_generation_worker.rb -C ./workers/shoryuken.yml'
       # rubocop:enable Layout/LineLength
     end

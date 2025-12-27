@@ -4,6 +4,8 @@
       enabled: false
     DuplicateMethodCall:
       enabled: false
+    TooManyStatements:
+      max_statements: 6
   exclude_paths:
     - _snippets
     - lib/lingo_beats.rb # one-time test fixture creator
