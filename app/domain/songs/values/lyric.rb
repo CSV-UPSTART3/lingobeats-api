@@ -49,23 +49,20 @@ module LingoBeats
       def clean_words
         return [] if text.to_s.strip.empty?
 
-        cleaned_text = Mixins::Cleaner.new(text).call
-        Mixins::Tokenizer.new(cleaned_text).call # array of words
+        cleaned_text = lyric_cleaner.new(text).call
+        lyric_tokenizer.new(cleaned_text).call # array of words
       end
 
       def evaluate_difficulty
         words = clean_words
-        results = Mixins::DifficultyEstimator.new(words).call
+        results = difficulty_estimator.new(words).call
 
         # puts "[DEBUG] evaluate_difficulty results sample: #{results.first.inspect}"
 
         # let A1/A2 → A, B1/B2 → B, C1/C2 → C
-        results
-          .map { |result| collapse_level(result) }
-          .compact
+        results.map { |result| collapse_level(result) }
+               .compact
         # puts "[DEBUG] Mapped results sample: #{mapped_results.first.inspect}"
-
-        # mapped_results.reject { |_word, lvl| [nil, 'None'].include?(lvl) }
       end
 
       def collapse_level(result)
@@ -77,6 +74,20 @@ module LingoBeats
 
       def self.collapse_level_code(raw_level)
         LEVEL_CODE_MAP[raw_level.to_s[0]]
+      end
+
+      private
+
+      def lyric_cleaner
+        Songs::Services::Cleaner
+      end
+
+      def lyric_tokenizer
+        Songs::Services::Tokenizer
+      end
+
+      def difficulty_estimator
+        Songs::Services::DifficultyEstimator
       end
     end
   end
