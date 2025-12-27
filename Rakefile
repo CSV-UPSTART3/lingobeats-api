@@ -251,9 +251,31 @@ end
 # check code quality
 namespace :quality do
   only_app = 'config/ app/'
+  checks = %w[rubocop reek flog]
 
   desc 'run all static-analysis quality checks'
-  task all: %i[rubocop reek flog]
+  task :all do
+    failures = []
+
+    checks.each do |check|
+      task_name = "quality:#{check}"
+      begin
+        Rake::Task[task_name].invoke
+      rescue StandardError => e
+        failures << [task_name, e.message]
+      ensure
+        Rake::Task[task_name].reenable
+      end
+    end
+
+    next if failures.empty?
+
+    puts 'Quality task failures:'
+    failures.each do |name, message|
+      puts "  #{name} failed: #{message}"
+    end
+    abort 'Quality checks failed'
+  end
 
   desc 'code style linter'
   task :rubocop do
