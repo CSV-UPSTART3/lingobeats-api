@@ -19,13 +19,13 @@ module LingoBeats
         @vocabs_repo = Repository::For.klass(Entity::Vocabulary)
       end
 
-      def call(song_id)
+      def call(song_id, &progress_callback)
         song   = @songs_repo.find_by_id(song_id)
         vocabs = @vocabs_repo.for_song(song_id)
 
         pending = vocabs.select(&:material_blank?)
 
-        process_in_batches(pending, song)
+        process_in_batches(pending, song, &progress_callback)
       rescue StandardError => error
         handle_error(error)
       end
@@ -63,7 +63,7 @@ module LingoBeats
         raise error
       end
 
-      def process_in_batches(pending, song)
+      def process_in_batches(pending, song, &progress_callback)
         total = pending.size
         return if total.zero?
 
@@ -72,14 +72,14 @@ module LingoBeats
         pending.each_slice(BATCH_SIZE) do |batch|
           generate_batch_materials(batch, song)
           processed += batch.size
-          yield_progress(processed, total)
+          yield_progress(processed, total, &progress_callback)
         end
       end
 
-      def yield_progress(processed, total)
-        return unless block_given?
+      def yield_progress(processed, total, &progress_callback)
+        return unless progress_callback
 
-        yield(current: processed, total: total)
+        progress_callback.call(current: processed, total: total)
       end
 
       # Renders the prompt for material generation

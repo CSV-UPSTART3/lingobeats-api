@@ -38,7 +38,7 @@ module MaterialGeneration
     end
 
     def build_context(body)
-      data = LingoBeats::Presenter::MaterialJob.from_json(body)
+      data = LingoBeats::Representer::MaterialJob.from_json(body)
 
       {
         data: data,
