@@ -21,7 +21,7 @@ module LingoBeats
 
       def call(song_id, &progress_callback)
         song = song_for(song_id)
-        pending = pending_vocabs_for(song_id)
+        pending = pending_vocabs_for(song)
 
         processor.process(pending, song, progress_callback)
       rescue StandardError => error
@@ -34,8 +34,9 @@ module LingoBeats
         @songs_repo.find_by_id(song_id)
       end
 
-      def pending_vocabs_for(song_id)
-        @vocabs_repo.for_song(song_id).select(&:material_blank?)
+      def pending_vocabs_for(song)
+        vocabs = @vocabs_repo.for_song(song.id)
+        PendingCollection.new(song, vocabs).pending
       end
 
       def processor
@@ -64,6 +65,31 @@ module LingoBeats
             vocab_pairs: pairs,
             song_name: song.name
           )
+        end
+      end
+
+      # Collection helper to filter and order pending vocabularies
+      class PendingCollection
+        def initialize(song, vocabs, order_class: Songs::Services::LyricWordOrder)
+          @song = song
+          @vocabs = vocabs
+          @order = order_class.new(song)
+        end
+
+        def pending
+          filtered.each_with_index
+                  .sort_by { |vocab, index| @order.position_for(vocab.original_word || vocab.name, offset + index) }
+                  .map(&:first)
+        end
+
+        private
+
+        def filtered
+          @vocabs.select(&:material_blank?)
+        end
+
+        def offset
+          @order.size
         end
       end
 

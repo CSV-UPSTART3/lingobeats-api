@@ -4,6 +4,8 @@ require 'json'
 require_relative '../orm/vocabulary_orm'
 require_relative '../../gemini/mappers/vocabulary_mapper'
 require_relative '../../../domain/vocabularies/entities/vocabulary'
+require_relative '../../../domain/songs/entities/song'
+require_relative '../../../domain/songs/services/lyric_word_order'
 
 module LingoBeats
   module Repository
@@ -94,7 +96,9 @@ module LingoBeats
       end
 
       def self.vocabs_content(song_id)
-        for_song(song_id).filter_map { |vocab| VocabulariesSupport.material_payload(vocab) }
+        vocabs = for_song(song_id)
+        ordered = VocabulariesSupport.ordered_by_lyric(vocabs, song_id)
+        ordered.filter_map { |vocab| VocabulariesSupport.material_payload(vocab) }
       end
 
       def self.contents_by_ids(ids)
@@ -154,6 +158,33 @@ module LingoBeats
         entities = rebuild_many(records)
         entity_map = entities.to_h { |vocab| [vocab.id, vocab] }
         ordered_ids.filter_map { |id| entity_map[id] }
+      end
+
+      # Use for material ordering according to lyric word appearance
+      def ordered_by_lyric(vocabs, song_id)
+        song = fetch_song(song_id)
+        return vocabs unless song
+
+        reorder_vocabs(vocabs, song)
+      rescue StandardError => error
+        App.logger.warn("[Vocabularies] Failed to order by lyric: #{error.message}")
+        vocabs
+      end
+
+      def fetch_song(song_id)
+        Repository::For.klass(Entity::Song).find_by_id(song_id)
+      end
+
+      def reorder_vocabs(vocabs, song)
+        order = LingoBeats::Songs::Services::LyricWordOrder.new(song)
+        offset = order.size
+        vocabs.each_with_index
+              .sort_by { |vocab, index| order.position_for(word_for(vocab), offset + index) }
+              .map(&:first)
+      end
+
+      def word_for(vocab)
+        vocab.original_word || vocab.name
       end
 
       def with_song(song_id)
