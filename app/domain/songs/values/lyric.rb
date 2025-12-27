@@ -15,6 +15,12 @@ module LingoBeats
       # pyimport :langdetect
       include Dry.Types
 
+      LEVEL_CODE_MAP = {
+        'A' => 'A',
+        'B' => 'B',
+        'C' => 'C'
+      }.freeze
+
       attribute :text, Strict::String.optional
 
       # get id by checksum of normalized text
@@ -63,18 +69,14 @@ module LingoBeats
       end
 
       def collapse_level(result)
-        collapsed = collapse_level_code(result['level'])
+        collapsed = self.class.collapse_level_code(result['level'])
         return nil unless collapsed
 
-        result.merge('level' => collapsed)
+        { **result, 'level' => collapsed }
       end
 
-      def collapse_level_code(raw_level)
-        case raw_level
-        when /^A/ then 'A'
-        when /^B/ then 'B'
-        when /^C/ then 'C'
-        end
+      def self.collapse_level_code(raw_level)
+        LEVEL_CODE_MAP[raw_level.to_s[0]]
       end
     end
   end

@@ -33,13 +33,11 @@ module LingoBeats
         end
 
         def strip_code_fences(text)
-          return '' if text.nil?
-
-          text
-            .sub(/\A```json\s*/i, '') # starts with ```json
-            .sub(/\A```/, '')         # or only ```
-            .sub(/```$/, '')          # end ```
-            .strip
+          text.to_s
+              .sub(/\A```json\s*/i, '') # starts with ```json
+              .sub(/\A```/, '')         # or only ```
+              .sub(/```$/, '')          # end ```
+              .strip
         end
 
         # remove extra: `, ]` / `, }`
@@ -47,16 +45,16 @@ module LingoBeats
           text.gsub(/,\s*([\]}])/, '\1')
         end
 
-        def symbolize_keys(obj)
-          case obj
+        def symbolize_keys(object)
+          case object
           when Hash
-            obj.each_with_object({}) do |(k, v), h|
-              h[k.to_sym] = symbolize_keys(v)
+            object.each_with_object({}) do |(key, value), result|
+              result[key.to_sym] = symbolize_keys(value)
             end
           when Array
-            obj.map { |v| symbolize_keys(v) }
+            object.map { |value| symbolize_keys(value) }
           else
-            obj
+            object
           end
         end
 
@@ -67,7 +65,7 @@ module LingoBeats
           return nil if text.to_s.strip.empty?
 
           cleaned = relax_trailing_commas(strip_code_fences(text))
-          raw = JSON.parse(cleaned)
+          raw     = JSON.parse(cleaned)
 
           symbolize_keys(raw)
         rescue JSON::ParserError
@@ -77,18 +75,24 @@ module LingoBeats
         # ----- batch mode: for AddMaterial -----
 
         def parse_batch(payload)
-          text = strip_code_fences(extract_text(payload).to_s).strip
+          text = batch_text(payload)
           return [] if text.empty?
 
-          cleaned = relax_trailing_commas(text)
-          raw     = begin
-            JSON.parse(cleaned)
-          rescue StandardError
-            { raw_text: text }
-          end
+          raw   = parse_json_relaxed(text)
           array = raw.is_a?(Array) ? raw : [raw]
 
           symbolize_keys(array)
+        end
+
+        def batch_text(payload)
+          strip_code_fences(extract_text(payload).to_s).strip
+        end
+
+        def parse_json_relaxed(text)
+          cleaned = relax_trailing_commas(text)
+          JSON.parse(cleaned)
+        rescue StandardError
+          { raw_text: text }
         end
       end
 

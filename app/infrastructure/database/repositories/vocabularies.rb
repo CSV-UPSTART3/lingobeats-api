@@ -1,100 +1,89 @@
 # frozen_string_literal: true
 
+require 'json'
 require_relative '../orm/vocabulary_orm'
 require_relative '../../gemini/mappers/vocabulary_mapper'
 require_relative '../../../domain/vocabularies/entities/vocabulary'
 
 module LingoBeats
   module Repository
-    # Repository for Vocabulary Entities
+    # Repository for Vocabulary entities (DB access + entity rebuild + linking).
     class Vocabularies
-      # ORM mapping
       VocabularyOrm = Database::VocabularyOrm
 
       # 取多筆
       def self.all
-        rebuild_many(VocabularyOrm.all)
+        VocabulariesSupport.rebuild_many(VocabularyOrm.all)
       end
 
       def self.latest(limit = 20)
-        rows = VocabularyOrm.reverse_order(:id).limit(limit).all
-        rebuild_many(rows)
+        VocabulariesSupport.rebuild_many(VocabularyOrm.reverse_order(:id).limit(limit).all)
       end
 
       # 查一筆
       def self.find_by_id(id)
-        rec = VocabularyOrm.first(id: id)
-        rebuild_entity(rec)
+        VocabulariesSupport.rebuild_entity(VocabularyOrm.first(id: id))
       end
 
       def self.for_song(song_id)
-        song = Database::SongOrm.first(id: song_id)
-        return [] unless song
-
-        rebuild_many(song.vocabularies)
+        VocabulariesSupport.with_song(song_id) do |song|
+          VocabulariesSupport.rebuild_many(song.vocabularies)
+        end || []
       end
 
       def self.find_by_name(name)
-        rec = VocabularyOrm.first(name: name)
-        rebuild_entity(rec)
+        VocabulariesSupport.rebuild_entity(VocabularyOrm.first(name: name))
       end
 
       def self.find_by_ids(ids)
-        return [] if !ids || ids.empty?
+        ordered_ids = VocabulariesSupport.normalize_ids(ids)
+        return [] if ordered_ids.empty?
 
-        ordered_ids = ids.map(&:to_i)
-        records = VocabularyOrm.where(id: ordered_ids).all
-        entities = rebuild_many(records)
-        entity_map = entities.each_with_object({}) { |vocab, memo| memo[vocab.id] = vocab }
-        ordered_ids.map { |id| entity_map[id] }.compact
+        VocabulariesSupport.ordered_entities(VocabularyOrm, ordered_ids)
       end
 
       def self.find_by_names(names)
-        VocabularyOrm.where(name: names).all.map { |rec| rebuild_entity(rec) }
+        VocabularyOrm.where(name: names).all.map { |rec| VocabulariesSupport.rebuild_entity(rec) }.compact
       end
 
       def self.create(entity)
-        rec = VocabularyOrm.create(name: entity.name, original_word: entity.original_word,
-                                   level: entity.level, material: entity.material)
-        rebuild_entity(rec)
+        rec = VocabularyOrm.create(
+          name: entity.name,
+          original_word: entity.original_word,
+          level: entity.level,
+          material: entity.material
+        )
+        VocabulariesSupport.rebuild_entity(rec)
       end
 
       def self.create_many(entities)
-        # 用 transaction 包起來，避免一半成功一半失敗
         VocabularyOrm.db.transaction do
-          entities.map do |ent|
-            rec = VocabularyOrm.create(name: ent.name, original_word: ent.original_word,
-                                       level: ent.level, material: ent.material)
-            rebuild_entity(rec)
-          end
+          entities.map { |ent| create_from_entity(ent) }
         end
       end
 
       def self.link_song(song_id, vocab_id)
-        song = Database::SongOrm.first(id: song_id)
-        vocab = VocabularyOrm.first(id: vocab_id)
-        return if song.vocabularies_dataset.where(id: vocab_id).any?
+        VocabulariesSupport.with_song(song_id) do |song|
+          next if song.vocabularies_dataset.where(id: vocab_id).any?
 
-        song.add_vocabulary(vocab)
-      end
-
-      def self.link_songs(song_id, vocab_ids)
-        song = Database::SongOrm.first(id: song_id)
-        existing_vocab_ids = song.vocabularies_dataset.select(:id).map(:id)
-        new_vocab_ids = vocab_ids - existing_vocab_ids
-        return if new_vocab_ids.empty?
-
-        new_vocab_ids.each do |vocab_id|
           vocab = VocabularyOrm.first(id: vocab_id)
           song.add_vocabulary(vocab) if vocab
         end
       end
 
+      def self.link_songs(song_id, vocab_ids)
+        VocabulariesSupport.with_song(song_id) do |song|
+          new_ids = VocabulariesSupport.new_vocab_ids_for(song, vocab_ids)
+          VocabulariesSupport.add_vocabularies(VocabularyOrm, song, new_ids) unless new_ids.empty?
+        end
+      end
+
       def self.update_material(id, material_hash)
-        # puts material_hash.class
         rec = VocabularyOrm.first(id: id)
+        return nil unless rec
+
         rec.update(material: material_hash)
-        rebuild_entity(rec)
+        VocabulariesSupport.rebuild_entity(rec)
       end
 
       def self.incomplete_material?(song_id)
@@ -105,34 +94,86 @@ module LingoBeats
       end
 
       def self.vocabs_content(song_id)
-        for_song(song_id).filter_map { |vocab| material_payload(vocab) }
+        for_song(song_id).filter_map { |vocab| VocabulariesSupport.material_payload(vocab) }
       end
 
       def self.contents_by_ids(ids)
-        find_by_ids(ids).filter_map { |vocab| material_payload(vocab) }
+        find_by_ids(ids).filter_map { |vocab| VocabulariesSupport.material_payload(vocab) }
       end
 
-      # --- helpers ---
-      def self.rebuild_many(db_records)
+      def self.create_from_entity(ent)
+        rec = VocabularyOrm.create(
+          name: ent.name,
+          original_word: ent.original_word,
+          level: ent.level,
+          material: ent.material
+        )
+        VocabulariesSupport.rebuild_entity(rec)
+      end
+      private_class_method :create_from_entity
+    end
+
+    # Helper functions used by the Vocabularies repository (rebuild, ordering, linking).
+    module VocabulariesSupport
+      module_function
+
+      def rebuild_many(db_records)
         Array(db_records).map { |rec| rebuild_entity(rec) }
       end
 
-      def self.rebuild_entity(rec)
+      def rebuild_entity(rec)
         return nil unless rec
 
-        Entity::Vocabulary.new(id: rec.id, name: rec.name, level: rec.level,
-                               original_word: rec.original_word, material: rec.material) # String 或 nil
+        Entity::Vocabulary.new(
+          id: rec.id,
+          name: rec.name,
+          level: rec.level,
+          original_word: rec.original_word,
+          material: rec.material
+        )
       end
 
-      def self.material_payload(vocab)
+      def material_payload(vocab)
         return nil unless vocab.material && !vocab.material.empty?
 
         material = JSON.parse(vocab.material)
-
-        material.merge('id' => vocab.id, 'word' => vocab.name,
-                       'origin_word' => vocab.original_word, 'level' => vocab.level)
+        material.merge(
+          'id'          => vocab.id,
+          'word'        => vocab.name,
+          'origin_word' => vocab.original_word,
+          'level'       => vocab.level
+        )
       end
-      private_class_method :rebuild_many, :rebuild_entity, :material_payload
+
+      def normalize_ids(ids)
+        Array(ids).map(&:to_i).uniq
+      end
+
+      def ordered_entities(vocabulary_orm, ordered_ids)
+        records = vocabulary_orm.where(id: ordered_ids).all
+        entities = rebuild_many(records)
+        entity_map = entities.to_h { |vocab| [vocab.id, vocab] }
+        ordered_ids.filter_map { |id| entity_map[id] }
+      end
+
+      def with_song(song_id)
+        song = Database::SongOrm.first(id: song_id)
+        return nil unless song
+
+        yield song
+      end
+
+      def new_vocab_ids_for(song, vocab_ids)
+        existing_ids = song.vocabularies_dataset.select(:id).map(:id)
+        Array(vocab_ids) - existing_ids
+      end
+
+      def add_vocabularies(vocabulary_orm, song, vocab_ids)
+        vocab_ids.each do |vocab_id|
+          vocab = vocabulary_orm.first(id: vocab_id)
+          song.add_vocabulary(vocab) if vocab
+        end
+      end
     end
   end
 end

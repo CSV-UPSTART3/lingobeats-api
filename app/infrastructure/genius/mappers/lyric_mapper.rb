@@ -26,14 +26,8 @@ module LingoBeats
 
       # 給歌名/歌手名字，回傳乾淨歌詞字串，或 nil
       def lyrics_for(song_name:, singer_name:)
-        lyrics_page_url = first_lyrics_url(self.class.build_query(song_name, singer_name))
-        return nil unless lyrics_page_url
-
-        html_doc = @gateway.fetch_lyrics_html(lyrics_page_url)
-        # App.logger.info html_doc
-        return nil unless html_doc
-
-        lyrics_text = LyricsExtractor.extract_lyrics_text(html_doc)
+        query       = self.class.build_query(song_name, singer_name)
+        lyrics_text = fetch_lyrics_text(query)
         return nil unless lyrics_text
 
         Value::Lyric.new(text: lyrics_text)
@@ -55,6 +49,18 @@ module LingoBeats
         return nil unless first_hit
 
         first_hit.dig('result', 'url')
+      end
+
+      private
+
+      def fetch_lyrics_text(query)
+        lyrics_page_url = first_lyrics_url(query)
+        return nil unless lyrics_page_url
+
+        html_doc = @gateway.fetch_lyrics_html(lyrics_page_url)
+        return nil unless html_doc
+
+        LyricsExtractor.extract_lyrics_text(html_doc)
       end
 
       # Extract lyric from html document
