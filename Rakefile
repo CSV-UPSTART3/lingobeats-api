@@ -144,24 +144,30 @@ namespace :queues do
   end
 end
 
+def shoryuken_command(env, config_file)
+  [
+    "RACK_ENV=#{env}",
+    'bundle exec shoryuken',
+    '-r ./workers/material_generation_worker.rb',
+    "-C #{config_file}"
+  ].join(' ')
+end
+
 namespace :worker do
   namespace :run do
     desc 'Run the background material generation worker in development mode'
     task :dev => 'queues:config' do
-      sh 'RACK_ENV=development bundle exec shoryuken -r ./workers/material_generation_worker.rb -C ./workers/shoryuken_dev.yml'
-      # rubocop:enable Layout/LineLength
+      sh shoryuken_command('development', './workers/shoryuken_dev.yml')
     end
 
     desc 'Run the background material generation worker in testing mode'
     task :test => 'queues:config' do
-      sh 'RACK_ENV=test bundle exec shoryuken -r ./workers/material_generation_worker.rb -C ./workers/shoryuken_test.yml'
-      # rubocop:enable Layout/LineLength
+      sh shoryuken_command('test', './workers/shoryuken_test.yml')
     end
 
     desc 'Run the background material generation worker in production mode'
     task :production => 'queues:config' do
-      sh 'RACK_ENV=production bundle exec shoryuken -r ./workers/material_generation_worker.rb -C ./workers/shoryuken.yml'
-      # rubocop:enable Layout/LineLength
+      sh shoryuken_command('production', './workers/shoryuken.yml')
     end
   end
 end

@@ -64,7 +64,7 @@ module LingoBeats
 
       def collapse_level(result)
         collapsed = collapse_level_code(result['level'])
-        return nil if !collapsed
+        return nil unless collapsed
 
         result.merge('level' => collapsed)
       end
