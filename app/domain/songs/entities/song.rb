@@ -5,6 +5,8 @@ require 'dry-struct'
 
 require_relative 'singer'
 require_relative '../values/lyric'
+require_relative '../values/song_difficulty'
+require_relative '../services/song_difficulty_analyzer'
 
 module LingoBeats
   module Entity
@@ -77,18 +79,11 @@ module LingoBeats
       end
 
       def difficulty_distribution
-        puts base_distribution
-        SongDifficultyHelper.fill_levels(base_distribution)
+        difficulty_analysis.distribution
       end
 
       def average_difficulty
-        dist = difficulty_distribution
-        return if dist.empty?
-
-        total = dist.values.sum
-        return if total.zero?
-
-        difficulty_helper.find_level(dist:, total:)
+        difficulty_analysis.level_code
       end
 
       # 要在 controller require service
@@ -98,44 +93,16 @@ module LingoBeats
 
       private
 
-      def base_distribution
-        evaluate_words.values.each_with_object(Hash.new(0)) do |level, hash|
-          next unless %w[A B C].include?(level)
-
-          hash[level] += 1
-        end
+      def difficulty_analysis
+        @difficulty_analysis ||= difficulty_analyzer.from_levels(word_levels)
       end
 
-      def difficulty_helper
-        @difficulty_helper ||= SongDifficultyHelper
-      end
-    end
-
-    # Helpers for calculating song difficulty
-    module SongDifficultyHelper
-      module_function
-
-      def find_level(dist:, total:)
-        level_scores.key(weighted_average(dist, total).round)
+      def difficulty_analyzer
+        Songs::Services::SongDifficultyAnalyzer
       end
 
-      def weighted_average(dist, total)
-        weighted = dist.sum { |level, count| level_scores[level] * count }.to_f
-        weighted / total
-      end
-
-      def fill_levels(distribution)
-        %w[A B C].each_with_object({}) do |level, hash|
-          hash[level] = distribution.fetch(level, 0)
-        end
-      end
-
-      def level_scores
-        {
-          'A' => 1,
-          'B' => 2,
-          'C' => 3
-        }.freeze
+      def word_levels
+        evaluate_words&.values || []
       end
     end
   end
