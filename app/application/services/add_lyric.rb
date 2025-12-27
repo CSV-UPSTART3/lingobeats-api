@@ -93,13 +93,15 @@ module LingoBeats
       end
 
       def fetch_lyric_of_song(song)
-        lyric = @songs_repo.fetch_lyric(song_name: song.name, singer_name: song.singers.first.name)
-        validate_lyric(lyric)
-      rescue FetchError => error
-        raise error
-      rescue StandardError => error
-        App.logger.error("[AddLyric] Unexpected error when fetching lyric: #{error.full_message}")
-        Failure(Response::ApiResult.new(status: :internal_error, message: GENIUS_API_ERROR))
+        handle_fetch_errors do
+          song_name = song.name
+          singer_name = song.singers.first.name
+          validate_lyric(retrieve_lyric(song_name:, singer_name:))
+        end
+      end
+
+      def retrieve_lyric(song_name:, singer_name:)
+        @songs_repo.fetch_lyric(song_name:, singer_name:)
       end
 
       def validate_lyric(lyric)
@@ -107,6 +109,15 @@ module LingoBeats
         raise FetchError.new(message: LYRIC_NOT_RECOMMENDED) unless lyric.english?
 
         lyric
+      end
+
+      def handle_fetch_errors
+        yield
+      rescue FetchError => error
+        raise error
+      rescue StandardError => error
+        App.logger.error("[AddLyric] Unexpected error when fetching lyric: #{error.full_message}")
+        Failure(Response::ApiResult.new(status: :internal_error, message: GENIUS_API_ERROR))
       end
 
       def store_remote_lyric(song_id, remote_lyric)

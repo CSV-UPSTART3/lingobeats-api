@@ -31,12 +31,16 @@ module LingoBeats
         lyric&.text&.strip
       end
 
-      # Remove duplicates by name + first singer id
-      def ==(other)
-        other.respond_to?(:comparison_key) && comparison_key == other.comparison_key
-      end
-      alias eql? ==
+      # :reek:FeatureEnvy
+      def eql?(other)
+        return false unless other.is_a?(Song)
 
+        comparison_key.eql?(other.comparison_key)
+      end
+
+      alias == eql?
+
+      # Compare by name and first singer's id
       def comparison_key
         [name, singers.first&.id]
       end
@@ -84,10 +88,7 @@ module LingoBeats
         total = dist.values.sum
         return if total.zero?
 
-        # 用 helper 的分數表來還原平均難度所對應的等級
-        SongDifficultyHelper.level_scores.key(
-          SongDifficultyHelper.weighted_average(dist, total).round
-        )
+        difficulty_helper.find_level(dist:, total:)
       end
 
       # 要在 controller require service
@@ -104,11 +105,19 @@ module LingoBeats
           hash[level] += 1
         end
       end
+
+      def difficulty_helper
+        @difficulty_helper ||= SongDifficultyHelper
+      end
     end
 
     # Helpers for calculating song difficulty
     module SongDifficultyHelper
       module_function
+
+      def find_level(dist:, total:)
+        level_scores.key(weighted_average(dist, total).round)
+      end
 
       def weighted_average(dist, total)
         weighted = dist.sum { |level, count| level_scores[level] * count }.to_f

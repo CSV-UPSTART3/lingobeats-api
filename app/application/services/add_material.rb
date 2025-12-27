@@ -104,23 +104,24 @@ module LingoBeats
 
       def handle_pending_materials(input)
         song = input[:song]
+        request_id = input[:request_id]
 
         if Material::ProcessingLock.acquire?(song.id)
           # first time enqueue
-          @material_job_queue.enqueue(song, input[:request_id])
-          success_processing(input, :insert_to_queue)
+          @material_job_queue.enqueue(song, request_id)
+          processing_success_message(input, request_id, :insert_to_queue)
         else
           App.logger.info("[AddMaterial] material job already queued for song=#{song.name}, song_id=#{song.id}")
-          success_processing(input, :already_queued)
+          processing_success_message(input, request_id, :already_queued)
         end
       end
 
-      def success_processing(input, message_key)
+      def processing_success_message(input, request_id, message_key)
         Success(
           input.merge(
             status: :processing,
             message: {
-              request_id: input[:request_id],
+              request_id: request_id,
               msg: MATERIAL_QUEUE_MESSAGES[message_key]
             }
           )
