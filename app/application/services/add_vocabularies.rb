@@ -84,7 +84,7 @@ module LingoBeats
       def fetch_existing_vocabularies
         # existing = @vocabs_repo.find_by_names(@difficulties.keys)
         # existing.to_h { |vocab| [vocab.name, vocab.id] }
-        names = @difficulties.map { |item| item["lemma"] }
+        names = @difficulties.map { |item| item['lemma'] }
         existing = @vocabs_repo.find_by_names(names)
         # puts "Existing vocabularies fetched: #{existing.map(&:name)}"
         existing.to_h { |vocab| [vocab.name, vocab.id] }

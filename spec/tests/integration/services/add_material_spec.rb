@@ -40,10 +40,8 @@ describe 'AddMaterial Service Integration Test' do
         "related_forms":[{"form":"test","pos":"test"}]}'
       )
     )
-    
-    @vocab_repo.link_song(@song.id, @vocab.id)
 
-    
+    @vocab_repo.link_song(@song.id, @vocab.id)
   end
 
   it 'HAPPY: returns :ok and existing material when all vocabs already have material' do
@@ -68,12 +66,10 @@ describe 'AddMaterial Service Integration Test' do
     assert_equal expected_contents, api.message.contents
   end
 
-  # TODO: 
+  # TODO:
   # HAPPY: 有vocab但沒有material的情況
 
-
   it 'SAD: failswith VOCAB_NOT_EXISTS when song has no vocabularies' do
-
     @song_repo.create(
       LingoBeats::Entity::Song.new(
         id: 'test-song-novocab',

@@ -91,7 +91,6 @@ end
 
 puts "CEFR 分析完成，輸出已寫入 #{output_path}"
 
-
 # --- call gemini api ---
 api_key = CONFIG['development']['GEMINI_API_KEY'] or raise 'GEMINI_API_KEY missing'
 LingoBeats::Gemini::VocabularyMapper.new(access_token: api_key)

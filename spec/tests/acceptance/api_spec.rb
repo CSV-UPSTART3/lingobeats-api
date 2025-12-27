@@ -14,9 +14,7 @@ CASSETTE_OPTS = { record: :new_episodes, match_requests_on: %i[method uri] }.fre
 VCR.configure do |config|
   config.before_record do |interaction|
     auth = interaction.request.headers['Authorization']&.first
-    if auth&.start_with?('Bearer ')
-      interaction.request.headers['Authorization'] = ['Bearer <SPOTIFY_ACCESS_TOKEN>']
-    end
+    interaction.request.headers['Authorization'] = ['Bearer <SPOTIFY_ACCESS_TOKEN>'] if auth&.start_with?('Bearer ')
   end
 end
 
@@ -265,12 +263,12 @@ describe 'LingoBeats API acceptance reference spec' do
     _(db_file).must_match(/test\.db\z/)
   end
 
-  def use_spotify_cassette(name, &block)
-    use_cassette('spotify', name, &block)
+  def use_spotify_cassette(name, &)
+    use_cassette('spotify', name, &)
   end
 
-  def use_genius_cassette(name, &block)
-    use_cassette('genius', name, &block)
+  def use_genius_cassette(name, &)
+    use_cassette('genius', name, &)
   end
 
   def use_cassette(provider, name, &block)

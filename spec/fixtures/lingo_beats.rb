@@ -60,7 +60,7 @@ genius_client = LingoBeats::Genius::LyricMapper.new(CONFIG['development']['GENIU
 lyrics = genius_client.lyrics_for(song_name: 'Golden', artist_name: 'HUNTR/X')
 lyrics_text = lyrics&.text
 File.write(File.join(dir, 'lyrics_output.txt'), lyrics_text)
-puts "歌詞已輸出到 spec/lyrics_output.txt"
+puts '歌詞已輸出到 spec/lyrics_output.txt'
 
 # 呼叫 Python 腳本
 # input_path  = File.join(dir, 'lyrics_output.txt')
@@ -137,7 +137,7 @@ end
 # 2) 用 result 生出 in-memory 的 Vocabulary entities
 initial_vocabs = result.map.with_index do |(word, level), idx|
   LingoBeats::Entity::Vocabulary.new(
-    id: idx + 1,            # ⭐ 加上假的自增 ID
+    id: idx + 1, # ⭐ 加上假的自增 ID
     name: word,
     level: level,
     material: nil # 一開始先是空的，等等由 service 幫你塞進去

@@ -18,7 +18,7 @@ module MaterialGeneration
             "#{@config.API_HOST}/faye",
             body: message_body(message)
           )
-          .then { |result| puts "(#{result.status})"}
+          .then { |result| puts "(#{result.status})" }
     rescue HTTP::ConnectionError
       puts '(Faye server not found - progress not sent)'
     end

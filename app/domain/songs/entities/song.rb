@@ -67,10 +67,9 @@ module LingoBeats
       def evaluate_words
         return {} unless lyric
 
-        result = lyric&.evaluate_difficulty # 呼叫 Lyric 的斷詞邏輯，並且進行評級
+        lyric&.evaluate_difficulty # 呼叫 Lyric 的斷詞邏輯，並且進行評級
         # puts "[DEBUG] evaluate_words result size=#{result.size}, sample=#{result.class}"
         # puts "[DEBUG] evaluate_words first: #{result.first.inspect}"
-        result
       end
 
       def difficulty_distribution

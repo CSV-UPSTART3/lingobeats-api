@@ -8,7 +8,7 @@ http_interactions:
       string: ''
     headers:
       Authorization:
-      - Bearer <GENIUS_CLIENT_ACCESS_TOKEN>
+      - Bearer <SPOTIFY_ACCESS_TOKEN>
       Connection:
       - close
       Host:
@@ -74,7 +74,7 @@ http_interactions:
       string: ''
     headers:
       Authorization:
-      - Bearer <GENIUS_CLIENT_ACCESS_TOKEN>
+      - Bearer <SPOTIFY_ACCESS_TOKEN>
       Connection:
       - close
       Host:
@@ -140,7 +140,7 @@ http_interactions:
       string: ''
     headers:
       Authorization:
-      - Bearer <GENIUS_CLIENT_ACCESS_TOKEN>
+      - Bearer <SPOTIFY_ACCESS_TOKEN>
       Connection:
       - close
       Host:
@@ -206,7 +206,7 @@ http_interactions:
       string: ''
     headers:
       Authorization:
-      - Bearer <GENIUS_CLIENT_ACCESS_TOKEN>
+      - Bearer <SPOTIFY_ACCESS_TOKEN>
       Connection:
       - close
       Host:
@@ -272,7 +272,7 @@ http_interactions:
       string: ''
     headers:
       Authorization:
-      - Bearer <GENIUS_CLIENT_ACCESS_TOKEN>
+      - Bearer <SPOTIFY_ACCESS_TOKEN>
       Connection:
       - close
       Host:
@@ -338,7 +338,7 @@ http_interactions:
       string: ''
     headers:
       Authorization:
-      - Bearer <GENIUS_CLIENT_ACCESS_TOKEN>
+      - Bearer <SPOTIFY_ACCESS_TOKEN>
       Connection:
       - close
       Host:
@@ -404,7 +404,7 @@ http_interactions:
       string: ''
     headers:
       Authorization:
-      - Bearer <GENIUS_CLIENT_ACCESS_TOKEN>
+      - Bearer <SPOTIFY_ACCESS_TOKEN>
       Connection:
       - close
       Host:
@@ -462,4 +462,58 @@ http_interactions:
         Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"available_markets":["AR","AU","AT","BE","BO","BR","BG","CA","CL","CO","CR","CY","CZ","DK","DO","DE","EC","EE","SV","FI","FR","GR","GT","HN","HK","HU","IS","IE","IT","LV","LT","LU","MY","MT","MX","NL","NZ","NI","NO","PA","PY","PE","PH","PL","PT","SG","SK","ES","SE","CH","TW","TR","UY","US","GB","AD","LI","MC","ID","JP","TH","VN","RO","IL","ZA","SA","AE","BH","QA","OM","KW","EG","MA","DZ","TN","LB","JO","PS","IN","KZ","MD","UA","AL","BA","HR","ME","MK","RS","SI","KR","BD","PK","LK","GH","KE","NG","TZ","UG","AG","AM","BS","BB","BZ","BT","BW","BF","CV","CW","DM","FJ","GM","GE","GD","GW","GY","HT","JM","KI","LS","LR","MW","MV","ML","MH","FM","NA","NR","NE","PW","PG","WS","SM","ST","SN","SC","SL","SB","KN","LC","VC","SR","TL","TO","TT","TV","VU","AZ","BN","BI","KH","CM","TD","KM","GQ","SZ","GA","GN","KG","LA","MO","MR","MN","NP","RW","TG","UZ","ZW","BJ","MG","MU","MZ","AO","CI","DJ","ZM","CD","CG","IQ","LY","TJ","VE","ET","XK"],"disc_number":1,"duration_ms":226073,"explicit":false,"external_ids":{"isrc":"USUG12506436"},"external_urls":{"spotify":"https://open.spotify.com/track/53iuhJlwXhSER5J2IYYv1W"},"href":"https://api.spotify.com/v1/tracks/53iuhJlwXhSER5J2IYYv1W","id":"53iuhJlwXhSER5J2IYYv1W","is_local":false,"name":"The
         Fate of Ophelia","popularity":100,"preview_url":null,"track_number":1,"type":"track","uri":"spotify:track:53iuhJlwXhSER5J2IYYv1W"}'
   recorded_at: Sat, 20 Dec 2025 12:20:09 GMT
+- request:
+    method: post
+    uri: https://accounts.spotify.com/api/token
+    body:
+      encoding: ASCII-8BIT
+      string: grant_type=client_credentials
+    headers:
+      Authorization:
+      - Basic Y2Y2OWRhNjY2NWNiNGJhNGFmYmMyYjUyYjU5YmYyMzc6NzE1ZjI0ZTE1NmQwNGU3ZGI2Nzk0Zjk4NjhiYmM5NGQ=
+      Connection:
+      - close
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - accounts.spotify.com
+      User-Agent:
+      - http.rb/5.3.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 27 Dec 2025 07:04:31 GMT
+      Request-Id:
+      - 6684d51b-46ef-44e6-b148-5160c237f0f7
+      Content-Type:
+      - application/json
+      Set-Cookie:
+      - __Host-device_id=AQDdmXbm3gr5skAlHG3RAvOwTVy9BcCIBOhdKgcx9ag74-bZt4Xp7INVfpZsuBAMAvINlpN8oQaV-z8g55fKGuHUnG6P39OodVw;Version=1;Path=/;Max-Age=2147483647;Secure;HttpOnly;SameSite=Lax
+      - sp_tr=false;Version=1;Domain=accounts.spotify.com;Path=/;Secure;SameSite=Lax
+      Content-Length:
+      - '198'
+      Server:
+      - envoy
+      X-Envoy-Upstream-Service-Time:
+      - '6'
+      Via:
+      - HTTP/1.1 fringe, HTTP/2 edgeproxy, 1.1 google
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Vary:
+      - Accept-Encoding
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"BQDkkHAdA5vbxkuDttZn6BR5NwXXkPPvbgpYl3EqrcUqhu96RNykTPXTRwgOikwJh-LJd3ReNTavOvTTKmjuuAu3M_2g2YmNRnlx2w4znVETU7uIpFSI8hywB_WmnE7xVnLP5bzZ7y0","token_type":"Bearer","expires_in":3600}'
+  recorded_at: Sat, 27 Dec 2025 07:04:30 GMT
 recorded_with: VCR 6.3.1

@@ -31,10 +31,9 @@ module LingoBeats
         pending.each_slice(BATCH_SIZE) do |batch|
           generate_batch_materials(batch, song)
           processed += batch.size
-          
+
           yield(current: processed, total: total) if block_given?
         end
-
       rescue StandardError => error
         App.logger.error("[MaterialGenerationService] #{error.full_message}")
         raise error # let worker retry
@@ -48,8 +47,10 @@ module LingoBeats
 
         batch.zip(materials).each do |vocab, raw_material|
           next unless raw_material
+
           material_for_db = validate_vocab_format(vocab, raw_material)
           next unless material_for_db
+
           save_vocab_material(vocab, material_for_db)
         end
       end

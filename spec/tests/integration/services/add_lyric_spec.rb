@@ -7,13 +7,13 @@ require_relative '../../../helpers/database_helper'
 describe 'AddLyric Service Integration Test' do
   VcrHelper.setup_vcr
 
-    before do
-        DatabaseHelper.wipe_database
-    end
+  before do
+    DatabaseHelper.wipe_database
+  end
 
-    after do
-        VcrHelper.eject_vcr
-    end
+  after do
+    VcrHelper.eject_vcr
+  end
 
   it 'HAPPY: fetches lyric from Genius, stores it,and returns :ok with lyric text' do
     songs_repo = LingoBeats::Repository::For.klass(LingoBeats::Entity::Song)
@@ -56,7 +56,6 @@ describe 'AddLyric Service Integration Test' do
     stored_lyric = songs_repo.find_lyric_in_database(song_id: SONG_ID)
     _(stored_lyric).wont_be_nil
     _(stored_lyric.text.to_s.strip.empty?).must_equal false
-
   end
 
   it 'HAPPY: reuses existing lyric from DB when lyric already exists' do
@@ -96,7 +95,7 @@ describe 'AddLyric Service Integration Test' do
       _(first_lyric.respond_to?(:text)).must_equal true
       _(first_lyric.text.to_s.strip.empty?).must_equal false
 
-      # 第一次：DB 有 lyric 
+      # 第一次：DB 有 lyric
       first_lyric_in_db = songs_repo.find_lyric_in_database(song_id: SONG_ID)
       _(first_lyric_in_db).wont_be_nil
       _(first_lyric_in_db.text.to_s.strip.empty?).must_equal false
@@ -123,7 +122,6 @@ describe 'AddLyric Service Integration Test' do
     end
   end
 
-
   it 'SAD: returns failure when AddSong fails (song not found)' do
     # 先把原本的 AddSong 存起來
     original_add_song = LingoBeats::Service.const_get(:AddSong)
@@ -134,7 +132,7 @@ describe 'AddLyric Service Integration Test' do
 
       def call(song_id:)
         api = LingoBeats::Response::ApiResult.new(
-          status:  :not_found,
+          status: :not_found,
           message: 'Cannot find the specified song'
         )
 
@@ -161,5 +159,4 @@ describe 'AddLyric Service Integration Test' do
       LingoBeats::Service.const_set(:AddSong, original_add_song)
     end
   end
-
 end

@@ -56,7 +56,9 @@ module LingoBeats
     # Database Setup
     @db = Sequel.connect(ENV.fetch('DATABASE_URL'))
     Sequel::Model.db = @db
-    def self.db = @db
+    class << self
+      attr_reader :db
+    end
 
     # Logger Setup
     configure :development, :production do

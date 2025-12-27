@@ -14,8 +14,8 @@ gem 'rake'
 # Asynchronicity
 gem 'aws-sdk-sqs', '~> 1.0'
 gem 'concurrent-ruby', '~> 1.0'
-gem 'shoryuken', '~> 6.0'
 gem 'faye', '~> 1'
+gem 'shoryuken', '~> 6.0'
 
 # PRESENTATION LAYER
 gem 'multi_json', '~> 1.15'
