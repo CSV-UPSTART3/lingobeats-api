@@ -7,6 +7,7 @@ ruby File.read('.ruby-version').strip
 gem 'cld3'
 gem 'figaro', '~> 1.0'
 gem 'openssl', '~> 3.3.1'
+gem 'panolint'
 gem 'pry'
 gem 'pycall'
 gem 'rake'
