@@ -44,13 +44,7 @@ module LingoBeats
 
             # puts "[DEBUG] Creating entity for lemma=#{lemma}, original_word=#{original_word}, level=#{level}"
 
-            Entity::Vocabulary.new(
-              id: nil,
-              name: lemma,
-              original_word: original_word,
-              level: level,
-              material: nil
-            )
+            Entity::Vocabulary.new(id: nil, name: lemma, original_word: original_word, level: level, material: nil)
           end
         end
       end

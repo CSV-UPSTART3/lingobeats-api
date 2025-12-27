@@ -18,6 +18,36 @@ VCR.configure do |config|
   end
 end
 
+FakeAddMaterialService = Class.new do
+  class << self
+    attr_accessor :called_with
+  end
+
+  def call(song_id:, request_id: nil)
+    _ = request_id
+    self.class.called_with = song_id
+
+    material = fake_material
+    fake_result = LingoBeats::Response::ApiResult.new(
+      status: :created,
+      message: material
+    )
+
+    Dry::Monads::Result::Success.new(fake_result)
+  end
+
+  private
+
+  def fake_material
+    LingoBeats::Response::Material.new(
+      song: 'Golden',
+      contents: [
+        { word: 'take', entries: [{ meaning: 'fake meaning', example: 'fake example' }] }
+      ]
+    )
+  end
+end
+
 describe 'LingoBeats API acceptance reference spec' do
   include Rack::Test::Methods
 
@@ -227,32 +257,11 @@ describe 'LingoBeats API acceptance reference spec' do
   end
 
   def with_fake_add_material
-    fake_service = Class.new do
-      class << self
-        attr_accessor :called_with
-      end
-
-      def initialize(*); end
-
-      def call(song_id:, request_id: nil)
-        self.class.called_with = song_id
-        material = LingoBeats::Response::Material.new(
-          song: 'Golden',
-          contents: [
-            { word: 'take', entries: [{ meaning: 'fake meaning', example: 'fake example' }] }
-          ]
-        )
-
-        fake_result = LingoBeats::Response::ApiResult.new(status: :created, message: material)
-        Dry::Monads::Result::Success.new(fake_result)
-      end
-    end
-
     original = LingoBeats::Service.const_get(:AddMaterial)
     LingoBeats::Service.send(:remove_const, :AddMaterial)
-    LingoBeats::Service.const_set(:AddMaterial, fake_service)
+    LingoBeats::Service.const_set(:AddMaterial, FakeAddMaterialService)
 
-    yield(fake_service)
+    yield(FakeAddMaterialService)
   ensure
     LingoBeats::Service.send(:remove_const, :AddMaterial)
     LingoBeats::Service.const_set(:AddMaterial, original)

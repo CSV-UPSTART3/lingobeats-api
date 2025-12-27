@@ -54,24 +54,27 @@ module LingoBeats
         # puts "[DEBUG] evaluate_difficulty results sample: #{results.first.inspect}"
 
         # let A1/A2 → A, B1/B2 → B, C1/C2 → C
-        results.map do |result|
-          raw_level = result['level']
-
-          collapsed =
-            case raw_level
-            when /^A/ then 'A'
-            when /^B/ then 'B'
-            when /^C/ then 'C'
-            end
-
-          next nil if collapsed.nil?
-
-          result.merge('level' => collapsed)
-        end.compact
-
+        results
+          .map { |result| collapse_level(result) }
+          .compact
         # puts "[DEBUG] Mapped results sample: #{mapped_results.first.inspect}"
 
         # mapped_results.reject { |_word, lvl| [nil, 'None'].include?(lvl) }
+      end
+
+      def collapse_level(result)
+        collapsed = collapse_level_code(result['level'])
+        return nil if collapsed.nil?
+
+        result.merge('level' => collapsed)
+      end
+
+      def collapse_level_code(raw_level)
+        case raw_level
+        when /^A/ then 'A'
+        when /^B/ then 'B'
+        when /^C/ then 'C'
+        end
       end
     end
   end

@@ -94,6 +94,7 @@ end
 
 # queue manipulation
 namespace :queues do
+  desc 'Load config into environment'
   task :config do
     require 'aws-sdk-sqs'
     require_relative 'config/environment' # load config info
@@ -146,17 +147,23 @@ namespace :worker do
   namespace :run do
     desc 'Run the background material generation worker in development mode'
     task :dev => 'queues:config' do
+      # rubocop:disable Layout/LineLength
       sh 'RACK_ENV=development bundle exec shoryuken -r ./workers/material_generation_worker.rb -C ./workers/shoryuken_dev.yml'
+      # rubocop:enable Layout/LineLength
     end
 
     desc 'Run the background material generation worker in testing mode'
     task :test => 'queues:config' do
+      # rubocop:disable Layout/LineLength
       sh 'RACK_ENV=test bundle exec shoryuken -r ./workers/material_generation_worker.rb -C ./workers/shoryuken_test.yml'
+      # rubocop:enable Layout/LineLength
     end
 
     desc 'Run the background material generation worker in production mode'
     task :production => 'queues:config' do
+      # rubocop:disable Layout/LineLength
       sh 'RACK_ENV=production bundle exec shoryuken -r ./workers/material_generation_worker.rb -C ./workers/shoryuken.yml'
+      # rubocop:enable Layout/LineLength
     end
   end
 end

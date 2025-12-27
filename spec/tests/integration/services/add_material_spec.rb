@@ -66,8 +66,53 @@ describe 'AddMaterial Service Integration Test' do
     assert_equal expected_contents, api.message.contents
   end
 
-  # TODO:
-  # HAPPY: 有vocab但沒有material的情況
+  it 'HAPPY: returns :processing and queues job when vocab has no material' do
+    pending_vocab = @vocab_repo.create(
+      LingoBeats::Entity::Vocabulary.new(
+        id: 2,
+        name: 'phantom',
+        original_word: 'phantom',
+        level: 'A1',
+        material: nil
+      )
+    )
+    @vocab_repo.link_song(@song.id, pending_vocab.id)
+
+    fake_queue = Class.new do
+      attr_reader :enqueued
+
+      def initialize
+        @enqueued = []
+      end
+
+      def enqueue(song, request_id)
+        @enqueued << { song: song, request_id: request_id }
+      end
+    end
+    job_queue = fake_queue.new
+
+    service = LingoBeats::Service::AddMaterial.new(
+      songs_repo: @song_repo,
+      vocabs_repo: @vocab_repo,
+      mapper: Object.new,
+      material_job_queue: job_queue
+    )
+
+    request_id = 'req-123'
+    result = service.call(song_id: @song.id, request_id: request_id)
+
+    assert result.success?
+    api = result.value!
+
+    assert_equal :processing, api.status
+    assert_equal request_id, api.message[:request_id]
+    assert_equal LingoBeats::Service::AddMaterial::MATERIAL_QUEUE_MESSAGES[:insert_to_queue], api.message[:msg]
+    assert_equal 1, job_queue.enqueued.length
+    assert_equal @song.id, job_queue.enqueued.first[:song].id
+    assert_equal request_id, job_queue.enqueued.first[:request_id]
+  ensure
+    LingoBeats::Service::Material::ProcessingLock.release(@song.id)
+  end
 
   it 'SAD: failswith VOCAB_NOT_EXISTS when song has no vocabularies' do
     @song_repo.create(

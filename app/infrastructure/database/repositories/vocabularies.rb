@@ -54,12 +54,8 @@ module LingoBeats
       end
 
       def self.create(entity)
-        rec = VocabularyOrm.create(
-          name: entity.name,
-          original_word: entity.original_word,
-          level: entity.level,
-          material: entity.material
-        )
+        rec = VocabularyOrm.create(name: entity.name, original_word: entity.original_word,
+                                   level: entity.level, material: entity.material)
         rebuild_entity(rec)
       end
 
@@ -67,12 +63,8 @@ module LingoBeats
         # 用 transaction 包起來，避免一半成功一半失敗
         VocabularyOrm.db.transaction do
           entities.map do |ent|
-            rec = VocabularyOrm.create(
-              name: ent.name,
-              original_word: ent.original_word,
-              level: ent.level,
-              material: ent.material
-            )
+            rec = VocabularyOrm.create(name: ent.name, original_word: ent.original_word,
+                                       level: ent.level, material: ent.material)
             rebuild_entity(rec)
           end
         end
@@ -128,13 +120,8 @@ module LingoBeats
       def self.rebuild_entity(rec)
         return nil unless rec
 
-        Entity::Vocabulary.new(
-          id: rec.id,
-          name: rec.name,
-          level: rec.level,
-          original_word: rec.original_word,
-          material: rec.material # String 或 nil
-        )
+        Entity::Vocabulary.new(id: rec.id, name: rec.name, level: rec.level,
+                               original_word: rec.original_word, material: rec.material) # String 或 nil
       end
 
       def self.material_payload(vocab)
@@ -142,12 +129,8 @@ module LingoBeats
 
         material = JSON.parse(vocab.material)
 
-        material.merge(
-          'id'          => vocab.id,
-          'word'        => vocab.name,
-          'origin_word' => vocab.original_word,
-          'level'       => vocab.level
-        )
+        material.merge('id' => vocab.id, 'word' => vocab.name,
+                       'origin_word' => vocab.original_word, 'level' => vocab.level)
       end
       private_class_method :rebuild_many, :rebuild_entity, :material_payload
     end

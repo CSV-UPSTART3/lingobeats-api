@@ -5,6 +5,7 @@ require 'json'
 
 module LingoBeats
   module Service
+    # Service to generate learning materials for vocabularies in batches
     class MaterialGenerationService
       BATCH_SIZE = 5
 
@@ -23,20 +24,10 @@ module LingoBeats
         vocabs = @vocabs_repo.for_song(song_id)
 
         pending = vocabs.select(&:material_blank?)
-        total = pending.size
-        return if total.zero?
 
-        processed = 0
-
-        pending.each_slice(BATCH_SIZE) do |batch|
-          generate_batch_materials(batch, song)
-          processed += batch.size
-
-          yield(current: processed, total: total) if block_given?
-        end
+        process_in_batches(pending, song)
       rescue StandardError => error
-        App.logger.error("[MaterialGenerationService] #{error.full_message}")
-        raise error # let worker retry
+        handle_error(error)
       end
 
       private
@@ -67,6 +58,31 @@ module LingoBeats
         @vocabs_repo.update_material(vocab.id, updated_material_json)
       end
 
+      def handle_error(error)
+        App.logger.error("[MaterialGenerationService] #{error.full_message}")
+        raise error
+      end
+
+      def process_in_batches(pending, song)
+        total = pending.size
+        return if total.zero?
+
+        processed = 0
+
+        pending.each_slice(BATCH_SIZE) do |batch|
+          generate_batch_materials(batch, song)
+          processed += batch.size
+          yield_progress(processed, total)
+        end
+      end
+
+      def yield_progress(processed, total)
+        return unless block_given?
+
+        yield(current: processed, total: total)
+      end
+
+      # Renders the prompt for material generation
       class PromptRenderer
         TEMPLATE_PATH = 'app/application/services/prompts/material_prompt.erb'
 

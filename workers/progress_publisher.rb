@@ -3,6 +3,7 @@
 require 'http'
 
 module MaterialGeneration
+  # Helper class to publish progress messages to Faye server
   class ProgressPublisher
     def initialize(config, channel_id)
       @config = config
@@ -14,10 +15,7 @@ module MaterialGeneration
       puts "[post: #{@config.API_HOST}/faye]}"
       puts "Channel: #{@channel_id}"
       HTTP.headers(content_type: 'application/json')
-          .post(
-            "#{@config.API_HOST}/faye",
-            body: message_body(message)
-          )
+          .post("#{@config.API_HOST}/faye", body: message_body(message))
           .then { |result| puts "(#{result.status})" }
     rescue HTTP::ConnectionError
       puts '(Faye server not found - progress not sent)'

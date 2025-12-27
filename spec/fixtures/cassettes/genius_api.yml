@@ -7443,4 +7443,625 @@ http_interactions:
       string: '{"error":"invalid_token","error_description":"The access token provided
         is expired, revoked, malformed or invalid for other reasons."}'
   recorded_at: Sat, 27 Dec 2025 07:04:31 GMT
+- request:
+    method: get
+    uri: https://api.genius.com/search?q=Photograph%20Ed%20Sheeran
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <GENIUS_CLIENT_ACCESS_TOKEN>
+      User-Agent:
+      - Mozilla/5.0 (compatible; LingoBeats/1.0; +https://github.com/CSV-UPSTART3)
+      Connection:
+      - close
+      Host:
+      - api.genius.com
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Date:
+      - Sat, 27 Dec 2025 08:24:54 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '134'
+      Connection:
+      - close
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 9b476c9509907db2-TPE
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cache-Control:
+      - no-cache
+      Via:
+      - 1.1 heroku-router
+      Www-Authenticate:
+      - Bearer realm="Rack::OAuth2", error="invalid_token", error_description="The
+        access token provided is expired, revoked, malformed or invalid for other
+        reasons."
+      Nel:
+      - '{"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}'
+      Report-To:
+      - '{"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=fix%2FfHUiPFxOQ0ogLQOLXS1tb6K29xA0Te6RJTurOZM%3D\u0026sid=929419e7-33ea-4e2f-85f0-7d8b7cd5cbd6\u0026ts=1766823893"}],"max_age":3600}'
+      Reporting-Endpoints:
+      - heroku-nel="https://nel.heroku.com/reports?s=fix%2FfHUiPFxOQ0ogLQOLXS1tb6K29xA0Te6RJTurOZM%3D&sid=929419e7-33ea-4e2f-85f0-7d8b7cd5cbd6&ts=1766823893"
+      X-Request-Id:
+      - 8ffbd30a-73ff-f460-a06a-22081be112d3
+      X-Runtime:
+      - '0.004646'
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - _cfuvid=75JFxKlxG5V1mCtW8vrprjQJ5FQ1Ry80187kpk4HU5Q-1766823894089-0.0.1.1-604800000;
+        path=/; domain=.genius.com; HttpOnly; Secure; SameSite=None
+    body:
+      encoding: UTF-8
+      string: '{"error":"invalid_token","error_description":"The access token provided
+        is expired, revoked, malformed or invalid for other reasons."}'
+  recorded_at: Sat, 27 Dec 2025 08:24:53 GMT
+- request:
+    method: get
+    uri: https://api.genius.com/search?q=Photograph%20Ed%20Sheeran
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <GENIUS_CLIENT_ACCESS_TOKEN>
+      User-Agent:
+      - Mozilla/5.0 (compatible; LingoBeats/1.0; +https://github.com/CSV-UPSTART3)
+      Connection:
+      - close
+      Host:
+      - api.genius.com
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Date:
+      - Sat, 27 Dec 2025 12:12:04 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '134'
+      Connection:
+      - close
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 9b48b95b8f6156f4-TPE
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cache-Control:
+      - no-cache
+      Via:
+      - 1.1 heroku-router
+      Www-Authenticate:
+      - Bearer realm="Rack::OAuth2", error="invalid_token", error_description="The
+        access token provided is expired, revoked, malformed or invalid for other
+        reasons."
+      Nel:
+      - '{"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}'
+      Report-To:
+      - '{"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=ZHnzO3CccuwpyfA%2FGe3S88u9DnMsC1Z21lHEvIzuVgc%3D\u0026sid=929419e7-33ea-4e2f-85f0-7d8b7cd5cbd6\u0026ts=1766837523"}],"max_age":3600}'
+      Reporting-Endpoints:
+      - heroku-nel="https://nel.heroku.com/reports?s=ZHnzO3CccuwpyfA%2FGe3S88u9DnMsC1Z21lHEvIzuVgc%3D&sid=929419e7-33ea-4e2f-85f0-7d8b7cd5cbd6&ts=1766837523"
+      X-Request-Id:
+      - 1e1be73c-9cb4-da12-0b8a-0599089c7d86
+      X-Runtime:
+      - '0.007888'
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - _cfuvid=CU96BdflQKfBzb47CzSwJa6bMyQXzUVlNXmrqw2ZuqQ-1766837524014-0.0.1.1-604800000;
+        path=/; domain=.genius.com; HttpOnly; Secure; SameSite=None
+    body:
+      encoding: UTF-8
+      string: '{"error":"invalid_token","error_description":"The access token provided
+        is expired, revoked, malformed or invalid for other reasons."}'
+  recorded_at: Sat, 27 Dec 2025 12:12:03 GMT
+- request:
+    method: get
+    uri: https://api.genius.com/search?q=The%20Fate%20of%20Ophelia%20Taylor%20Swift
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <GENIUS_CLIENT_ACCESS_TOKEN>
+      User-Agent:
+      - Mozilla/5.0 (compatible; LingoBeats/1.0; +https://github.com/CSV-UPSTART3)
+      Connection:
+      - close
+      Host:
+      - api.genius.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 27 Dec 2025 12:16:57 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - close
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 9b48c082dcaaa9b3-TPE
+      Cf-Cache-Status:
+      - DYNAMIC
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - public, s-maxage=300
+      Etag:
+      - W/"23938c45a3d3ae756478fa4de40df82f"
+      Via:
+      - 1.1 heroku-router
+      Access-Control-Allow-Headers:
+      - Origin, Access-Control-Request-Method, Access-Control-Request-Headers, Content-Type,
+        Accept, X-Auth-Token, Authorization
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, OPTIONS, DELETE
+      Nel:
+      - '{"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}'
+      Report-To:
+      - '{"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=U9cNHXBg6LWiYixJdd%2F4Jy2wHeufCaEPj2QBbmofCbc%3D\u0026sid=929419e7-33ea-4e2f-85f0-7d8b7cd5cbd6\u0026ts=1766837816"}],"max_age":3600}'
+      Reporting-Endpoints:
+      - heroku-nel="https://nel.heroku.com/reports?s=U9cNHXBg6LWiYixJdd%2F4Jy2wHeufCaEPj2QBbmofCbc%3D&sid=929419e7-33ea-4e2f-85f0-7d8b7cd5cbd6&ts=1766837816"
+      X-Ratelimit-Limit:
+      - '10000'
+      X-Ratelimit-Remaining:
+      - '9994'
+      X-Ratelimit-Reset:
+      - '33591'
+      X-Request-Id:
+      - 38c04864-ee4f-8636-d304-98efbe703362
+      X-Runtime:
+      - '0.352326'
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - _cfuvid=1r7m2GReTXfJv_mmTguK4yldZeIUxeWMZxYfFbqNXMY-1766837817539-0.0.1.1-604800000;
+        path=/; domain=.genius.com; HttpOnly; Secure; SameSite=None
+    body:
+      encoding: UTF-8
+      string: '{"meta":{"status":200},"response":{"hits":[{"highlights":[],"index":"song","type":"song","result":{"annotation_count":27,"api_path":"/songs/12287956","artist_names":"Taylor
+        Swift","full_title":"The Fate of Ophelia by Taylor Swift","header_image_thumbnail_url":"https://images.genius.com/20137020caed6518eafd30ae87b0c216.300x300x1.png","header_image_url":"https://images.genius.com/20137020caed6518eafd30ae87b0c216.1000x1000x1.png","id":12287956,"lyrics_owner_id":17813994,"lyrics_state":"complete","path":"/Taylor-swift-the-fate-of-ophelia-lyrics","primary_artist_names":"Taylor
+        Swift","pyongs_count":26,"relationships_index_url":"https://genius.com/Taylor-swift-the-fate-of-ophelia-sample","release_date_components":{"year":2025,"month":10,"day":3},"release_date_for_display":"October
+        3, 2025","release_date_with_abbreviated_month_for_display":"Oct. 3, 2025","song_art_image_thumbnail_url":"https://images.genius.com/20137020caed6518eafd30ae87b0c216.300x300x1.png","song_art_image_url":"https://images.genius.com/20137020caed6518eafd30ae87b0c216.1000x1000x1.png","stats":{"unreviewed_annotations":19,"concurrents":12,"hot":false,"pageviews":3760698},"title":"The
+        Fate of Ophelia","title_with_featured":"The Fate of Ophelia","url":"https://genius.com/Taylor-swift-the-fate-of-ophelia-lyrics","featured_artists":[],"primary_artist":{"api_path":"/artists/1177","header_image_url":"https://images.genius.com/bc9884a4c7c8c6b71aa73509d8a7d6a0.1000x274x1.jpg","id":1177,"image_url":"https://images.genius.com/e9c8ac4c408d4f0a7daf4a3395cd8e1a.1000x1000x1.jpg","is_meme_verified":true,"is_verified":true,"name":"Taylor
+        Swift","url":"https://genius.com/artists/Taylor-swift","iq":1544},"primary_artists":[{"api_path":"/artists/1177","header_image_url":"https://images.genius.com/bc9884a4c7c8c6b71aa73509d8a7d6a0.1000x274x1.jpg","id":1177,"image_url":"https://images.genius.com/e9c8ac4c408d4f0a7daf4a3395cd8e1a.1000x1000x1.jpg","is_meme_verified":true,"is_verified":true,"name":"Taylor
+        Swift","url":"https://genius.com/artists/Taylor-swift","iq":1544}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":0,"api_path":"/songs/12625094","artist_names":"Taylor
+        Swift","full_title":"The Fate of Ophelia (Instrumental) by Taylor Swift","header_image_thumbnail_url":"https://images.genius.com/0c92da62473732e98583bbebb025b149.300x300x1.png","header_image_url":"https://images.genius.com/0c92da62473732e98583bbebb025b149.1000x1000x1.png","id":12625094,"lyrics_owner_id":12455462,"lyrics_state":"complete","path":"/Taylor-swift-the-fate-of-ophelia-instrumental-lyrics","primary_artist_names":"Taylor
+        Swift","pyongs_count":1,"relationships_index_url":"https://genius.com/Taylor-swift-the-fate-of-ophelia-instrumental-sample","release_date_components":{"year":2025,"month":10,"day":31},"release_date_for_display":"October
+        31, 2025","release_date_with_abbreviated_month_for_display":"Oct. 31, 2025","song_art_image_thumbnail_url":"https://images.genius.com/0c92da62473732e98583bbebb025b149.300x300x1.png","song_art_image_url":"https://images.genius.com/0c92da62473732e98583bbebb025b149.1000x1000x1.png","stats":{"unreviewed_annotations":0,"hot":false},"title":"The
+        Fate of Ophelia (Instrumental)","title_with_featured":"The Fate of Ophelia
+        (Instrumental)","url":"https://genius.com/Taylor-swift-the-fate-of-ophelia-instrumental-lyrics","featured_artists":[],"primary_artist":{"api_path":"/artists/1177","header_image_url":"https://images.genius.com/bc9884a4c7c8c6b71aa73509d8a7d6a0.1000x274x1.jpg","id":1177,"image_url":"https://images.genius.com/e9c8ac4c408d4f0a7daf4a3395cd8e1a.1000x1000x1.jpg","is_meme_verified":true,"is_verified":true,"name":"Taylor
+        Swift","url":"https://genius.com/artists/Taylor-swift","iq":1544},"primary_artists":[{"api_path":"/artists/1177","header_image_url":"https://images.genius.com/bc9884a4c7c8c6b71aa73509d8a7d6a0.1000x274x1.jpg","id":1177,"image_url":"https://images.genius.com/e9c8ac4c408d4f0a7daf4a3395cd8e1a.1000x1000x1.jpg","is_meme_verified":true,"is_verified":true,"name":"Taylor
+        Swift","url":"https://genius.com/artists/Taylor-swift","iq":1544}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":1,"api_path":"/songs/12507639","artist_names":"Taylor
+        Swift","full_title":"The Fate of Ophelia (Clean Version) by Taylor Swift","header_image_thumbnail_url":"https://images.genius.com/ddf4f82eeb4d5d7a1e84301484314fa4.300x300x1.png","header_image_url":"https://images.genius.com/ddf4f82eeb4d5d7a1e84301484314fa4.1000x1000x1.png","id":12507639,"lyrics_owner_id":22882250,"lyrics_state":"complete","path":"/Taylor-swift-the-fate-of-ophelia-clean-version-lyrics","primary_artist_names":"Taylor
+        Swift","pyongs_count":null,"relationships_index_url":"https://genius.com/Taylor-swift-the-fate-of-ophelia-clean-version-sample","release_date_components":{"year":2025,"month":10,"day":3},"release_date_for_display":"October
+        3, 2025","release_date_with_abbreviated_month_for_display":"Oct. 3, 2025","song_art_image_thumbnail_url":"https://images.genius.com/ddf4f82eeb4d5d7a1e84301484314fa4.300x300x1.png","song_art_image_url":"https://images.genius.com/ddf4f82eeb4d5d7a1e84301484314fa4.1000x1000x1.png","stats":{"unreviewed_annotations":0,"hot":false,"pageviews":6587},"title":"The
+        Fate of Ophelia (Clean Version)","title_with_featured":"The Fate of Ophelia
+        (Clean Version)","url":"https://genius.com/Taylor-swift-the-fate-of-ophelia-clean-version-lyrics","featured_artists":[],"primary_artist":{"api_path":"/artists/1177","header_image_url":"https://images.genius.com/bc9884a4c7c8c6b71aa73509d8a7d6a0.1000x274x1.jpg","id":1177,"image_url":"https://images.genius.com/e9c8ac4c408d4f0a7daf4a3395cd8e1a.1000x1000x1.jpg","is_meme_verified":true,"is_verified":true,"name":"Taylor
+        Swift","url":"https://genius.com/artists/Taylor-swift","iq":1544},"primary_artists":[{"api_path":"/artists/1177","header_image_url":"https://images.genius.com/bc9884a4c7c8c6b71aa73509d8a7d6a0.1000x274x1.jpg","id":1177,"image_url":"https://images.genius.com/e9c8ac4c408d4f0a7daf4a3395cd8e1a.1000x1000x1.jpg","is_meme_verified":true,"is_verified":true,"name":"Taylor
+        Swift","url":"https://genius.com/artists/Taylor-swift","iq":1544}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":1,"api_path":"/songs/12500317","artist_names":"Taylor
+        Swift","full_title":"The Fate of Ophelia (Track by Track) by Taylor Swift","header_image_thumbnail_url":"https://images.genius.com/749b23edce9b5c548fc53f660cdf08f0.300x300x1.png","header_image_url":"https://images.genius.com/749b23edce9b5c548fc53f660cdf08f0.1000x1000x1.png","id":12500317,"lyrics_owner_id":12455462,"lyrics_state":"complete","path":"/Taylor-swift-the-fate-of-ophelia-track-by-track-annotated","primary_artist_names":"Taylor
+        Swift","pyongs_count":null,"relationships_index_url":"https://genius.com/Taylor-swift-the-fate-of-ophelia-track-by-track-sample","release_date_components":{"year":2025,"month":10,"day":3},"release_date_for_display":"October
+        3, 2025","release_date_with_abbreviated_month_for_display":"Oct. 3, 2025","song_art_image_thumbnail_url":"https://images.genius.com/749b23edce9b5c548fc53f660cdf08f0.300x300x1.png","song_art_image_url":"https://images.genius.com/749b23edce9b5c548fc53f660cdf08f0.1000x1000x1.png","stats":{"unreviewed_annotations":1,"hot":false,"pageviews":55977},"title":"The
+        Fate of Ophelia (Track by Track)","title_with_featured":"The Fate of Ophelia
+        (Track by Track)","url":"https://genius.com/Taylor-swift-the-fate-of-ophelia-track-by-track-annotated","featured_artists":[],"primary_artist":{"api_path":"/artists/1177","header_image_url":"https://images.genius.com/bc9884a4c7c8c6b71aa73509d8a7d6a0.1000x274x1.jpg","id":1177,"image_url":"https://images.genius.com/e9c8ac4c408d4f0a7daf4a3395cd8e1a.1000x1000x1.jpg","is_meme_verified":true,"is_verified":true,"name":"Taylor
+        Swift","url":"https://genius.com/artists/Taylor-swift","iq":1544},"primary_artists":[{"api_path":"/artists/1177","header_image_url":"https://images.genius.com/bc9884a4c7c8c6b71aa73509d8a7d6a0.1000x274x1.jpg","id":1177,"image_url":"https://images.genius.com/e9c8ac4c408d4f0a7daf4a3395cd8e1a.1000x1000x1.jpg","is_meme_verified":true,"is_verified":true,"name":"Taylor
+        Swift","url":"https://genius.com/artists/Taylor-swift","iq":1544}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":1,"api_path":"/songs/12658653","artist_names":"Taylor
+        Swift & Loud Luxury","full_title":"The Fate of Ophelia (Loud Luxury Remix)
+        by Taylor Swift & Loud Luxury","header_image_thumbnail_url":"https://images.genius.com/568beb2ca321756fb068c82dd36cd518.300x300x1.png","header_image_url":"https://images.genius.com/568beb2ca321756fb068c82dd36cd518.1000x1000x1.png","id":12658653,"lyrics_owner_id":13765025,"lyrics_state":"complete","path":"/Taylor-swift-and-loud-luxury-the-fate-of-ophelia-loud-luxury-remix-lyrics","primary_artist_names":"Taylor
+        Swift & Loud Luxury","pyongs_count":2,"relationships_index_url":"https://genius.com/Taylor-swift-and-loud-luxury-the-fate-of-ophelia-loud-luxury-remix-sample","release_date_components":{"year":2025,"month":11,"day":6},"release_date_for_display":"November
+        6, 2025","release_date_with_abbreviated_month_for_display":"Nov. 6, 2025","song_art_image_thumbnail_url":"https://images.genius.com/568beb2ca321756fb068c82dd36cd518.300x300x1.png","song_art_image_url":"https://images.genius.com/568beb2ca321756fb068c82dd36cd518.1000x1000x1.png","stats":{"unreviewed_annotations":0,"hot":false},"title":"The
+        Fate of Ophelia (Loud Luxury Remix)","title_with_featured":"The Fate of Ophelia
+        (Loud Luxury Remix)","url":"https://genius.com/Taylor-swift-and-loud-luxury-the-fate-of-ophelia-loud-luxury-remix-lyrics","featured_artists":[],"primary_artist":{"api_path":"/artists/1177","header_image_url":"https://images.genius.com/bc9884a4c7c8c6b71aa73509d8a7d6a0.1000x274x1.jpg","id":1177,"image_url":"https://images.genius.com/e9c8ac4c408d4f0a7daf4a3395cd8e1a.1000x1000x1.jpg","is_meme_verified":true,"is_verified":true,"name":"Taylor
+        Swift","url":"https://genius.com/artists/Taylor-swift","iq":1544},"primary_artists":[{"api_path":"/artists/1177","header_image_url":"https://images.genius.com/bc9884a4c7c8c6b71aa73509d8a7d6a0.1000x274x1.jpg","id":1177,"image_url":"https://images.genius.com/e9c8ac4c408d4f0a7daf4a3395cd8e1a.1000x1000x1.jpg","is_meme_verified":true,"is_verified":true,"name":"Taylor
+        Swift","url":"https://genius.com/artists/Taylor-swift","iq":1544},{"api_path":"/artists/989559","header_image_url":"https://images.genius.com/d075cac5f6648263900949a41325f894.940x1000x1.jpg","id":989559,"image_url":"https://images.genius.com/6aa21ea8658908051e15b8d7808b5196.1000x1000x1.jpg","is_meme_verified":false,"is_verified":false,"name":"Loud
+        Luxury","url":"https://genius.com/artists/Loud-luxury"}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":1,"api_path":"/songs/12747860","artist_names":"Taylor
+        Swift & The Chainsmokers","full_title":"The Fate of Ophelia (The Chainsmokers
+        Remix) by Taylor Swift & The Chainsmokers","header_image_thumbnail_url":"https://images.genius.com/43428abe7603270c0e9867fdddd32ba2.300x300x1.jpg","header_image_url":"https://images.genius.com/43428abe7603270c0e9867fdddd32ba2.1000x1000x1.jpg","id":12747860,"lyrics_owner_id":12455462,"lyrics_state":"complete","path":"/Taylor-swift-and-the-chainsmokers-the-fate-of-ophelia-the-chainsmokers-remix-lyrics","primary_artist_names":"Taylor
+        Swift & The Chainsmokers","pyongs_count":null,"relationships_index_url":"https://genius.com/Taylor-swift-and-the-chainsmokers-the-fate-of-ophelia-the-chainsmokers-remix-sample","release_date_components":{"year":2025,"month":11,"day":25},"release_date_for_display":"November
+        25, 2025","release_date_with_abbreviated_month_for_display":"Nov. 25, 2025","song_art_image_thumbnail_url":"https://images.genius.com/43428abe7603270c0e9867fdddd32ba2.300x300x1.jpg","song_art_image_url":"https://images.genius.com/43428abe7603270c0e9867fdddd32ba2.1000x1000x1.jpg","stats":{"unreviewed_annotations":1,"hot":false},"title":"The
+        Fate of Ophelia (The Chainsmokers Remix)","title_with_featured":"The Fate
+        of Ophelia (The Chainsmokers Remix)","url":"https://genius.com/Taylor-swift-and-the-chainsmokers-the-fate-of-ophelia-the-chainsmokers-remix-lyrics","featured_artists":[],"primary_artist":{"api_path":"/artists/1177","header_image_url":"https://images.genius.com/bc9884a4c7c8c6b71aa73509d8a7d6a0.1000x274x1.jpg","id":1177,"image_url":"https://images.genius.com/e9c8ac4c408d4f0a7daf4a3395cd8e1a.1000x1000x1.jpg","is_meme_verified":true,"is_verified":true,"name":"Taylor
+        Swift","url":"https://genius.com/artists/Taylor-swift","iq":1544},"primary_artists":[{"api_path":"/artists/1177","header_image_url":"https://images.genius.com/bc9884a4c7c8c6b71aa73509d8a7d6a0.1000x274x1.jpg","id":1177,"image_url":"https://images.genius.com/e9c8ac4c408d4f0a7daf4a3395cd8e1a.1000x1000x1.jpg","is_meme_verified":true,"is_verified":true,"name":"Taylor
+        Swift","url":"https://genius.com/artists/Taylor-swift","iq":1544},{"api_path":"/artists/150934","header_image_url":"https://images.genius.com/75ac8a63f86859ec90e35392d38311f3.1000x333x1.jpg","id":150934,"image_url":"https://images.genius.com/cdb7eb15864b0c208b84a68e52be7e18.1000x1000x1.jpg","is_meme_verified":true,"is_verified":true,"name":"The
+        Chainsmokers","url":"https://genius.com/artists/The-chainsmokers","iq":694}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":0,"api_path":"/songs/12520388","artist_names":"Taylor
+        Swift","full_title":"The Fate of Ophelia (Original Songwriting Voice Memo)
+        by Taylor Swift","header_image_thumbnail_url":"https://images.genius.com/9dff0f1a87e7a542e572850f5388a328.300x300x1.png","header_image_url":"https://images.genius.com/9dff0f1a87e7a542e572850f5388a328.1000x1000x1.png","id":12520388,"lyrics_owner_id":12455462,"lyrics_state":"complete","path":"/Taylor-swift-the-fate-of-ophelia-original-songwriting-voice-memo-lyrics","primary_artist_names":"Taylor
+        Swift","pyongs_count":null,"relationships_index_url":"https://genius.com/Taylor-swift-the-fate-of-ophelia-original-songwriting-voice-memo-sample","release_date_components":{"year":2025,"month":10,"day":7},"release_date_for_display":"October
+        7, 2025","release_date_with_abbreviated_month_for_display":"Oct. 7, 2025","song_art_image_thumbnail_url":"https://images.genius.com/9dff0f1a87e7a542e572850f5388a328.300x300x1.png","song_art_image_url":"https://images.genius.com/9dff0f1a87e7a542e572850f5388a328.1000x1000x1.png","stats":{"unreviewed_annotations":0,"hot":false},"title":"The
+        Fate of Ophelia (Original Songwriting Voice Memo)","title_with_featured":"The
+        Fate of Ophelia (Original Songwriting Voice Memo)","url":"https://genius.com/Taylor-swift-the-fate-of-ophelia-original-songwriting-voice-memo-lyrics","featured_artists":[],"primary_artist":{"api_path":"/artists/1177","header_image_url":"https://images.genius.com/bc9884a4c7c8c6b71aa73509d8a7d6a0.1000x274x1.jpg","id":1177,"image_url":"https://images.genius.com/e9c8ac4c408d4f0a7daf4a3395cd8e1a.1000x1000x1.jpg","is_meme_verified":true,"is_verified":true,"name":"Taylor
+        Swift","url":"https://genius.com/artists/Taylor-swift","iq":1544},"primary_artists":[{"api_path":"/artists/1177","header_image_url":"https://images.genius.com/bc9884a4c7c8c6b71aa73509d8a7d6a0.1000x274x1.jpg","id":1177,"image_url":"https://images.genius.com/e9c8ac4c408d4f0a7daf4a3395cd8e1a.1000x1000x1.jpg","is_meme_verified":true,"is_verified":true,"name":"Taylor
+        Swift","url":"https://genius.com/artists/Taylor-swift","iq":1544}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":0,"api_path":"/songs/12324613","artist_names":"Genius
+        Deutsche Übersetzungen","full_title":"Taylor Swift - The Fate of Ophelia (Deutsche
+        Übersetzung) by Genius Deutsche Übersetzungen","header_image_thumbnail_url":"https://images.genius.com/20137020caed6518eafd30ae87b0c216.300x300x1.png","header_image_url":"https://images.genius.com/20137020caed6518eafd30ae87b0c216.1000x1000x1.png","id":12324613,"lyrics_owner_id":18996803,"lyrics_state":"complete","path":"/Genius-deutsche-ubersetzungen-taylor-swift-the-fate-of-ophelia-deutsche-ubersetzung-lyrics","primary_artist_names":"Genius
+        Deutsche Übersetzungen","pyongs_count":null,"relationships_index_url":"https://genius.com/Genius-deutsche-ubersetzungen-taylor-swift-the-fate-of-ophelia-deutsche-ubersetzung-sample","release_date_components":{"year":2025,"month":10,"day":3},"release_date_for_display":"October
+        3, 2025","release_date_with_abbreviated_month_for_display":"Oct. 3, 2025","song_art_image_thumbnail_url":"https://images.genius.com/20137020caed6518eafd30ae87b0c216.300x300x1.png","song_art_image_url":"https://images.genius.com/20137020caed6518eafd30ae87b0c216.1000x1000x1.png","stats":{"unreviewed_annotations":0,"concurrents":2,"hot":false,"pageviews":94564},"title":"Taylor
+        Swift - The Fate of Ophelia (Deutsche Übersetzung)","title_with_featured":"Taylor
+        Swift - The Fate of Ophelia (Deutsche Übersetzung)","url":"https://genius.com/Genius-deutsche-ubersetzungen-taylor-swift-the-fate-of-ophelia-deutsche-ubersetzung-lyrics","featured_artists":[],"primary_artist":{"api_path":"/artists/1799569","header_image_url":"https://images.genius.com/4cd52448d159fcc37e7837b512feab9d.1000x250x1.jpg","id":1799569,"image_url":"https://images.genius.com/5be402ac22b96f4f06c534baa7efa626.1000x1000x1.jpg","is_meme_verified":false,"is_verified":false,"name":"Genius
+        Deutsche Übersetzungen","url":"https://genius.com/artists/Genius-deutsche-ubersetzungen"},"primary_artists":[{"api_path":"/artists/1799569","header_image_url":"https://images.genius.com/4cd52448d159fcc37e7837b512feab9d.1000x250x1.jpg","id":1799569,"image_url":"https://images.genius.com/5be402ac22b96f4f06c534baa7efa626.1000x1000x1.jpg","is_meme_verified":false,"is_verified":false,"name":"Genius
+        Deutsche Übersetzungen","url":"https://genius.com/artists/Genius-deutsche-ubersetzungen"}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":0,"api_path":"/songs/12498380","artist_names":"Genius
+        Brasil Traduções","full_title":"Taylor Swift - The Fate of Ophelia (Tradução
+        em Português) by Genius Brasil Traduções","header_image_thumbnail_url":"https://images.genius.com/ddf4f82eeb4d5d7a1e84301484314fa4.300x300x1.png","header_image_url":"https://images.genius.com/ddf4f82eeb4d5d7a1e84301484314fa4.1000x1000x1.png","id":12498380,"lyrics_owner_id":4212581,"lyrics_state":"complete","path":"/Genius-brasil-traducoes-taylor-swift-the-fate-of-ophelia-traducao-em-portugues-lyrics","primary_artist_names":"Genius
+        Brasil Traduções","pyongs_count":null,"relationships_index_url":"https://genius.com/Genius-brasil-traducoes-taylor-swift-the-fate-of-ophelia-traducao-em-portugues-sample","release_date_components":{"year":2025,"month":10,"day":3},"release_date_for_display":"October
+        3, 2025","release_date_with_abbreviated_month_for_display":"Oct. 3, 2025","song_art_image_thumbnail_url":"https://images.genius.com/ddf4f82eeb4d5d7a1e84301484314fa4.300x300x1.png","song_art_image_url":"https://images.genius.com/ddf4f82eeb4d5d7a1e84301484314fa4.1000x1000x1.png","stats":{"unreviewed_annotations":0,"hot":false,"pageviews":20584},"title":"Taylor
+        Swift - The Fate of Ophelia (Tradução em Português)","title_with_featured":"Taylor
+        Swift - The Fate of Ophelia (Tradução em Português)","url":"https://genius.com/Genius-brasil-traducoes-taylor-swift-the-fate-of-ophelia-traducao-em-portugues-lyrics","featured_artists":[],"primary_artist":{"api_path":"/artists/210448","header_image_url":"https://images.genius.com/887be16f52b0dec817adc23304662df0.900x176x1.jpg","id":210448,"image_url":"https://images.genius.com/3a0be3346223ddde1f4b5c1d315cb9db.750x750x1.jpg","is_meme_verified":false,"is_verified":false,"name":"Genius
+        Brasil Traduções","url":"https://genius.com/artists/Genius-brasil-traducoes"},"primary_artists":[{"api_path":"/artists/210448","header_image_url":"https://images.genius.com/887be16f52b0dec817adc23304662df0.900x176x1.jpg","id":210448,"image_url":"https://images.genius.com/3a0be3346223ddde1f4b5c1d315cb9db.750x750x1.jpg","is_meme_verified":false,"is_verified":false,"name":"Genius
+        Brasil Traduções","url":"https://genius.com/artists/Genius-brasil-traducoes"}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":0,"api_path":"/songs/12500786","artist_names":"Genius
+        Traducciones al Español","full_title":"Taylor Swift - The Fate of Ophelia
+        (Traducción al Español) by Genius Traducciones al Español","header_image_thumbnail_url":"https://images.genius.com/ddf4f82eeb4d5d7a1e84301484314fa4.300x300x1.png","header_image_url":"https://images.genius.com/ddf4f82eeb4d5d7a1e84301484314fa4.1000x1000x1.png","id":12500786,"lyrics_owner_id":6076965,"lyrics_state":"complete","path":"/Genius-traducciones-al-espanol-taylor-swift-the-fate-of-ophelia-traduccion-al-espanol-lyrics","primary_artist_names":"Genius
+        Traducciones al Español","pyongs_count":1,"relationships_index_url":"https://genius.com/Genius-traducciones-al-espanol-taylor-swift-the-fate-of-ophelia-traduccion-al-espanol-sample","release_date_components":{"year":2025,"month":10,"day":3},"release_date_for_display":"October
+        3, 2025","release_date_with_abbreviated_month_for_display":"Oct. 3, 2025","song_art_image_thumbnail_url":"https://images.genius.com/ddf4f82eeb4d5d7a1e84301484314fa4.300x300x1.png","song_art_image_url":"https://images.genius.com/ddf4f82eeb4d5d7a1e84301484314fa4.1000x1000x1.png","stats":{"unreviewed_annotations":0,"hot":false,"pageviews":23229},"title":"Taylor
+        Swift - The Fate of Ophelia (Traducción al Español)","title_with_featured":"Taylor
+        Swift - The Fate of Ophelia (Traducción al Español)","url":"https://genius.com/Genius-traducciones-al-espanol-taylor-swift-the-fate-of-ophelia-traduccion-al-espanol-lyrics","featured_artists":[],"primary_artist":{"api_path":"/artists/1376254","header_image_url":"https://images.genius.com/d43c9375eda8e9c8e8768a3a911b7d49.1000x213x44.gif","id":1376254,"image_url":"https://images.genius.com/766a687c3e07f9acd993d7f8ac3e9902.1000x1000x1.png","is_meme_verified":false,"is_verified":false,"name":"Genius
+        Traducciones al Español","url":"https://genius.com/artists/Genius-traducciones-al-espanol"},"primary_artists":[{"api_path":"/artists/1376254","header_image_url":"https://images.genius.com/d43c9375eda8e9c8e8768a3a911b7d49.1000x213x44.gif","id":1376254,"image_url":"https://images.genius.com/766a687c3e07f9acd993d7f8ac3e9902.1000x1000x1.png","is_meme_verified":false,"is_verified":false,"name":"Genius
+        Traducciones al Español","url":"https://genius.com/artists/Genius-traducciones-al-espanol"}]}}]}}'
+  recorded_at: Sat, 27 Dec 2025 12:16:57 GMT
+- request:
+    method: get
+    uri: https://api.genius.com/search?q=The%20Fate%20of%20Ophelia%20Taylor%20Swift
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <GENIUS_CLIENT_ACCESS_TOKEN>
+      User-Agent:
+      - Mozilla/5.0 (compatible; LingoBeats/1.0; +https://github.com/CSV-UPSTART3)
+      Connection:
+      - close
+      Host:
+      - api.genius.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 27 Dec 2025 12:17:02 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - close
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 9b48c0a4df9f77f1-TPE
+      Cf-Cache-Status:
+      - DYNAMIC
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - public, s-maxage=300
+      Etag:
+      - W/"23938c45a3d3ae756478fa4de40df82f"
+      Via:
+      - 1.1 heroku-router
+      Access-Control-Allow-Headers:
+      - Origin, Access-Control-Request-Method, Access-Control-Request-Headers, Content-Type,
+        Accept, X-Auth-Token, Authorization
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, OPTIONS, DELETE
+      Nel:
+      - '{"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}'
+      Report-To:
+      - '{"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=hfLTOvVlh62Yuk8mS%2FI3b%2FKJWT664dp2e2FhFPpMNpk%3D\u0026sid=929419e7-33ea-4e2f-85f0-7d8b7cd5cbd6\u0026ts=1766837822"}],"max_age":3600}'
+      Reporting-Endpoints:
+      - heroku-nel="https://nel.heroku.com/reports?s=hfLTOvVlh62Yuk8mS%2FI3b%2FKJWT664dp2e2FhFPpMNpk%3D&sid=929419e7-33ea-4e2f-85f0-7d8b7cd5cbd6&ts=1766837822"
+      X-Ratelimit-Limit:
+      - '10000'
+      X-Ratelimit-Remaining:
+      - '9993'
+      X-Ratelimit-Reset:
+      - '33585'
+      X-Request-Id:
+      - 67c95b13-f0f5-13a9-eb85-fdf3b8cb5eee
+      X-Runtime:
+      - '0.297442'
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - _cfuvid=ch12qT4Vj0t9SxPfUywdn3QhRRqfsQYOxo77QtJzXdQ-1766837822735-0.0.1.1-604800000;
+        path=/; domain=.genius.com; HttpOnly; Secure; SameSite=None
+    body:
+      encoding: UTF-8
+      string: '{"meta":{"status":200},"response":{"hits":[{"highlights":[],"index":"song","type":"song","result":{"annotation_count":27,"api_path":"/songs/12287956","artist_names":"Taylor
+        Swift","full_title":"The Fate of Ophelia by Taylor Swift","header_image_thumbnail_url":"https://images.genius.com/20137020caed6518eafd30ae87b0c216.300x300x1.png","header_image_url":"https://images.genius.com/20137020caed6518eafd30ae87b0c216.1000x1000x1.png","id":12287956,"lyrics_owner_id":17813994,"lyrics_state":"complete","path":"/Taylor-swift-the-fate-of-ophelia-lyrics","primary_artist_names":"Taylor
+        Swift","pyongs_count":26,"relationships_index_url":"https://genius.com/Taylor-swift-the-fate-of-ophelia-sample","release_date_components":{"year":2025,"month":10,"day":3},"release_date_for_display":"October
+        3, 2025","release_date_with_abbreviated_month_for_display":"Oct. 3, 2025","song_art_image_thumbnail_url":"https://images.genius.com/20137020caed6518eafd30ae87b0c216.300x300x1.png","song_art_image_url":"https://images.genius.com/20137020caed6518eafd30ae87b0c216.1000x1000x1.png","stats":{"unreviewed_annotations":19,"concurrents":12,"hot":false,"pageviews":3760699},"title":"The
+        Fate of Ophelia","title_with_featured":"The Fate of Ophelia","url":"https://genius.com/Taylor-swift-the-fate-of-ophelia-lyrics","featured_artists":[],"primary_artist":{"api_path":"/artists/1177","header_image_url":"https://images.genius.com/bc9884a4c7c8c6b71aa73509d8a7d6a0.1000x274x1.jpg","id":1177,"image_url":"https://images.genius.com/e9c8ac4c408d4f0a7daf4a3395cd8e1a.1000x1000x1.jpg","is_meme_verified":true,"is_verified":true,"name":"Taylor
+        Swift","url":"https://genius.com/artists/Taylor-swift","iq":1544},"primary_artists":[{"api_path":"/artists/1177","header_image_url":"https://images.genius.com/bc9884a4c7c8c6b71aa73509d8a7d6a0.1000x274x1.jpg","id":1177,"image_url":"https://images.genius.com/e9c8ac4c408d4f0a7daf4a3395cd8e1a.1000x1000x1.jpg","is_meme_verified":true,"is_verified":true,"name":"Taylor
+        Swift","url":"https://genius.com/artists/Taylor-swift","iq":1544}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":0,"api_path":"/songs/12625094","artist_names":"Taylor
+        Swift","full_title":"The Fate of Ophelia (Instrumental) by Taylor Swift","header_image_thumbnail_url":"https://images.genius.com/0c92da62473732e98583bbebb025b149.300x300x1.png","header_image_url":"https://images.genius.com/0c92da62473732e98583bbebb025b149.1000x1000x1.png","id":12625094,"lyrics_owner_id":12455462,"lyrics_state":"complete","path":"/Taylor-swift-the-fate-of-ophelia-instrumental-lyrics","primary_artist_names":"Taylor
+        Swift","pyongs_count":1,"relationships_index_url":"https://genius.com/Taylor-swift-the-fate-of-ophelia-instrumental-sample","release_date_components":{"year":2025,"month":10,"day":31},"release_date_for_display":"October
+        31, 2025","release_date_with_abbreviated_month_for_display":"Oct. 31, 2025","song_art_image_thumbnail_url":"https://images.genius.com/0c92da62473732e98583bbebb025b149.300x300x1.png","song_art_image_url":"https://images.genius.com/0c92da62473732e98583bbebb025b149.1000x1000x1.png","stats":{"unreviewed_annotations":0,"hot":false},"title":"The
+        Fate of Ophelia (Instrumental)","title_with_featured":"The Fate of Ophelia
+        (Instrumental)","url":"https://genius.com/Taylor-swift-the-fate-of-ophelia-instrumental-lyrics","featured_artists":[],"primary_artist":{"api_path":"/artists/1177","header_image_url":"https://images.genius.com/bc9884a4c7c8c6b71aa73509d8a7d6a0.1000x274x1.jpg","id":1177,"image_url":"https://images.genius.com/e9c8ac4c408d4f0a7daf4a3395cd8e1a.1000x1000x1.jpg","is_meme_verified":true,"is_verified":true,"name":"Taylor
+        Swift","url":"https://genius.com/artists/Taylor-swift","iq":1544},"primary_artists":[{"api_path":"/artists/1177","header_image_url":"https://images.genius.com/bc9884a4c7c8c6b71aa73509d8a7d6a0.1000x274x1.jpg","id":1177,"image_url":"https://images.genius.com/e9c8ac4c408d4f0a7daf4a3395cd8e1a.1000x1000x1.jpg","is_meme_verified":true,"is_verified":true,"name":"Taylor
+        Swift","url":"https://genius.com/artists/Taylor-swift","iq":1544}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":1,"api_path":"/songs/12507639","artist_names":"Taylor
+        Swift","full_title":"The Fate of Ophelia (Clean Version) by Taylor Swift","header_image_thumbnail_url":"https://images.genius.com/ddf4f82eeb4d5d7a1e84301484314fa4.300x300x1.png","header_image_url":"https://images.genius.com/ddf4f82eeb4d5d7a1e84301484314fa4.1000x1000x1.png","id":12507639,"lyrics_owner_id":22882250,"lyrics_state":"complete","path":"/Taylor-swift-the-fate-of-ophelia-clean-version-lyrics","primary_artist_names":"Taylor
+        Swift","pyongs_count":null,"relationships_index_url":"https://genius.com/Taylor-swift-the-fate-of-ophelia-clean-version-sample","release_date_components":{"year":2025,"month":10,"day":3},"release_date_for_display":"October
+        3, 2025","release_date_with_abbreviated_month_for_display":"Oct. 3, 2025","song_art_image_thumbnail_url":"https://images.genius.com/ddf4f82eeb4d5d7a1e84301484314fa4.300x300x1.png","song_art_image_url":"https://images.genius.com/ddf4f82eeb4d5d7a1e84301484314fa4.1000x1000x1.png","stats":{"unreviewed_annotations":0,"hot":false,"pageviews":6587},"title":"The
+        Fate of Ophelia (Clean Version)","title_with_featured":"The Fate of Ophelia
+        (Clean Version)","url":"https://genius.com/Taylor-swift-the-fate-of-ophelia-clean-version-lyrics","featured_artists":[],"primary_artist":{"api_path":"/artists/1177","header_image_url":"https://images.genius.com/bc9884a4c7c8c6b71aa73509d8a7d6a0.1000x274x1.jpg","id":1177,"image_url":"https://images.genius.com/e9c8ac4c408d4f0a7daf4a3395cd8e1a.1000x1000x1.jpg","is_meme_verified":true,"is_verified":true,"name":"Taylor
+        Swift","url":"https://genius.com/artists/Taylor-swift","iq":1544},"primary_artists":[{"api_path":"/artists/1177","header_image_url":"https://images.genius.com/bc9884a4c7c8c6b71aa73509d8a7d6a0.1000x274x1.jpg","id":1177,"image_url":"https://images.genius.com/e9c8ac4c408d4f0a7daf4a3395cd8e1a.1000x1000x1.jpg","is_meme_verified":true,"is_verified":true,"name":"Taylor
+        Swift","url":"https://genius.com/artists/Taylor-swift","iq":1544}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":1,"api_path":"/songs/12500317","artist_names":"Taylor
+        Swift","full_title":"The Fate of Ophelia (Track by Track) by Taylor Swift","header_image_thumbnail_url":"https://images.genius.com/749b23edce9b5c548fc53f660cdf08f0.300x300x1.png","header_image_url":"https://images.genius.com/749b23edce9b5c548fc53f660cdf08f0.1000x1000x1.png","id":12500317,"lyrics_owner_id":12455462,"lyrics_state":"complete","path":"/Taylor-swift-the-fate-of-ophelia-track-by-track-annotated","primary_artist_names":"Taylor
+        Swift","pyongs_count":null,"relationships_index_url":"https://genius.com/Taylor-swift-the-fate-of-ophelia-track-by-track-sample","release_date_components":{"year":2025,"month":10,"day":3},"release_date_for_display":"October
+        3, 2025","release_date_with_abbreviated_month_for_display":"Oct. 3, 2025","song_art_image_thumbnail_url":"https://images.genius.com/749b23edce9b5c548fc53f660cdf08f0.300x300x1.png","song_art_image_url":"https://images.genius.com/749b23edce9b5c548fc53f660cdf08f0.1000x1000x1.png","stats":{"unreviewed_annotations":1,"hot":false,"pageviews":55977},"title":"The
+        Fate of Ophelia (Track by Track)","title_with_featured":"The Fate of Ophelia
+        (Track by Track)","url":"https://genius.com/Taylor-swift-the-fate-of-ophelia-track-by-track-annotated","featured_artists":[],"primary_artist":{"api_path":"/artists/1177","header_image_url":"https://images.genius.com/bc9884a4c7c8c6b71aa73509d8a7d6a0.1000x274x1.jpg","id":1177,"image_url":"https://images.genius.com/e9c8ac4c408d4f0a7daf4a3395cd8e1a.1000x1000x1.jpg","is_meme_verified":true,"is_verified":true,"name":"Taylor
+        Swift","url":"https://genius.com/artists/Taylor-swift","iq":1544},"primary_artists":[{"api_path":"/artists/1177","header_image_url":"https://images.genius.com/bc9884a4c7c8c6b71aa73509d8a7d6a0.1000x274x1.jpg","id":1177,"image_url":"https://images.genius.com/e9c8ac4c408d4f0a7daf4a3395cd8e1a.1000x1000x1.jpg","is_meme_verified":true,"is_verified":true,"name":"Taylor
+        Swift","url":"https://genius.com/artists/Taylor-swift","iq":1544}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":1,"api_path":"/songs/12658653","artist_names":"Taylor
+        Swift & Loud Luxury","full_title":"The Fate of Ophelia (Loud Luxury Remix)
+        by Taylor Swift & Loud Luxury","header_image_thumbnail_url":"https://images.genius.com/568beb2ca321756fb068c82dd36cd518.300x300x1.png","header_image_url":"https://images.genius.com/568beb2ca321756fb068c82dd36cd518.1000x1000x1.png","id":12658653,"lyrics_owner_id":13765025,"lyrics_state":"complete","path":"/Taylor-swift-and-loud-luxury-the-fate-of-ophelia-loud-luxury-remix-lyrics","primary_artist_names":"Taylor
+        Swift & Loud Luxury","pyongs_count":2,"relationships_index_url":"https://genius.com/Taylor-swift-and-loud-luxury-the-fate-of-ophelia-loud-luxury-remix-sample","release_date_components":{"year":2025,"month":11,"day":6},"release_date_for_display":"November
+        6, 2025","release_date_with_abbreviated_month_for_display":"Nov. 6, 2025","song_art_image_thumbnail_url":"https://images.genius.com/568beb2ca321756fb068c82dd36cd518.300x300x1.png","song_art_image_url":"https://images.genius.com/568beb2ca321756fb068c82dd36cd518.1000x1000x1.png","stats":{"unreviewed_annotations":0,"hot":false},"title":"The
+        Fate of Ophelia (Loud Luxury Remix)","title_with_featured":"The Fate of Ophelia
+        (Loud Luxury Remix)","url":"https://genius.com/Taylor-swift-and-loud-luxury-the-fate-of-ophelia-loud-luxury-remix-lyrics","featured_artists":[],"primary_artist":{"api_path":"/artists/1177","header_image_url":"https://images.genius.com/bc9884a4c7c8c6b71aa73509d8a7d6a0.1000x274x1.jpg","id":1177,"image_url":"https://images.genius.com/e9c8ac4c408d4f0a7daf4a3395cd8e1a.1000x1000x1.jpg","is_meme_verified":true,"is_verified":true,"name":"Taylor
+        Swift","url":"https://genius.com/artists/Taylor-swift","iq":1544},"primary_artists":[{"api_path":"/artists/1177","header_image_url":"https://images.genius.com/bc9884a4c7c8c6b71aa73509d8a7d6a0.1000x274x1.jpg","id":1177,"image_url":"https://images.genius.com/e9c8ac4c408d4f0a7daf4a3395cd8e1a.1000x1000x1.jpg","is_meme_verified":true,"is_verified":true,"name":"Taylor
+        Swift","url":"https://genius.com/artists/Taylor-swift","iq":1544},{"api_path":"/artists/989559","header_image_url":"https://images.genius.com/d075cac5f6648263900949a41325f894.940x1000x1.jpg","id":989559,"image_url":"https://images.genius.com/6aa21ea8658908051e15b8d7808b5196.1000x1000x1.jpg","is_meme_verified":false,"is_verified":false,"name":"Loud
+        Luxury","url":"https://genius.com/artists/Loud-luxury"}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":1,"api_path":"/songs/12747860","artist_names":"Taylor
+        Swift & The Chainsmokers","full_title":"The Fate of Ophelia (The Chainsmokers
+        Remix) by Taylor Swift & The Chainsmokers","header_image_thumbnail_url":"https://images.genius.com/43428abe7603270c0e9867fdddd32ba2.300x300x1.jpg","header_image_url":"https://images.genius.com/43428abe7603270c0e9867fdddd32ba2.1000x1000x1.jpg","id":12747860,"lyrics_owner_id":12455462,"lyrics_state":"complete","path":"/Taylor-swift-and-the-chainsmokers-the-fate-of-ophelia-the-chainsmokers-remix-lyrics","primary_artist_names":"Taylor
+        Swift & The Chainsmokers","pyongs_count":null,"relationships_index_url":"https://genius.com/Taylor-swift-and-the-chainsmokers-the-fate-of-ophelia-the-chainsmokers-remix-sample","release_date_components":{"year":2025,"month":11,"day":25},"release_date_for_display":"November
+        25, 2025","release_date_with_abbreviated_month_for_display":"Nov. 25, 2025","song_art_image_thumbnail_url":"https://images.genius.com/43428abe7603270c0e9867fdddd32ba2.300x300x1.jpg","song_art_image_url":"https://images.genius.com/43428abe7603270c0e9867fdddd32ba2.1000x1000x1.jpg","stats":{"unreviewed_annotations":1,"hot":false},"title":"The
+        Fate of Ophelia (The Chainsmokers Remix)","title_with_featured":"The Fate
+        of Ophelia (The Chainsmokers Remix)","url":"https://genius.com/Taylor-swift-and-the-chainsmokers-the-fate-of-ophelia-the-chainsmokers-remix-lyrics","featured_artists":[],"primary_artist":{"api_path":"/artists/1177","header_image_url":"https://images.genius.com/bc9884a4c7c8c6b71aa73509d8a7d6a0.1000x274x1.jpg","id":1177,"image_url":"https://images.genius.com/e9c8ac4c408d4f0a7daf4a3395cd8e1a.1000x1000x1.jpg","is_meme_verified":true,"is_verified":true,"name":"Taylor
+        Swift","url":"https://genius.com/artists/Taylor-swift","iq":1544},"primary_artists":[{"api_path":"/artists/1177","header_image_url":"https://images.genius.com/bc9884a4c7c8c6b71aa73509d8a7d6a0.1000x274x1.jpg","id":1177,"image_url":"https://images.genius.com/e9c8ac4c408d4f0a7daf4a3395cd8e1a.1000x1000x1.jpg","is_meme_verified":true,"is_verified":true,"name":"Taylor
+        Swift","url":"https://genius.com/artists/Taylor-swift","iq":1544},{"api_path":"/artists/150934","header_image_url":"https://images.genius.com/75ac8a63f86859ec90e35392d38311f3.1000x333x1.jpg","id":150934,"image_url":"https://images.genius.com/cdb7eb15864b0c208b84a68e52be7e18.1000x1000x1.jpg","is_meme_verified":true,"is_verified":true,"name":"The
+        Chainsmokers","url":"https://genius.com/artists/The-chainsmokers","iq":694}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":0,"api_path":"/songs/12520388","artist_names":"Taylor
+        Swift","full_title":"The Fate of Ophelia (Original Songwriting Voice Memo)
+        by Taylor Swift","header_image_thumbnail_url":"https://images.genius.com/9dff0f1a87e7a542e572850f5388a328.300x300x1.png","header_image_url":"https://images.genius.com/9dff0f1a87e7a542e572850f5388a328.1000x1000x1.png","id":12520388,"lyrics_owner_id":12455462,"lyrics_state":"complete","path":"/Taylor-swift-the-fate-of-ophelia-original-songwriting-voice-memo-lyrics","primary_artist_names":"Taylor
+        Swift","pyongs_count":null,"relationships_index_url":"https://genius.com/Taylor-swift-the-fate-of-ophelia-original-songwriting-voice-memo-sample","release_date_components":{"year":2025,"month":10,"day":7},"release_date_for_display":"October
+        7, 2025","release_date_with_abbreviated_month_for_display":"Oct. 7, 2025","song_art_image_thumbnail_url":"https://images.genius.com/9dff0f1a87e7a542e572850f5388a328.300x300x1.png","song_art_image_url":"https://images.genius.com/9dff0f1a87e7a542e572850f5388a328.1000x1000x1.png","stats":{"unreviewed_annotations":0,"hot":false},"title":"The
+        Fate of Ophelia (Original Songwriting Voice Memo)","title_with_featured":"The
+        Fate of Ophelia (Original Songwriting Voice Memo)","url":"https://genius.com/Taylor-swift-the-fate-of-ophelia-original-songwriting-voice-memo-lyrics","featured_artists":[],"primary_artist":{"api_path":"/artists/1177","header_image_url":"https://images.genius.com/bc9884a4c7c8c6b71aa73509d8a7d6a0.1000x274x1.jpg","id":1177,"image_url":"https://images.genius.com/e9c8ac4c408d4f0a7daf4a3395cd8e1a.1000x1000x1.jpg","is_meme_verified":true,"is_verified":true,"name":"Taylor
+        Swift","url":"https://genius.com/artists/Taylor-swift","iq":1544},"primary_artists":[{"api_path":"/artists/1177","header_image_url":"https://images.genius.com/bc9884a4c7c8c6b71aa73509d8a7d6a0.1000x274x1.jpg","id":1177,"image_url":"https://images.genius.com/e9c8ac4c408d4f0a7daf4a3395cd8e1a.1000x1000x1.jpg","is_meme_verified":true,"is_verified":true,"name":"Taylor
+        Swift","url":"https://genius.com/artists/Taylor-swift","iq":1544}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":0,"api_path":"/songs/12324613","artist_names":"Genius
+        Deutsche Übersetzungen","full_title":"Taylor Swift - The Fate of Ophelia (Deutsche
+        Übersetzung) by Genius Deutsche Übersetzungen","header_image_thumbnail_url":"https://images.genius.com/20137020caed6518eafd30ae87b0c216.300x300x1.png","header_image_url":"https://images.genius.com/20137020caed6518eafd30ae87b0c216.1000x1000x1.png","id":12324613,"lyrics_owner_id":18996803,"lyrics_state":"complete","path":"/Genius-deutsche-ubersetzungen-taylor-swift-the-fate-of-ophelia-deutsche-ubersetzung-lyrics","primary_artist_names":"Genius
+        Deutsche Übersetzungen","pyongs_count":null,"relationships_index_url":"https://genius.com/Genius-deutsche-ubersetzungen-taylor-swift-the-fate-of-ophelia-deutsche-ubersetzung-sample","release_date_components":{"year":2025,"month":10,"day":3},"release_date_for_display":"October
+        3, 2025","release_date_with_abbreviated_month_for_display":"Oct. 3, 2025","song_art_image_thumbnail_url":"https://images.genius.com/20137020caed6518eafd30ae87b0c216.300x300x1.png","song_art_image_url":"https://images.genius.com/20137020caed6518eafd30ae87b0c216.1000x1000x1.png","stats":{"unreviewed_annotations":0,"concurrents":2,"hot":false,"pageviews":94564},"title":"Taylor
+        Swift - The Fate of Ophelia (Deutsche Übersetzung)","title_with_featured":"Taylor
+        Swift - The Fate of Ophelia (Deutsche Übersetzung)","url":"https://genius.com/Genius-deutsche-ubersetzungen-taylor-swift-the-fate-of-ophelia-deutsche-ubersetzung-lyrics","featured_artists":[],"primary_artist":{"api_path":"/artists/1799569","header_image_url":"https://images.genius.com/4cd52448d159fcc37e7837b512feab9d.1000x250x1.jpg","id":1799569,"image_url":"https://images.genius.com/5be402ac22b96f4f06c534baa7efa626.1000x1000x1.jpg","is_meme_verified":false,"is_verified":false,"name":"Genius
+        Deutsche Übersetzungen","url":"https://genius.com/artists/Genius-deutsche-ubersetzungen"},"primary_artists":[{"api_path":"/artists/1799569","header_image_url":"https://images.genius.com/4cd52448d159fcc37e7837b512feab9d.1000x250x1.jpg","id":1799569,"image_url":"https://images.genius.com/5be402ac22b96f4f06c534baa7efa626.1000x1000x1.jpg","is_meme_verified":false,"is_verified":false,"name":"Genius
+        Deutsche Übersetzungen","url":"https://genius.com/artists/Genius-deutsche-ubersetzungen"}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":0,"api_path":"/songs/12498380","artist_names":"Genius
+        Brasil Traduções","full_title":"Taylor Swift - The Fate of Ophelia (Tradução
+        em Português) by Genius Brasil Traduções","header_image_thumbnail_url":"https://images.genius.com/ddf4f82eeb4d5d7a1e84301484314fa4.300x300x1.png","header_image_url":"https://images.genius.com/ddf4f82eeb4d5d7a1e84301484314fa4.1000x1000x1.png","id":12498380,"lyrics_owner_id":4212581,"lyrics_state":"complete","path":"/Genius-brasil-traducoes-taylor-swift-the-fate-of-ophelia-traducao-em-portugues-lyrics","primary_artist_names":"Genius
+        Brasil Traduções","pyongs_count":null,"relationships_index_url":"https://genius.com/Genius-brasil-traducoes-taylor-swift-the-fate-of-ophelia-traducao-em-portugues-sample","release_date_components":{"year":2025,"month":10,"day":3},"release_date_for_display":"October
+        3, 2025","release_date_with_abbreviated_month_for_display":"Oct. 3, 2025","song_art_image_thumbnail_url":"https://images.genius.com/ddf4f82eeb4d5d7a1e84301484314fa4.300x300x1.png","song_art_image_url":"https://images.genius.com/ddf4f82eeb4d5d7a1e84301484314fa4.1000x1000x1.png","stats":{"unreviewed_annotations":0,"hot":false,"pageviews":20584},"title":"Taylor
+        Swift - The Fate of Ophelia (Tradução em Português)","title_with_featured":"Taylor
+        Swift - The Fate of Ophelia (Tradução em Português)","url":"https://genius.com/Genius-brasil-traducoes-taylor-swift-the-fate-of-ophelia-traducao-em-portugues-lyrics","featured_artists":[],"primary_artist":{"api_path":"/artists/210448","header_image_url":"https://images.genius.com/887be16f52b0dec817adc23304662df0.900x176x1.jpg","id":210448,"image_url":"https://images.genius.com/3a0be3346223ddde1f4b5c1d315cb9db.750x750x1.jpg","is_meme_verified":false,"is_verified":false,"name":"Genius
+        Brasil Traduções","url":"https://genius.com/artists/Genius-brasil-traducoes"},"primary_artists":[{"api_path":"/artists/210448","header_image_url":"https://images.genius.com/887be16f52b0dec817adc23304662df0.900x176x1.jpg","id":210448,"image_url":"https://images.genius.com/3a0be3346223ddde1f4b5c1d315cb9db.750x750x1.jpg","is_meme_verified":false,"is_verified":false,"name":"Genius
+        Brasil Traduções","url":"https://genius.com/artists/Genius-brasil-traducoes"}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":0,"api_path":"/songs/12500786","artist_names":"Genius
+        Traducciones al Español","full_title":"Taylor Swift - The Fate of Ophelia
+        (Traducción al Español) by Genius Traducciones al Español","header_image_thumbnail_url":"https://images.genius.com/ddf4f82eeb4d5d7a1e84301484314fa4.300x300x1.png","header_image_url":"https://images.genius.com/ddf4f82eeb4d5d7a1e84301484314fa4.1000x1000x1.png","id":12500786,"lyrics_owner_id":6076965,"lyrics_state":"complete","path":"/Genius-traducciones-al-espanol-taylor-swift-the-fate-of-ophelia-traduccion-al-espanol-lyrics","primary_artist_names":"Genius
+        Traducciones al Español","pyongs_count":1,"relationships_index_url":"https://genius.com/Genius-traducciones-al-espanol-taylor-swift-the-fate-of-ophelia-traduccion-al-espanol-sample","release_date_components":{"year":2025,"month":10,"day":3},"release_date_for_display":"October
+        3, 2025","release_date_with_abbreviated_month_for_display":"Oct. 3, 2025","song_art_image_thumbnail_url":"https://images.genius.com/ddf4f82eeb4d5d7a1e84301484314fa4.300x300x1.png","song_art_image_url":"https://images.genius.com/ddf4f82eeb4d5d7a1e84301484314fa4.1000x1000x1.png","stats":{"unreviewed_annotations":0,"hot":false,"pageviews":23229},"title":"Taylor
+        Swift - The Fate of Ophelia (Traducción al Español)","title_with_featured":"Taylor
+        Swift - The Fate of Ophelia (Traducción al Español)","url":"https://genius.com/Genius-traducciones-al-espanol-taylor-swift-the-fate-of-ophelia-traduccion-al-espanol-lyrics","featured_artists":[],"primary_artist":{"api_path":"/artists/1376254","header_image_url":"https://images.genius.com/d43c9375eda8e9c8e8768a3a911b7d49.1000x213x44.gif","id":1376254,"image_url":"https://images.genius.com/766a687c3e07f9acd993d7f8ac3e9902.1000x1000x1.png","is_meme_verified":false,"is_verified":false,"name":"Genius
+        Traducciones al Español","url":"https://genius.com/artists/Genius-traducciones-al-espanol"},"primary_artists":[{"api_path":"/artists/1376254","header_image_url":"https://images.genius.com/d43c9375eda8e9c8e8768a3a911b7d49.1000x213x44.gif","id":1376254,"image_url":"https://images.genius.com/766a687c3e07f9acd993d7f8ac3e9902.1000x1000x1.png","is_meme_verified":false,"is_verified":false,"name":"Genius
+        Traducciones al Español","url":"https://genius.com/artists/Genius-traducciones-al-espanol"}]}}]}}'
+  recorded_at: Sat, 27 Dec 2025 12:17:02 GMT
+- request:
+    method: get
+    uri: https://api.genius.com/search?q=Golden%20HUNTR/X
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <GENIUS_CLIENT_ACCESS_TOKEN>
+      User-Agent:
+      - Mozilla/5.0 (compatible; LingoBeats/1.0; +https://github.com/CSV-UPSTART3)
+      Connection:
+      - close
+      Host:
+      - api.genius.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 27 Dec 2025 12:17:08 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - close
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 9b48c0c549786a8c-TPE
+      Cf-Cache-Status:
+      - DYNAMIC
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - public, s-maxage=300
+      Etag:
+      - W/"ad84ae674e4fde3788b8738332a75752"
+      Via:
+      - 1.1 heroku-router
+      Access-Control-Allow-Headers:
+      - Origin, Access-Control-Request-Method, Access-Control-Request-Headers, Content-Type,
+        Accept, X-Auth-Token, Authorization
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, OPTIONS, DELETE
+      Nel:
+      - '{"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}'
+      Report-To:
+      - '{"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=pHoNoOzcQ7zJXx6zyHkpw87coP5VOUQn5HjF2mInUtE%3D\u0026sid=929419e7-33ea-4e2f-85f0-7d8b7cd5cbd6\u0026ts=1766837827"}],"max_age":3600}'
+      Reporting-Endpoints:
+      - heroku-nel="https://nel.heroku.com/reports?s=pHoNoOzcQ7zJXx6zyHkpw87coP5VOUQn5HjF2mInUtE%3D&sid=929419e7-33ea-4e2f-85f0-7d8b7cd5cbd6&ts=1766837827"
+      X-Ratelimit-Limit:
+      - '10000'
+      X-Ratelimit-Remaining:
+      - '9992'
+      X-Ratelimit-Reset:
+      - '33580'
+      X-Request-Id:
+      - 4a648fab-8f37-7086-b65e-65a5e1bfc11d
+      X-Runtime:
+      - '0.212851'
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - _cfuvid=4bJAd2j20mmmaDFXSYAW8norEZZgHSdfndaxC8L4Yag-1766837828034-0.0.1.1-604800000;
+        path=/; domain=.genius.com; HttpOnly; Secure; SameSite=None
+    body:
+      encoding: UTF-8
+      string: '{"meta":{"status":200},"response":{"hits":[{"highlights":[],"index":"song","type":"song","result":{"annotation_count":13,"api_path":"/songs/12026309","artist_names":"HUNTR/X,
+        EJAE, AUDREY NUNA, REI AMI & KPop Demon Hunters Cast","full_title":"Golden
+        by HUNTR/X, EJAE, AUDREY NUNA, REI AMI & KPop Demon Hunters Cast","header_image_thumbnail_url":"https://images.genius.com/b5c11506d341f028f3665d09b2d41250.300x300x1.png","header_image_url":"https://images.genius.com/b5c11506d341f028f3665d09b2d41250.1000x1000x1.png","id":12026309,"lyrics_owner_id":16463578,"lyrics_state":"complete","path":"/Huntr-x-ejae-audrey-nuna-rei-ami-and-kpop-demon-hunters-cast-golden-lyrics","primary_artist_names":"HUNTR/X,
+        EJAE, AUDREY NUNA, REI AMI & KPop Demon Hunters Cast","pyongs_count":24,"relationships_index_url":"https://genius.com/Huntr-x-ejae-audrey-nuna-rei-ami-and-kpop-demon-hunters-cast-golden-sample","release_date_components":{"year":2025,"month":6,"day":20},"release_date_for_display":"June
+        20, 2025","release_date_with_abbreviated_month_for_display":"Jun. 20, 2025","song_art_image_thumbnail_url":"https://images.genius.com/b5c11506d341f028f3665d09b2d41250.300x300x1.png","song_art_image_url":"https://images.genius.com/b5c11506d341f028f3665d09b2d41250.1000x1000x1.png","stats":{"unreviewed_annotations":2,"concurrents":3,"hot":false,"pageviews":3436694},"title":"Golden","title_with_featured":"Golden","url":"https://genius.com/Huntr-x-ejae-audrey-nuna-rei-ami-and-kpop-demon-hunters-cast-golden-lyrics","featured_artists":[],"primary_artist":{"api_path":"/artists/4436796","header_image_url":"https://images.genius.com/a20db8caea2037dfa8b6335cf84df3fc.1000x419x1.jpg","id":4436796,"image_url":"https://images.genius.com/c0503895093d3c7503f0746e91a8200e.1000x1000x1.webp","is_meme_verified":false,"is_verified":false,"name":"HUNTR/X","url":"https://genius.com/artists/Huntr-x"},"primary_artists":[{"api_path":"/artists/4436796","header_image_url":"https://images.genius.com/a20db8caea2037dfa8b6335cf84df3fc.1000x419x1.jpg","id":4436796,"image_url":"https://images.genius.com/c0503895093d3c7503f0746e91a8200e.1000x1000x1.webp","is_meme_verified":false,"is_verified":false,"name":"HUNTR/X","url":"https://genius.com/artists/Huntr-x"},{"api_path":"/artists/1015580","header_image_url":"https://images.genius.com/16196e32ad3683546b26db9f72e0b0f2.1000x300x1.png","id":1015580,"image_url":"https://images.genius.com/e0076705eeb5509aa48d4896d9440291.1000x1000x1.jpg","is_meme_verified":false,"is_verified":false,"name":"EJAE","url":"https://genius.com/artists/Ejae"},{"api_path":"/artists/2130780","header_image_url":"https://images.genius.com/6222f43a37ae6ff3b5146e845688fd64.1000x419x1.png","id":2130780,"image_url":"https://images.genius.com/75e3b9203fc150a1f2ed4a47b2106188.400x400x1.jpg","is_meme_verified":false,"is_verified":false,"name":"AUDREY
+        NUNA","url":"https://genius.com/artists/Audrey-nuna"},{"api_path":"/artists/1917162","header_image_url":"https://images.genius.com/4b6a64b541a6b20812134a03125e26fa.1000x583x1.png","id":1917162,"image_url":"https://images.genius.com/ce387507bbe56ab649db9b153bdc3dd0.1000x1000x1.jpg","is_meme_verified":false,"is_verified":true,"name":"REI
+        AMI","url":"https://genius.com/artists/Rei-ami","iq":1604},{"api_path":"/artists/4468523","header_image_url":"https://images.genius.com/cdd18478350c8c78e2fc01f08d520eef.1000x1000x1.jpg","id":4468523,"image_url":"https://images.genius.com/cdd18478350c8c78e2fc01f08d520eef.1000x1000x1.jpg","is_meme_verified":false,"is_verified":false,"name":"KPop
+        Demon Hunters Cast","url":"https://genius.com/artists/Kpop-demon-hunters-cast"}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":0,"api_path":"/songs/12105332","artist_names":"HUNTR/X,
+        Analu Pimenta, Vic Brow, Taís Feijó & KPop Demon Hunters Cast","full_title":"Brilho
+        (Golden) by HUNTR/X, Analu Pimenta, Vic Brow, Taís Feijó & KPop Demon Hunters
+        Cast","header_image_thumbnail_url":"https://images.genius.com/befeeeecaf0885549097e7fd26235e0a.300x300x1.png","header_image_url":"https://images.genius.com/befeeeecaf0885549097e7fd26235e0a.1000x1000x1.png","id":12105332,"lyrics_owner_id":21154560,"lyrics_state":"complete","path":"/Huntr-x-analu-pimenta-vic-brow-tais-feijo-and-kpop-demon-hunters-cast-brilho-golden-lyrics","primary_artist_names":"HUNTR/X,
+        Analu Pimenta, Vic Brow, Taís Feijó & KPop Demon Hunters Cast","pyongs_count":null,"relationships_index_url":"https://genius.com/Huntr-x-analu-pimenta-vic-brow-tais-feijo-and-kpop-demon-hunters-cast-brilho-golden-sample","release_date_components":{"year":2025,"month":6,"day":19},"release_date_for_display":"June
+        19, 2025","release_date_with_abbreviated_month_for_display":"Jun. 19, 2025","song_art_image_thumbnail_url":"https://images.genius.com/befeeeecaf0885549097e7fd26235e0a.300x300x1.png","song_art_image_url":"https://images.genius.com/befeeeecaf0885549097e7fd26235e0a.1000x1000x1.png","stats":{"unreviewed_annotations":0,"hot":false},"title":"Brilho
+        (Golden)","title_with_featured":"Brilho (Golden)","url":"https://genius.com/Huntr-x-analu-pimenta-vic-brow-tais-feijo-and-kpop-demon-hunters-cast-brilho-golden-lyrics","featured_artists":[],"primary_artist":{"api_path":"/artists/4436796","header_image_url":"https://images.genius.com/a20db8caea2037dfa8b6335cf84df3fc.1000x419x1.jpg","id":4436796,"image_url":"https://images.genius.com/c0503895093d3c7503f0746e91a8200e.1000x1000x1.webp","is_meme_verified":false,"is_verified":false,"name":"HUNTR/X","url":"https://genius.com/artists/Huntr-x"},"primary_artists":[{"api_path":"/artists/4436796","header_image_url":"https://images.genius.com/a20db8caea2037dfa8b6335cf84df3fc.1000x419x1.jpg","id":4436796,"image_url":"https://images.genius.com/c0503895093d3c7503f0746e91a8200e.1000x1000x1.webp","is_meme_verified":false,"is_verified":false,"name":"HUNTR/X","url":"https://genius.com/artists/Huntr-x"},{"api_path":"/artists/1763354","header_image_url":"https://assets.genius.com/images/default_avatar_300.png?1766594224","id":1763354,"image_url":"https://assets.genius.com/images/default_avatar_300.png?1766594224","is_meme_verified":false,"is_verified":false,"name":"Analu
+        Pimenta","url":"https://genius.com/artists/Analu-pimenta"},{"api_path":"/artists/1596384","header_image_url":"https://images.genius.com/5dd12cbbd43ebcc730cc6c4f18da3526.990x990x1.jpg","id":1596384,"image_url":"https://images.genius.com/5dd12cbbd43ebcc730cc6c4f18da3526.990x990x1.jpg","is_meme_verified":false,"is_verified":false,"name":"Vic
+        Brow","url":"https://genius.com/artists/Vic-brow"},{"api_path":"/artists/4505386","header_image_url":"https://assets.genius.com/images/default_avatar_300.png?1766594224","id":4505386,"image_url":"https://assets.genius.com/images/default_avatar_300.png?1766594224","is_meme_verified":false,"is_verified":false,"name":"Taís
+        Feijó","url":"https://genius.com/artists/Tais-feijo"},{"api_path":"/artists/4468523","header_image_url":"https://images.genius.com/cdd18478350c8c78e2fc01f08d520eef.1000x1000x1.jpg","id":4468523,"image_url":"https://images.genius.com/cdd18478350c8c78e2fc01f08d520eef.1000x1000x1.jpg","is_meme_verified":false,"is_verified":false,"name":"KPop
+        Demon Hunters Cast","url":"https://genius.com/artists/Kpop-demon-hunters-cast"}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":0,"api_path":"/songs/12851773","artist_names":"Parallyx","full_title":"Golden
+        (Huntr/x Cover) by Parallyx","header_image_thumbnail_url":"https://images.genius.com/aeb8316fbaf78a0d18eab34af5d05e34.300x300x1.jpg","header_image_url":"https://images.genius.com/aeb8316fbaf78a0d18eab34af5d05e34.1000x1000x1.jpg","id":12851773,"lyrics_owner_id":9666843,"lyrics_state":"complete","path":"/Parallyx-golden-huntr-x-cover-lyrics","primary_artist_names":"Parallyx","pyongs_count":null,"relationships_index_url":"https://genius.com/Parallyx-golden-huntr-x-cover-sample","release_date_components":{"year":2025,"month":12,"day":18},"release_date_for_display":"December
+        18, 2025","release_date_with_abbreviated_month_for_display":"Dec. 18, 2025","song_art_image_thumbnail_url":"https://images.genius.com/aeb8316fbaf78a0d18eab34af5d05e34.300x300x1.jpg","song_art_image_url":"https://images.genius.com/aeb8316fbaf78a0d18eab34af5d05e34.1000x1000x1.jpg","stats":{"unreviewed_annotations":0,"hot":false},"title":"Golden
+        (Huntr/x Cover)","title_with_featured":"Golden (Huntr/x Cover)","url":"https://genius.com/Parallyx-golden-huntr-x-cover-lyrics","featured_artists":[],"primary_artist":{"api_path":"/artists/3930265","header_image_url":"https://images.genius.com/aeb8316fbaf78a0d18eab34af5d05e34.1000x1000x1.jpg","id":3930265,"image_url":"https://images.genius.com/aeb8316fbaf78a0d18eab34af5d05e34.1000x1000x1.jpg","is_meme_verified":false,"is_verified":false,"name":"Parallyx","url":"https://genius.com/artists/Parallyx"},"primary_artists":[{"api_path":"/artists/3930265","header_image_url":"https://images.genius.com/aeb8316fbaf78a0d18eab34af5d05e34.1000x1000x1.jpg","id":3930265,"image_url":"https://images.genius.com/aeb8316fbaf78a0d18eab34af5d05e34.1000x1000x1.jpg","is_meme_verified":false,"is_verified":false,"name":"Parallyx","url":"https://genius.com/artists/Parallyx"}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":0,"api_path":"/songs/12733834","artist_names":"Polskie
+        tłumaczenia Genius","full_title":"Golden - HUNTR/X, EJAE, AUDREY NUNA, REI
+        AMI & KPop Demon Hunters Cast (polskie tłumaczenie) by Polskie tłumaczenia
+        Genius","header_image_thumbnail_url":"https://images.genius.com/b5c11506d341f028f3665d09b2d41250.300x300x1.png","header_image_url":"https://images.genius.com/b5c11506d341f028f3665d09b2d41250.1000x1000x1.png","id":12733834,"lyrics_owner_id":21719739,"lyrics_state":"complete","path":"/Polskie-tumaczenia-genius-golden-huntr-x-ejae-audrey-nuna-rei-ami-and-kpop-demon-hunters-cast-polskie-tumaczenie-lyrics","primary_artist_names":"Polskie
+        tłumaczenia Genius","pyongs_count":null,"relationships_index_url":"https://genius.com/Polskie-tumaczenia-genius-golden-huntr-x-ejae-audrey-nuna-rei-ami-and-kpop-demon-hunters-cast-polskie-tumaczenie-sample","release_date_components":{"year":2025,"month":6,"day":20},"release_date_for_display":"June
+        20, 2025","release_date_with_abbreviated_month_for_display":"Jun. 20, 2025","song_art_image_thumbnail_url":"https://images.genius.com/b5c11506d341f028f3665d09b2d41250.300x300x1.png","song_art_image_url":"https://images.genius.com/b5c11506d341f028f3665d09b2d41250.1000x1000x1.png","stats":{"unreviewed_annotations":0,"hot":false},"title":"Golden
+        - HUNTR/X, EJAE, AUDREY NUNA, REI AMI & KPop Demon Hunters Cast (polskie tłumaczenie)","title_with_featured":"Golden
+        - HUNTR/X, EJAE, AUDREY NUNA, REI AMI & KPop Demon Hunters Cast (polskie tłumaczenie)","url":"https://genius.com/Polskie-tumaczenia-genius-golden-huntr-x-ejae-audrey-nuna-rei-ami-and-kpop-demon-hunters-cast-polskie-tumaczenie-lyrics","featured_artists":[],"primary_artist":{"api_path":"/artists/161407","header_image_url":"https://images.genius.com/d5556d9bbcf2acf5746255ac70326318.1000x300x1.png","id":161407,"image_url":"https://images.genius.com/0e56374611b2fa9e5647bce7b5ef7544.613x613x1.jpg","is_meme_verified":false,"is_verified":false,"name":"Polskie
+        tłumaczenia Genius","url":"https://genius.com/artists/Polskie-tumaczenia-genius"},"primary_artists":[{"api_path":"/artists/161407","header_image_url":"https://images.genius.com/d5556d9bbcf2acf5746255ac70326318.1000x300x1.png","id":161407,"image_url":"https://images.genius.com/0e56374611b2fa9e5647bce7b5ef7544.613x613x1.jpg","is_meme_verified":false,"is_verified":false,"name":"Polskie
+        tłumaczenia Genius","url":"https://genius.com/artists/Polskie-tumaczenia-genius"}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":0,"api_path":"/songs/12798300","artist_names":"Luísa
+        Nikki","full_title":"Retrospectiva Spotify 2025 by Luísa Nikki","header_image_thumbnail_url":"https://images.genius.com/e68b4981a04ce6f714f0d0d44973a02c.300x300x1.jpg","header_image_url":"https://images.genius.com/e68b4981a04ce6f714f0d0d44973a02c.720x720x1.jpg","id":12798300,"lyrics_owner_id":13643648,"lyrics_state":"complete","path":"/Luisa-nikki-retrospectiva-spotify-2025-annotated","primary_artist_names":"Luísa
+        Nikki","pyongs_count":null,"relationships_index_url":"https://genius.com/Luisa-nikki-retrospectiva-spotify-2025-sample","release_date_components":null,"release_date_for_display":null,"release_date_with_abbreviated_month_for_display":null,"song_art_image_thumbnail_url":"https://images.genius.com/e68b4981a04ce6f714f0d0d44973a02c.300x300x1.jpg","song_art_image_url":"https://images.genius.com/e68b4981a04ce6f714f0d0d44973a02c.720x720x1.jpg","stats":{"unreviewed_annotations":0,"hot":false},"title":"Retrospectiva
+        Spotify 2025","title_with_featured":"Retrospectiva Spotify 2025","url":"https://genius.com/Luisa-nikki-retrospectiva-spotify-2025-annotated","featured_artists":[],"primary_artist":{"api_path":"/artists/3034099","header_image_url":"https://images.genius.com/9472da8f27e7f4c620a39805f9cfad77.500x500x1.jpg","id":3034099,"image_url":"https://images.genius.com/e68b4981a04ce6f714f0d0d44973a02c.720x720x1.jpg","is_meme_verified":false,"is_verified":false,"name":"Luísa
+        Nikki","url":"https://genius.com/artists/Luisa-nikki","iq":199972},"primary_artists":[{"api_path":"/artists/3034099","header_image_url":"https://images.genius.com/9472da8f27e7f4c620a39805f9cfad77.500x500x1.jpg","id":3034099,"image_url":"https://images.genius.com/e68b4981a04ce6f714f0d0d44973a02c.720x720x1.jpg","is_meme_verified":false,"is_verified":false,"name":"Luísa
+        Nikki","url":"https://genius.com/artists/Luisa-nikki","iq":199972}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":6,"api_path":"/songs/12099088","artist_names":"HUNTR/X,
+        EJAE, AUDREY NUNA, REI AMI & KPop Demon Hunters Cast","full_title":"Golden
+        (Acapella) by HUNTR/X, EJAE, AUDREY NUNA, REI AMI & KPop Demon Hunters Cast","header_image_thumbnail_url":"https://images.genius.com/b5c11506d341f028f3665d09b2d41250.300x300x1.png","header_image_url":"https://images.genius.com/b5c11506d341f028f3665d09b2d41250.1000x1000x1.png","id":12099088,"lyrics_owner_id":16463578,"lyrics_state":"complete","path":"/Huntr-x-ejae-audrey-nuna-rei-ami-and-kpop-demon-hunters-cast-golden-acapella-lyrics","primary_artist_names":"HUNTR/X,
+        EJAE, AUDREY NUNA, REI AMI & KPop Demon Hunters Cast","pyongs_count":null,"relationships_index_url":"https://genius.com/Huntr-x-ejae-audrey-nuna-rei-ami-and-kpop-demon-hunters-cast-golden-acapella-sample","release_date_components":{"year":2025,"month":7,"day":4},"release_date_for_display":"July
+        4, 2025","release_date_with_abbreviated_month_for_display":"Jul. 4, 2025","song_art_image_thumbnail_url":"https://images.genius.com/b5c11506d341f028f3665d09b2d41250.300x300x1.png","song_art_image_url":"https://images.genius.com/b5c11506d341f028f3665d09b2d41250.1000x1000x1.png","stats":{"unreviewed_annotations":6,"hot":false,"pageviews":5388},"title":"Golden
+        (Acapella)","title_with_featured":"Golden (Acapella)","url":"https://genius.com/Huntr-x-ejae-audrey-nuna-rei-ami-and-kpop-demon-hunters-cast-golden-acapella-lyrics","featured_artists":[],"primary_artist":{"api_path":"/artists/4436796","header_image_url":"https://images.genius.com/a20db8caea2037dfa8b6335cf84df3fc.1000x419x1.jpg","id":4436796,"image_url":"https://images.genius.com/c0503895093d3c7503f0746e91a8200e.1000x1000x1.webp","is_meme_verified":false,"is_verified":false,"name":"HUNTR/X","url":"https://genius.com/artists/Huntr-x"},"primary_artists":[{"api_path":"/artists/4436796","header_image_url":"https://images.genius.com/a20db8caea2037dfa8b6335cf84df3fc.1000x419x1.jpg","id":4436796,"image_url":"https://images.genius.com/c0503895093d3c7503f0746e91a8200e.1000x1000x1.webp","is_meme_verified":false,"is_verified":false,"name":"HUNTR/X","url":"https://genius.com/artists/Huntr-x"},{"api_path":"/artists/1015580","header_image_url":"https://images.genius.com/16196e32ad3683546b26db9f72e0b0f2.1000x300x1.png","id":1015580,"image_url":"https://images.genius.com/e0076705eeb5509aa48d4896d9440291.1000x1000x1.jpg","is_meme_verified":false,"is_verified":false,"name":"EJAE","url":"https://genius.com/artists/Ejae"},{"api_path":"/artists/2130780","header_image_url":"https://images.genius.com/6222f43a37ae6ff3b5146e845688fd64.1000x419x1.png","id":2130780,"image_url":"https://images.genius.com/75e3b9203fc150a1f2ed4a47b2106188.400x400x1.jpg","is_meme_verified":false,"is_verified":false,"name":"AUDREY
+        NUNA","url":"https://genius.com/artists/Audrey-nuna"},{"api_path":"/artists/1917162","header_image_url":"https://images.genius.com/4b6a64b541a6b20812134a03125e26fa.1000x583x1.png","id":1917162,"image_url":"https://images.genius.com/ce387507bbe56ab649db9b153bdc3dd0.1000x1000x1.jpg","is_meme_verified":false,"is_verified":true,"name":"REI
+        AMI","url":"https://genius.com/artists/Rei-ami","iq":1604},{"api_path":"/artists/4468523","header_image_url":"https://images.genius.com/cdd18478350c8c78e2fc01f08d520eef.1000x1000x1.jpg","id":4468523,"image_url":"https://images.genius.com/cdd18478350c8c78e2fc01f08d520eef.1000x1000x1.jpg","is_meme_verified":false,"is_verified":false,"name":"KPop
+        Demon Hunters Cast","url":"https://genius.com/artists/Kpop-demon-hunters-cast"}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":1,"api_path":"/songs/12099087","artist_names":"HUNTR/X,
+        EJAE, AUDREY NUNA, REI AMI & KPop Demon Hunters Cast","full_title":"Golden
+        (Instrumental) by HUNTR/X, EJAE, AUDREY NUNA, REI AMI & KPop Demon Hunters
+        Cast","header_image_thumbnail_url":"https://images.genius.com/b5c11506d341f028f3665d09b2d41250.300x300x1.png","header_image_url":"https://images.genius.com/b5c11506d341f028f3665d09b2d41250.1000x1000x1.png","id":12099087,"lyrics_owner_id":16463578,"lyrics_state":"complete","path":"/Huntr-x-ejae-audrey-nuna-rei-ami-and-kpop-demon-hunters-cast-golden-instrumental-lyrics","primary_artist_names":"HUNTR/X,
+        EJAE, AUDREY NUNA, REI AMI & KPop Demon Hunters Cast","pyongs_count":null,"relationships_index_url":"https://genius.com/Huntr-x-ejae-audrey-nuna-rei-ami-and-kpop-demon-hunters-cast-golden-instrumental-sample","release_date_components":{"year":2025,"month":7,"day":4},"release_date_for_display":"July
+        4, 2025","release_date_with_abbreviated_month_for_display":"Jul. 4, 2025","song_art_image_thumbnail_url":"https://images.genius.com/b5c11506d341f028f3665d09b2d41250.300x300x1.png","song_art_image_url":"https://images.genius.com/b5c11506d341f028f3665d09b2d41250.1000x1000x1.png","stats":{"unreviewed_annotations":1,"hot":false},"title":"Golden
+        (Instrumental)","title_with_featured":"Golden (Instrumental)","url":"https://genius.com/Huntr-x-ejae-audrey-nuna-rei-ami-and-kpop-demon-hunters-cast-golden-instrumental-lyrics","featured_artists":[],"primary_artist":{"api_path":"/artists/4436796","header_image_url":"https://images.genius.com/a20db8caea2037dfa8b6335cf84df3fc.1000x419x1.jpg","id":4436796,"image_url":"https://images.genius.com/c0503895093d3c7503f0746e91a8200e.1000x1000x1.webp","is_meme_verified":false,"is_verified":false,"name":"HUNTR/X","url":"https://genius.com/artists/Huntr-x"},"primary_artists":[{"api_path":"/artists/4436796","header_image_url":"https://images.genius.com/a20db8caea2037dfa8b6335cf84df3fc.1000x419x1.jpg","id":4436796,"image_url":"https://images.genius.com/c0503895093d3c7503f0746e91a8200e.1000x1000x1.webp","is_meme_verified":false,"is_verified":false,"name":"HUNTR/X","url":"https://genius.com/artists/Huntr-x"},{"api_path":"/artists/1015580","header_image_url":"https://images.genius.com/16196e32ad3683546b26db9f72e0b0f2.1000x300x1.png","id":1015580,"image_url":"https://images.genius.com/e0076705eeb5509aa48d4896d9440291.1000x1000x1.jpg","is_meme_verified":false,"is_verified":false,"name":"EJAE","url":"https://genius.com/artists/Ejae"},{"api_path":"/artists/2130780","header_image_url":"https://images.genius.com/6222f43a37ae6ff3b5146e845688fd64.1000x419x1.png","id":2130780,"image_url":"https://images.genius.com/75e3b9203fc150a1f2ed4a47b2106188.400x400x1.jpg","is_meme_verified":false,"is_verified":false,"name":"AUDREY
+        NUNA","url":"https://genius.com/artists/Audrey-nuna"},{"api_path":"/artists/1917162","header_image_url":"https://images.genius.com/4b6a64b541a6b20812134a03125e26fa.1000x583x1.png","id":1917162,"image_url":"https://images.genius.com/ce387507bbe56ab649db9b153bdc3dd0.1000x1000x1.jpg","is_meme_verified":false,"is_verified":true,"name":"REI
+        AMI","url":"https://genius.com/artists/Rei-ami","iq":1604},{"api_path":"/artists/4468523","header_image_url":"https://images.genius.com/cdd18478350c8c78e2fc01f08d520eef.1000x1000x1.jpg","id":4468523,"image_url":"https://images.genius.com/cdd18478350c8c78e2fc01f08d520eef.1000x1000x1.jpg","is_meme_verified":false,"is_verified":false,"name":"KPop
+        Demon Hunters Cast","url":"https://genius.com/artists/Kpop-demon-hunters-cast"}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":11,"api_path":"/songs/12045295","artist_names":"Genius
+        Romanizations","full_title":"HUNTR/X - Golden (Romanized) by Genius Romanizations","header_image_thumbnail_url":"https://images.genius.com/83a4701279b25b49b9c7af1940f0b17a.300x300x1.png","header_image_url":"https://images.genius.com/83a4701279b25b49b9c7af1940f0b17a.1000x1000x1.png","id":12045295,"lyrics_owner_id":22771446,"lyrics_state":"complete","path":"/Genius-romanizations-huntr-x-golden-romanized-lyrics","primary_artist_names":"Genius
+        Romanizations","pyongs_count":12,"relationships_index_url":"https://genius.com/Genius-romanizations-huntr-x-golden-romanized-sample","release_date_components":{"year":2025,"month":6,"day":20},"release_date_for_display":"June
+        20, 2025","release_date_with_abbreviated_month_for_display":"Jun. 20, 2025","song_art_image_thumbnail_url":"https://images.genius.com/83a4701279b25b49b9c7af1940f0b17a.300x300x1.png","song_art_image_url":"https://images.genius.com/83a4701279b25b49b9c7af1940f0b17a.1000x1000x1.png","stats":{"unreviewed_annotations":0,"concurrents":12,"hot":false,"pageviews":4757748},"title":"HUNTR/X
+        - Golden (Romanized)","title_with_featured":"HUNTR/X - Golden (Romanized)","url":"https://genius.com/Genius-romanizations-huntr-x-golden-romanized-lyrics","featured_artists":[],"primary_artist":{"api_path":"/artists/1507735","header_image_url":"https://images.genius.com/e5afba664f84f0cadba65e3231dd57c7.1000x495x1.png","id":1507735,"image_url":"https://images.genius.com/086f5809e96b133dd536982629e5844b.1000x1000x1.png","is_meme_verified":false,"is_verified":false,"name":"Genius
+        Romanizations","url":"https://genius.com/artists/Genius-romanizations"},"primary_artists":[{"api_path":"/artists/1507735","header_image_url":"https://images.genius.com/e5afba664f84f0cadba65e3231dd57c7.1000x495x1.png","id":1507735,"image_url":"https://images.genius.com/086f5809e96b133dd536982629e5844b.1000x1000x1.png","is_meme_verified":false,"is_verified":false,"name":"Genius
+        Romanizations","url":"https://genius.com/artists/Genius-romanizations"}]}},{"highlights":[],"index":"song","type":"song","result":{"annotation_count":7,"api_path":"/songs/12053853","artist_names":"Genius
+        English Translations","full_title":"HUNTR/X - Golden (English Translation)
+        by Genius English Translations","header_image_thumbnail_url":"https://images.genius.com/b5c11506d341f028f3665d09b2d41250.300x300x1.png","header_image_url":"https://images.genius.com/b5c11506d341f028f3665d09b2d41250.1000x1000x1.png","id":12053853,"lyrics_owner_id":22069551,"lyrics_state":"complete","path":"/Genius-english-translations-huntr-x-golden-english-translation-lyrics","primary_artist_names":"Genius
+        English Translations","pyongs_count":null,"relationships_index_url":"https://genius.com/Genius-english-translations-huntr-x-golden-english-translation-sample","release_date_components":{"year":2025,"month":6,"day":20},"release_date_for_display":"June
+        20, 2025","release_date_with_abbreviated_month_for_display":"Jun. 20, 2025","song_art_image_thumbnail_url":"https://images.genius.com/b5c11506d341f028f3665d09b2d41250.300x300x1.png","song_art_image_url":"https://images.genius.com/b5c11506d341f028f3665d09b2d41250.1000x1000x1.png","stats":{"unreviewed_annotations":5,"hot":false,"pageviews":626894},"title":"HUNTR/X
+        - Golden (English Translation)","title_with_featured":"HUNTR/X - Golden (English
+        Translation)","url":"https://genius.com/Genius-english-translations-huntr-x-golden-english-translation-lyrics","featured_artists":[],"primary_artist":{"api_path":"/artists/196943","header_image_url":"https://images.genius.com/570963869585334ad99453cdb2db42bf.1000x140x1.png","id":196943,"image_url":"https://images.genius.com/de32245e4abcb8be6c5d15aace40d53e.1000x1000x1.png","is_meme_verified":false,"is_verified":false,"name":"Genius
+        English Translations","url":"https://genius.com/artists/Genius-english-translations"},"primary_artists":[{"api_path":"/artists/196943","header_image_url":"https://images.genius.com/570963869585334ad99453cdb2db42bf.1000x140x1.png","id":196943,"image_url":"https://images.genius.com/de32245e4abcb8be6c5d15aace40d53e.1000x1000x1.png","is_meme_verified":false,"is_verified":false,"name":"Genius
+        English Translations","url":"https://genius.com/artists/Genius-english-translations"}]}}]}}'
+  recorded_at: Sat, 27 Dec 2025 12:17:07 GMT
+- request:
+    method: get
+    uri: https://api.genius.com/search?q=Photograph%20Ed%20Sheeran
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    headers:
+      Authorization:
+      - Bearer <GENIUS_CLIENT_ACCESS_TOKEN>
+      User-Agent:
+      - Mozilla/5.0 (compatible; LingoBeats/1.0; +https://github.com/CSV-UPSTART3)
+      Connection:
+      - close
+      Host:
+      - api.genius.com
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Date:
+      - Sat, 27 Dec 2025 12:17:08 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '134'
+      Connection:
+      - close
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 9b48c0cb1c9f4a0f-TPE
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cache-Control:
+      - no-cache
+      Via:
+      - 1.1 heroku-router
+      Www-Authenticate:
+      - Bearer realm="Rack::OAuth2", error="invalid_token", error_description="The
+        access token provided is expired, revoked, malformed or invalid for other
+        reasons."
+      Nel:
+      - '{"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}'
+      Report-To:
+      - '{"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=MiHJbDlxY777ROGPViONTXE0FWM2iYaG9ICYJzp2%2BaM%3D\u0026sid=929419e7-33ea-4e2f-85f0-7d8b7cd5cbd6\u0026ts=1766837828"}],"max_age":3600}'
+      Reporting-Endpoints:
+      - heroku-nel="https://nel.heroku.com/reports?s=MiHJbDlxY777ROGPViONTXE0FWM2iYaG9ICYJzp2%2BaM%3D&sid=929419e7-33ea-4e2f-85f0-7d8b7cd5cbd6&ts=1766837828"
+      X-Request-Id:
+      - 599a5375-f5a6-6057-9792-781fa04adf04
+      X-Runtime:
+      - '0.004665'
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - _cfuvid=kY3UDU_g3looRml6QxUx3rVRTbm.H4q_CZDpQO8nXV8-1766837828577-0.0.1.1-604800000;
+        path=/; domain=.genius.com; HttpOnly; Secure; SameSite=None
+    body:
+      encoding: UTF-8
+      string: '{"error":"invalid_token","error_description":"The access token provided
+        is expired, revoked, malformed or invalid for other reasons."}'
+  recorded_at: Sat, 27 Dec 2025 12:17:08 GMT
 recorded_with: VCR 6.3.1
