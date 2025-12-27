@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'search_histories'
 require_relative 'vocabularies'
 require_relative 'singers'
 require_relative 'songs'
@@ -11,11 +10,10 @@ module LingoBeats
     # Finds the right repository for an entity object or class
     module For
       ENTITY_REPOSITORY = {
-        Entity::Singer        => Singers,
-        Entity::Song          => Songs,
-        Entity::Vocabulary    => Vocabularies,
-        Entity::SearchHistory => SearchHistories,
-        Value::Lyric          => Lyrics
+        Entity::Singer     => Singers,
+        Entity::Song       => Songs,
+        Entity::Vocabulary => Vocabularies,
+        Value::Lyric       => Lyrics
       }.freeze
 
       def self.klass(entity_klass)
