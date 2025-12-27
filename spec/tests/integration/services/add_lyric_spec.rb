@@ -130,7 +130,8 @@ describe 'AddLyric Service Integration Test' do
     fake_add_song = Class.new do
       def initialize(*); end
 
-      def call(_song_id:)
+      def call(song_id:)
+        _ = song_id
         api = LingoBeats::Response::ApiResult.new(
           status: :not_found,
           message: 'Cannot find the specified song'

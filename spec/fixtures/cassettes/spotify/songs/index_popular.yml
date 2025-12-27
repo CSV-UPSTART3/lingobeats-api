@@ -97,4 +97,58 @@ http_interactions:
         Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"external_urls":{"spotify":"https://open.spotify.com/album/4a6NzYL1YHRUgx9e3YZI6I"},"total_tracks":12},"artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02"},"href":"https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02","id":"06HL4z0CvFAxyc27GXpf02","name":"Taylor
         Swift","type":"artist","uri":"spotify:artist:06HL4z0CvFAxyc27GXpf02"}],"disc_number":1,"track_number":3,"duration_ms":235355,"external_ids":{"isrc":"USUG12506438"},"external_urls":{"spotify":"https://open.spotify.com/track/3yWuTOYDztXjZxdE2cIRUa"},"href":"https://api.spotify.com/v1/tracks/3yWuTOYDztXjZxdE2cIRUa","id":"3yWuTOYDztXjZxdE2cIRUa","name":"Opalite","popularity":95,"uri":"spotify:track:3yWuTOYDztXjZxdE2cIRUa","is_local":false},"video_thumbnail":{"url":null}}],"limit":10,"next":"https://api.spotify.com/v1/playlists/6UeSakyzhiEt4NB3UAd6NQ/tracks?offset=10&limit=10","offset":0,"previous":null,"total":100}'
   recorded_at: Sat, 20 Dec 2025 12:19:26 GMT
+- request:
+    method: post
+    uri: https://accounts.spotify.com/api/token
+    body:
+      encoding: ASCII-8BIT
+      string: grant_type=client_credentials
+    headers:
+      Authorization:
+      - Basic Y2Y2OWRhNjY2NWNiNGJhNGFmYmMyYjUyYjU5YmYyMzc6NzE1ZjI0ZTE1NmQwNGU3ZGI2Nzk0Zjk4NjhiYmM5NGQ=
+      Connection:
+      - close
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - accounts.spotify.com
+      User-Agent:
+      - http.rb/5.3.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 27 Dec 2025 12:56:10 GMT
+      Request-Id:
+      - 2c1a4a8e-d2be-4866-a483-6f909ef8d889
+      Content-Type:
+      - application/json
+      Set-Cookie:
+      - __Host-device_id=AQAb_qXqcarcn-CUFvdD2YrOHBl8ZCvSE7mudZDH8AqB_jOTHciy5OsircTmkeEHwru-8Xr7xxfVbmF_LD5qsgFZ0VKuy5AqlEg;Version=1;Path=/;Max-Age=2147483647;Secure;HttpOnly;SameSite=Lax
+      - sp_tr=false;Version=1;Domain=accounts.spotify.com;Path=/;Secure;SameSite=Lax
+      Content-Length:
+      - '198'
+      Server:
+      - envoy
+      X-Envoy-Upstream-Service-Time:
+      - '8'
+      Via:
+      - HTTP/1.1 fringe, HTTP/2 edgeproxy, 1.1 google
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Vary:
+      - Accept-Encoding
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"BQAVwznpYRdcvKYHn_mYz3GHXIUmbsYV9oi5pHKDfqAVh7w5QCI-UJkteexvqAih79NmSgnKomxAd_34gll6P2zfqJEtJl1hvTDE-Scl6WFgpvOIbUf7RbLzZ3dWryTS9LwjGNHhx2M","token_type":"Bearer","expires_in":3600}'
+  recorded_at: Sat, 27 Dec 2025 12:56:10 GMT
 recorded_with: VCR 6.3.1
