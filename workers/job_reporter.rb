@@ -3,6 +3,7 @@
 require_relative 'progress_publisher'
 
 module MaterialGeneration
+  # Helper class to report job progress
   class JobReporter
     def initialize(request_json, config)
       job_request = LingoBeats::Representer::MaterialJob.from_json(request_json)

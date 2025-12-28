@@ -15,6 +15,12 @@ module LingoBeats
       # pyimport :langdetect
       include Dry.Types
 
+      LEVEL_CODE_MAP = {
+        'A' => 'A',
+        'B' => 'B',
+        'C' => 'C'
+      }.freeze
+
       attribute :text, Strict::String.optional
 
       # get id by checksum of normalized text
@@ -43,37 +49,45 @@ module LingoBeats
       def clean_words
         return [] if text.to_s.strip.empty?
 
-        cleaned_text = Mixins::Cleaner.new(text).call
-        Mixins::Tokenizer.new(cleaned_text).call # array of words
+        cleaned_text = lyric_cleaner.new(text).call
+        lyric_tokenizer.new(cleaned_text).call # array of words
       end
 
       def evaluate_difficulty
         words = clean_words
-        results = Mixins::DifficultyEstimator.new(words).call
+        results = difficulty_estimator.new(words).call
 
         # puts "[DEBUG] evaluate_difficulty results sample: #{results.first.inspect}"
 
         # let A1/A2 → A, B1/B2 → B, C1/C2 → C
-        mapped_results =
-        results.map do |result|
-          raw_level = result["level"]
-          
-          collapsed =
-            case raw_level
-            when /^A/ then 'A'
-            when /^B/ then 'B'
-            when /^C/ then 'C'
-            end
-          
-          next nil if collapsed.nil?
-
-          result.merge("level" => collapsed)
-        end.compact
-
+        results.map { |result| collapse_level(result) }
+               .compact
         # puts "[DEBUG] Mapped results sample: #{mapped_results.first.inspect}"
+      end
 
-        # mapped_results.reject { |_word, lvl| [nil, 'None'].include?(lvl) }
-        mapped_results
+      def collapse_level(result)
+        collapsed = self.class.collapse_level_code(result['level'])
+        return nil unless collapsed
+
+        { **result, 'level' => collapsed }
+      end
+
+      def self.collapse_level_code(raw_level)
+        LEVEL_CODE_MAP[raw_level.to_s[0]]
+      end
+
+      private
+
+      def lyric_cleaner
+        Songs::Services::Cleaner
+      end
+
+      def lyric_tokenizer
+        Songs::Services::Tokenizer
+      end
+
+      def difficulty_estimator
+        Songs::Services::DifficultyEstimator
       end
     end
   end

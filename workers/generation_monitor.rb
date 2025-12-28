@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module MaterialGeneration
+  # Helper module to monitor generation progress
   module GenerationMonitor
     def self.starting
       { status: 'started', percent: 5 }

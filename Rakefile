@@ -12,7 +12,7 @@ desc 'Run unit and integration tests'
 Rake::TestTask.new(:spec) do |t|
   puts 'Make sure worker is running in separate process'
   # require_app
-  t.ruby_opts << '-r./require_app' 
+  t.ruby_opts << '-r./require_app'
   t.pattern = 'spec/tests/**/*_spec.rb'
   t.warning = false
 end
@@ -81,8 +81,9 @@ namespace :db do
   end
 
   desc 'Delete database file based on DB_FILENAME env'
-  task :drop do
-    db_file = ENV['DB_FILENAME']
+  task :drop => :config do
+    db_file = ENV['DB_FILENAME'] || app.config.DB_FILENAME
+    # db_file = ENV.fetch('DB_FILENAME', nil)
     abort 'DB_FILENAME env required for db:drop' unless db_file
 
     FileUtils.rm_f(db_file)
@@ -94,6 +95,7 @@ end
 
 # queue manipulation
 namespace :queues do
+  desc 'Load config into environment'
   task :config do
     require 'aws-sdk-sqs'
     require_relative 'config/environment' # load config info
@@ -142,21 +144,30 @@ namespace :queues do
   end
 end
 
+def shoryuken_command(env, config_file)
+  [
+    "RACK_ENV=#{env}",
+    'bundle exec shoryuken',
+    '-r ./workers/material_generation_worker.rb',
+    "-C #{config_file}"
+  ].join(' ')
+end
+
 namespace :worker do
   namespace :run do
     desc 'Run the background material generation worker in development mode'
     task :dev => 'queues:config' do
-      sh 'RACK_ENV=development bundle exec shoryuken -r ./workers/material_generation_worker.rb -C ./workers/shoryuken_dev.yml'
+      sh shoryuken_command('development', './workers/shoryuken_dev.yml')
     end
 
     desc 'Run the background material generation worker in testing mode'
     task :test => 'queues:config' do
-      sh 'RACK_ENV=test bundle exec shoryuken -r ./workers/material_generation_worker.rb -C ./workers/shoryuken_test.yml'
+      sh shoryuken_command('test', './workers/shoryuken_test.yml')
     end
 
     desc 'Run the background material generation worker in production mode'
     task :production => 'queues:config' do
-      sh 'RACK_ENV=production bundle exec shoryuken -r ./workers/material_generation_worker.rb -C ./workers/shoryuken.yml'
+      sh shoryuken_command('production', './workers/shoryuken.yml')
     end
   end
 end
@@ -240,9 +251,31 @@ end
 # check code quality
 namespace :quality do
   only_app = 'config/ app/'
+  checks = %w[rubocop reek flog]
 
   desc 'run all static-analysis quality checks'
-  task all: %i[rubocop reek flog]
+  task :all do
+    failures = []
+
+    checks.each do |check|
+      task_name = "quality:#{check}"
+      begin
+        Rake::Task[task_name].invoke
+      rescue StandardError => e
+        failures << [task_name, e.message]
+      ensure
+        Rake::Task[task_name].reenable
+      end
+    end
+
+    next if failures.empty?
+
+    puts 'Quality task failures:'
+    failures.each do |name, message|
+      puts "  #{name} failed: #{message}"
+    end
+    abort 'Quality checks failed'
+  end
 
   desc 'code style linter'
   task :rubocop do

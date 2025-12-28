@@ -19,22 +19,23 @@ module LingoBeats
 
       def initialize(
         songs_repo: Repository::For.klass(Entity::Song),
-        vocabs_repo: Repository::For.klass(Entity::Vocabulary)
+        vocabs_repo: Repository::For.klass(Entity::Vocabulary),
+        processing_lock: Material::ProcessingLock,
+        material_builder: Response::Material
       )
         super()
         @songs_repo = songs_repo
         @vocabs_repo = vocabs_repo
+        @processing_lock = processing_lock
+        @material_builder = material_builder
       end
 
       private
 
       # step 1. fetch song + validate materials exist
       def fetch_data(input)
-        song     = find_song(input[:song_id])
-        contents = @vocabs_repo.vocabs_content(song.id)
-        status   = contents.empty? ? material_status(song.id) : :ok
-
-        Success(input.merge(song_name: song.name, status:, contents:))
+        payload = build_fetch_payload(input[:song_id])
+        Success(input.merge(payload))
       rescue StandardError => error
         App.logger.error("[GetMaterial] fetch data error: #{error.full_message}")
         Failure(Response::ApiResult.new(status: :not_found, message: error.message || DB_ERROR))
@@ -57,13 +58,14 @@ module LingoBeats
       end
 
       def material_status(song_id)
-        Material::ProcessingLock.processing?(song_id) ? :processing : :not_found
+        @processing_lock.processing?(song_id) ? :processing : :not_found
       end
 
+      # :reek:FeatureEnvy
       def result_message(input)
         case input[:status]
         when :ok
-          build_material_entity(input)
+          @material_builder.new(song: input[:song_name], contents: input[:contents])
         when :processing
           MATERIAL_IN_QUEUE
         when :not_found
@@ -71,9 +73,12 @@ module LingoBeats
         end
       end
 
-      # :reek:FeatureEnvy
-      def build_material_entity(input)
-        Response::Material.new(song: input[:song_name], contents: input[:contents])
+      def build_fetch_payload(song_id)
+        song = find_song(song_id)
+        contents = @vocabs_repo.vocabs_content(song.id)
+        status = contents.empty? ? material_status(song.id) : :ok
+
+        { song_name: song.name, status:, contents: }
       end
     end
   end

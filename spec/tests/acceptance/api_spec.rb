@@ -14,9 +14,37 @@ CASSETTE_OPTS = { record: :new_episodes, match_requests_on: %i[method uri] }.fre
 VCR.configure do |config|
   config.before_record do |interaction|
     auth = interaction.request.headers['Authorization']&.first
-    if auth&.start_with?('Bearer ')
-      interaction.request.headers['Authorization'] = ['Bearer <SPOTIFY_ACCESS_TOKEN>']
-    end
+    interaction.request.headers['Authorization'] = ['Bearer <SPOTIFY_ACCESS_TOKEN>'] if auth&.start_with?('Bearer ')
+  end
+end
+
+FakeAddMaterialService = Class.new do
+  class << self
+    attr_accessor :called_with
+  end
+
+  def call(song_id:, request_id: nil)
+    _ = request_id
+    self.class.called_with = song_id
+
+    material = fake_material
+    fake_result = LingoBeats::Response::ApiResult.new(
+      status: :created,
+      message: material
+    )
+
+    Dry::Monads::Result::Success.new(fake_result)
+  end
+
+  private
+
+  def fake_material
+    LingoBeats::Response::Material.new(
+      song: 'Golden',
+      contents: [
+        { word: 'take', entries: [{ meaning: 'fake meaning', example: 'fake example' }] }
+      ]
+    )
   end
 end
 
@@ -229,32 +257,11 @@ describe 'LingoBeats API acceptance reference spec' do
   end
 
   def with_fake_add_material
-    fake_service = Class.new do
-      class << self
-        attr_accessor :called_with
-      end
-
-      def initialize(*); end
-
-      def call(song_id:, request_id: nil)
-        self.class.called_with = song_id
-        material = LingoBeats::Response::Material.new(
-          song: 'Golden',
-          contents: [
-            { word: 'take', entries: [{ meaning: 'fake meaning', example: 'fake example' }] }
-          ]
-        )
-
-        fake_result = LingoBeats::Response::ApiResult.new(status: :created, message: material)
-        Dry::Monads::Result::Success.new(fake_result)
-      end
-    end
-
     original = LingoBeats::Service.const_get(:AddMaterial)
     LingoBeats::Service.send(:remove_const, :AddMaterial)
-    LingoBeats::Service.const_set(:AddMaterial, fake_service)
+    LingoBeats::Service.const_set(:AddMaterial, FakeAddMaterialService)
 
-    yield(fake_service)
+    yield(FakeAddMaterialService)
   ensure
     LingoBeats::Service.send(:remove_const, :AddMaterial)
     LingoBeats::Service.const_set(:AddMaterial, original)
@@ -265,12 +272,12 @@ describe 'LingoBeats API acceptance reference spec' do
     _(db_file).must_match(/test\.db\z/)
   end
 
-  def use_spotify_cassette(name, &block)
-    use_cassette('spotify', name, &block)
+  def use_spotify_cassette(name, &)
+    use_cassette('spotify', name, &)
   end
 
-  def use_genius_cassette(name, &block)
-    use_cassette('genius', name, &block)
+  def use_genius_cassette(name, &)
+    use_cassette('genius', name, &)
   end
 
   def use_cassette(provider, name, &block)

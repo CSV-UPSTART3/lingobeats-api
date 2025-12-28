@@ -19,7 +19,7 @@ module LingoBeats
         songs_repo: Repository::For.klass(Entity::Song),
         vocabs_repo: Repository::For.klass(Entity::Vocabulary),
         mapper: Gemini::VocabularyMapper.new(access_token: App.config.GEMINI_API_KEY),
-        material_job_queue: Messaging::MaterialJobQueue.new
+        material_job_queue: self.class.default_material_job_queue
       )
         super()
         @songs_repo = songs_repo
@@ -37,6 +37,17 @@ module LingoBeats
         insert_to_queue: 'Material generation job queued',                 # → 202
         already_queued: 'Material generation job already in queue'         # → 202
       }.freeze
+
+      def self.default_material_job_queue
+        aws_credentials = {
+          access_key_id: App.config.AWS_ACCESS_KEY_ID,
+          secret_access_key: App.config.AWS_SECRET_ACCESS_KEY, region: App.config.AWS_REGION
+        }
+
+        Messaging::MaterialJobQueue.new(
+          queue_url: App.config.MATERIAL_QUEUE_URL, aws_credentials: aws_credentials
+        )
+      end
 
       private
 
@@ -104,19 +115,28 @@ module LingoBeats
 
       def handle_pending_materials(input)
         song = input[:song]
+        request_id = input[:request_id]
 
         if Material::ProcessingLock.acquire?(song.id)
           # first time enqueue
-          @material_job_queue.enqueue(song, input[:request_id])
-          Success(input.merge(status: :processing, message: {
-            request_id: input[:request_id], msg: MATERIAL_QUEUE_MESSAGES[:insert_to_queue]
-          }))
+          @material_job_queue.enqueue(song, request_id)
+          processing_success_message(input, request_id, :insert_to_queue)
         else
           App.logger.info("[AddMaterial] material job already queued for song=#{song.name}, song_id=#{song.id}")
-          Success(input.merge(status: :processing, message: {
-            request_id: input[:request_id], msg: MATERIAL_QUEUE_MESSAGES[:already_queued]
-          }))
+          processing_success_message(input, request_id, :already_queued)
         end
+      end
+
+      def processing_success_message(input, request_id, message_key)
+        Success(
+          input.merge(
+            status: :processing,
+            message: {
+              request_id: request_id,
+              msg: MATERIAL_QUEUE_MESSAGES[message_key]
+            }
+          )
+        )
       end
     end
   end

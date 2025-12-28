@@ -91,7 +91,6 @@ end
 
 puts "CEFR 分析完成，輸出已寫入 #{output_path}"
 
-
 # --- call gemini api ---
 api_key = CONFIG['development']['GEMINI_API_KEY'] or raise 'GEMINI_API_KEY missing'
 LingoBeats::Gemini::VocabularyMapper.new(access_token: api_key)
@@ -99,6 +98,8 @@ LingoBeats::Gemini::VocabularyMapper.new(access_token: api_key)
 # 1) 先準備一個假 song（之後真正接 controller 就會變成真的 Song）
 SongStub = Struct.new(:id, :name)
 song = SongStub.new(0, 'Golden')
+
+# 2) 用剛剛 cefrpy_service.py 的結果生出 Vocabulary entities
 class InMemoryVocabularyRepo
   def initialize(vocabs)
     @store = {}
@@ -115,18 +116,27 @@ class InMemoryVocabularyRepo
   # 給 service 用的新介面：用 vocab.id 找那一個，更新 material
   def update_material(id, material_str)
     @store.each_value do |list|
-      idx = list.index { |v| v.id == id }
-      next unless idx
-
-      old = list[idx]
-      updated = LingoBeats::Entity::Vocabulary.new(
-        old.to_attr_hash.merge(material: material_str)
-      )
-      list[idx] = updated
-      return updated
+      updated = update_in_list(list, id, material_str)
+      return updated if updated
     end
 
     nil
+  end
+
+  def update_in_list(list, id, material_str)
+    idx = list.index { |v| v.id == id }
+    return nil unless idx
+
+    old = list[idx]
+    updated = build_updated_vocab(old, material_str)
+    list[idx] = updated
+    updated
+  end
+
+  def build_updated_vocab(old_vocab, material_str)
+    LingoBeats::Entity::Vocabulary.new(
+      old_vocab.to_attr_hash.merge(material: material_str)
+    )
   end
 
   # 更新：用 word 當 key 找到舊的，換成新的

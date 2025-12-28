@@ -14,7 +14,7 @@ module LingoBeats
         # false → should skip processing
         def acquire?(song_id)
           previous = store.put_if_absent(song_id.to_s, true)
-          previous.nil?
+          !previous
         end
 
         # check if song_id is being processed

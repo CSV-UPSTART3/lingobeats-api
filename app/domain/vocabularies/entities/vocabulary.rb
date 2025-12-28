@@ -25,7 +25,7 @@ module LingoBeats
 
       # Helper: check if Gemini already enriched this vocab
       def material_blank?
-        material.nil? || material.strip.empty?
+        material.to_s.strip.empty?
       end
 
       def to_attr_hash

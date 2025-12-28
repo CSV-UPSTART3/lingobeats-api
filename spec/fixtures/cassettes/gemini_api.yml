@@ -30,7 +30,7 @@ http_interactions:
       - Referer
       - X-Origin
       Date:
-      - Sat, 20 Dec 2025 12:19:40 GMT
+      - Sun, 28 Dec 2025 06:42:11 GMT
       Server:
       - scaffolding on HTTPServer2
       X-Xss-Protection:
@@ -40,7 +40,7 @@ http_interactions:
       X-Content-Type-Options:
       - nosniff
       Server-Timing:
-      - gfet4t7; dur=2304
+      - gfet4t7; dur=1992
       Alt-Svc:
       - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
       Accept-Ranges:
@@ -58,19 +58,19 @@ http_interactions:
               "content": {
                 "parts": [
                   {
-                    "text": "```json\n[\n  {\n    \"word\": \"serendipity\",\n    \"cefr\": \"C1\",\n    \"entries\": [\n      {\n        \"meaning\": \"The occurrence and development of events by chance in a happy or beneficial way.\",\n        \"example\": \"They found love through pure serendipity, bumping into each other at a concert neither planned to attend.\"\n      },\n      {\n        \"meaning\": \"Good luck in making unexpected and fortunate discoveries.\",\n        \"example\": \"The bookshop was full of serendipity; I found titles I never knew I needed.\"\n      }\n    ]\n  },\n  {\n    \"word\": \"resilient\",\n    \"cefr\": \"B2\",\n    \"entries\": [\n      {\n        \"meaning\": \"Able to withstand or recover quickly from difficult conditions.\",\n        \"example\": \"She is a resilient woman who overcame many hardships in her life.\"\n      },\n      {\n        \"meaning\": \"Able to recoil or spring back into shape after bending, stretching, or being compressed.\",\n        \"example\": \"The resilient rubber band snapped back into its original form.\"\n      }\n    ]\n  }\n]\n```"
+                    "text": "```json\n[\n  {\n    \"word\": \"serendipity\",\n    \"cefr\": \"C1\",\n    \"entries\": [\n      {\n        \"meaning\": \"The occurrence and development of events by chance in a happy or beneficial way.\",\n        \"example\": \"Finding this rare book was a complete act of serendipity.\"\n      },\n      {\n        \"meaning\": \"The faculty or phenomenon of finding valuable or agreeable things not sought for.\",\n        \"example\": \"His discoveries were often the result of pure serendipity; he wasn't even looking for them!\"\n      }\n    ]\n  },\n  {\n    \"word\": \"resilient\",\n    \"cefr\": \"B2\",\n    \"entries\": [\n      {\n        \"meaning\": \"Able to withstand or recover quickly from difficult conditions.\",\n        \"example\": \"She's a resilient woman who has overcome many hardships.\"\n      },\n      {\n        \"meaning\": \"Returning to the original form or position after being bent, compressed, or stretched.\",\n        \"example\": \"The rubber ball is very resilient and bounces high.\"\n      }\n    ]\n  }\n]\n```"
                   }
                 ],
                 "role": "model"
               },
               "finishReason": "STOP",
-              "avgLogprobs": -0.15135687908143489
+              "avgLogprobs": -0.0871178013409755
             }
           ],
           "usageMetadata": {
             "promptTokenCount": 69,
-            "candidatesTokenCount": 262,
-            "totalTokenCount": 331,
+            "candidatesTokenCount": 258,
+            "totalTokenCount": 327,
             "promptTokensDetails": [
               {
                 "modality": "TEXT",
@@ -80,12 +80,12 @@ http_interactions:
             "candidatesTokensDetails": [
               {
                 "modality": "TEXT",
-                "tokenCount": 262
+                "tokenCount": 258
               }
             ]
           },
           "modelVersion": "gemini-2.0-flash",
-          "responseId": "WZRGaYvXNMPW1e8PzLmWqAc"
+          "responseId": "QdFQadOiGdKU1e8PjK70QA"
         }
-  recorded_at: Sat, 20 Dec 2025 12:19:40 GMT
+  recorded_at: Sun, 28 Dec 2025 06:42:11 GMT
 recorded_with: VCR 6.3.1

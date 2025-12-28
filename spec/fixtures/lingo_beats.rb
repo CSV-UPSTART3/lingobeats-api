@@ -60,7 +60,7 @@ genius_client = LingoBeats::Genius::LyricMapper.new(CONFIG['development']['GENIU
 lyrics = genius_client.lyrics_for(song_name: 'Golden', artist_name: 'HUNTR/X')
 lyrics_text = lyrics&.text
 File.write(File.join(dir, 'lyrics_output.txt'), lyrics_text)
-puts "歌詞已輸出到 spec/lyrics_output.txt"
+puts '歌詞已輸出到 spec/lyrics_output.txt'
 
 # 呼叫 Python 腳本
 # input_path  = File.join(dir, 'lyrics_output.txt')
@@ -114,18 +114,27 @@ class InMemoryVocabularyRepo
   # 更新：用 word 當 key 找到舊的，換成新的
   def update_material(id, material_str)
     @store.each_value do |list|
-      idx = list.index { |v| v.id == id }
-      next unless idx
-
-      old = list[idx]
-      updated = LingoBeats::Entity::Vocabulary.new(
-        old.to_attr_hash.merge(material: material_str)
-      )
-      list[idx] = updated
-      return updated
+      updated = update_in_list(list, id, material_str)
+      return updated if updated
     end
 
     nil
+  end
+
+  def update_in_list(list, id, material_str)
+    idx = list.index { |v| v.id == id }
+    return nil unless idx
+
+    old = list[idx]
+    updated = build_updated_vocab(old, material_str)
+    list[idx] = updated
+    updated
+  end
+
+  def build_updated_vocab(old_vocab, material_str)
+    LingoBeats::Entity::Vocabulary.new(
+      old_vocab.to_attr_hash.merge(material: material_str)
+    )
   end
 
   # 方便最後輸出全部看看
@@ -137,7 +146,7 @@ end
 # 2) 用 result 生出 in-memory 的 Vocabulary entities
 initial_vocabs = result.map.with_index do |(word, level), idx|
   LingoBeats::Entity::Vocabulary.new(
-    id: idx + 1,            # ⭐ 加上假的自增 ID
+    id: idx + 1, # ⭐ 加上假的自增 ID
     name: word,
     level: level,
     material: nil # 一開始先是空的，等等由 service 幫你塞進去

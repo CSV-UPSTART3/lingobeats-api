@@ -28,25 +28,56 @@ module MaterialGeneration
                       auto_delete: true
 
     def perform(_sqs_msg, body)
-      # body is JSON queue.enqueue(message)
+      context = build_context(body)
+
+      start_job(context)
+      run_generation(context)
+      finish_job(context)
+    rescue StandardError => e
+      handle_error(e)
+    end
+
+    def build_context(body)
       data = LingoBeats::Representer::MaterialJob.from_json(body)
-      job = JobReporter.new(body, MaterialGenerationWorker.config)
-      service = LingoBeats::Service::MaterialGenerationService.new
+
+      {
+        data: data,
+        job: JobReporter.new(body, MaterialGenerationWorker.config),
+        service: LingoBeats::Service::MaterialGenerationService.new
+      }
+    end
+
+    def start_job(context)
+      data = context[:data]
+      job  = context[:job]
 
       puts "[Worker] Start generating materials for song #{data.song_id}"
       job.report(GenerationMonitor.starting)
       async_rebroadcast_start(job)
+    end
+
+    def run_generation(context)
+      data    = context[:data]
+      job     = context[:job]
+      service = context[:service]
 
       service.call(data.song_id) do |event|
         job.report(
           GenerationMonitor.progress(event[:current], event[:total])
         )
       end
+    end
+
+    def finish_job(context)
+      data = context[:data]
+      job  = context[:job]
 
       puts "[Worker] Completed job for song #{data.song_id}"
       job.report_each_second(5) { GenerationMonitor.finished }
-    rescue StandardError => e
-      puts "[Worker] ERROR: #{e.full_message}"
+    end
+
+    def handle_error(error)
+      puts "[Worker] ERROR: #{error.full_message}"
     end
 
     def async_rebroadcast_start(job)

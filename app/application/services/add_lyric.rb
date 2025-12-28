@@ -93,20 +93,66 @@ module LingoBeats
       end
 
       def fetch_lyric_of_song(song)
-        lyric = @songs_repo.fetch_lyric(song_name: song.name, singer_name: song.singers.first.name)
-        validate_lyric(lyric)
+        handle_fetch_errors { LyricValidator.new(fetch(song)).validate! }
+      end
+
+      def fetch(song)
+        RequestPayload.build(song).reify do |payload|
+          retrieve_lyric(**payload)
+        end
+      end
+
+      def retrieve_lyric(song_name:, singer_name:)
+        @songs_repo.fetch_lyric(song_name:, singer_name:)
+      end
+
+      def handle_fetch_errors
+        yield
       rescue FetchError => error
         raise error
-      rescue StandardError => e
-        App.logger.error("[AddLyric] Unexpected error when fetching lyric: #{e.full_message}")
+      rescue StandardError => error
+        App.logger.error("[AddLyric] Unexpected error when fetching lyric: #{error.full_message}")
         Failure(Response::ApiResult.new(status: :internal_error, message: GENIUS_API_ERROR))
       end
 
-      def validate_lyric(lyric)
-        raise FetchError.new(message: LYRIC_EMPTY) if lyric.text.strip.empty?
-        raise FetchError.new(message: LYRIC_NOT_RECOMMENDED) unless lyric.english?
+      # Validator for fetched lyric
+      class LyricValidator
+        def initialize(lyric)
+          @lyric = lyric
+        end
 
-        lyric
+        def validate!
+          raise FetchError.new(message: LYRIC_EMPTY) unless present_text?
+          raise FetchError.new(message: LYRIC_NOT_RECOMMENDED) unless @lyric.english?
+
+          @lyric
+        end
+
+        def validate
+          validate!
+        end
+
+        private
+
+        def present_text?
+          @lyric && @lyric.text.to_s.strip != ''
+        end
+      end
+
+      # Payload builder for lyric fetch request
+      class RequestPayload
+        def self.build(song)
+          new(song.name, song.singers.first&.name)
+        end
+
+        def initialize(song_name, singer_name)
+          @song_name = song_name
+          @singer_name = singer_name
+        end
+
+        def reify
+          yield(song_name: @song_name, singer_name: @singer_name)
+        end
       end
 
       def store_remote_lyric(song_id, remote_lyric)

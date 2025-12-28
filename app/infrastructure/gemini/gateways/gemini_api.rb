@@ -10,23 +10,30 @@ module LingoBeats
       BASE  = 'https://generativelanguage.googleapis.com/v1beta/models'
       MODEL = 'gemini-2.0-flash'
 
+      # 專門用來檢查 HTTP 回應是否成功，失敗就 raise，成功回傳 body
+      ENSURE_SUCCESS = lambda do |status, body|
+        raise "Gemini HTTP #{status}: #{body}" unless status == 200
+
+        body
+      end
+
       def initialize(token_provider:, model: MODEL, http_client: HTTP)
         @token_provider = token_provider
         @model          = model
         @http           = http_client
+        @user_role      = 'user'
       end
 
       # prompt: String or Array<String>
       def generate_content(prompt)
         Functionality.validate_prompt!(prompt)
-        resp = @http.post(request_url, json: request_body(prompt))
-        # http gem 取碼：resp.status.to_i 或 resp.code
-        status = resp.respond_to?(:code) ? resp.code : resp.status.to_i
-        body   = resp.to_s
 
-        raise "Gemini HTTP #{status}: #{body}" if status != 200
+        response = @http.post(request_url, json: request_body(prompt))
+        status = response.status.to_i
+        body = response.to_s
+        body = ENSURE_SUCCESS.call(status, body)
 
-        JSON.parse(resp.to_s)
+        JSON.parse(body)
       end
 
       private
@@ -36,7 +43,14 @@ module LingoBeats
       end
 
       def request_body(prompt)
-        { contents: [{ role: 'user', parts: Functionality.build_parts(prompt) }] }
+        {
+          contents: [
+            {
+              role: @user_role,
+              parts: Functionality.build_parts(prompt)
+            }
+          ]
+        }
       end
 
       # Functionality module for Gemini API
@@ -70,7 +84,7 @@ module LingoBeats
         def nonblank_array?(prompt)
           return false if prompt.empty?
 
-          prompt.all? { |prompt| nonblank_string?(prompt) }
+          prompt.all? { |text| nonblank_string?(text) }
         end
       end
     end

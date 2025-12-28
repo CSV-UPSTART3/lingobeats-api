@@ -14,8 +14,8 @@ module LingoBeats
         #   existing_names.include?(lemma) || !level
         # end
         candidates = difficulties.reject do |item|
-          lemma = item["lemma"]
-          level = item["level"]
+          lemma = item['lemma']
+          level = item['level']
           existing_names.include?(lemma) || !level
         end
 
@@ -38,19 +38,13 @@ module LingoBeats
           #   )
           # end
           candidates.map do |item|
-            lemma = item["lemma"]
-            original_word = item["origin_word"]
-            level = item["level"]
+            lemma = item['lemma']
+            original_word = item['origin_word']
+            level = item['level']
 
             # puts "[DEBUG] Creating entity for lemma=#{lemma}, original_word=#{original_word}, level=#{level}"
 
-            Entity::Vocabulary.new(
-              id: nil,
-              name: lemma,
-              original_word: original_word,
-              level: level,
-              material: nil
-            )
+            Entity::Vocabulary.new(id: nil, name: lemma, original_word: original_word, level: level, material: nil)
           end
         end
       end

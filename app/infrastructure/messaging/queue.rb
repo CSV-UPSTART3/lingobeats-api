@@ -9,13 +9,10 @@ module LingoBeats
     class Queue
       IDLE_TIMEOUT = 60 # seconds: stop polling after 60 seconds of inactivity
 
-      def initialize(queue_url, config)
+      def initialize(queue_url:, aws_credentials:)
         @queue_url = queue_url
-        sqs = Aws::SQS::Client.new(
-          access_key_id: config.AWS_ACCESS_KEY_ID,
-          secret_access_key: config.AWS_SECRET_ACCESS_KEY,
-          region: config.AWS_REGION
-        )
+
+        sqs = Aws::SQS::Client.new(**aws_credentials)
         @queue = Aws::SQS::Queue.new(url: queue_url, client: sqs)
       end
 

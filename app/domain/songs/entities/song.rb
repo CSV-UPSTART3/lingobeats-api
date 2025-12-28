@@ -5,6 +5,8 @@ require 'dry-struct'
 
 require_relative 'singer'
 require_relative '../values/lyric'
+require_relative '../values/song_difficulty'
+require_relative '../services/song_difficulty_analyzer'
 
 module LingoBeats
   module Entity
@@ -31,12 +33,16 @@ module LingoBeats
         lyric&.text&.strip
       end
 
-      # Remove duplicates by name + first singer id
-      def ==(other)
-        other.respond_to?(:comparison_key) && comparison_key == other.comparison_key
-      end
-      alias eql? ==
+      # :reek:FeatureEnvy
+      def eql?(other)
+        return false unless other.is_a?(Song)
 
+        comparison_key.eql?(other.comparison_key)
+      end
+
+      alias == eql?
+
+      # Compare by name and first singer's id
       def comparison_key
         [name, singers.first&.id]
       end
@@ -67,28 +73,17 @@ module LingoBeats
       def evaluate_words
         return {} unless lyric
 
-        result = lyric&.evaluate_difficulty # 呼叫 Lyric 的斷詞邏輯，並且進行評級
+        lyric&.evaluate_difficulty # 呼叫 Lyric 的斷詞邏輯，並且進行評級
         # puts "[DEBUG] evaluate_words result size=#{result.size}, sample=#{result.class}"
         # puts "[DEBUG] evaluate_words first: #{result.first.inspect}"
-        result
       end
 
       def difficulty_distribution
-        puts base_distribution
-        SongDifficultyHelper.fill_levels(base_distribution)
+        difficulty_analysis.distribution
       end
 
       def average_difficulty
-        dist = difficulty_distribution
-        return if dist.empty?
-
-        total = dist.values.sum
-        return if total.zero?
-
-        # 用 helper 的分數表來還原平均難度所對應的等級
-        SongDifficultyHelper.level_scores.key(
-          SongDifficultyHelper.weighted_average(dist, total).round
-        )
+        difficulty_analysis.level_code
       end
 
       # 要在 controller require service
@@ -98,36 +93,16 @@ module LingoBeats
 
       private
 
-      def base_distribution
-        evaluate_words.values.each_with_object(Hash.new(0)) do |level, hash|
-          next unless %w[A B C].include?(level)
-
-          hash[level] += 1
-        end
-      end
-    end
-
-    # Helpers for calculating song difficulty
-    module SongDifficultyHelper
-      module_function
-
-      def weighted_average(dist, total)
-        weighted = dist.sum { |level, count| level_scores[level] * count }.to_f
-        weighted / total
+      def difficulty_analysis
+        @difficulty_analysis ||= difficulty_analyzer.from_levels(word_levels)
       end
 
-      def fill_levels(distribution)
-        %w[A B C].each_with_object({}) do |level, hash|
-          hash[level] = distribution.fetch(level, 0)
-        end
+      def difficulty_analyzer
+        Songs::Services::SongDifficultyAnalyzer
       end
 
-      def level_scores
-        {
-          'A' => 1,
-          'B' => 2,
-          'C' => 3
-        }.freeze
+      def word_levels
+        evaluate_words&.values || []
       end
     end
   end
