@@ -6,7 +6,7 @@ module LingoBeats
   module Representer
     # OpenStruct for deserializing json with hypermedia
     class OpenStructWithLinks < OpenStruct
-      attr_accessor :links
+      attr_reader :links
     end
   end
 end
